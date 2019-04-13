@@ -1,14 +1,19 @@
+.h1 {
+  color: #957DAD;
+  margin: 0;
+  /*
+  R   E   S   P   O   N   S   I   V   E
+                                          */
+}
+@media (max-width: 767px) {
+  .h1 {
+    color: blue;
+  }
+}
+
 body {
   background: #efefef;
   font-family: sans-serif;
-}
-
-h1 {
-  color: #e41612;
-}
-
-h2 {
-  color: blue;
 }
 
 /*# sourceMappingURL=app.css.map */

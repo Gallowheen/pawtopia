@@ -7,7 +7,7 @@
 </head>
 <body>
   <img src="src/assets/images/logo-heaj.png">
-  <h1>Hello world</h1>
+  <h1 class="h1">Hello world</h1>
   <?php phpinfo();?>
 
   <script src="src/scripts/jquery-3.4.0.min.js"></script>
