@@ -4,6 +4,7 @@
   <title>DWMA project</title>
   <link rel="stylesheet" type="text/css" href="src/styles/app.css">
   <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
 </head>
 <body>
   <img src="src/assets/images/logo-heaj.png">
