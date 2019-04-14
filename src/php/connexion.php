@@ -1,15 +1,27 @@
 <?php
-    $host = "127.0.0.1";
-    $user = "root";
-    $mdp = "";
-    $base = "pawtopia";
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-    $link = mysqli_connect($host,$user,$mdp,$base);
+    require_once("bdd.php");
+    $link = mysqli_connect(HOST, USER, PWD, BASE);
+
     mysqli_query($link, "SET NAMES UTF8");
 
+
     // Gallow / jjj
-    $query = mysqli_query($link, "SELECT * FROM user WHERE USERNAME = '" . $_POST['username'] . "'");
-    $row = mysqli_fetch_assoc($query);
+    // $query = mysqli_query($link, "SELECT * FROM user WHERE USERNAME = '" . $_POST['username'] . "'");
+
+    $query = $link->prepare("SELECT * FROM user WHERE USERNAME = ?");
+    $query->bind_param("s", $_POST['username']);
+    $query->execute();
+
+    $result =  $query->get_result();
+    if($result->num_rows === 0) exit('No rows');
+    $row = $result->fetch_assoc();
+
+
+
+    // $row = mysqli_fetch_assoc($query);
 
     $username = $row['USERNAME'];
     $password = $row['PASSWORD'];
