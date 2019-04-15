@@ -14,12 +14,32 @@
     $password_1 = mysqli_real_escape_string($link , $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($link , $_POST['password_2']);
     
-    if (empty($username)) { array_push($errors, "Username is required"); }
-    if (empty($email)) { array_push($errors, "Email is required"); }
-    if (empty($town)) { array_push($errors, "Town is required"); }
-    if (empty($password_1)) { array_push($errors, "Password is required"); }
+    if (empty($username)) 
+    { 
+        array_push($errors, "Username is required");
+        echo 'username_needed';
+        die();
+    }
+    if (empty($email)) 
+    { 
+        array_push($errors, "Email is required"); 
+        echo 'email_needed';
+        die();
+    }
+    if (empty($town)) { 
+        array_push($errors, "Town is required"); 
+        echo 'town_needed';
+        die();
+    }
+    if (empty($password_1) || empty($password_2)  ) { 
+        array_push($errors, "Password is required");
+        echo 'password_needed' ;
+        die();
+    }
     if ($password_1 != $password_2) { 
         array_push($errors, "The two passwords do not match");
+        echo 'password_no_match';
+        die();
     }  
 
     $user_check_query = $link->prepare("SELECT * FROM USER WHERE USERNAME = ? OR EMAIL = ? LIMIT 1");
@@ -31,7 +51,8 @@
     //check if exist
     if($result->num_rows > 0){
         //header("location:/pawtopia?error=usernametaken");
-        echo "Failed";  
+        echo "user_taken";  
+        die();
     }else{
         $row = $result->fetch_assoc();
         $user = $row['USERNAME'];
@@ -48,7 +69,8 @@
             $townToInsert = $row['ID'];
         }else{        
             array_push($errors, "town is unknown");
-            //header("location:/pawtopia?error=towntaken");
+            echo "town_unknown";
+            die();
         }
 
         //if no error

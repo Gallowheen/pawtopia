@@ -48,10 +48,25 @@ $(document).ready(function(){
             function(data){
 
                 if(data == 'Success'){
-                    $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
-                }                
-                else{
-                    $("#resultat").html("<p>Erreur lors de la connexion...</p>");
+                    $("#resultat").html("<p>Votre inscription est validée</p>");
+                }  
+                if(data == 'username_needed'){
+                    $("#username_error").html("<p>Veuillez entrer votre pseudonyme</p>");
+                } 
+                if(data == 'email_needed'){
+                    $("#email_error").html("<p>Veuillez entrer votre adresse mail</p>");
+                } 
+                if(data == 'town_needed'){
+                    $("#town_error").html("<p>Veuillez entrer votre ville</p>");
+                } 
+                if(data == 'password_needed'){
+                    $("#password_error").html("<p>Veuille entrer votre mot de passe</p>");
+                }  
+                if(data == 'password_needed'){
+                    $("#resultat").html("<p>Les deux mots de passent ne sont pas identiques</p>");
+                }               
+                if(data == 'Failed'){
+                    $("#resultat").html("<p>Erreur lors de l'inscription</p>");
                 }
             },
             'text'

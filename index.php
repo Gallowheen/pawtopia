@@ -38,22 +38,27 @@
 
     <div id="resultat"></div>
     <form>
+      <div id="username_error"></div>
       <div class="input-group">
         <label>Username</label>
         <input type="text" name="username" id="username">
       </div>
+      <div id="email_error"></div>
       <div class="input-group">
         <label>Email</label>
         <input type="email" name="email" id="email">
       </div>
+      <div id="town_error"></div>
       <div class="input-group">
         <label>Ville</label>
         <input type="ville" name="town" id="town">
       </div>
+      <div id="password_error"></div>
       <div class="input-group">
         <label>Password</label>
         <input type="password" name="password_1" id="password_1">
       </div>
+      <div id="password_error"></div>
       <div class="input-group">
         <label>Confirm password</label>
         <input type="password" name="password_2" id="password_2">
