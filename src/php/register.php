@@ -18,28 +18,23 @@
     { 
         array_push($errors, "Username is required");
         echo 'username_needed';
-        die();
     }
     if (empty($email)) 
     { 
         array_push($errors, "Email is required"); 
         echo 'email_needed';
-        die();
     }
     if (empty($town)) { 
         array_push($errors, "Town is required"); 
         echo 'town_needed';
-        die();
     }
     if (empty($password_1) || empty($password_2)  ) { 
         array_push($errors, "Password is required");
         echo 'password_needed' ;
-        die();
     }
     if ($password_1 != $password_2) { 
         array_push($errors, "The two passwords do not match");
         echo 'password_no_match';
-        die();
     }  
 
     $user_check_query = $link->prepare("SELECT * FROM USER WHERE USERNAME = ? OR EMAIL = ? LIMIT 1");
@@ -48,14 +43,23 @@
 
     $result = $user_check_query->get_result();
 
+    // $row = $result->fetch_assoc();
+    // echo 'test1'.$row['USERNAME'];
+    // echo 'test2'.$row['EMAIL'];
+
     //check if exist
     if($result->num_rows > 0){
-        //header("location:/pawtopia?error=usernametaken");
-        echo "user_taken";  
-        die();
-    }else{
         $row = $result->fetch_assoc();
-        $user = $row['USERNAME'];
+
+        if (isset($row['USERNAME']) && $row['USERNAME'] == $username ){
+            echo 'user_taken';
+        }
+
+        if (isset($row['EMAIL']) && $row['EMAIL'] == $email){
+            echo 'mail_taken';
+        }
+
+    }else{
 
         $town_check_query = $link->prepare("SELECT ID FROM TOWNS WHERE NAME= ? ");
         $town_check_query->bind_param("s", $town);
@@ -69,8 +73,8 @@
             $townToInsert = $row['ID'];
         }else{        
             array_push($errors, "town is unknown");
-            echo "town_unknown";
-            die();
+            if ($town != null)
+                echo "town_unknown";
         }
 
         //if no error
