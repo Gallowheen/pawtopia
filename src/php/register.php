@@ -35,7 +35,7 @@
     if ($password_1 != $password_2) { 
         array_push($errors, "The two passwords do not match");
         echo 'password_no_match';
-    }  
+    } 
 
     $user_check_query = $link->prepare("SELECT * FROM USER WHERE USERNAME = ? OR EMAIL = ? LIMIT 1");
     $user_check_query->bind_param("ss", $username, $email);
@@ -43,10 +43,22 @@
 
     $result = $user_check_query->get_result();
 
-    // $row = $result->fetch_assoc();
-    // echo 'test1'.$row['USERNAME'];
-    // echo 'test2'.$row['EMAIL'];
+    $town_check_query = $link->prepare("SELECT ID FROM TOWNS WHERE NAME= ? ");
+    $town_check_query->bind_param("s", $town);
+    $town_check_query->execute();
 
+    $result_town = $town_check_query->get_result();
+
+    //check if exist
+    if($result_town->num_rows > 0){
+        $row = $result_town->fetch_assoc();
+        $townToInsert = $row['ID'];
+    }else{        
+        array_push($errors, "town is unknown");
+        // if ($town != null)
+            echo "town_unknown";
+    }
+    
     //check if exist
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
@@ -60,22 +72,6 @@
         }
 
     }else{
-
-        $town_check_query = $link->prepare("SELECT ID FROM TOWNS WHERE NAME= ? ");
-        $town_check_query->bind_param("s", $town);
-        $town_check_query->execute();
-    
-        $result = $town_check_query->get_result();
-
-        //check if exist
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            $townToInsert = $row['ID'];
-        }else{        
-            array_push($errors, "town is unknown");
-            if ($town != null)
-                echo "town_unknown";
-        }
 
         //if no error
         if (count($errors) == 0) {
