@@ -15,12 +15,14 @@ $(document).ready(function(){
 
                 if(data == 'Success'){
                     location.reload();
-                } 
+                }else{
+                    $("#log_error").append("<p>La connexion a echouée</p>"); 
+                }
             },
             'text'
         );
     });
-
+    
     $('#logout').click(function(){
 
         $.ajax({

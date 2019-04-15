@@ -24,6 +24,7 @@
       echo '<img src="'.$_SESSION['avatar'].'">';
     }
     else{ ?>
+      <div id="log_error"></div>
       <h1>Connect</h1>
 
       <form>
