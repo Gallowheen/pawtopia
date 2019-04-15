@@ -24,8 +24,6 @@
       echo '<img src="'.$_SESSION['avatar'].'">';
     }
     else{ ?>
-
-      <div id="resultat"></div>
       <h1>Connect</h1>
 
       <form>
@@ -37,6 +35,30 @@
       </form>
 
       <h1>Sign Up</h1>
+
+      <?php
+
+        if (isset($_GET['error'])){
+          if($_GET['error'] == "usernametaken"){
+            ?>
+            <h3>User name is taken</h3>
+            <?php
+          }
+          if($_GET['error'] == "towntaken"){
+            ?>
+            <h3>Town doesn't exist</h3>
+            <?php
+          }
+        }
+        if (isset($_GET["register"])){
+          if($_GET['register'] == "ok"){
+            ?>
+            <h3>Account created</h3>
+            <?php
+          }
+        }
+
+      ?>
 
       <form method="post" action="src/php/register.php">
         <div class="input-group">

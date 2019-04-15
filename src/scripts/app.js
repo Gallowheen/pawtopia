@@ -14,12 +14,8 @@ $(document).ready(function(){
             function(data){
 
                 if(data == 'Success'){
-                $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
-                location.reload();
-                }
-                else{
-                $("#resultat").html("<p>Erreur lors de la connexion...</p>");
-                }
+                    location.reload();
+                } 
             },
             'text'
         );

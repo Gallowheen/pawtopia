@@ -32,8 +32,7 @@
 
         //check if exist
         if($result->num_rows > 0){
-            array_push($errors, "Username exist");
-            echo "user sucks";
+            header("location:/pawtopia?error=usernametaken");
         }else{
             $row = $result->fetch_assoc();
             $user = $row['USERNAME'];
@@ -50,7 +49,7 @@
                 $townToInsert = $row['ID'];
             }else{        
                 array_push($errors, "town is unknown");
-                echo "town sucks";
+                header("location:/pawtopia?error=towntaken");
             }
 
             //if no error
@@ -72,7 +71,7 @@
                 mkdir($newDirectory, 0777);
 
                 //relocate
-                header("location:/pawtopia");
+                header("location:/pawtopia?register=ok");
             }
         }
     } 
