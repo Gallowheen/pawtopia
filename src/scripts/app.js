@@ -7,8 +7,8 @@ $(document).ready(function(){
         $.post(
             'src/php/connect.php',
             {
-            username : $("#username").val(),
-            password : $("#password").val()
+            username : $("#login_username").val(),
+            password : $("#login_password").val()
             },
 
             function(data){
@@ -20,15 +20,41 @@ $(document).ready(function(){
             'text'
         );
     });
-});
 
-$('#logout').click(function(){
+    $('#logout').click(function(){
 
-    $.ajax({
-    type: 'GET',
-    url: 'src/php/logout.php',
-    success: function(msg) {
-        console.log(msg);
-    }
+        $.ajax({
+        type: 'GET',
+        url: 'src/php/logout.php',
+        success: function(msg) {
+            console.log(msg);
+        }
+        });
+    });
+
+    $("#register").click(function(e){
+        e.preventDefault();
+
+        $.post(
+            'src/php/register.php',
+            {
+            username : $("#username").val(),
+            email : $("#email").val(),
+            town : $("#town").val(),
+            password_1 : $("#password_1").val(),
+            password_2 : $("#password_2").val()
+            },
+
+            function(data){
+
+                if(data == 'Success'){
+                    $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+                }                
+                else{
+                    $("#resultat").html("<p>Erreur lors de la connexion...</p>");
+                }
+            },
+            'text'
+        );
     });
 });
