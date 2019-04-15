@@ -24,22 +24,31 @@
           array_push($errors, "The two passwords do not match");
         }  
 
-        $user_check_query = "SELECT * FROM USER WHERE USERNAME='$username' OR EMAIL='$email' LIMIT 1";
+        $user_check_query = $link->prepare("SELECT * FROM USER WHERE USERNAME = ? OR EMAIL = ? LIMIT 1");
+        $user_check_query->bind_param("ss", $username, $email);
+        $user_check_query->execute();
+    
+        $result = $user_check_query->get_result();
+        if($result->num_rows === 0) exit('No rows');
+        $row = $result->fetch_assoc();
+
+        $user = $row['USERNAME'];
+
+        echo $user;
+
         $town_check_query = "SELECT ID FROM TOWNS WHERE NAME='$town'";
-
-        $result = mysqli_query($link , $user_check_query);
         $result_town = mysqli_query($link , $town_check_query);
-
-        $user = mysqli_fetch_assoc($result);
         $town_array = mysqli_fetch_assoc($result_town);
         $townToInsert = $town_array['ID'];
+
+        echo $user;
         
         if ($user) {
-            if ($user['USERNAME'] === $username) {
+            if ($row['USERNAME'] === $username) {
                 array_push($errors, "Username already exists");
             }
         
-            if ($user['EMAIL'] === $email) {
+            if ($row['EMAIL'] === $email) {
                 array_push($errors, "email already exists");
             }
         }
