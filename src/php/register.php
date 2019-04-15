@@ -32,8 +32,8 @@
 
         //check if exist
         if($result->num_rows > 0){
-            
-
+            array_push($errors, "Username exist");
+            echo "user sucks";
         }else{
             $row = $result->fetch_assoc();
             $user = $row['USERNAME'];
@@ -48,31 +48,32 @@
             if($result->num_rows > 0){
                 $row = $result->fetch_assoc();
                 $townToInsert = $row['ID'];
-            }else{
-                $townToInsert = null;
-                if ($townToInsert == null) { array_push($errors, "town is unknown"); }
+            }else{        
+                array_push($errors, "town is unknown");
+                echo "town sucks";
             }
 
-            // Set up avatar
-            $firstLetter = strtolower($username[0]);
+            //if no error
+            if (count($errors) == 0) {
 
-            // echo $username;
-            // echo $firstLetter;
+                // Set up avatar
+                $firstLetter = strtolower($username[0]);
+                $avatarPath = 'src/assets/img/avatar/default_'.$firstLetter.'.png';
 
-            $avatarPath = 'src/assets/img/avatar/default_'.$firstLetter.'.png';
+                // create user in DB
+                $password = md5($password_1);
+                $query = "INSERT INTO USER (USERNAME, EMAIL, TOWN_ID, PASSWORD, AVATAR) 
+                            VALUES('$username', '$email', '$townToInsert', '$password', '$avatarPath')";
+                mysqli_query($link, $query);
+                $id = mysqli_insert_id($link);
 
-            $password = md5($password_1);
-            $query = "INSERT INTO USER (USERNAME, EMAIL, TOWN_ID, PASSWORD, AVATAR) 
-                        VALUES('$username', '$email', '$townToInsert', '$password', '$avatarPath')";
-            mysqli_query($link, $query);
-            $id = mysqli_insert_id($link);
+                // create user directory
+                $newDirectory = "../../users/" . $id . "_" . $username;
+                mkdir($newDirectory, 0777);
 
-            // create user directory
-            $newDirectory = "../../users/" . $id . "_" . $username;
-            mkdir($newDirectory, 0777);
-
-            //header("location:/pawtopia");
+                //relocate
+                header("location:/pawtopia");
+            }
         }
-      }
-      
+    } 
 ?>
