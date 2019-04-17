@@ -72,6 +72,7 @@
             top: 0;
             margin-left : 50px;
             color : white;
+            font-family: 'Fira Sans', sans-serif;
         }
 
         .right {
@@ -94,8 +95,18 @@
             -webkit-transform: rotate(45deg);
         }
 
-        .avatar{
+        .avatar__container{
             margin-top : 75px;
+            text-align : center;
+        }
+        .avatar{
+            border-radius : 50%;
+            margin-top : 32px;
+        }
+
+        .username{
+            margin-top : 16px;
+            font-family: 'Fira Sans', sans-serif;
         }
     </style>
 
@@ -130,7 +141,7 @@
                 </div>
             </div>
         </header>
-        <div class="avatar">
+        <div class="avatar__container">
             <?php if (empty($_GET)) {
                 if ( isset($_SESSION['user']) ){
                     $user = $_SESSION['user'];
@@ -147,9 +158,11 @@
 
                     ?>
 
-                    <img src="<?php echo $avatar_path ?>"/>
+                    <img class="avatar" src="<?php echo $avatar_path ?>"/>
                     <?php
-
+                    ?>
+                    <h3 class="username"><?php echo $row['USERNAME'] ?></h3>
+                    <?php
                 } 
             }
             ?>
