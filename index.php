@@ -1,4 +1,5 @@
 <?php 
+  require_once("src/php/bdd.php");
   session_start();
 ?>
 
@@ -7,6 +8,7 @@
   <head>
     <title>DWMA project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="src/styles/app.css">
     <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
@@ -23,6 +25,9 @@
       echo "vous êtes connecté " . $_SESSION['user'];
       echo '<a href="src/php/logout.php">Log Out Btn</a>';
       echo '<img src="'.$_SESSION['avatar'].'">';
+      ?>
+      <a href="profil.php">Log Out Btn</a>
+      <?php
     }
     else{ ?>
       <div id="log_error"></div>
@@ -51,10 +56,28 @@
         <input type="email" name="email" id="email">
       </div>
       <div id="town_error"></div>
-      <div class="input-group">
+
+      <?php
+          $link = mysqli_connect(HOST, USER, PWD, BASE);
+          mysqli_query($link, "SET NAMES UTF8");
+          
+          $sql = "SELECT * FROM TOWNS";
+          $query = mysqli_query($link,$sql);
+          while ( $results[] = mysqli_fetch_object ( $query ) );
+          array_pop ( $results );
+      ?>
+
+      <select name="town" id="town">
+          <?php foreach ( $results as $option ) : ?>
+                <option value="<?php echo $option->ID; ?>"><?php echo $option->NAME; ?></option>
+          <?php endforeach; ?>
+      </select>
+
+
+      <!-- <div class="input-group">
         <label>Ville</label>
         <input type="ville" name="town" id="town">
-      </div>
+      </div> -->
       <div id="password_error"></div>
       <div class="input-group">
         <label>Password</label>
