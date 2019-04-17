@@ -41,6 +41,7 @@
         color : white;
         font-family: 'Fira Sans', sans-serif;
         background: #ffffff36;
+        z-index: 100;
     }
 
     .dotting{
