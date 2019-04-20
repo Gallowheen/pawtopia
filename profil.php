@@ -97,6 +97,7 @@
             margin-left : 50px;
             color : white;
             font-family: 'Fira Sans', sans-serif;
+            margin-top: 20px;
         }
 
         .right {
@@ -147,7 +148,7 @@
             margin-top : 32px;
         }
         .information{
-            margin-bottom: 24px;
+            margin-bottom: 32px;
             font-weight: bold;
         }
         .information_space{
