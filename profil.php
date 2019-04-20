@@ -3,6 +3,14 @@
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
+
+    function resultToArray($result) {
+        $rows = array();
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,9 +23,12 @@
     <link rel="stylesheet" type="text/css" href="src/styles/app.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
     <style>
+        .relative{
+            position : relative;
+        }
 
         body{
-            background : white;
+            background : #f6f8fa;
         }
 
         .header{
@@ -28,9 +39,9 @@
             background-color : #0077C0;
         }
         .menu-toggle {
-            width: 50px;
+            width: 40px;
             height: 30px;
-            top: 20px;
+            top: 23px;
             right: 25px;
             cursor: pointer;
             position : absolute;
@@ -48,6 +59,11 @@
             transform : rotate(-45deg) translate(8px, -10px);
         }
 
+        /*SCSS*/
+        .one{
+            margin-top: 2px !important;
+        }
+
         .one,
         .two,
         .three{
@@ -63,9 +79,10 @@
             border: solid white;
             border-width: 0 3px 3px 0;
             display: inline-block;
-            padding: 15px;
+            padding: 10px;
             position: absolute;
-            top: 20px;
+            top: 28px;
+            left : 25px;
         }
 
         .title h1{
@@ -101,12 +118,94 @@
         }
         .avatar{
             border-radius : 50%;
-            margin-top : 32px;
+            margin-top : 64px;
+        }
+
+        .avatar--top{
+            margin-top : 16px;
         }
 
         .username{
             margin-top : 16px;
             font-family: 'Fira Sans', sans-serif;
+        }
+        .private{
+            margin-top : 32px;
+            margin-bottom : 16px;
+            font-weight : bold;
+            color : #C72C1C;
+        }
+
+        .information__container{
+            margin-top : 32px;
+        }
+        .information{
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        .information_space{
+            margin-left : 16px;
+        }
+        .information_title{
+            font-weight : bold;
+        }
+        .my_pet__container{
+            overflow : visible;
+        }
+
+        .dog_card_container{
+            display: flex;
+            max-width: 500%;
+            overflow-y: scroll;
+            margin-bottom: 32px;
+        }
+
+        .dog_card{
+            text-align: center;
+            min-width: 150px;
+            min-height: 200px;
+            padding: 24px;
+            background: white;
+            border-radius: 10px;
+            margin-right : 16px;
+        }
+        .dog_name{
+            text-align: center;
+            text-transform: capitalize;
+        }
+        .dog_img,
+        .dog_button_container{
+            border-radius: 50%;
+            height: 100px;
+            width : 100px;
+            margin-top: 16px;
+        }
+
+        .dog_button_container{
+            position : relative;
+            margin-top : 0px;
+        }
+        .dog_button{
+            background: transparent;
+            padding: 0px;
+            margin: 0px;
+            border: none;
+            margin-top : 16px;
+            position : relative;
+            outline : none;
+        }
+        .plus {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #0077C0;
+            background-position: center;
+            background-size: 50% 2px,2px 50%;
+            background-repeat: no-repeat;
+            border-radius: 50%;
         }
     </style>
 
@@ -115,7 +214,7 @@
         <header class="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 relative">
                         <div class="title">
                             <i class="left"></i>
 
@@ -131,7 +230,7 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="col-2 offset-4">
+                    <div class="col-4 offset-2 relative">
                         <div class="menu-toggle">
                             <div class="one"></div>
                             <div class="two"></div>
@@ -142,30 +241,163 @@
             </div>
         </header>
         <div class="avatar__container">
-            <?php if (empty($_GET)) {
-                if ( isset($_SESSION['user']) ){
-                    $user = $_SESSION['user'];
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <?php 
+                            //if it's user's profile
+                            if (empty($_GET)) {
+                                if ( isset($_SESSION['user']) ){
+                                    $user = $_SESSION['user'];
+                                }
+                            //if it's another user's profile
+                            }else{
+                                if ( isset($_GET['user']) ){
+                                    $user = $_GET['user'];
+                                }else{
+                                    //redirect 404 ?
+                                }
+                            }
 
-                    $query = $link->prepare("SELECT * FROM user WHERE USERNAME = ?");
-                    $query->bind_param("s", $user);
-                    $query->execute();
+                            $query = $link->prepare("SELECT * FROM user WHERE USERNAME = ?");
+                            $query->bind_param("s", $user);
+                            $query->execute();
 
-                    $result = $query->get_result();
-                    if($result->num_rows === 0) exit('No rows');
-                    $row = $result->fetch_assoc();
+                            $result = $query->get_result();
+                            if($result->num_rows === 0) exit('No rows');
+                            $row = $result->fetch_assoc();
 
-                    $avatar_path = $row['AVATAR'];
+                            if ($row['PRIVATE'] == 1)
+                                echo "<p class='private'>Ce profil est privé</p>";
 
-                    ?>
+                        ?>
+                        <?php
+                            $avatar_path = $row['AVATAR'];
 
-                    <img class="avatar" src="<?php echo $avatar_path ?>"/>
-                    <?php
-                    ?>
-                    <h3 class="username"><?php echo $row['USERNAME'] ?></h3>
-                    <?php
-                } 
-            }
-            ?>
+                            ?>
+                            
+                            <?php
+                                if ($row['PRIVATE'] == 1){
+                            ?>
+                                    <img class="avatar avatar--top" src="<?php echo $avatar_path ?>"/>
+                                <?php }
+                                else{
+                                ?>
+                                    <img class="avatar" src="<?php echo $avatar_path ?>"/>
+                            <?php }
+                            ?>
+                            <h3 class="username"><?php echo $row['USERNAME'] ?></h3>
+                            <?php
+
+                            //viewing our own profile
+                            if ( isset($_SESSION['user'])){
+                                if ( $row['FIRST_NAME'] ){
+                                    echo" <span>".$row['FIRST_NAME']."</span>";
+                                }
+                                if ( $row['NAME'] ){
+                                    echo" <span>".$row['NAME']."</span>";
+                                }
+                            }
+                            ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="information__container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="information">Informations</h3>
+                            <?php
+                                $town_check_query = $link->prepare("SELECT NAME FROM TOWNS WHERE ID = ? ");
+
+                                $town_check_query->bind_param("i", $row['TOWN_ID'] );
+                                $town_check_query->execute();
+                            
+                                $result_town = $town_check_query->get_result(); 
+                                $row_city = $result_town->fetch_assoc();
+
+                                $townToInsert = $row_city['NAME']; 
+
+                                echo" <p class='information_title'>Ville</p><p class='information_space'>".$townToInsert."</p>";
+
+                                if ( $row['BIO'])
+                                    echo"<p class='information_title'>Biographie</p><p class='information_space'>".$row['BIO']."</p>";
+                                else
+                                    echo"<p class='information_title'>Biographie</p><p class='information_space'>Rien à afficher pour le moment</p>";
+                                if ( $row['WALK'])
+                                    echo"<p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p>";
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my_pet__container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <!-- DOG VIEWER FUNCTION -->   
+                        <?php
+                            $query = $link->prepare("SELECT * FROM DOG WHERE OWNER_ID = ?");
+                            $query->bind_param("i", $row['ID']);
+                            $query->execute();
+
+                            $result = $query->get_result();
+                            if($result->num_rows === 0){
+                                ?>
+                                <h3 class="information">Mes animaux</h3>
+                                <?php
+                            }else{
+                                //$row_dog = $result->fetch_assoc();
+                                $rows = resultToArray($result);                     
+                                ?>
+                                <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
+                                <div class='dog_card_container'>
+                                <div class="dog_card">
+                                    <h4 class='dog_name'> Ajouter </h4>
+                                    <button class="dog_button">
+                                        <div class="dog_button_container">
+                                            <div class="plus"></div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <?php
+                                foreach ( $rows as $dog ) :
+                                ?>
+                                    <div class="dog_card">
+                                        <?php
+                                        echo "<h4 class='dog_name'>".$dog['NAME']."</h4>";
+                                        echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';
+                                        ?>
+                                    </div> 
+                                <?php
+                                endforeach;
+                            }
+                        ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reviews__container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="information">Mes reviews</h3>
+                        <!-- REVIEW FUNCTION -->   
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="last_event__container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="information">Mes derniers événements</h3>
+                        <!-- LAST_EVENT FUNCTION -->   
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </body>

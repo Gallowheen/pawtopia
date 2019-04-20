@@ -5,23 +5,9 @@
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
-@media (max-width: 767px) {
-  .h1 {
-    color: blue;
-  }
-}
-
 body {
   background: #efefef;
   font-family: sans-serif;
-}
-
-h2 {
-  color: red;
-}
-
-h3 {
-  color: blue;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -43,7 +43,7 @@
 
     $result = $user_check_query->get_result();
 
-    $town_check_query = $link->prepare("SELECT ID FROM TOWNS WHERE NAME= ? ");
+    $town_check_query = $link->prepare("SELECT ID FROM TOWNS WHERE ID = ? ");
     $town_check_query->bind_param("s", $town);
     $town_check_query->execute();
 
@@ -53,10 +53,10 @@
     if($result_town->num_rows > 0){
         $row = $result_town->fetch_assoc();
         $townToInsert = $row['ID'];
-    }else{        
+    }else{     
         array_push($errors, "town is unknown");
         // if ($town != null)
-            echo "town_unknown";
+        echo "town_unknown";
     }
     
     //check if exist
