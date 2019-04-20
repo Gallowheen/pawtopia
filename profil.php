@@ -11,6 +11,8 @@
         }
         return $rows;
     }
+    
+    $error = false;
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +25,9 @@
     <link rel="stylesheet" type="text/css" href="src/styles/app.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
     <style>
+        body{
+            font-family: 'Cabin', sans-serif;
+        }
         .relative{
             position : relative;
         }
@@ -118,7 +123,7 @@
         }
         .avatar{
             border-radius : 50%;
-            margin-top : 64px;
+            margin-top : 32px;
         }
 
         .avatar--top{
@@ -140,7 +145,7 @@
             margin-top : 32px;
         }
         .information{
-            margin-bottom: 25px;
+            margin-bottom: 24px;
             font-weight: bold;
         }
         .information_space{
@@ -151,13 +156,13 @@
         }
         .my_pet__container{
             overflow : visible;
+            margin-top : 32px;
         }
 
         .dog_card_container{
             display: flex;
-            max-width: 500%;
-            overflow-y: scroll;
-            margin-bottom: 32px;
+            overflow-x: scroll;
+            margin-top : 32px;
         }
 
         .dog_card{
@@ -168,6 +173,7 @@
             background: white;
             border-radius: 10px;
             margin-right : 16px;
+            position : relative;
         }
         .dog_name{
             text-align: center;
@@ -178,12 +184,10 @@
             border-radius: 50%;
             height: 100px;
             width : 100px;
-            margin-top: 16px;
         }
 
         .dog_button_container{
             position : relative;
-            margin-top : 0px;
         }
         .dog_button{
             background: transparent;
@@ -207,6 +211,41 @@
             background-repeat: no-repeat;
             border-radius: 50%;
         }
+        .close-icon
+        {
+            display:block;
+            box-sizing:border-box;
+            width:35px;
+            height:35px;
+            border-width:5px;
+            border-style: solid;
+            border-color:#C72C1C;
+            border-radius:100%;
+            background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+            background-color:#C72C1C;
+            transition: all 0.3s ease;
+            position : absolute;
+            bottom : 10px;
+            right : 50%;
+            z-index : 5;
+
+            transform : translateX(50%);
+        }
+        .reviews__container{
+            margin-top : 32px;
+        }
+        .last_event__container{
+            margin-top : 32px;
+        }
+        .error__container{
+            text-align : center;
+            height : 100vh;
+        }
+        .error__container h2{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
     </style>
 
     </head>
@@ -214,23 +253,38 @@
         <header class="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-6 relative">
+                    <div class="col-8 relative">
                         <div class="title">
                             <i class="left"></i>
 
                             <h1>
-                                <?php if (empty($_GET)) {
-                                    if ( isset($_SESSION['user']) ){
-                                        echo $_SESSION["user"];
-                                    }else{
-                                        echo 'error';
+                            <?php 
+                                $user;
+                                if (empty($_GET))
+                                    $user = $_SESSION['ID'];
+                                else
+                                    $user = $_GET['ID'];
+
+                                if($user) {
+                                    $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
+                                    $query->bind_param("i", $user);
+                                    $query->execute();
+
+                                    $result = $query->get_result();
+                                    if($result->num_rows === 0){
+                                        echo 'Error';
+                                        $error = true;
+                                        //redirect ?
                                     }
-                                }
-                                ?>
+                                    $row = $result->fetch_assoc();
+
+                                    echo $row["USERNAME"];
+                                }       
+                            ?>
                             </h1>
                         </div>
                     </div>
-                    <div class="col-4 offset-2 relative">
+                    <div class="col-4 relative">
                         <div class="menu-toggle">
                             <div class="one"></div>
                             <div class="two"></div>
@@ -240,33 +294,24 @@
                 </div>
             </div>
         </header>
+        <?php 
+        if ($error){ ?>
+        <div class="error__container">
+            <div class="container">
+                <div class="row">
+                    <h2>Impossible de trouver cet utilisateur</h2>
+                </div>
+            </div>
+        </div>
+        <?php    
+        }else{
+
+            ?>
         <div class="avatar__container">
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <?php 
-                            //if it's user's profile
-                            if (empty($_GET)) {
-                                if ( isset($_SESSION['user']) ){
-                                    $user = $_SESSION['user'];
-                                }
-                            //if it's another user's profile
-                            }else{
-                                if ( isset($_GET['user']) ){
-                                    $user = $_GET['user'];
-                                }else{
-                                    //redirect 404 ?
-                                }
-                            }
-
-                            $query = $link->prepare("SELECT * FROM user WHERE USERNAME = ?");
-                            $query->bind_param("s", $user);
-                            $query->execute();
-
-                            $result = $query->get_result();
-                            if($result->num_rows === 0) exit('No rows');
-                            $row = $result->fetch_assoc();
-
                             if ($row['PRIVATE'] == 1)
                                 echo "<p class='private'>Ce profil est privé</p>";
 
@@ -348,32 +393,45 @@
                                 <h3 class="information">Mes animaux</h3>
                                 <?php
                             }else{
-                                //$row_dog = $result->fetch_assoc();
-                                $rows = resultToArray($result);                     
-                                ?>
-                                <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
-                                <div class='dog_card_container'>
-                                <div class="dog_card">
-                                    <h4 class='dog_name'> Ajouter </h4>
-                                    <button class="dog_button">
-                                        <div class="dog_button_container">
-                                            <div class="plus"></div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <?php
-                                foreach ( $rows as $dog ) :
-                                ?>
+                                $rows = resultToArray($result);   
+                                if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
+                                    <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
+                                    <p class="information_space private"> Ce profil est privé</p>
+                                    <?php
+                                }else{
+                                    //$row_dog = $result->fetch_assoc();                  
+                                    ?>
+                                    <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
+                                    <div class='dog_card_container'>
                                     <div class="dog_card">
-                                        <?php
-                                        echo "<h4 class='dog_name'>".$dog['NAME']."</h4>";
-                                        echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';
-                                        ?>
-                                    </div> 
-                                <?php
-                                endforeach;
+                                        <h4 class='dog_name'> Ajouter </h4>
+                                        <button class="dog_button">
+                                            <div class="dog_button_container">
+                                                <div class="plus"></div>
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <?php
+                                    foreach ( $rows as $dog ) :
+                                    ?>
+                                        <div class="dog_card">
+                                            <?php
+                                                if (empty($_GET)){ ?>
+                                                    <button class="close-icon"></button>
+                                            <?php
+                                                }
+                                            echo "<h4 class='dog_name'>".$dog['NAME']."</h4>";
+                                            ?>
+                                            <button class="dog_button">
+                                            <?php
+                                            echo '<img class="dog_img" src="'.$dog['PICTURE'].'">'; ?>
+                                            </button>
+                                        </div> 
+                                    <?php
+                                    endforeach;
+                                }
                             }
-                        ?>
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -400,6 +458,9 @@
             </div>
         </div>
     </div>
+    <?php
+            }
+    ?>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>

@@ -16,6 +16,7 @@
 
     $username = $row['USERNAME'];
     $password = $row['PASSWORD'];
+    $id = $row['ID'];
     $avatar = $row['AVATAR'];
  
     if( isset($_POST['username']) && isset($_POST['password']) ){
@@ -23,7 +24,7 @@
         if($_POST['username'] == $username && md5($_POST['password']) == $password){
             session_start();
             $_SESSION['user'] = $username;
-            $_SESSION['avatar'] = $avatar;
+            $_SESSION['ID'] = $id;
             echo "Success";    
         }
         else{

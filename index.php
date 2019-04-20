@@ -15,18 +15,13 @@
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
   </head>
   <body>
-    <img src="src/assets/img/logo/logo-heaj.png">
-    <h1 class="h1">Hello world</h1>
-
-
     <?php
 
     if ( isset($_SESSION['user']) ){
       echo "vous êtes connecté " . $_SESSION['user'];
       echo '<a href="src/php/logout.php">Log Out Btn</a>';
-      echo '<img src="'.$_SESSION['avatar'].'">';
       ?>
-      <a href="profil.php">Log Out Btn</a>
+      <a href="profil.php">Profile</a>
       <?php
     }
     else{ ?>
@@ -73,11 +68,6 @@
           <?php endforeach; ?>
       </select>
 
-
-      <!-- <div class="input-group">
-        <label>Ville</label>
-        <input type="ville" name="town" id="town">
-      </div> -->
       <div id="password_error"></div>
       <div class="input-group">
         <label>Password</label>
