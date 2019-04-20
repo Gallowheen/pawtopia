@@ -27,6 +27,8 @@
     <style>
         body{
             font-family: 'Cabin', sans-serif;
+            font-size : 18px;
+            line-height : 1.6;
         }
         .relative{
             position : relative;
@@ -150,9 +152,25 @@
         }
         .information_space{
             margin-left : 16px;
+            margin-bottom : 0px;
         }
+
+        .information_group{
+            background: #0077C0;
+            color : white;
+            padding: 8px 16px;
+            box-shadow: 4px 4px 5px 0px #00000036;
+            margin-bottom: 16px;
+            border-radius : 10px;
+        }
+
+        .information_group:last-child{
+            margin-bottom : 0px;
+        }
+
         .information_title{
             font-weight : bold;
+            font-size: 20px;
         }
         .my_pet__container{
             overflow : visible;
@@ -364,14 +382,14 @@
 
                                 $townToInsert = $row_city['NAME']; 
 
-                                echo" <p class='information_title'>Ville</p><p class='information_space'>".$townToInsert."</p>";
+                                echo" <div class='information_group'><p class='information_title'>Ville</p><p class='information_space'>".$townToInsert."</p></div>";
 
                                 if ( $row['BIO'])
-                                    echo"<p class='information_title'>Biographie</p><p class='information_space'>".$row['BIO']."</p>";
+                                    echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>".$row['BIO']."</p></div>";
                                 else
-                                    echo"<p class='information_title'>Biographie</p><p class='information_space'>Rien à afficher pour le moment</p>";
+                                    echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>Rien à afficher pour le moment</p></div>";
                                 if ( $row['WALK'])
-                                    echo"<p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p>";
+                                    echo"<div class='information_group'><p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p></div>";
                         ?>
                     </div>
                 </div>
