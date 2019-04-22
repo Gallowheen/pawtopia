@@ -4,6 +4,7 @@
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
 
+    //Function to return table of result
     function resultToArray($result) {
         $rows = array();
         while($row = $result->fetch_assoc()) {
@@ -11,6 +12,8 @@
         }
         return $rows;
     }
+
+    //Check if friends ?
     
     $error = false;
 ?>
@@ -143,7 +146,9 @@
             font-weight : bold;
             color : #C72C1C;
         }
-
+        .friend__container{
+            margin-top : 32px;
+        }
         .information__container{
             margin-top : 32px;
         }
@@ -157,10 +162,13 @@
         }
 
         .information_group{
-            background: #0077C0;
-            color : white;
+            /* background: #0077C0;
+            color : white; */
             padding: 8px 16px;
-            box-shadow: 4px 4px 5px 0px #00000036;
+            background: white;
+            color: black;
+            border: 1px dashed #0077C0;
+            /* box-shadow: 4px 4px 5px 0px #00000036; */
             margin-bottom: 16px;
             border-radius : 10px;
         }
@@ -172,6 +180,7 @@
         .information_title{
             font-weight : bold;
             font-size: 20px;
+            color : #0077C0;
         }
         .my_pet__container{
             overflow : visible;
@@ -186,13 +195,14 @@
 
         .dog_card{
             text-align: center;
-            min-width: 150px;
+            width: 150px;
             min-height: 200px;
             padding: 24px;
             background: white;
             border-radius: 10px;
             margin-right : 16px;
             position : relative;
+            border: 1px dashed #0077C0;
         }
         .dog_name{
             text-align: center;
@@ -203,6 +213,7 @@
             border-radius: 50%;
             height: 100px;
             width : 100px;
+            object-fit: cover;
         }
 
         .dog_button_container{
@@ -331,9 +342,8 @@
                 <div class="row">
                     <div class="col">
                         <?php 
-                            if ($row['PRIVATE'] == 1)
+                            if ($row['PRIVATE'] == 1 )
                                 echo "<p class='private'>Ce profil est privé</p>";
-
                         ?>
                         <?php
                             $avatar_path = $row['AVATAR'];
@@ -354,15 +364,136 @@
                             <?php
 
                             //viewing our own profile
-                            if ( isset($_SESSION['user'])){
-                                if ( $row['FIRST_NAME'] ){
-                                    echo" <span>".$row['FIRST_NAME']."</span>";
-                                }
-                                if ( $row['NAME'] ){
-                                    echo" <span>".$row['NAME']."</span>";
+                            if ($row['PRIVATE'] == 0){
+                                if ( isset($_SESSION['user'])){
+                                    if ( $row['FIRST_NAME'] ){
+                                        echo" <span>".$row['FIRST_NAME']."</span>";
+                                    }
+                                    if ( $row['NAME'] ){
+                                        echo" <span>".$row['NAME']."</span>";
+                                    }
                                 }
                             }
                             ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="friend__container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <?php
+                            $friends = [];
+                            $friends_pending = [];
+                            $friends_invite= [];
+    
+                            $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?)");
+                            $query_friend_mutual->bind_param("ii", $user, $user);
+                            $query_friend_mutual->execute();
+    
+                            $result_friend_mutual = $query_friend_mutual->get_result();
+                            $row_friends_mutual = resultToArray($result_friend_mutual);  
+                                        
+                            foreach ($row_friends_mutual as $friend) :          
+                                if(!in_array($friend['id_user1'],$friends)){
+                                    if($friend['id_user1'] != $user)
+                                        array_push($friends, $friend['id_user1']);        
+                                }   
+                            endforeach;
+     
+                        ?>
+                        <h3 class="information">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3>
+                        <?php
+                        if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
+                            <p class="information_space private"> Ce profil est privé</p>
+                            <?php
+                        }else{//get user's friendlist ( we get ID )
+
+                            //own profile
+                            if (empty($_GET)){
+                                echo "<h4>Mutuel</h4>";
+           
+                                if($result_friend_mutual->num_rows === 1){
+                                    echo 'Vous n"avez pas d"amis :(';
+                                }else{   
+                                    foreach ($friends as $friend) :           
+                                        echo $friend;
+                                    endforeach;
+
+                                }  
+                                
+                                echo "<h4>Envoyée</h4>";
+                                $query_friend_pending = $link->prepare("SELECT distinct(id_user2) FROM friends WHERE mutual = 0 AND ID_USER1 = ?");
+                                $query_friend_pending->bind_param("i", $user);
+                                $query_friend_pending->execute();
+
+                                $result_friend_pending = $query_friend_pending->get_result();
+                                if($result_friend_pending->num_rows === 0){
+                                    echo 'Aucune demande en attente';
+                                }else{
+                                    $row_friends_pending = resultToArray($result_friend_pending);  
+                                    
+                                    foreach ($row_friends_pending as $friend) :       
+                                        if(!in_array($friend['id_user2'],$friends_pending)){
+                                            if($friend['id_user2'] != $user)
+                                                array_push($friends_pending, $friend['id_user2']);    
+                                        }   
+                                    endforeach;
+
+                                    foreach ($friends_pending as $friend) :           
+                                        echo $friend;
+                                    endforeach;
+
+                                }  
+                                echo "<h4>Reçu</h4>";
+                                $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
+                                $query_friend_invite->bind_param("i", $user);
+                                $query_friend_invite->execute();
+
+                                $result_friend_invite = $query_friend_invite->get_result();
+                                if($result_friend_invite->num_rows === 0){
+                                    echo 'Aucune demande en attente';
+                                }else{
+                                    $row_friends_pending = resultToArray($result_friend_invite);  
+                                    
+                                    foreach ($row_friends_pending as $friend) :       
+                                        if(!in_array($friend['id_user1'],$friends_pending)){
+                                            if($friend['id_user1'] != $user)
+                                                array_push($friends_invite, $friend['id_user1']);    
+                                        }   
+                                    endforeach;
+
+                                    foreach ($friends_invite as $friend) :           
+                                        echo $friend;
+                                    endforeach;
+                                }
+                            //other one profile
+                            }else{
+                                $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?)");
+                                $query_friend_mutual->bind_param("ii", $user, $user);
+                                $query_friend_mutual->execute();
+
+                                $result_friend_mutual = $query_friend_mutual->get_result();
+                                if($result_friend_mutual->num_rows === 1){
+                                    echo 'Vous n"avez pas d"amis :(';
+                                }else{
+                                    $row_friends_mutual = resultToArray($result_friend_mutual);  
+                                    
+                                    foreach ($row_friends_mutual as $friend) :          
+                                        if(!in_array($friend['id_user1'],$friends)){
+                                            if($friend['id_user1'] != $user)
+                                                array_push($friends, $friend['id_user1']);        
+                                        }   
+                                    endforeach;
+
+                                    foreach ($friends as $friend) :           
+                                        echo $friend;
+                                    endforeach;
+                                } 
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -410,6 +541,14 @@
                             if($result->num_rows === 0){
                                 ?>
                                 <h3 class="information">Mes animaux</h3>
+                                <div class="dog_card">
+                                    <h4 class='dog_name'> Ajouter </h4>
+                                    <button class="dog_button">
+                                        <div class="dog_button_container">
+                                            <div class="plus"></div>
+                                        </div>
+                                    </button>
+                                </div>
                                 <?php
                             }else{
                                 $rows = resultToArray($result);   
@@ -417,20 +556,26 @@
                                     <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
                                     <p class="information_space private"> Ce profil est privé</p>
                                     <?php
-                                }else{
-                                    //$row_dog = $result->fetch_assoc();                  
+                                }else{              
                                     ?>
                                     <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
                                     <div class='dog_card_container'>
-                                    <div class="dog_card">
-                                        <h4 class='dog_name'> Ajouter </h4>
-                                        <button class="dog_button">
-                                            <div class="dog_button_container">
-                                                <div class="plus"></div>
-                                            </div>
-                                        </button>
-                                    </div>
+                                    <?php 
+
+                                        if(empty($_GET)){
+                                        ?>
+
+                                        <div class="dog_card">
+                                            <h4 class='dog_name'> Ajouter </h4>
+                                            <button class="dog_button">
+                                                <div class="dog_button_container">
+                                                    <div class="plus"></div>
+                                                </div>
+                                            </button>
+                                        </div>
+
                                     <?php
+                                    }
                                     foreach ( $rows as $dog ) :
                                     ?>
                                         <div class="dog_card">
