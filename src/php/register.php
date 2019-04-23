@@ -37,13 +37,13 @@
         echo 'password_no_match';
     } 
 
-    $user_check_query = $link->prepare("SELECT * FROM USER WHERE USERNAME = ? OR EMAIL = ? LIMIT 1");
+    $user_check_query = $link->prepare("SELECT * FROM user WHERE USERNAME = ? OR EMAIL = ? LIMIT 1");
     $user_check_query->bind_param("ss", $username, $email);
     $user_check_query->execute();
 
     $result = $user_check_query->get_result();
 
-    $town_check_query = $link->prepare("SELECT ID FROM TOWNS WHERE ID = ? ");
+    $town_check_query = $link->prepare("SELECT ID FROM towns WHERE ID = ? ");
     $town_check_query->bind_param("s", $town);
     $town_check_query->execute();
 
@@ -82,7 +82,7 @@
 
             // create user in DB
             $password = md5($password_1);
-            $query = "INSERT INTO USER (USERNAME, EMAIL, TOWN_ID, PASSWORD, AVATAR) 
+            $query = "INSERT INTO user (USERNAME, EMAIL, TOWN_ID, PASSWORD, AVATAR) 
                         VALUES('$username', '$email', '$townToInsert', '$password', '$avatarPath')";
             mysqli_query($link, $query);
             $id = mysqli_insert_id($link);

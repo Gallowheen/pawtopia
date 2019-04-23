@@ -276,6 +276,9 @@
             top: 50%;
             transform: translateY(-50%);
         }
+        button{
+            outline: none !important;
+        }
     </style>
 
     </head>
@@ -283,7 +286,7 @@
         <header class="header">
             <div class="container">
                 <div class="row">
-                    <div class="col-8 relative">
+                    <div class="col-10 relative">
                         <div class="title">
                             <i class="left"></i>
 
@@ -314,7 +317,7 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="col-4 relative">
+                    <div class="col-2 relative">
                         <div class="menu-toggle">
                             <div class="one"></div>
                             <div class="two"></div>
@@ -345,7 +348,7 @@
                             if ($row['PRIVATE'] == 1 )
                                 echo "<p class='private'>Ce profil est privé</p>";
                         ?>
-                        <?php
+                        <?php              
                             $avatar_path = $row['AVATAR'];
 
                             ?>
@@ -364,7 +367,7 @@
                             <?php
 
                             //viewing our own profile
-                            if ($row['PRIVATE'] == 0){
+                            if ($row['PRIVATE'] == 0 || empty($_GET) ){
                                 if ( isset($_SESSION['user'])){
                                     if ( $row['FIRST_NAME'] ){
                                         echo" <span>".$row['FIRST_NAME']."</span>";
@@ -403,7 +406,13 @@
                             endforeach;
      
                         ?>
-                        <h3 class="information">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3>
+                        <?php
+                            if ((count($row_friends_mutual)-1) < 0){ ?>
+                                <h3 class="information">Mes amis</h3><?php
+                            }else{?>
+                                 <h3 class="information">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
+                            }
+                        ?>      
                         <?php
                         if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
                             <p class="information_space private"> Ce profil est privé</p>
@@ -414,7 +423,7 @@
                             if (empty($_GET)){
                                 echo "<h4>Mutuel</h4>";
            
-                                if($result_friend_mutual->num_rows === 1){
+                                if($result_friend_mutual->num_rows <= 1){
                                     echo 'Vous n"avez pas d"amis :(';
                                 }else{   
                                     foreach ($friends as $friend) :           
@@ -475,7 +484,7 @@
                                 $query_friend_mutual->execute();
 
                                 $result_friend_mutual = $query_friend_mutual->get_result();
-                                if($result_friend_mutual->num_rows === 1){
+                                if($result_friend_mutual->num_rows === 0){
                                     echo 'Vous n"avez pas d"amis :(';
                                 }else{
                                     $row_friends_mutual = resultToArray($result_friend_mutual);  
@@ -504,7 +513,7 @@
                     <div class="col">
                         <h3 class="information">Informations</h3>
                             <?php
-                                $town_check_query = $link->prepare("SELECT NAME FROM TOWNS WHERE ID = ? ");
+                                $town_check_query = $link->prepare("SELECT NAME FROM towns WHERE ID = ? ");
 
                                 $town_check_query->bind_param("i", $row['TOWN_ID'] );
                                 $town_check_query->execute();
@@ -533,7 +542,7 @@
                     <div class="col">
                         <!-- DOG VIEWER FUNCTION -->   
                         <?php
-                            $query = $link->prepare("SELECT * FROM DOG WHERE OWNER_ID = ?");
+                            $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ?");
                             $query->bind_param("i", $row['ID']);
                             $query->execute();
 

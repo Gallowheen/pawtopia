@@ -56,7 +56,7 @@
           $link = mysqli_connect(HOST, USER, PWD, BASE);
           mysqli_query($link, "SET NAMES UTF8");
           
-          $sql = "SELECT * FROM TOWNS";
+          $sql = "SELECT * FROM towns";
           $query = mysqli_query($link,$sql);
           while ( $results[] = mysqli_fetch_object ( $query ) );
           array_pop ( $results );
