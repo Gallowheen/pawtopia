@@ -136,6 +136,11 @@
             margin-top : 16px;
         }
 
+        .avatar--small{
+            height : 50px;
+            width : 50px;
+        }
+
         .username{
             margin-top : 16px;
             font-family: 'Fira Sans', sans-serif;
@@ -165,9 +170,7 @@
             /* background: #0077C0;
             color : white; */
             padding: 8px 16px;
-            background: white;
             color: black;
-            border: 1px dashed #0077C0;
             /* box-shadow: 4px 4px 5px 0px #00000036; */
             margin-bottom: 16px;
             border-radius : 10px;
@@ -279,6 +282,21 @@
         button{
             outline: none !important;
         }
+
+        .friend_widget_container{
+            display : flex;
+            flex-wrap : wrap;
+            justify-content : space-around;
+        }
+        .friend_widget{
+            height : 100px;
+            width : 100px;
+            position : relative;
+            background: white;
+            padding: 8px;
+            border-radius: 15px;
+            margin-bottom: 32px;
+        }
     </style>
 
     </head>
@@ -311,7 +329,7 @@
                                     }
                                     $row = $result->fetch_assoc();
 
-                                    echo $row["USERNAME"];
+                                    echo 'Profil';
                                 }       
                             ?>
                             </h1>
@@ -391,7 +409,7 @@
                             $friends_pending = [];
                             $friends_invite= [];
     
-                            $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?)");
+                            $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
                             $query_friend_mutual->bind_param("ii", $user, $user);
                             $query_friend_mutual->execute();
     
@@ -417,69 +435,89 @@
                         if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
                             <p class="information_space private"> Ce profil est privé</p>
                             <?php
-                        }else{//get user's friendlist ( we get ID )
+                        }
+                        else{//get user's friendlist ( we get ID )
 
                             //own profile
                             if (empty($_GET)){
-                                echo "<h4>Mutuel</h4>";
-           
                                 if($result_friend_mutual->num_rows <= 1){
-                                    echo 'Vous n"avez pas d"amis :(';
+                                    echo "<h4>Vous n'avez actuellement aucun ami.</h4>";
                                 }else{   
+                                    echo '<div class="friend_widget_container">';
                                     foreach ($friends as $friend) :           
-                                        echo $friend;
+                                        
+                                        $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ?");
+                                        $query_friend_info->bind_param("i", $friend);
+                                        $query_friend_info->execute();
+
+                                        $result_friend_info = $query_friend_info->get_result();
+                                        if($result_friend_info->num_rows === 0){
+                                            //impossible
+                                        }
+                                        $row_friend_info = $result_friend_info->fetch_assoc();
+                                        
+
+                                        echo '<div class="friend_widget">';?>
+                                        <img class="avatar avatar--small" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                        <?php
+                                        echo $row_friend_info['USERNAME'];
+                                        echo '</div>';
                                     endforeach;
+                                    echo '</div>';
+                                    ?>
+                                    <a href="friends.php"><button>Plus d'amis</button></a>
+                                    <?php
 
                                 }  
                                 
-                                echo "<h4>Envoyée</h4>";
-                                $query_friend_pending = $link->prepare("SELECT distinct(id_user2) FROM friends WHERE mutual = 0 AND ID_USER1 = ?");
-                                $query_friend_pending->bind_param("i", $user);
-                                $query_friend_pending->execute();
+                                // echo "<h4>Envoyée</h4>";
+                                // $query_friend_pending = $link->prepare("SELECT distinct(id_user2) FROM friends WHERE mutual = 0 AND ID_USER1 = ?");
+                                // $query_friend_pending->bind_param("i", $user);
+                                // $query_friend_pending->execute();
 
-                                $result_friend_pending = $query_friend_pending->get_result();
-                                if($result_friend_pending->num_rows === 0){
-                                    echo 'Aucune demande en attente';
-                                }else{
-                                    $row_friends_pending = resultToArray($result_friend_pending);  
+                                // $result_friend_pending = $query_friend_pending->get_result();
+                                // if($result_friend_pending->num_rows === 0){
+                                //     echo 'Aucune demande en attente';
+                                // }else{
+                                //     $row_friends_pending = resultToArray($result_friend_pending);  
                                     
-                                    foreach ($row_friends_pending as $friend) :       
-                                        if(!in_array($friend['id_user2'],$friends_pending)){
-                                            if($friend['id_user2'] != $user)
-                                                array_push($friends_pending, $friend['id_user2']);    
-                                        }   
-                                    endforeach;
+                                //     foreach ($row_friends_pending as $friend) :       
+                                //         if(!in_array($friend['id_user2'],$friends_pending)){
+                                //             if($friend['id_user2'] != $user)
+                                //                 array_push($friends_pending, $friend['id_user2']);    
+                                //         }   
+                                //     endforeach;
 
-                                    foreach ($friends_pending as $friend) :           
-                                        echo $friend;
-                                    endforeach;
+                                //     foreach ($friends_pending as $friend) :           
+                                //         echo $friend;
+                                //     endforeach;
 
-                                }  
-                                echo "<h4>Reçu</h4>";
-                                $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
-                                $query_friend_invite->bind_param("i", $user);
-                                $query_friend_invite->execute();
+                                // }  
+                                // echo "<h4>Reçu</h4>";
+                                // $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
+                                // $query_friend_invite->bind_param("i", $user);
+                                // $query_friend_invite->execute();
 
-                                $result_friend_invite = $query_friend_invite->get_result();
-                                if($result_friend_invite->num_rows === 0){
-                                    echo 'Aucune demande en attente';
-                                }else{
-                                    $row_friends_pending = resultToArray($result_friend_invite);  
+                                // $result_friend_invite = $query_friend_invite->get_result();
+                                // if($result_friend_invite->num_rows === 0){
+                                //     echo 'Aucune demande en attente';
+                                // }else{
+                                //     $row_friends_pending = resultToArray($result_friend_invite);  
                                     
-                                    foreach ($row_friends_pending as $friend) :       
-                                        if(!in_array($friend['id_user1'],$friends_pending)){
-                                            if($friend['id_user1'] != $user)
-                                                array_push($friends_invite, $friend['id_user1']);    
-                                        }   
-                                    endforeach;
+                                //     foreach ($row_friends_pending as $friend) :       
+                                //         if(!in_array($friend['id_user1'],$friends_pending)){
+                                //             if($friend['id_user1'] != $user)
+                                //                 array_push($friends_invite, $friend['id_user1']);    
+                                //         }   
+                                //     endforeach;
 
-                                    foreach ($friends_invite as $friend) :           
-                                        echo $friend;
-                                    endforeach;
-                                }
+                                //     foreach ($friends_invite as $friend) :           
+                                //         echo $friend;
+                                //     endforeach;
+                                // }
                             //other one profile
                             }else{
-                                $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?)");
+                                $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
                                 $query_friend_mutual->bind_param("ii", $user, $user);
                                 $query_friend_mutual->execute();
 
@@ -496,9 +534,29 @@
                                         }   
                                     endforeach;
 
+                                    echo '<div class="friend_widget_container">';
                                     foreach ($friends as $friend) :           
-                                        echo $friend;
+                                        $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ?");
+                                        $query_friend_info->bind_param("i", $friend);
+                                        $query_friend_info->execute();
+
+                                        $result_friend_info = $query_friend_info->get_result();
+                                        if($result_friend_info->num_rows === 0){
+                                            //impossible
+                                        }
+                                        $row_friend_info = $result_friend_info->fetch_assoc();
+                                        
+
+                                        echo '<div class="friend_widget">';?>
+                                        <img class="avatar avatar--small" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                        <?php
+                                        echo $row_friend_info['USERNAME'];
+                                        echo '</div>';
                                     endforeach;
+                                    echo '</div>';
+                                    ?>
+                                    <a href="<?php echo "friends.php?ID=".$user ?>"><button>Plus d'amis</button></a>
+                                    <?php
                                 } 
                             }
                         }

@@ -170,9 +170,7 @@
                 <source id="source" src="" type="video/mp4">
             </video>
 
-            <form>
-            <button formaction="test.php">LET'S WALK TOGETHER</button>
-            </form>
+            <a href="test.php"><button>LET'S WALK TOGETHER</button></a>
         </div>
         <div class="desktop">
             <h1>C'est une expérience mobile, allez hop direction l'outil de dévoleppement pour passer en mobile ! Attention : Work In Progress</h1>

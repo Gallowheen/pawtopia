@@ -21,7 +21,7 @@
       echo "vous êtes connecté " . $_SESSION['user'];
       echo '<a href="src/php/logout.php">Log Out Btn</a>';
       ?>
-      <a href="profil.php">Profile</a>
+      <a href="profile.php">Profile</a>
       <?php
     }
     else{ ?>
