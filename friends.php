@@ -35,8 +35,6 @@
             //redirect ?
         }
         $row = $result->fetch_assoc();
-
-        echo 'Profil';
     }  
     //
 
@@ -73,277 +71,7 @@
     <link rel="stylesheet" type="text/css" href="src/styles/app.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
     <style>
-        body{
-            font-family: 'Cabin', sans-serif;
-            font-size : 18px;
-            line-height : 1.6;
-        }
-        .relative{
-            position : relative;
-        }
-
-        body{
-            background : #f6f8fa;
-        }
-
-        .header{
-            height : 75px;
-            width : 100vw;
-            position : absolute;
-            top : 0px;
-            background-color : #0077C0;
-        }
-        .menu-toggle {
-            width: 40px;
-            height: 30px;
-            top: 23px;
-            right: 25px;
-            cursor: pointer;
-            position : absolute;
-        }
-
-        .on .one{
-            transform : rotate(45deg) translate(7px, 7px);
-        }
-
-        .on .two{
-            opacity: 0;
-        }
-
-        .on .three{
-            transform : rotate(-45deg) translate(8px, -10px);
-        }
-
-        /*SCSS*/
-        .one{
-            margin-top: 2px !important;
-        }
-
-        .one,
-        .two,
-        .three{
-            width: 100%;
-            height: 5px;
-            background: white;
-            margin: 6px auto;
-            backface-visibility: hidden;
-            transition-duration : .3s;
-        }
-
-        i {
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            display: inline-block;
-            padding: 10px;
-            position: absolute;
-            top: 28px;
-            left : 25px;
-        }
-
-        .title h1{
-            top: 0;
-            margin-left : 50px;
-            color : white;
-            font-family: 'Fira Sans', sans-serif;
-            margin-top: 20px;
-        }
-
-        .right {
-            transform: rotate(-45deg);
-            -webkit-transform: rotate(-45deg);
-        }
-
-        .left {
-            transform: rotate(135deg);
-            -webkit-transform: rotate(135deg);
-        }
-
-        .up {
-            transform: rotate(-135deg);
-            -webkit-transform: rotate(-135deg);
-        }
-
-        .down {
-            transform: rotate(45deg);
-            -webkit-transform: rotate(45deg);
-        }
-
-        .avatar__container{
-            margin-top : 75px;
-            text-align : center;
-        }
-        .avatar{
-            border-radius : 50%;
-            margin-top : 32px;
-        }
-
-        .avatar--top{
-            margin-top : 16px;
-        }
-
-        .avatar--small{
-            height : 50px;
-            width : 50px;
-        }
-
-        .username{
-            margin-top : 16px;
-            font-family: 'Fira Sans', sans-serif;
-        }
-        .private{
-            margin-top : 32px;
-            margin-bottom : 16px;
-            font-weight : bold;
-            color : #C72C1C;
-        }
-        .friend__container{
-            margin-top : 32px;
-        }
-        .information__container{
-            margin-top : 32px;
-        }
-        .information{
-            margin-bottom: 32px;
-            font-weight: bold;
-        }
-        .information_space{
-            margin-left : 16px;
-            margin-bottom : 0px;
-        }
-
-        .information_group{
-            /* background: #0077C0;
-            color : white; */
-            padding: 8px 16px;
-            background: white;
-            color: black;
-            border: 1px dashed #0077C0;
-            /* box-shadow: 4px 4px 5px 0px #00000036; */
-            margin-bottom: 16px;
-            border-radius : 10px;
-        }
-
-        .information_group:last-child{
-            margin-bottom : 0px;
-        }
-
-        .information_title{
-            font-weight : bold;
-            font-size: 20px;
-            color : #0077C0;
-        }
-        .my_pet__container{
-            overflow : visible;
-            margin-top : 32px;
-        }
-
-        .dog_card_container{
-            display: flex;
-            overflow-x: scroll;
-            margin-top : 32px;
-        }
-
-        .dog_card{
-            text-align: center;
-            width: 150px;
-            min-height: 200px;
-            padding: 24px;
-            background: white;
-            border-radius: 10px;
-            margin-right : 16px;
-            position : relative;
-            border: 1px dashed #0077C0;
-        }
-        .dog_name{
-            text-align: center;
-            text-transform: capitalize;
-        }
-        .dog_img,
-        .dog_button_container{
-            border-radius: 50%;
-            height: 100px;
-            width : 100px;
-            object-fit: cover;
-        }
-
-        .dog_button_container{
-            position : relative;
-        }
-        .dog_button{
-            background: transparent;
-            padding: 0px;
-            margin: 0px;
-            border: none;
-            margin-top : 16px;
-            position : relative;
-            outline : none;
-        }
-        .plus {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #0077C0;
-            background-position: center;
-            background-size: 50% 2px,2px 50%;
-            background-repeat: no-repeat;
-            border-radius: 50%;
-        }
-        .close-icon
-        {
-            display:block;
-            box-sizing:border-box;
-            width:35px;
-            height:35px;
-            border-width:5px;
-            border-style: solid;
-            border-color:#C72C1C;
-            border-radius:100%;
-            background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
-            background-color:#C72C1C;
-            transition: all 0.3s ease;
-            position : absolute;
-            bottom : 10px;
-            right : 50%;
-            z-index : 5;
-
-            transform : translateX(50%);
-        }
-        .reviews__container{
-            margin-top : 32px;
-        }
-        .last_event__container{
-            margin-top : 32px;
-        }
-        .error__container{
-            text-align : center;
-            height : 100vh;
-        }
-        .error__container h2{
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        button{
-            outline: none !important;
-        }
-
-        .friend_widget_container{
-            display : flex;
-            flex-wrap : wrap;
-            justify-content : space-around;
-        }
-        .friend_widget{
-            height : 100px;
-            width : 100px;
-            position : relative;
-            background: white;
-            padding: 8px;
-            border-radius: 15px;
-            margin-bottom: 32px;
-        }
+        
     </style>
 
     </head>
@@ -403,6 +131,44 @@
         </div>
         <?php    
         }else{?>
+        <div class="friend_pending">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <?php
+
+                        if (!empty($_GET)){
+                            //other profile, we don't have to see what's going on on their channel
+                        }
+                        else{
+                            echo "<h4>Reçu</h4>";
+                            $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
+                            $query_friend_invite->bind_param("i", $user);
+                            $query_friend_invite->execute();
+
+                            $result_friend_invite = $query_friend_invite->get_result();
+                            if($result_friend_invite->num_rows === 0){
+                                echo 'Aucune demande en attente';
+                            }else{
+                                $row_friends_pending = resultToArray($result_friend_invite);  
+                                
+                                foreach ($row_friends_pending as $friend) :       
+                                    if(!in_array($friend['id_user1'],$friends_pending)){
+                                        if($friend['id_user1'] != $user)
+                                            array_push($friends_invite, $friend['id_user1']);    
+                                    }   
+                                endforeach;
+
+                                foreach ($friends_invite as $friend) :           
+                                    echo "<button class='handle_friend' data-user='$friend'>$friend</button>";
+                                endforeach;
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="friend_list">
             <div class="container">
                 <div class="row">
@@ -497,6 +263,22 @@
                 </div>   
             </div>
         </div>
+        <div class="friends__handler__container">
+            <div class="friends__handler">
+                <div class="container">
+                    <div class="row">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    
+                </div>
+            </div>
+        </footer>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>

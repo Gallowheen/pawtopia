@@ -4,3 +4,296 @@ body {
   background: $c-bg;
   font-family: sans-serif;
 }
+
+body{
+  font-family: 'Cabin', sans-serif;
+  font-size : 18px;
+  line-height : 1.6;
+}
+.relative{
+  position : relative;
+}
+
+body{
+  background : #f6f8fa;
+}
+
+.header,.footer{
+  height : 75px;
+  width : 100vw;
+  position : relative;
+  background-color : #0077C0;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+}
+.menu-toggle {
+  width: 40px;
+  height: 30px;
+  top: 23px;
+  right: 25px;
+  cursor: pointer;
+  position : absolute;
+}
+
+.on .one{
+  transform : rotate(45deg) translate(7px, 7px);
+}
+
+.on .two{
+  opacity: 0;
+}
+
+.on .three{
+  transform : rotate(-45deg) translate(8px, -10px);
+}
+
+/*SCSS*/
+.one{
+  margin-top: 2px !important;
+}
+
+.one,
+.two,
+.three{
+  width: 100%;
+  height: 5px;
+  background: white;
+  margin: 6px auto;
+  backface-visibility: hidden;
+  transition-duration : .3s;
+}
+
+i {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+  position: absolute;
+  top: 28px;
+  left : 25px;
+}
+
+.title h1{
+  top: 0;
+  margin-left : 50px;
+  color : white;
+  font-family: 'Fira Sans', sans-serif;
+  margin-top: 20px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.avatar__container{
+  text-align : center;
+}
+.avatar{
+  border-radius : 50%;
+  margin-top : 32px;
+}
+
+.avatar--top{
+  margin-top : 16px;
+}
+
+.avatar--small{
+  height : 50px;
+  width : 50px;
+}
+
+.username{
+  margin-top : 16px;
+  font-family: 'Fira Sans', sans-serif;
+}
+.private{
+  margin-top : 32px;
+  margin-bottom : 16px;
+  font-weight : bold;
+  color : #C72C1C;
+}
+.friend__container{
+  margin-top : 32px;
+}
+.information__container{
+  margin-top : 32px;
+}
+.information{
+  margin-bottom: 32px;
+  font-weight: bold;
+}
+.information_space{
+  margin-left : 16px;
+  margin-bottom : 0px;
+}
+
+.information_group{
+  /* background: #0077C0;
+  color : white; */
+  padding: 8px 16px;
+  color: black;
+  /* box-shadow: 4px 4px 5px 0px #00000036; */
+  margin-bottom: 16px;
+  border-radius : 10px;
+}
+
+.information_group:last-child{
+  margin-bottom : 0px;
+}
+
+.information_title{
+  font-weight : bold;
+  font-size: 20px;
+  color : #0077C0;
+}
+.my_pet__container{
+  overflow : visible;
+  margin-top : 32px;
+}
+
+.dog_card_container{
+  display: flex;
+  overflow-x: scroll;
+  margin-top : 32px;
+}
+
+.dog_card{
+  text-align: center;
+  width: 150px;
+  min-height: 200px;
+  padding: 24px;
+  background: white;
+  border-radius: 10px;
+  margin-right : 16px;
+  position : relative;
+  border: 1px dashed #0077C0;
+}
+.dog_name{
+  text-align: center;
+  text-transform: capitalize;
+}
+.dog_img,
+.dog_button_container{
+  border-radius: 50%;
+  height: 100px;
+  width : 100px;
+  object-fit: cover;
+}
+
+.dog_button_container{
+  position : relative;
+}
+.dog_button{
+  background: transparent;
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  margin-top : 16px;
+  position : relative;
+  outline : none;
+}
+.plus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(#fff,#fff), linear-gradient(#fff,#fff), #0077C0;
+  background-position: center;
+  background-size: 50% 2px,2px 50%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+.close-icon
+{
+  display:block;
+  box-sizing:border-box;
+  width:35px;
+  height:35px;
+  border-width:5px;
+  border-style: solid;
+  border-color:#C72C1C;
+  border-radius:100%;
+  background: -webkit-linear-gradient(-45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%,  white 56%,transparent 56%, transparent 100%);
+  background-color:#C72C1C;
+  transition: all 0.3s ease;
+  position : absolute;
+  bottom : 10px;
+  right : 50%;
+  z-index : 5;
+
+  transform : translateX(50%);
+}
+.reviews__container{
+  margin-top : 32px;
+}
+.last_event__container{
+  margin-top : 32px;
+}
+.error__container{
+  text-align : center;
+  height : 100vh;
+}
+.error__container h2{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+button{
+  outline: none !important;
+}
+
+.friend_widget_container{
+  display : flex;
+  flex-wrap : wrap;
+  justify-content : space-around;
+}
+.friend_widget{
+  height : 100px;
+  width : 100px;
+  position : relative;
+  background: white;
+  padding: 8px;
+  border-radius: 15px;
+  margin-bottom: 32px;
+}
+
+.friends__handler__container{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  bottom: 75px;
+  transition: all 1s;
+  transform : translateY(100%);
+  display : none;
+}
+
+.friends__handler{
+  height: 65vh;
+  position: absolute;
+  width: 100vw;
+  background: white;
+  border-radius: 25px 25px 0px 0px;
+  bottom: 0;
+}

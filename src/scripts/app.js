@@ -88,4 +88,99 @@ $(document).ready(function(){
             'text'
         );
     });
+
+    $(".handle_friend").click(function(e){
+        e.preventDefault();
+        console.log($(this).data("user"));
+        console.log('lol');
+
+            var user = $(this).data("user");
+        
+			$.ajax({
+				method: "GET",
+				data:{ID:user},
+				url:"src/php/print_friend_request.php",
+			})
+			.done(function(result){ 
+                $("body").css('overflow','hidden');
+                $(".friends__handler__container").css('display','block');
+
+                setTimeout(function(){
+                    $(".friends__handler__container").css('transform','translateY(0%)'); 
+                }, 500);
+
+                setTimeout(function(){
+                    $(".friends__handler__container").css('background','#00000024'); 
+                }, 1000);
+                           
+                $(".friends__handler").append(result);
+
+                // CREATE YES BUTTON
+                $("#accept").click(function(e){
+                    e.preventDefault();
+                    console.log($(this).data("user"));
+            
+                    var user = $(this).data("user");
+                
+                    $.ajax({
+                        method: "GET",
+                        data:{ID:user},
+                        url:"src/php/accept_friend.php",
+                    })
+                    .done(function(result){ 
+                        console.log(result)
+                        if (result === "success"){
+                            $('.result').append('Vous êtes maintenant amis');
+
+                            setTimeout(function(){
+                                $(".friends__handler__container").css('background','transparent'); 
+                            }, 500);
+
+                            setTimeout(function(){
+                                $(".friends__handler__container").css('transform','translateY(100%)'); 
+                                $("body").css('overflow','auto');
+                            }, 2000);
+
+                            setTimeout(function(){
+                                $(".friends__handler__container").css('display','none');
+                                $('.handle_friend[data-user="'+user+'"]').remove()
+                            }, 2500);
+  
+                        }else{
+                            $('.result').append('Une erreur est survenue, veuillez réessayer plus tard');
+                        }
+                    });
+                });
+                // CREAT NO BUTTON
+                $("#refuse").click(function(e){
+                    e.preventDefault();
+                    console.log($(this).data("user"));
+            
+                    var user = $(this).data("user");
+                
+                    $.ajax({
+                        method: "GET",
+                        data:{ID:user},
+                        url:"src/php/refuse_friend.php",
+                    })
+                    .done(function(result){ 
+                        $('.result').append('Vous avez refusé la demande');
+
+                        setTimeout(function(){
+                            $(".friends__handler__container").css('background','transparent'); 
+                        }, 500);
+
+                        setTimeout(function(){
+                            $(".friends__handler__container").css('transform','translateY(100%)'); 
+                            $("body").css('overflow','auto');
+                        }, 2000);
+
+                        setTimeout(function(){
+                            $(".friends__handler__container").css('display','none');
+                            $('.handle_friend[data-user="'+user+'"]').remove()
+                        }, 2500);
+                    });
+                });
+			});
+    });
 });
