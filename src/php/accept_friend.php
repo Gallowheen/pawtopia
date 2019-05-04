@@ -13,6 +13,7 @@
     $username2 = $_SESSION['ID'];
     $mutual = 1;
     $errors = array(); 
+    $information = array();
 
     //User2 devient ami avec User1
     $query_user2_accept = $link->prepare("INSERT INTO `friends`(`ID_USER1`, `ID_USER2`, `MUTUAL`) VALUES (?,?,?)");
@@ -41,8 +42,27 @@
     }
 
     if (count($errors) == 0) {
-        echo "success";
+        array_push($information, "success");
+        
+        $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
+        $query->bind_param("i", $username1);
+        $query->execute();
+
+        $result = $query->get_result();
+        if($result->num_rows === 0){
+            
+        }
+        $rows = array();
+
+        $rows[] = "success";
+
+        while($e = $result->fetch_assoc() ){
+            $rows[] = $e;
+        }
+
+        echo json_encode($rows);
+        //echo "success";
     }else{
-        echo "failed";
+        //echo "failed";
     }
 ?>

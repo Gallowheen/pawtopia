@@ -12,9 +12,7 @@
         }
         return $rows;
     }
-
-    //Check if friends ?
-
+    $pagename = 'Mes amis';
 
     // Récupérer l'utilisateur
     $user;
@@ -76,51 +74,10 @@
 
     </head>
     <body>
-        <header class="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-10 relative">
-                        <div class="title">
-                            <i class="left"></i>
+        
 
-                            <h1>
-                            <?php 
-                                $user;
-                                if (empty($_GET))
-                                    $user = $_SESSION['ID'];
-                                else
-                                    $user = $_GET['ID'];
-
-                                if($user) {
-                                    $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
-                                    $query->bind_param("i", $user);
-                                    $query->execute();
-
-                                    $result = $query->get_result();
-                                    if($result->num_rows === 0){
-                                        echo 'Error';
-                                        $error = true;
-                                        //redirect ?
-                                    }
-                                    $row = $result->fetch_assoc();
-
-                                    echo 'Amis';
-                                }       
-                            ?>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="col-2 relative">
-                        <div class="menu-toggle">
-                            <div class="one"></div>
-                            <div class="two"></div>
-                            <div class="three"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
         <?php 
+        include ('src/php/header.php');
         if ($error){ ?>
         <div class="error__container">
             <div class="container">
@@ -148,7 +105,7 @@
 
                             $result_friend_invite = $query_friend_invite->get_result();
                             if($result_friend_invite->num_rows === 0){
-                                echo 'Aucune demande en attente';
+                                echo '<p>Aucune demande en attente</p>';
                             }else{
                                 $row_friends_pending = resultToArray($result_friend_invite);  
                                 

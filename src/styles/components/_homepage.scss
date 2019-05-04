@@ -20,9 +20,9 @@ body{
 
 .header,.footer{
   height : 75px;
-  width : 100vw;
+  width : 100%;
   position : relative;
-  background-color : #0077C0;
+  background-color : #008C31;
 }
 
 .footer{
@@ -270,6 +270,20 @@ button{
   justify-content : space-around;
 }
 .friend_widget{
+  height: 100px;
+  width: 100%;
+  position: relative;
+  background: white;
+  padding: 8px;
+  margin-bottom: 32px;
+  border-bottom: 5px solid #0287D0;
+  border-top: 1px solid #0287D0;
+  border-left: 1px solid #0287D0;
+  border-right: 1px solid #0287D0;
+  border-radius: 15px;
+}
+
+.friend_widget_small{
   height : 100px;
   width : 100px;
   position : relative;
@@ -280,8 +294,8 @@ button{
 }
 
 .friends__handler__container{
-  height: 100vh;
-  width: 100vw;
+  height: calc(100% - 150px);
+  width: 100%;
   position: absolute;
   bottom: 75px;
   transition: all 1s;
@@ -290,10 +304,85 @@ button{
 }
 
 .friends__handler{
-  height: 65vh;
+  height: 75%;
   position: absolute;
   width: 100vw;
   background: white;
   border-radius: 25px 25px 0px 0px;
   bottom: 0;
 }
+
+// MEEMBERS
+
+.member__content{
+  margin-bottom: 75px;
+}
+
+.members__handler__container{
+  background :#00000024;
+  height: calc(100% - 150px);
+  width: 100%;
+  position: absolute;
+  bottom: 75px;
+  transition: all 1s;
+}
+
+.members__handler{
+  height: 75%;
+  position: absolute;
+  width: 100vw;
+  background: white;
+  border-radius: 25px 25px 0px 0px;
+  bottom: 0;
+}
+
+
+
+//RANGE
+input[type=range] {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1;
+  height: 2em;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  width: 100%;
+}
+  input[type=range]:focus {
+	  outline: none;
+}
+ input[type=range]::-webkit-slider-thumb {
+	 -webkit-appearance: none;
+	 width: 2em;
+	 height: 2em;
+	 margin-top: 0;
+	 background-color: #16a085;
+	 border-radius: 1em;
+	 border: 2px solid rgba(255,255,255,0.5);
+	 cursor: pointer;
+}
+ input[type=range]::-moz-range-thumb {
+	 width: 2em;
+	 height: 2em;
+	 margin-top: 0;
+	 background-color: #16a085;
+	 border-radius: 1em;
+	 border: 2px solid rgba(255,255,255,0.5);
+	 cursor: pointer;
+}
+ input[type=range]::-ms-thumb {
+	 width: 2em;
+	 height: 2em;
+	 margin-top: 0;
+	 background-color: #16a085;
+	 border-radius: 1em;
+	 border: 2px solid rgba(255,255,255,0.5);
+	 cursor: pointer;
+}
+ input[type=range]::-ms-track {
+	 background: transparent;
+	 border-color: transparent;
+	 color: transparent;
+}
+ 

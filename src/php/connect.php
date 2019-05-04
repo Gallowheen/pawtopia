@@ -17,6 +17,7 @@
     $username = $row['USERNAME'];
     $password = $row['PASSWORD'];
     $id = $row['ID'];
+    $town = $row['TOWN_ID'];
     $avatar = $row['AVATAR'];
  
     if( isset($_POST['username']) && isset($_POST['password']) ){
@@ -25,6 +26,7 @@
             session_start();
             $_SESSION['user'] = $username;
             $_SESSION['ID'] = $id;
+            $_SESSION['TOWN_ID'] = $town;
             echo "Success";    
         }
         else{

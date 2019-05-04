@@ -1,5 +1,3 @@
-//console.log("Hello");
-
 $(document).ready(function(){
     $("#submit").click(function(e){
         e.preventDefault();
@@ -95,6 +93,7 @@ $(document).ready(function(){
         console.log('lol');
 
             var user = $(this).data("user");
+            
         
 			$.ajax({
 				method: "GET",
@@ -111,7 +110,7 @@ $(document).ready(function(){
 
                 setTimeout(function(){
                     $(".friends__handler__container").css('background','#00000024'); 
-                }, 1000);
+                }, 1500);
                            
                 $(".friends__handler").append(result);
 
@@ -128,8 +127,11 @@ $(document).ready(function(){
                         url:"src/php/accept_friend.php",
                     })
                     .done(function(result){ 
-                        console.log(result)
-                        if (result === "success"){
+
+                        let data = JSON.parse(result);
+
+                        //On vérifie que la demande soit acceptée
+                        if (data[0] === "success"){
                             $('.result').append('Vous êtes maintenant amis');
 
                             setTimeout(function(){
@@ -148,6 +150,17 @@ $(document).ready(function(){
   
                         }else{
                             $('.result').append('Une erreur est survenue, veuillez réessayer plus tard');
+                        }
+
+                        //On crée 'facticement' l'entrée de l'ami dans la liste
+                        $('.friend_widget_container').append('<div class="friend_widget"><img class="avatar avatar--small" src="'+data[1].AVATAR+'"/><p>'+data[1].USERNAME+'</p></div>');
+                        //On ajoute +1 au nombre d'ami
+                        $('.information').html('Mes amis (' + $('.friend_widget_container div').length + ')')   
+                        //On ajoute le message : pas de demande en attente si nécéssaire
+                        if ($('.friend_pending div p').length === 0){
+                            setTimeout(function(){
+                                $('.friend_pending .col-12').append('<p>Aucune demande en attente</p>');
+                            }, 2500);
                         }
                     });
                 });
@@ -177,7 +190,8 @@ $(document).ready(function(){
 
                         setTimeout(function(){
                             $(".friends__handler__container").css('display','none');
-                            $('.handle_friend[data-user="'+user+'"]').remove()
+                            $('.handle_friend[data-user="'+user+'"]').remove();
+                            $('.friend_pending .col-12').append('<p>Aucune demande en attente</p>');
                         }, 2500);
                     });
                 });

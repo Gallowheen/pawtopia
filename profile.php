@@ -13,7 +13,7 @@
         return $rows;
     }
 
-    //Check if friends ?
+    $pagename = 'Mon profil';
     
     $error = false;
 ?>
@@ -33,51 +33,8 @@
 
     </head>
     <body>
-        <header class="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-10 relative">
-                        <div class="title">
-                            <i class="left"></i>
-
-                            <h1>
-                            <?php 
-                                $user;
-                                if (empty($_GET))
-                                    $user = $_SESSION['ID'];
-                                else
-                                    $user = $_GET['ID'];
-
-                                if($user) {
-                                    $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
-                                    $query->bind_param("i", $user);
-                                    $query->execute();
-
-                                    $result = $query->get_result();
-                                    if($result->num_rows === 0){
-                                        echo 'Error';
-                                        $error = true;
-                                        //redirect ?
-                                    }
-                                    $row = $result->fetch_assoc();
-
-                                    echo 'Profil';
-                                }       
-                            ?>
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="col-2 relative">
-                        <div class="menu-toggle">
-                            <div class="one"></div>
-                            <div class="two"></div>
-                            <div class="three"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
         <?php 
+        include ('src/php/header.php');
         if ($error){ ?>
         <div class="error__container">
             <div class="container">
@@ -266,7 +223,7 @@
                                         $row_friend_info = $result_friend_info->fetch_assoc();
                                         
 
-                                        echo '<div class="friend_widget">';?>
+                                        echo '<div class="friend_widget_small">';?>
                                         <img class="avatar avatar--small" src="<?php echo $row_friend_info['AVATAR']?>"/>
                                         <?php
                                         echo $row_friend_info['USERNAME'];
