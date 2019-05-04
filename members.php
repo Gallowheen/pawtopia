@@ -73,6 +73,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
+                        <i class="icon icon-single-01"></i>
                     </div>
                 </div>
             </div>

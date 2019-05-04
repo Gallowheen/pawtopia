@@ -1,0 +1,63 @@
+/*------------------------
+	icons
+-------------------------*/
+@function unicode($str) {
+  @return unquote("\"\\#{$str}\"");
+}
+
+$icon-home-52: unicode(ea02);
+$icon-ic_photo_camera_48px: unicode(ea03);
+$icon-ic_edit_48px: unicode(ea04);
+$icon-ic_person_add_48px: unicode(ea05);
+$icon-ic_people_48px: unicode(ea06);
+$icon-ic_visibility_48px: unicode(ea07);
+$icon-ic_visibility_off_48px: unicode(ea08);
+$icon-single-01: unicode(ea09);
+$icon-multiple-11: unicode(ea0a);
+$icon-calendar-60: unicode(ea0b);
+$icon-ic_home_48px: unicode(ea0c);
+
+.icon-home-52::before {
+  content: $icon-home-52;
+}
+
+.icon-ic_photo_camera_48px::before {
+  content: $icon-ic_photo_camera_48px;
+}
+
+.icon-ic_edit_48px::before {
+  content: $icon-ic_edit_48px;
+}
+
+.icon-ic_person_add_48px::before {
+  content: $icon-ic_person_add_48px;
+}
+
+.icon-ic_people_48px::before {
+  content: $icon-ic_people_48px;
+}
+
+.icon-ic_visibility_48px::before {
+  content: $icon-ic_visibility_48px;
+}
+
+.icon-ic_visibility_off_48px::before {
+  content: $icon-ic_visibility_off_48px;
+}
+
+.icon-single-01::before {
+  content: $icon-single-01;
+}
+
+.icon-multiple-11::before {
+  content: $icon-multiple-11;
+}
+
+.icon-calendar-60::before {
+  content: $icon-calendar-60;
+}
+
+.icon-ic_home_48px::before {
+  content: $icon-ic_home_48px;
+}
+
