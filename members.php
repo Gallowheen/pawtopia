@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col">
                             <h4>Trouvez votre partenaire idéale !</h4>
-                            <button id="filter">Filtrer</button>
+                            <button class="button" id="filter">Filtrer</button>
                         </div> 
                     </div>
                 </div>
@@ -69,15 +69,9 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <i class="icon icon-single-01"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php 
+            include('src/php/footer.php');
+        ?>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>

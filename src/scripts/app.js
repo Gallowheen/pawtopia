@@ -198,3 +198,10 @@ $(document).ready(function(){
 			});
     });
 });
+
+$(".view").click(function(e){
+
+    var user = $(this).data("id");
+
+    window.location = "profile.php?ID=" + user;
+});

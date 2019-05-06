@@ -1,0 +1,98 @@
+@import "breakpoint.scss";
+
+.button
+{
+  $root: '.button';
+  border : none;
+  background : none;
+  cursor: pointer;
+  font-family: 'Fira Sans', sans-serif;
+
+  ////////////////////////////////////////////////////
+  //
+  //                  Child
+  //
+  ////////////////////////////////////////////////////
+
+
+  ////////////////////////////////////////////////////
+  //
+  //                  States
+  //
+  ////////////////////////////////////////////////////
+
+  &:hover
+  {
+
+  }
+
+  &:active
+  {
+
+  }
+
+  &:focus
+  {
+
+  }
+
+
+  ////////////////////////////////////////////////////
+  //
+  //                  Variation
+  //
+  ////////////////////////////////////////////////////
+
+    &.-transparent{
+        background : transparent;
+        border : 2px solid white;
+        color : white;
+        background: #ffffff36;
+        z-index: 100;
+        border-radius: 20px;
+    }
+
+    &.-color {
+        width: 200px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        margin: 20px;
+        height: 55px;
+        text-align:center;
+        border: none;
+        background-size: 300% 100%;
+
+        border-radius: 50px;
+        transition: all .4s ease-in-out;
+
+        &:hover {
+            background-position: 100% 0;
+            transition: all .4s ease-in-out;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &.-blue {
+            border : 2px solid #0287D0;
+            color: #0287D0;
+        }
+
+        &.-green {
+            border : 2px solid #007C21;
+            color: #007C21;
+        }
+    }
+
+  /*
+  R   E   S   P   O   N   S   I   V   E
+                                        */
+  @include respond-below(sm) {
+    & {
+      
+    }
+  }
+}

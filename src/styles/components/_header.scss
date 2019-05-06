@@ -1,0 +1,53 @@
+@import "styles.scss";
+
+
+.header{
+    color : white;
+    position: fixed;
+    z-index: 100;
+}
+
+.header,.footer{
+    height : 75px;
+    width : 100%;
+    background-color : #007C21;
+}
+
+.header__title{
+    font-size: 36px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: -64px;
+}
+
+.title{
+    margin-top: 8px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.right, .left, .down, .up{
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 10px;
+    position: absolute;
+    margin-top: -2px;
+}
