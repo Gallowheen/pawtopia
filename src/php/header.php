@@ -15,7 +15,7 @@
                     <h1 class="h1 header__title">
                     <?php 
                         $user;
-                        if (empty($_GET))
+                        if (empty($_GET['ID']))
                             $user = $_SESSION['ID'];
                         else
                             $user = $_GET['ID'];

@@ -1,5 +1,6 @@
 <?php 
-  session_start();
+    require_once("src/php/bdd.php");
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -21,16 +22,93 @@
             <video id="video" autoplay muted loop class="video-responsive">
                 <source id="source" src="" type="video/mp4">
             </video>
+            <div class="container__action">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="login" style="opacity:0">
+                            <div class="log_error" id="log_error"></div>
+                                <form>
+                                    <div class="input__container">
+                                        <input placeholder="Nom d'utilisateur" class="input -transparent login__name" type="text" id="login_username" />
+                                    </div>
+                                    <div class="input__container">
+                                        <i class='icon icon-ic_visibility_48px'></i>
+                                        <input placeholder="Mot de passe" class="input -transparent login__pwd" type="password" id="login_password" />
+                                    </div>
+                                    <input class="input button login__submit" type="submit" id="submit" value="Se connecter" />
+                                </form>
+                                <span class="choice">S'inscrire</span>
+                            </div>
+                            <div class="signup" style="display:none;">
+                                <div class="log_error" id="resultat"></div>
+                                <form>
+                                    <div class="input__container">
+                                        <!-- <div class="log_error" id="username_error"></div> -->
+                                        <input placeholder="Votre pseudo" class="input -transparent register__name" type="text" name="username" id="username">
+                                    </div>
+                                    <div class="input__container">
+                                        <!-- <div class="log_error" id="email_error"></div> -->
+                                        <input placeholder="Votre adresse mail" class="input -transparent register__mail" type="email" name="email" id="email">
+                                    </div>
 
-            <a href="test.php"><button class="together button -transparent">LET'S WALK TOGETHER</button></a>
+                                    <?php
+                                        $link = mysqli_connect(HOST, USER, PWD, BASE);
+                                        mysqli_query($link, "SET NAMES UTF8");
+                                        
+                                        $sql = "SELECT * FROM towns";
+                                        $query = mysqli_query($link,$sql);
+                                        while ( $results[] = mysqli_fetch_object ( $query ) );
+                                        array_pop ( $results );
+                                    ?>
+                                    <div class="input__container">
+                                        <!-- <div class="log_error" id="town_error"></div> -->
+                                        <select required placeholder="Votre ville" class="select -transparent register__town" name="town" id="town">
+                                            <option value="" disabled selected hidden>Choisissez votre ville</option>
+                                            <?php foreach ( $results as $option ) : ?>
+                                                <option value="<?php echo $option->ID; ?>"><?php echo $option->NAME; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="input__container">
+                                        <!-- <div class="log_error" id="password_error"></div> -->
+                                        <i class='icon icon-ic_visibility_48px'></i>
+                                        <input placeholder="Entrez votre mot de passe" class="input -transparent register__password1" type="password" name="password_1" id="password_1">
+                                    </div>
+                                    <div class="input__container">
+                                        <!-- <div class="log_error" id="password_error"></div> -->
+                                        <i class='icon icon-ic_visibility_48px'></i>
+                                        <input placeholder="Entrez votre mot de passe" class="input -transparent register__password2" type="password" name="password_2" id="password_2">
+                                    </div>
+                                    <input class="input button login__submit -register" type="submit" id="register" value="S'enregister" />
+                                </form>
+                                <span class="choice">Se connecter</span>
+                            </div>
+                        </div>
+                    </div>       
+                </div>      
+            </div>
+            <div class="container__introduction">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <p class="introduction">Meet people with the same passion</p>
+                            <!-- <button class="button -transparent together">LET'S WALK TOGETHER</button> -->
+                        </div>
+                    </div>
+                </div>       
+            </div>      
         </div>
         <div class="desktop">
-            <h1>C'est une expérience mobile, allez hop direction l'outil de dévoleppement pour passer en mobile ! Attention : Work In Progress</h1>
+            <h1 class="wip">C'est une expérience mobile, allez hop direction l'outil de dévoleppement pour passer en mobile ! Attention : Work In Progress</h1>
         </div>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>
+    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
+    <script src="src/scripts/homepage.js"></script>
     <script src="src/scripts/app.js"></script>
+
     <script>
 
         var url ="src/assets/video/pawtopia_";

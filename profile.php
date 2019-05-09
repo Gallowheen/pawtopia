@@ -113,6 +113,11 @@
                                         </button>
                                     </div> -->
                                     <?php
+                                    if(!empty($_GET))
+                                        echo "<p class='information_space'>Cet utilisateur n'a aucun chien pour le moment.</p>";
+                                    else{
+                                        echo "<p class='information_space'>Vous n'avez aucun chien pour le moment.</p>";
+                                    }
                                 }else{
                                     $rows = resultToArray($result);   
                                     if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
@@ -175,6 +180,9 @@
                                             </div> 
                                         <?php
                                         endforeach;
+                                        ?>
+                                        </div>
+                                        <?php
                                     }
                                 }
                                 ?>
@@ -207,8 +215,13 @@
         
                             ?>
                             <?php
-                                if ((count($row_friends_mutual)-1) < 0){ ?>
-                                    <h3 class="information -space">Mes amis</h3><?php
+                                if ((count($row_friends_mutual)-1) <= 0){ ?>
+                                    <h3 class="information">Mes amis (0)</h3><?php
+                                    if(!empty($_GET))
+                                        echo "<p class='information_space'>Cet utilisateur n'a aucun ami pour le moment.</p>";
+                                    else{
+                                        echo "<p class='information_space'>Vous n'avez aucun ami pour le moment.</p>";
+                                    }
                                 }else{?>
                                     <h3 class="information -space">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
                                 }
@@ -223,9 +236,10 @@
                                 //own profile
                                 if (empty($_GET)){
                                     if($result_friend_mutual->num_rows <= 1){
-                                        echo "<h4>Vous n'avez actuellement aucun ami.</h4>";
                                         ?>
-                                        <a href="friends.php"><button class="button -color">Plus d'amis</button></a>
+                                        <div class="more__friend">
+                                            <a href="friends.php"><button class="button -color -blue">Plus d'amis</button></a>
+                                        </div>
                                     <?php
                                     }else{   
                                         echo '<div class="friend_widget_container -notEmpty">';
@@ -309,8 +323,8 @@
                                     $query_friend_mutual->execute();
 
                                     $result_friend_mutual = $query_friend_mutual->get_result();
-                                    if($result_friend_mutual->num_rows === 0){
-                                        echo 'Vous n"avez pas d"amis :(';
+                                    if($result_friend_mutual->num_rows === 1){
+                                        
                                     }else{
                                         $row_friends_mutual = resultToArray($result_friend_mutual);  
                                         
@@ -334,7 +348,8 @@
                                             $row_friend_info = $result_friend_info->fetch_assoc();
                                             
 
-                                            echo '<div class="friend_widget -small">';?>
+                                            echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';?>
+                                            
                                             <img class="avatar avatar -small -negative" src="<?php echo $row_friend_info['AVATAR']?>"/>
                                             <?php
                                             echo $row_friend_info['USERNAME'];
@@ -343,7 +358,7 @@
                                         echo '</div>';
                                         ?>
                                         <div class="more__friend">
-                                            <a href="<?php echo "friends.php?ID=".$user ?>"><button class="button -color -green">Plus d'amis</button></a>
+                                            <a href="<?php echo "friends.php?ID=".$user ?>"><button class="button -color -blue">Plus d'amis</button></a>
                                         </div>
                                         <?php
                                     } 
@@ -414,12 +429,7 @@
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>
+    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
     <script src="src/scripts/app.js"></script>
-    <script>
-        $(".menu-toggle").on('click', function() {
-            $(this).toggleClass("on");
-            $('.menu-section').toggleClass("on");
-            $("nav ul").toggleClass('hidden');
-        });
-    </script>
+
 </html>

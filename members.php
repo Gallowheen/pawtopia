@@ -62,7 +62,7 @@
                                 <input type="radio" name="walk" value="Sportive" checked> Sportive<br>
                                 <input type="radio" name="walk" value="Découverte"> Découverte<br>
                                 <input type="radio" name="walk" value="Récréative">Récréative<br><br>
-                                <input id="submit" type="submit">
+                                <input id="submit__members" type="submit">
                             </form>
                         </div>
                     </div>
@@ -75,46 +75,6 @@
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>
+    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
     <script src="src/scripts/app.js"></script>
-    <script>
-        $(document).on('input', '#slider', function() {
-            $('#slider_value').html( $(this).val() + " km" );
-        });
-
-        $('#submit').click(function(){
-
-            $.ajax({
-				method: "GET",
-                data:{
-                    walk:$('form input[type=radio]:checked').val(),
-                    km : $('#slider').val()
-                },
-				url:"src/php/managefriend.php",
-            })
-            .done(function(result){ 
-                console.log(result);
-
-                $(".members__handler__container").css('background','transparent'); 
-
-                setTimeout(function(){
-                    $(".members__handler__container").css('transform','translateY(100%)'); 
-                    $("body").css('overflow','auto');
-                }, 750);
-            });
-        });
-
-        $('#filter').click(function(){
-            $("body").css('overflow','hidden');
-            $(".members__handler__container").css('display','block');
-
-            setTimeout(function(){
-                $(".members__handler__container").css('transform','translateY(0%)'); 
-            }, 500);
-
-            setTimeout(function(){
-                $(".members__handler__container").css('background','#00000024'); 
-            }, 1500);
-        });
-
-    </script>
 </html>

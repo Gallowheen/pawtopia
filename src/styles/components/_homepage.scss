@@ -20,12 +20,85 @@
   top: 7.5%;
 }
 
-.together{
+.container__introduction{
   position : absolute;
-  width : 60%;
-  left: 20%;
-  padding : 10px;
-  bottom : 7.5%;
+  width: 100%;
+  bottom : 5%;
+  text-align: center;
+  color: white;
+  z-index: 100;
+
+  .introduction{
+    font-size: 24px;
+    margin-bottom: 32px;
+  }
+
+  .together{
+    padding: 10px;
+    width : 60%;
+  }
+}
+
+.container__action{
+  position: absolute;
+  z-index: 100;
+  bottom: 5%;
+  width: 80%;
+  left : 10%;
+  text-align: center;
+
+  .login, .register{
+    font-size: 18px;
+  }
+
+  .log_error p{
+    margin-bottom: 0px;
+    color: #C72C1C;
+  }
+
+  .login__name, .login__pwd, .register__name, 
+  .register__mail, .register__town, .register__password1,
+  .register__password2{
+    color: white;
+    width: 100%;
+  }
+
+  .login__submit{
+    padding: 10px;
+    border-radius: 25px;
+    margin: 48px 0px 24px 0px;
+    color: white;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+
+    &.-register{
+      margin: 12px 0px 24px 0px;
+      margin-left: 10%;
+      font-size: 18px;
+    }
+  }
+
+  i{
+    color: white;
+    position: absolute;
+    right: 0%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.input__container{
+  position: relative;
+  margin: 32px 0px;
+}
+
+.choice{
+  display: block;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 .dotting{
@@ -43,32 +116,43 @@
 
 .desktop{
   height : 100vh;
+
+  h1{
+    margin : 0;
+    position : absolute;
+    left : 50%;
+    top : 50%;
+    transform : translate(-50%,-50%);
+    text-align : center;
+  }
 }
 
-h1{
-  margin : 0;
-  position : absolute;
-  left : 50%;
-  top : 50%;
-  transform : translate(-50%,-50%);
-  text-align : center;
-}
-
-@media only screen and (orientation:portrait){
+@media only screen and (max-aspect-ratio: 13/9){
   .mobile{
     display : block;
   }
 
-  h1{
-    display : none;
+  .wip{
+    display: none;
   }
 }   
 
-//
+@media only screen and (min-aspect-ratio: 13/9){
+  .mobile{
+    display : block;
+  }
+
+  .wip{
+    display: none;
+  }
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 
 .content_container{
-  margin-bottom: 75px;
-  padding-top: 75px;
+  margin-bottom: 60px;
+  padding-top: 60px;
 }
 
 .avatar__container{
@@ -159,6 +243,33 @@ h1{
   overflow-x: scroll;
   margin-top : 32px;
 }
+
+//SLIDER TIME
+
+.bubble{
+  height: 10px;
+  width: 10px;
+  background: #1C2A39;
+  border-radius: 50%;
+  margin-right: 8px;
+
+  &:last-child(){
+    margin-right: 0px;
+  }
+
+  &.-active{
+    background : #0077C0;
+  }
+}
+
+.dog_card_bubble_container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+//
 
 .dog_information{
   padding-top: 16px;
@@ -283,13 +394,14 @@ button{
 
 .more__friend{
   text-align: center;
+  margin-top: 8px;
 }
 
 .friends__handler__container{
-  height: calc(100% - 150px);
+  height: calc(100% - 120px);
   width: 100%;
   position: absolute;
-  bottom: 75px;
+  bottom: 60px;
   transition: all 1s;
   transform : translateY(100%);
   display : none;
@@ -307,15 +419,16 @@ button{
 // MEEMBERS
 
 .member__content{
-  margin-bottom: 75px;
+  margin-bottom: 60px;
+  padding-top: 60px;
 }
 
 .members__handler__container{
   background :#00000024;
-  height: calc(100% - 150px);
+  height: calc(100% - 120px);
   width: 100%;
   position: absolute;
-  bottom: 75px;
+  bottom: 60px;
   transition: all 1s;
 }
 
@@ -327,54 +440,3 @@ button{
   padding-top: 16px;
   bottom: 0;
 }
-
-
-
-//RANGE
-input[type=range] {
-  box-sizing: border-box;
-  font-size: 16px;
-  line-height: 1;
-  height: 2em;
-  background-color: transparent;
-  cursor: pointer;
-  -webkit-appearance: none;
-  width: 100%;
-}
-  input[type=range]:focus {
-	  outline: none;
-}
- input[type=range]::-webkit-slider-thumb {
-	 -webkit-appearance: none;
-	 width: 2em;
-	 height: 2em;
-	 margin-top: 0;
-	 background-color: #16a085;
-	 border-radius: 1em;
-	 border: 2px solid rgba(255,255,255,0.5);
-	 cursor: pointer;
-}
- input[type=range]::-moz-range-thumb {
-	 width: 2em;
-	 height: 2em;
-	 margin-top: 0;
-	 background-color: #16a085;
-	 border-radius: 1em;
-	 border: 2px solid rgba(255,255,255,0.5);
-	 cursor: pointer;
-}
- input[type=range]::-ms-thumb {
-	 width: 2em;
-	 height: 2em;
-	 margin-top: 0;
-	 background-color: #16a085;
-	 border-radius: 1em;
-	 border: 2px solid rgba(255,255,255,0.5);
-	 cursor: pointer;
-}
- input[type=range]::-ms-track {
-	 background: transparent;
-	 border-color: transparent;
-	 color: transparent;
-}
- 

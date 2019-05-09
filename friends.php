@@ -231,22 +231,12 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    
-                </div>
-            </div>
-        </footer>
+        <?php
+            include ('src/php/footer.php');
+        ?>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>
+    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
     <script src="src/scripts/app.js"></script>
-    <script>
-        $(".menu-toggle").on('click', function() {
-            $(this).toggleClass("on");
-            $('.menu-section').toggleClass("on");
-            $("nav ul").toggleClass('hidden');
-        });
-    </script>
 </html>

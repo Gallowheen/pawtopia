@@ -1,0 +1,79 @@
+.select
+{
+  $root: '.select';
+
+  border: 1px solid white;
+  border-radius: 2px;
+
+  outline : none;
+
+  @keyframes bounce{
+    10%,40%{
+        transform: translateX(-10px);
+        border-bottom-color : red;
+    }
+    40%,70%{
+        transform: translateX(10px);
+        border-bottom-color : red;
+    }
+    70%,100%{
+        transform: translateX(0px);
+        border-bottom-color : red;
+    }
+  }
+
+  ////////////////////////////////////////////////////
+  //
+  //                  States
+  //
+  ////////////////////////////////////////////////////
+
+  &::placeholder
+  {
+ 
+  }
+
+  &:active,
+  &:hover,
+  &:focus
+  {
+
+  }
+
+  &.-error
+  {
+   
+  }
+
+  &:invalid
+  {
+   
+  }
+
+  ////////////////////////////////////////////////////
+  //
+  //                  Variation
+  //
+  ////////////////////////////////////////////////////
+
+  &.-transparent
+  {
+    border : none;
+    border-bottom: 1px solid white;
+    background: transparent;
+
+    &:not(:placeholder-shown)
+    {
+         
+    }
+
+    option{
+        background : #0287D0;
+        color: white;
+    }
+  }
+
+  &.-error{
+    animation: bounce 1s forwards;
+  }
+}
