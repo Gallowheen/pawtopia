@@ -99,7 +99,7 @@
                                 //other profile, we don't have to see what's going on on their channel
                             }
                             else{
-                                echo "<h4>Reçu</h4>";
+                                echo "<h3 class='information -first'>Invitation reçue</h3>";
                                 $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
                                 $query_friend_invite->bind_param("i", $user);
                                 $query_friend_invite->execute();
@@ -154,7 +154,7 @@
                                             echo '<div class="friend_widget_container">';
                                             foreach ($friends as $friend) :           
                                                 
-                                                $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ?");
+                                                $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ? ORDER BY USERNAME ASC");
                                                 $query_friend_info->bind_param("i", $friend);
                                                 $query_friend_info->execute();
 
@@ -165,10 +165,12 @@
                                                 $row_friend_info = $result_friend_info->fetch_assoc();
                                                 
 
-                                                echo '<div class="friend_widget">';?>
-                                                <img class="avatar avatar -small" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                                echo '<div data-id="'.$row_friend_info['ID'].'" class="view friend_widget">';?>
+                                                <img class="avatar avatar -friendlist" src="<?php echo $row_friend_info['AVATAR']?>"/>
                                                 <?php
-                                                echo $row_friend_info['USERNAME'];
+                                                echo '<span class="friend_name">'.$row_friend_info['USERNAME'].'</span>';?>
+                                                <button data-friend=<?php echo '"'.$row_friend_info["ID"].'"' ?> class="friend_delete icon close-icon -friendlist"></button>
+                                                <?php
                                                 echo '</div>';
                                             endforeach;
                                             echo '</div>';  
@@ -225,7 +227,8 @@
                 <div class="friends__handler">
                     <div class="container">
                         <div class="row">
-                            
+                            <div class="col">
+                            </div>
                         </div>
                     </div>
                 </div>

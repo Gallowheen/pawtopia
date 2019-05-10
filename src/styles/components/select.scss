@@ -76,4 +76,8 @@
   &.-error{
     animation: bounce 1s forwards;
   }
+
+  &.-small{
+    width: 80%;
+  }
 }

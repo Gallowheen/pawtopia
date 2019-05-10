@@ -60,6 +60,16 @@ body {
   border: 2px solid #007C21;
   color: #007C21;
 }
+.button.-small {
+  width: 100px;
+  margin: 8px;
+}
+.button.-nomargin {
+  margin: 0;
+}
+.button.-margintop {
+  margin: 12px 0px 0px 0px;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -419,6 +429,13 @@ input[type=range]::-ms-track {
 }
 .select.-error {
   animation: bounce 1s forwards;
+}
+.select.-small {
+  width: 80%;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .video-responsive {
@@ -558,6 +575,12 @@ input[type=range]::-ms-track {
   padding-top: 60px;
 }
 
+.avatars {
+  width: 60%;
+  margin-left: 20%;
+  position: relative;
+}
+
 .avatar__container {
   text-align: center;
 }
@@ -575,6 +598,30 @@ input[type=range]::-ms-track {
 .avatar.-small {
   height: 75px;
   width: 75px;
+}
+.avatar.-dog {
+  height: 128px;
+  width: 128px;
+  object-fit: cover;
+}
+.avatar.-master {
+  position: absolute;
+  left: 10%;
+  bottom: 0;
+}
+.avatar.-friend {
+  margin: 0;
+  position: absolute;
+  left: 24px;
+}
+.avatar.-friendlist {
+  border-radius: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  margin-top: 0;
 }
 
 .username {
@@ -598,6 +645,14 @@ input[type=range]::-ms-track {
   margin: 8px 0px;
 }
 
+.friend_name {
+  font-size: 24px;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  left: 120px;
+}
+
 .information__container {
   margin-top: 32px;
 }
@@ -608,6 +663,16 @@ input[type=range]::-ms-track {
 }
 .information.-space {
   margin-bottom: 48px;
+}
+.information.-first {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.information_name {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .information_space {
@@ -643,6 +708,49 @@ input[type=range]::-ms-track {
   display: flex;
   overflow-x: scroll;
   margin-top: 32px;
+}
+
+.dog_information_button {
+  text-align: center;
+}
+
+.dog_handler, .friend_handler {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background: #00000024;
+  z-index: 100;
+}
+
+.dog_handler_container {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.dog_handler_container, .friend_handler_container {
+  z-index: 150;
+  position: absolute;
+  padding: 20px;
+  background: white;
+  opacity: 0;
+  text-align: center;
+  border-radius: 15px;
+}
+.dog_handler_container.-noBg, .friend_handler_container.-noBg {
+  background: none;
+}
+
+.dog_handler_button_container, .friend_handler_button_container {
+  display: flex;
+  justify-content: center;
+}
+
+.dog_add_icon {
+  position: absolute;
+  font-size: 72px !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .bubble {
@@ -696,6 +804,12 @@ input[type=range]::-ms-track {
   width: 150px;
   object-fit: cover;
 }
+.dog_img.-add,
+.dog_button_container.-add {
+  margin-right: 0px;
+  background: lightgray;
+  margin-left: calc(50% - 150px / 2);
+}
 
 .dog_button_container {
   position: relative;
@@ -706,6 +820,9 @@ input[type=range]::-ms-track {
   margin-bottom: 32px;
   position: relative;
   text-align: center;
+}
+.dog_button.-add {
+  margin-bottom: 0px;
 }
 
 .plus {
@@ -739,6 +856,13 @@ input[type=range]::-ms-track {
   right: 50%;
   z-index: 5;
   transform: translateX(50%);
+}
+.close-icon.-friendlist {
+  top: 50%;
+  height: 35px;
+  width: 35px;
+  transform: translate(0, -50%);
+  right: 12px;
 }
 
 .reviews__container {
@@ -782,7 +906,6 @@ button {
   border-top: 1px solid #0287D0;
   border-left: 1px solid #0287D0;
   border-right: 1px solid #0287D0;
-  border-radius: 15px;
 }
 .friend_widget.-small {
   height: 100px;
@@ -807,15 +930,22 @@ button {
   transition: all 1s;
   transform: translateY(100%);
   display: none;
+  z-index: 150;
 }
 
 .friends__handler {
-  height: 75%;
   position: absolute;
   width: 100vw;
-  background: white;
-  padding-top: 16px;
+  padding: 32px;
   bottom: 0;
+  text-align: center;
+  border-radius: 25px 25px 0px 0px;
+  z-index: 100;
+  background: white;
+  border-bottom: 5px solid #0287D0;
+  border-top: 1px solid #0287D0;
+  border-left: 1px solid #0287D0;
+  border-right: 1px solid #0287D0;
 }
 
 .member__content {
@@ -902,6 +1032,16 @@ body {
   border: 2px solid #007C21;
   color: #007C21;
 }
+.button.-small {
+  width: 100px;
+  margin: 8px;
+}
+.button.-nomargin {
+  margin: 0;
+}
+.button.-margintop {
+  margin: 12px 0px 0px 0px;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -1262,6 +1402,9 @@ input[type=range]::-ms-track {
 .select.-error {
   animation: bounce 1s forwards;
 }
+.select.-small {
+  width: 80%;
+}
 
 .nav_container {
   display: flex;
@@ -1297,6 +1440,7 @@ input[type=range]::-ms-track {
   bottom: 0;
   z-index: 10;
   color: white;
+  z-index: 150;
 }
 
 body {
@@ -1360,6 +1504,16 @@ body {
   border: 2px solid #007C21;
   color: #007C21;
 }
+.button.-small {
+  width: 100px;
+  margin: 8px;
+}
+.button.-nomargin {
+  margin: 0;
+}
+.button.-margintop {
+  margin: 12px 0px 0px 0px;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -1719,6 +1873,9 @@ input[type=range]::-ms-track {
 }
 .select.-error {
   animation: bounce 1s forwards;
+}
+.select.-small {
+  width: 80%;
 }
 
 .header {

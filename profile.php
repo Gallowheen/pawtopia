@@ -56,20 +56,34 @@
                                 if ($row['PRIVATE'] == 1 )
                                     echo "<p class='private'>Ce profil est privé</p>";
                             ?>
-                            <?php              
+                            <?php 
+                            
+                                $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1 LIMIT 1");
+                                if (empty($_GET)){
+                                    $query->bind_param("i", $_SESSION['ID']);
+                                }else{
+                                    $query->bind_param("i", $_GET['ID']); 
+                                }  
+                                $query->execute();
+
+                                $result = $query->get_result();
+                                $row_dog = $result->fetch_assoc();
+
+                                $avatar_dog = $row_dog['PICTURE'];
                                 $avatar_path = $row['AVATAR'];
 
-                                ?>
-                                
+                                if($result->num_rows === 0){ ?>
+                                    <img class="avatar avatar" src="<?php echo $avatar_path ?>"/>
                                 <?php
-                                    if ($row['PRIVATE'] == 1){
-                                ?>
-                                        <img class="avatar avatar -top" src="<?php echo $avatar_path ?>"/>
-                                    <?php }
-                                    else{
-                                    ?>
-                                        <img class="avatar" src="<?php echo $avatar_path ?>"/>
-                                <?php }
+                                }else{ ?>
+
+                                <div class="avatars">
+                                    <img class="avatar avatar -dog" src="<?php echo $avatar_dog ?>"/>
+                                    <img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>
+                                </div>
+                                   
+                                <?php
+                                }
                                 ?>
                                 <h3 class="username"><?php echo $row['USERNAME'] ?></h3>
                                 <?php
@@ -96,7 +110,7 @@
                         <div class="col">
                             <!-- DOG VIEWER FUNCTION -->   
                             <?php
-                                $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ?");
+                                $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1");
                                 $query->bind_param("i", $row['ID']);
                                 $query->execute();
 
@@ -104,14 +118,7 @@
                                 if($result->num_rows === 0){
                                     ?>
                                     <h3 class="information">Mes animaux</h3>
-                                    <!-- <div class="dog_card">
-                                        <h4 class='dog_name'> Ajouter </h4>
-                                        <button class="dog_button">
-                                            <div class="dog_button_container">
-                                                <div class="plus"></div>
-                                            </div>
-                                        </button>
-                                    </div> -->
+                                
                                     <?php
                                     if(!empty($_GET))
                                         echo "<p class='information_space'>Cet utilisateur n'a aucun chien pour le moment.</p>";
@@ -127,23 +134,15 @@
                                     }else{              
                                         ?>
                                         <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
-                                        <div class='dog_card_container'>
-                                        <?php 
-
-                                            if(empty($_GET)){
-                                            ?>
-
-                                            <!-- <div class="dog_card">
-                                                <h4 class='dog_name'> Ajouter </h4>
-                                                <button class="dog_button">
-                                                    <div class="dog_button_container">
-                                                        <div class="plus"></div>
-                                                    </div>
-                                                </button>
-                                            </div> -->
-
                                         <?php
-                                        }
+                                            if(empty($_GET)){
+                                                ?>
+                                                <div class="dog_information_button"><button id="add_dog" class="button -color -blue -nomargin">Ajouter un chien</button></div>
+                                        <?php
+                                            }
+                                        ?>
+                                        <div class='dog_card_container'>
+                                        <?php
                                         foreach ( $rows as $dog ) :
                                         ?>
                                             <div class="dog_card">
@@ -153,7 +152,7 @@
                                                 <div class="dog_button">
                                                 <?php
                                                     if (empty($_GET)){ ?>
-                                                        <button data-dog=<?php echo '"'.$dog["ID"].'"' ?> class="close-icon"></button>
+                                                        <button data-dog=<?php echo '"'.$dog["ID"].'"' ?> class="icon close-icon dog_delete"></button>
                                                 <?php
                                                     }
                                                 echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';?>
@@ -238,7 +237,7 @@
                                     if($result_friend_mutual->num_rows <= 1){
                                         ?>
                                         <div class="more__friend">
-                                            <a href="friends.php"><button class="button -color -blue">Plus d'amis</button></a>
+                                            <a href="friends.php"><button class="button -color -blue -nomargin">Plus d'amis</button></a>
                                         </div>
                                     <?php
                                     }else{   
@@ -265,57 +264,11 @@
                                         echo '</div></button>';
                                         ?>
                                         <div class="more__friend">
-                                            <a href="friends.php"><button class="button -color -blue">Plus d'amis</button></a>
+                                            <a href="friends.php"><button class="button -color -blue -nomargin">Plus d'amis</button></a>
                                         </div>
                                         <?php
 
                                     }  
-                                    
-                                    // echo "<h4>Envoyée</h4>";
-                                    // $query_friend_pending = $link->prepare("SELECT distinct(id_user2) FROM friends WHERE mutual = 0 AND ID_USER1 = ?");
-                                    // $query_friend_pending->bind_param("i", $user);
-                                    // $query_friend_pending->execute();
-
-                                    // $result_friend_pending = $query_friend_pending->get_result();
-                                    // if($result_friend_pending->num_rows === 0){
-                                    //     echo 'Aucune demande en attente';
-                                    // }else{
-                                    //     $row_friends_pending = resultToArray($result_friend_pending);  
-                                        
-                                    //     foreach ($row_friends_pending as $friend) :       
-                                    //         if(!in_array($friend['id_user2'],$friends_pending)){
-                                    //             if($friend['id_user2'] != $user)
-                                    //                 array_push($friends_pending, $friend['id_user2']);    
-                                    //         }   
-                                    //     endforeach;
-
-                                    //     foreach ($friends_pending as $friend) :           
-                                    //         echo $friend;
-                                    //     endforeach;
-
-                                    // }  
-                                    // echo "<h4>Reçu</h4>";
-                                    // $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
-                                    // $query_friend_invite->bind_param("i", $user);
-                                    // $query_friend_invite->execute();
-
-                                    // $result_friend_invite = $query_friend_invite->get_result();
-                                    // if($result_friend_invite->num_rows === 0){
-                                    //     echo 'Aucune demande en attente';
-                                    // }else{
-                                    //     $row_friends_pending = resultToArray($result_friend_invite);  
-                                        
-                                    //     foreach ($row_friends_pending as $friend) :       
-                                    //         if(!in_array($friend['id_user1'],$friends_pending)){
-                                    //             if($friend['id_user1'] != $user)
-                                    //                 array_push($friends_invite, $friend['id_user1']);    
-                                    //         }   
-                                    //     endforeach;
-
-                                    //     foreach ($friends_invite as $friend) :           
-                                    //         echo $friend;
-                                    //     endforeach;
-                                    // }
                                 //other one profile
                                 }else{
                                     $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
