@@ -12,7 +12,11 @@
         }
         return $rows;
     }
-    $pagename = 'Mes amis';
+
+    if(!isset($_SESSION['ID'])){
+        header('Location:index.php');
+        exit;
+    }
 
     // Récupérer l'utilisateur
     $user;
@@ -34,27 +38,18 @@
         }
         $row = $result->fetch_assoc();
     }  
+
+    if (empty($_GET)) 
+        $pagename = 'Mes amis';
+    else{
+        $pagename = 'Amis de '. $row['USERNAME'];
+    }
     //
 
     //Récupérer ses amis
     $friends = [];
     $friends_pending = [];
     $friends_invite= [];
-
-    $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
-    $query_friend_mutual->bind_param("ii", $user, $user);
-    $query_friend_mutual->execute();
-
-    $result_friend_mutual = $query_friend_mutual->get_result();
-    $row_friends_mutual = resultToArray($result_friend_mutual);  
-                
-    foreach ($row_friends_mutual as $friend) :          
-        if(!in_array($friend['id_user1'],$friends)){
-            if($friend['id_user1'] != $user)
-                array_push($friends, $friend['id_user1']);        
-        }   
-    endforeach;
-    //
     
     $error = false;
 ?>
@@ -132,6 +127,21 @@
                     <div class="row">
                         <div class="col-12">
                             <?php
+                                $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?)");
+                                $query_friend_mutual->bind_param("ii", $user, $user);
+                                $query_friend_mutual->execute();
+                            
+                                $result_friend_mutual = $query_friend_mutual->get_result();
+                                $row_friends_mutual = resultToArray($result_friend_mutual);  
+                                            
+                                foreach ($row_friends_mutual as $friend) :          
+                                    if(!in_array($friend['id_user1'],$friends)){
+                                        if($friend['id_user1'] != $user)
+                                            array_push($friends, $friend['id_user1']);        
+                                    }   
+                                endforeach;
+
+
                                 if ((count($row_friends_mutual)-1) < 0){ ?>
                                     <h3 class="information">Mes amis</h3><?php
                                 }else{?>
@@ -149,9 +159,10 @@
                                     //own profile
                                     if (empty($_GET)){
                                         if($result_friend_mutual->num_rows <= 1){
-                                            echo "<h4>Vous n'avez actuellement aucun ami.</h4>";
+                                            echo "<h4 class='h4'>Vous n'avez actuellement aucun ami.</h4>";
                                         }else{   
                                             echo '<div class="friend_widget_container">';
+                                            $friends_global = [];
                                             foreach ($friends as $friend) :           
                                                 
                                                 $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ? ORDER BY USERNAME ASC");
@@ -163,18 +174,28 @@
                                                     //impossible
                                                 }
                                                 $row_friend_info = $result_friend_info->fetch_assoc();
-                                                
+                                                array_push($friends_global, $row_friend_info);
+                                            endforeach;
+                                            
+                                            $newArray = [];
+                                            foreach($friends_global as $user)
+                                            {
+                                                $newArray[$user['USERNAME']] = $user;
+                                            }
+                                          
+                                            ksort($newArray);
 
-                                                echo '<div data-id="'.$row_friend_info['ID'].'" class="view friend_widget">';?>
-                                                <img class="avatar avatar -friendlist" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                            foreach ($newArray as $friend) :
+                                                echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';?>
+                                                <img class="avatar avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
-                                                echo '<span class="friend_name">'.$row_friend_info['USERNAME'].'</span>';?>
-                                                <button data-friend=<?php echo '"'.$row_friend_info["ID"].'"' ?> class="friend_delete icon close-icon -friendlist"></button>
+                                                echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';?>
+                                                <button data-friend=<?php echo '"'.$friend["ID"].'"' ?> class="friend_delete icon close-icon -friendlist"></button>
                                                 <?php
                                                 echo '</div>';
                                             endforeach;
-                                            echo '</div>';  
-                                        }          
+                                            echo '</div>';     
+                                        }      
                                     //other one profile
                                     }else{
                                         $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
@@ -195,8 +216,9 @@
                                             endforeach;
 
                                             echo '<div class="friend_widget_container">';
+                                            $friends_global = [];
                                             foreach ($friends as $friend) :           
-                                                $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ?");
+                                                $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ? ORDER BY USERNAME ASC");
                                                 $query_friend_info->bind_param("i", $friend);
                                                 $query_friend_info->execute();
 
@@ -205,13 +227,23 @@
                                                     //impossible
                                                 }
                                                 $row_friend_info = $result_friend_info->fetch_assoc();
-                                                
+                                                array_push($friends_global, $row_friend_info);
+                                            endforeach;
 
-                                                echo '<div class="friend_widget">';?>
-                                                <img class="avatar avatar -small" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                            $newArray = [];
+                                            foreach($friends_global as $user)
+                                            {
+                                                $newArray[$user['USERNAME']] = $user;
+                                            }
+                                          
+                                            ksort($newArray);
+
+                                            foreach ($newArray as $friend) :
+                                                echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';?>
+                                                <img class="avatar avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
-                                                echo $row_friend_info['USERNAME'];
-                                                echo '</div>';
+                                                echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';
+                                                echo '</div>';  
                                             endforeach;
                                             echo '</div>';
                                         } 

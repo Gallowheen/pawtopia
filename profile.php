@@ -13,7 +13,37 @@
         return $rows;
     }
 
-    $pagename = 'Mon Profil';
+    if(!isset($_SESSION['ID'])){
+        header('Location:index.php');
+        exit;
+    }
+
+    $user;
+    if (empty($_GET))
+        $user = $_SESSION['ID'];
+    else
+        $user = $_GET['ID'];
+
+    if($user) {
+        $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
+        $query->bind_param("i", $user);
+        $query->execute();
+
+        $result = $query->get_result();
+        if($result->num_rows === 0){
+            echo 'Error';
+            $error = true;
+            //redirect ?
+        }
+        $row = $result->fetch_assoc();
+    }  
+
+
+    if (empty($_GET)) 
+        $pagename = 'Mon Profil';
+    else{
+        $pagename = 'Profil de '. $row['USERNAME'];
+    }
     
     $error = false;
 ?>
@@ -57,6 +87,37 @@
                                     echo "<p class='private'>Ce profil est privé</p>";
                             ?>
                             <?php 
+
+                                if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
+
+                                    // CHECK IF FRIEND
+
+                                    $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 1 LIMIT 1");
+                                    $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
+                                    $query->execute();
+
+                                    $result_friend = $query->get_result();
+                                    $row_friend = $result_friend->fetch_assoc();
+
+                                    $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 0 LIMIT 1");
+                                    $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
+                                    $query->execute();
+
+                                    $result_friend_requested = $query->get_result();
+                                    $row_friend_requested = $result_friend_requested->fetch_assoc();
+
+                                    if ($row_friend['MUTUAL']){
+                                        echo '<div><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Ami</button></div>';
+                                    }else{
+                                        if($row_friend_requested){
+                                            echo '<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+                                        }else{
+                                            echo '<div id="friend__button"><button id="add_friend" data-id="'.$_GET['ID'].'" class="friend__button button -friend"><i class="icon icon__friend icon icon-ic_person_add_48px"></i>Ajouter</button></div>';
+                                        }
+                                    }
+                                }
+
+                                // SELECT AVATAR
                             
                                 $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1 LIMIT 1");
                                 if (empty($_GET)){
@@ -85,7 +146,7 @@
                                 <?php
                                 }
                                 ?>
-                                <h3 class="username"><?php echo $row['USERNAME'] ?></h3>
+                                <h3 class="username h3"><?php echo $row['USERNAME'] ?></h3>
                                 <?php
 
                                 //viewing our own profile
@@ -117,7 +178,7 @@
                                 $result = $query->get_result();
                                 if($result->num_rows === 0){
                                     ?>
-                                    <h3 class="information">Mes animaux</h3>
+                                    <h3 class="information h3">Mes animaux</h3>
                                 
                                     <?php
                                     if(!empty($_GET))
@@ -128,12 +189,12 @@
                                 }else{
                                     $rows = resultToArray($result);   
                                     if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
-                                        <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
+                                        <h3 class="information h3">Mes animaux <?php echo '('.count($rows).')' ?></h3>
                                         <p class="information_space private"> Ce profil est privé</p>
                                         <?php
                                     }else{              
                                         ?>
-                                        <h3 class="information">Mes animaux <?php echo '('.count($rows).')' ?></h3>
+                                        <h3 class="information h3">Mes animaux <?php echo '('.count($rows).')' ?></h3>
                                         <?php
                                             if(empty($_GET)){
                                                 ?>
@@ -147,7 +208,7 @@
                                         ?>
                                             <div class="dog_card">
                                                 <?php
-                                                echo "<h4 class='dog_name'>".$dog['NAME']."</h4>";
+                                                echo "<h4 class='h4 dog_name'>".$dog['NAME']."</h4>";
                                                 ?>
                                                 <div class="dog_button">
                                                 <?php
@@ -215,14 +276,14 @@
                             ?>
                             <?php
                                 if ((count($row_friends_mutual)-1) <= 0){ ?>
-                                    <h3 class="information">Mes amis (0)</h3><?php
+                                    <h3 class="information h3">Mes amis (0)</h3><?php
                                     if(!empty($_GET))
                                         echo "<p class='information_space'>Cet utilisateur n'a aucun ami pour le moment.</p>";
                                     else{
                                         echo "<p class='information_space'>Vous n'avez aucun ami pour le moment.</p>";
                                     }
                                 }else{?>
-                                    <h3 class="information -space">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
+                                    <h3 class="information -space h3">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
                                 }
                             ?>      
                             <?php
@@ -326,7 +387,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h3 class="information">Informations</h3>
+                            <h3 class="information h3">Informations</h3>
                                 <?php
                                     $town_check_query = $link->prepare("SELECT NAME FROM towns WHERE ID = ? ");
 
@@ -355,7 +416,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h3 class="information">Mes reviews</h3>
+                            <h3 class="information h3">Mes reviews</h3>
                             <!-- REVIEW FUNCTION -->   
                         </div>
                     </div>
@@ -365,7 +426,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h3 class="information">Mes derniers événements</h3>
+                            <h3 class="information h3">Mes derniers événements</h3>
                             <!-- LAST_EVENT FUNCTION -->   
                         </div>
                     </div>

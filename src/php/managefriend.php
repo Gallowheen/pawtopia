@@ -32,10 +32,18 @@
     }
 
     $distanceMax = (int)$_GET['km'];
-    $walk = $_GET['walk'];
 
-    $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK = ? AND ID != ?");
-    $query->bind_param("si", $walk, $_SESSION['ID']);
+    if (isset($_GET['walk']))
+        if ($_GET['walk'] !== 'undefined')
+            $walk = $_GET['walk'];
+
+    if (!isset($walk)){
+        $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE ID != ? ORDER BY USERNAME");
+        $query->bind_param("i", $_SESSION['ID']);
+    }else{
+        $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK = ? AND ID != ? ORDER BY USERNAME");
+        $query->bind_param("si", $walk, $_SESSION['ID']);
+    }
     $query->execute();
 
     $result = $query->get_result();

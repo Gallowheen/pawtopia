@@ -16,6 +16,10 @@ $icon-single-01: unicode(ea09);
 $icon-multiple-11: unicode(ea0a);
 $icon-calendar-60: unicode(ea0b);
 $icon-ic_home_48px: unicode(ea0c);
+$icon-ic_directions_run_48px: unicode(ea0d);
+$icon-ic_map_48px: unicode(ea0e);
+$icon-ic_pets_48px: unicode(ea0f);
+$icon-ic_check_48px: unicode(ea10);
 
 .icon-home-52::before {
   content: $icon-home-52;
@@ -59,5 +63,21 @@ $icon-ic_home_48px: unicode(ea0c);
 
 .icon-ic_home_48px::before {
   content: $icon-ic_home_48px;
+}
+
+.icon-ic_directions_run_48px::before {
+  content: $icon-ic_directions_run_48px;
+}
+
+.icon-ic_map_48px::before {
+  content: $icon-ic_map_48px;
+}
+
+.icon-ic_pets_48px::before {
+  content: $icon-ic_pets_48px;
+}
+
+.icon-ic_check_48px::before {
+  content: $icon-ic_check_48px;
 }
 

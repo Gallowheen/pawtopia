@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
     </head>
-    <body>
+    <body class="landing">
         <div class="mobile">
             <div class="dotting"></div>
 

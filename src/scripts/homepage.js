@@ -24,6 +24,24 @@ $(document).ready(function(){
         );
     });
 
+    $( window ).resize(function(){
+        if($('body').is('.landing')){
+            if ( $('.logo').css('display') == 'none')
+                $('.logo').css('display','block');
+            else
+                $('.logo').css('display','none');
+
+            if ($('.container__action').css('position') == 'absolute'){
+                $('.container__action').css('position','relative'); 
+                $('.container__action').css('padding-top','20px');
+                $('body').css('overflow','auto');  
+            } else {
+                $('.container__action').css('position','absolute'); 
+                $('body').css('overflow','hidden');    
+            } 
+        }
+    });
+
     function showPassword(input, icon){
         if (input.type === "password") {
             input.type = "text";

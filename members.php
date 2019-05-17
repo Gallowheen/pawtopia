@@ -16,6 +16,11 @@
     $pagename = 'Membres';
     
     $error = false;
+
+    if(!isset($_SESSION['ID'])){
+        header('Location:index.php');
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +37,7 @@
     </style>
 
     </head>
-    <body>
+    <body class="members">
         <?php 
         include ('src/php/header.php');
         ?>
@@ -41,8 +46,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h4>Trouvez votre partenaire idéale !</h4>
-                            <button class="button" id="filter">Filtrer</button>
+                            <h3 class="h3">Aidez nous à trouver votre partenaire de balade idéale</h3>
+                            <div class="find__more">
+                                <button class="button -color -blue -nomargin" id="filter">Filtrer</button>
+                            </div>
                         </div> 
                     </div>
                 </div>
@@ -53,16 +60,35 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h4>Aidez nous à trouver votre partenaire idéale de balade</h4>
                             <form>
-                                <p id="slider_value">50 km</p>
-                                <span>0</span>
-                                <input class="slider" type="range" id="slider" name="km" min="0" max="100">
-                                <span>100</span>
-                                <input type="radio" name="walk" value="Sportive" checked> Sportive<br>
-                                <input type="radio" name="walk" value="Découverte"> Découverte<br>
-                                <input type="radio" name="walk" value="Récréative">Récréative<br><br>
-                                <input id="submit__members" type="submit">
+                                <h3 class="h3 filter__title">Proximité</h3>
+                                <div class="slider__value" id="slider_value">125 km</div>
+                                <div class="slider__range">
+                                    <span class="range__number">0</span>
+                                    <input class="slider" type="range" id="slider" name="km" min="0" max="250">
+                                    <span class="range__number">250</span>
+                                </div>
+                                <h3 class="h3 filter__title">Type de balade préféré</h3>
+                                <div class="button_choice">
+                                    <label class="label selected" for="Sportive"><div class="button_container">
+                                        <input class="hidden" type="radio" name="walk" id="Sportive" value="Sportive" checked>
+                                        <i class="icon icon-ic_directions_run_48px icon_walk"></i>
+                                        <span class="walk__type">Sportive</span>
+                                    </div></label>
+                                    <label class="label" for="Découverte"><div class="button_container">
+                                        <input class="hidden" type="radio" name="walk" id="Découverte" value="Découverte">
+                                        <i class="icon icon-ic_map_48px icon_walk"></i>
+                                        <span class="walk__type">Découverte</span>
+                                    </div></label>                
+                                    <label class="label" for="Récréative"><div class="button_container">
+                                        <input class="hidden" type="radio" name="walk" id="Récréative" value="Récréative">
+                                        <i class="icon icon-ic_pets_48px icon_walk"></i>
+                                        <span class="walk__type">Récréative</span>
+                                    </div></label>
+                                </div>
+                                <div class="submit__button">
+                                    <button class="button -color -blue -nomargin" id="submit__members" type="submit">C'est parti !</button>
+                                </div>
                             </form>
                         </div>
                     </div>

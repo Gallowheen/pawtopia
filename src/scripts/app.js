@@ -130,8 +130,11 @@ $(document).ready(function(){
     });
 
     $(".view").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
 
         var user = $(this).data("id");
+        console.log('lol');
 
         window.location = "profile.php?ID=" + user;
     });
@@ -187,6 +190,7 @@ $(document).ready(function(){
     });
 
     $('#submit__members').click(function(e){
+
         e.preventDefault();
 
         $.ajax({
@@ -198,18 +202,147 @@ $(document).ready(function(){
             url:"src/php/managefriend.php",
         })
         .done(function(result){ 
+            localStorage.setItem('km', $('#slider').val());
+            localStorage.setItem('type', $('form input[type=radio]:checked').val());
+
             console.log(result);
+
+            let data = JSON.parse(result);
+            console.log(data);
+            let member;
+
+            if(data.length == 0){
+
+            }else{
+
+                if($('.member_widget_container'))
+                    $('.member_widget_container').remove();
+
+                if($('.tag_container'))
+                    $('.tag_container').remove();
+
+                if ($('form input[type=radio]:checked').val() != undefined)
+                    $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+                else
+                $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+
+                $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
+                
+
+                for( let i = 0; i < data.length; i++){
+                    member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">'+data[i].km+' km</span></div>'; 
+                    $(".member__filtred .container .row .col .member_widget_container").append(member);
+                }
+
+                console.log(result);
+
+                $(".view").click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+            
+                    var user = $(this).data("id");
+                    console.log('lol');
+            
+                    window.location = "profile.php?ID=" + user;
+                });
+            }
 
             $(".members__handler__container").css('background','transparent'); 
 
             setTimeout(function(){
                 $(".members__handler__container").css('transform','translateY(100%)'); 
-                $("body").css('overflow','auto');
             }, 750);
+
+            setTimeout(function(){
+                $(".members__handler__container").css('display','none'); 
+                $("body").css('overflow','auto');
+            }, 1250);
         });
     });
 
+    if (localStorage.km !== undefined && localStorage.type !== undefined){
+
+        $.ajax({
+            method: "GET",
+            data:{
+                walk:localStorage.getItem('type'),
+                km : localStorage.getItem('km')
+            },
+            url:"src/php/managefriend.php",
+        })
+        .done(function(result){ 
+
+            var scroll = localStorage.getItem("scroll");
+
+            // if($('body').is('.members'))
+            //     setTimeout(function(){
+            //         if (scroll >= 1)
+            //             $('html, body').animate({scrollTop: '+='+scroll}, 800);
+            //     },1000);
+
+            let data = JSON.parse(result);
+            console.log(data);
+            let member;
+
+            if(data.length == 0){
+
+            }else{
+                
+                if($('.member_widget_container'))
+                $('.member_widget_container').remove();
+
+                if($('.tag_container'))
+                    $('.tag_container').remove();
+
+                if (localStorage.getItem('type') !== 'undefined')
+                    $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+localStorage.getItem('type')+'</span></div><div class="tags"><span>'+localStorage.getItem('km')+'km</span></div></div>');
+                else
+                    $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+localStorage.getItem('km')+'km</span></div></div>');
+            
+                
+                $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
+
+                for( let i = 0; i < data.length; i++){
+                    member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
+                    $(".member__filtred .container .row .col .member_widget_container").append(member);
+                }
+
+                console.log(result);
+
+                $(".view").click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+            
+                    // localStorage.setItem('scroll', $(window).scrollTop());
+                    var user = $(this).data("id");
+                    console.log('lol');
+            
+                    window.location = "profile.php?ID=" + user;
+                });
+            }
+
+            $(".members__handler__container").css('background','transparent'); 
+
+            setTimeout(function(){
+                $(".members__handler__container").css('transform','translateY(100%)'); 
+            }, 750);
+
+            setTimeout(function(){
+                $(".members__handler__container").css('display','none'); 
+                $("body").css('overflow','auto');
+            }, 1250);
+
+        });
+    }
+
     $('#filter').click(function(){
+
+        $(".members__handler").find("input:radio").prop("checked", false);
+        $(".label").each(function(){
+            if($(this).hasClass('selected'))
+                $(this).removeClass('selected')
+        });
+
         $("body").css('overflow','hidden');
         $(".members__handler__container").css('display','block');
 
@@ -238,7 +371,7 @@ $(document).ready(function(){
         });
 
         $(document.body).css('overflow','hidden');
-        $(document.body).append('<div class="dog_handler"><div class="dog_handler_container"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="dog_handler_button_container"><button id="dog_accepted" class="button -color -blue -small">Oui</button><button id="dog_denied" class="button -color -blue -small">Non</button><div></div></div></div></div></div>')
+        $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -small"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="dog_handler_button_container"><button id="dog_accepted" class="button -color -blue -small">Oui</button><button id="dog_denied" class="button -color -blue -small">Non</button><div></div></div></div></div></div>')
         $('.dog_handler').css('top',position);
 
         let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
@@ -281,7 +414,10 @@ $(document).ready(function(){
         });
     })
 
-    $('.friend_delete').click(function(){
+    $('.friend_delete').click(function(e){
+
+        e.preventDefault();
+        e.stopPropagation();
         //On récupère l'ID de l'ami
         let friend = $(this).data('friend');
         let position = $(window).scrollTop();
@@ -359,6 +495,89 @@ $(document).ready(function(){
             $('.dog_handler_container').css('top',position_popup);
             $('.dog_handler_container').animate({"opacity": 1}, "normal");
         });
+    });
+
+    $('.label').click(function(){
+
+        $('.label').each(function(){
+            $(this).removeClass('selected');
+        })
+
+        if (!$(this).hasClass('selected'))
+            $(this).addClass('selected');
+    });
+
+    $('#add_friend').click(function(){
+
+        let user = $(this).data("id");
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/add_friend.php",
+        })
+        .done(function(result){ 
+            $('.avatar__container #friend__button').remove();
+            $('.avatar__container .container .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
+        });
+    });
+
+    $('.clickme').click(function(){
+        $.ajax({
+            method: "GET",
+            url:"src/php/add_event.php",
+        })
+        .done(function(result){ 
+            console.log(result);
+        });
+    });
+
+    //WALK 
+    if($('body').is('.new_walk')){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        var hour = today.getHours();
+        if(dd<10){
+                dd='0'+dd
+            } 
+            if(mm<10){
+                mm='0'+mm
+            } 
+
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("date").setAttribute("min", today);
+        document.getElementById("time").setAttribute("min", hour);
+    }
+
+    $('#new_walk').click(function(e){
+        window.location = "new_walk.php";
+    });
+
+    $("#validate").click(function(e){
+        e.preventDefault();
+
+        var date = $("#date").val() + " " + $("#time").val();
+
+        $.get(
+            'src/php/add_event.php',
+            {
+                ID_OWNER : $("form").data('id'),
+                NAME : $("#walk_name").val(),
+                TOWN_ID : $("#town").val(),
+                LOCATION : $("#info").val(),
+                TYPE : $("#walk_type").val(),
+                DATE : date,
+                LENGTH : $("#length").val(),
+            },
+
+            function(data){
+                if(data === 'success'){
+                    window.location = "walk.php"; 
+                }
+            },
+            'text'
+        );
     });
 });
 

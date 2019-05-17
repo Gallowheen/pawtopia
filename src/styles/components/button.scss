@@ -52,6 +52,14 @@
       padding: 10px;
     }
 
+    &.-friend{
+      border : 2px solid #003780;
+      color: #003780;
+      padding: 5px 16px 5px 8px;
+      background: transparent;
+      font-size: 14px;
+    }
+
     &.-color {
       width: 200px;
       font-size: 16px;
@@ -68,22 +76,22 @@
       transition: all .4s ease-in-out;
 
       &:hover {
-          background-position: 100% 0;
-          transition: all .4s ease-in-out;
+        background-position: 100% 0;
+        transition: all .4s ease-in-out;
       }
 
       &:focus {
-          outline: none;
+        outline: none;
       }
 
       &.-blue {
-          border : 2px solid #0077C0;
-          color: #0077C0;
+        border : 2px solid #003780;
+        color: #003780;
       }
 
       &.-green {
-          border : 2px solid #007C21;
-          color: #007C21;
+        border : 2px solid #007C21;
+        color: #007C21;
       }
     }
 

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="nav_container">
                 <div class="nav_button_group">
-                    <a class="link_footer" href="test.php"><i class="icon icon__footer icon-ic_home_48px"></i></a>
+                    <a class="link_footer" href="home.php"><i class="icon icon__footer icon-ic_home_48px"></i></a>
                     <span class="icon__name">Accueil</span>
                 </div>
                 <div class="nav_button_group">

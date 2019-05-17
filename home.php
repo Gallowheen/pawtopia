@@ -1,6 +1,13 @@
 <?php 
   require_once("src/php/bdd.php");
   session_start();
+
+  $pagename = 'Accueil';
+
+  if(!isset($_SESSION)){
+    header('index.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +21,10 @@
     <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
   </head>
-  <body>
+  <body> 
+      <?php 
+        include ('src/php/header.php');
+      ?>
       <?php
         if ( isset($_SESSION['user']) ){
             echo "vous êtes connecté " . $_SESSION['user'];
@@ -24,8 +34,12 @@
             <?php
         }
         ?>
+        <?php 
+        include ('src/php/footer.php');
+      ?>
   </body>
   <script src="src/scripts/jquery-3.4.0.min.js"></script>
   <script src="src/scripts/bootstrap.min.js"></script>
+  <script src="src/scripts/jquery.touchSwipe.min.js"></script>
   <script src="src/scripts/app.js"></script>
 </html>
