@@ -40,13 +40,30 @@
     $length = $_GET['LENGTH'];
     //$length = "3 heures";
 
+    //Les chiens
+    $dogs = $_GET['DOG'];
 
-    //INSERT
-    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `TOWN_ID`, `LOCATION`, `TYPE`, `DATE`, `LENGTH`) VALUES (?,?,?,?,?,?,?)");
+    //INSERT INTO EVENT
+    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `TOWN_ID`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`) VALUES (?,?,?,?,?,?,?)");
     $query_add_event->bind_param("isissss", $id_owner, $name, $town_id, $location, $type, $date, $length);
     $query_add_event->execute();
+    $last_ID = $query_add_event->insert_id;
 
-    if($query_add_event){
+    //THE USER CREATED THE EVENT SO HE'S THE FIRST ATTENDEE OF THIS EVENT
+    $query_add_event_attendee = $link->prepare("INSERT INTO event_attendee (`ID_EVENT`, `ID_ATTENDEE`) VALUES (?,?)");
+    $query_add_event_attendee->bind_param("ii", $last_ID, $id_owner);
+    $query_add_event_attendee->execute();
+
+    //ADD THE DOG(S) OF THE CREATOR 
+    foreach ($dogs as $dog){
+        $query_add_event_dog = $link->prepare("INSERT INTO event_dog (`ID_EVENT`, `ID_DOG`) VALUES (?,?)");
+        $query_add_event_dog->bind_param("ii", $last_ID, $dog);
+        $query_add_event_dog->execute();
+    }
+
+    if($query_add_event && $query_add_event_attendee && $query_add_event_dog){
         echo 'success';
+    }else{
+        echo 'failed';
     }
 ?>

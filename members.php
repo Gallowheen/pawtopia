@@ -26,16 +26,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DWMA project</title>
+    <title>Pawtopia | Members</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="src/styles/app.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <style>
-        
-    </style>
-
+    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
+    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
+    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
     </head>
     <body class="members">
         <?php 
@@ -46,9 +51,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h3 class="h3">Aidez nous à trouver votre partenaire de balade idéale</h3>
+                            <h3 class="h3">Trouvez votre partenaire de balade idéale</h3>
                             <div class="find__more">
-                                <button class="button -color -blue -nomargin" id="filter">Filtrer</button>
+                                <button class="button -color" id="filter">Découvrez nos membres</button>
                             </div>
                         </div> 
                     </div>
@@ -85,7 +90,7 @@
                                         <i class="icon icon-ic_pets_48px icon_walk"></i>
                                         <span class="walk__type">Récréative</span>
                                     </div></label>
-                                </div>
+                                </div>     
                                 <div class="submit__button">
                                     <button class="button -color -blue -nomargin" id="submit__members" type="submit">C'est parti !</button>
                                 </div>

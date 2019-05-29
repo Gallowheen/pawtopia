@@ -10,7 +10,12 @@
         <div class="row">
             <div class="col">
                 <div class="title">
+
+                <?php if (!strpos($_SERVER['REQUEST_URI'], 'home.php') !== false) {?>
                     <button class="button" onclick="history.go(-1);"><i class="left"></i></button>
+                <?php }else{ ?>
+                    
+                <?php } ?>
 
                     <h1 class="h1 header__title">
                     <?php 
@@ -27,9 +32,7 @@
 
                             $result = $query->get_result();
                             if($result->num_rows === 0){
-                                echo 'Error';
-                                $error = true;
-                                //redirect ?
+                                
                             }
                             $row = $result->fetch_assoc();
 

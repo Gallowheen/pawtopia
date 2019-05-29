@@ -28,9 +28,9 @@
     $bio = $row ['BIO'];
     $walk = $row ['WALK'];
 
-    echo '<img class="avatar avatar--top" data-id="'.$row['ID'].'" src="'.$avatar_path.'?>"/>';
+    echo '<img class="avatar avatar--top -noMargin" data-id="'.$row['ID'].'" src="'.$avatar_path.'?>"/>';
     echo '<p class="information_name">'.$username.'</p>';
 
-    echo "<button class='button -color -blue -small' data-user='$username1' id='accept'>Accepter</button>";
-    echo "<button class='button -color -blue -small' data-user='$username1' id='refuse'>Refuser</button>";
+    echo "<button class='button -color -blue -right' data-user='$username1' id='accept'>Accepter</button>";
+    echo "<button class='button -color -blue' data-user='$username1' id='refuse'>Refuser</button>";
 ?>

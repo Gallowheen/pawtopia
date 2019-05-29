@@ -51,20 +51,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DWMA project</title>
+    <title>Pawtopia | Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="src/styles/app.css">
     <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <style>
-        
-    </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
+    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
+    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Méta Google -->
+    <meta name="title" content="Pawtopia" />
+    <meta name="description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
 
+    <!-- Métas Facebook Opengraph -->
+    <meta property="og:title" content="Pawtopia" />
+    <meta property="og:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
+    <meta property="og:url" content="https://dylanernoud.be/projets/tfe/beta/" />
+    <meta property="og:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
+    <meta property="og:type" content="website"/>
+
+    <!-- Métas Twitter Card -->
+    <meta name="twitter:title" content="Pawtopia" />
+    <meta name="twitter:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
+    <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
+    <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
     </head>
-    <body>
-        <?php 
+    <?php 
         include ('src/php/header.php');
+    ?>
+    <body>
+        <?php
         if ($error){ ?>
         <div class="error__container">
             <div class="container">
@@ -198,7 +221,7 @@
                                         <?php
                                             if(empty($_GET)){
                                                 ?>
-                                                <div class="dog_information_button"><button id="add_dog" class="button -color -blue -nomargin">Ajouter un chien</button></div>
+                                                <div class="dog_information_button"><button id="add_dog" class="button -color">Ajouter un chien</button></div>
                                         <?php
                                             }
                                         ?>
@@ -298,7 +321,7 @@
                                     if($result_friend_mutual->num_rows <= 1){
                                         ?>
                                         <div class="more__friend">
-                                            <a href="friends.php"><button class="button -color -blue -nomargin">Plus d'amis</button></a>
+                                            <a href="friends.php"><button class="button -color">Plus d'amis</button></a>
                                         </div>
                                     <?php
                                     }else{   
@@ -325,7 +348,7 @@
                                         echo '</div></button>';
                                         ?>
                                         <div class="more__friend">
-                                            <a href="friends.php"><button class="button -color -blue -nomargin">Plus d'amis</button></a>
+                                            <a href="friends.php"><button class="button -color">Plus d'amis</button></a>
                                         </div>
                                         <?php
 
@@ -437,10 +460,10 @@
     <?php
         }
     ?>
+    </body>
     <?php 
         include('src/php/footer.php');
     ?>
-    </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>
     <script src="src/scripts/jquery.touchSwipe.min.js"></script>

@@ -50,8 +50,6 @@ $(document).ready(function(){
                 // CREATE YES BUTTON
                 $("#accept").click(function(e){
                     e.preventDefault();
-                    console.log($(this).data("user"));
-            
                     var user = $(this).data("user");
                 
                     $.ajax({
@@ -100,7 +98,6 @@ $(document).ready(function(){
                 // CREAT NO BUTTON
                 $("#refuse").click(function(e){
                     e.preventDefault();
-                    console.log($(this).data("user"));
             
                     var user = $(this).data("user");
                 
@@ -134,7 +131,6 @@ $(document).ready(function(){
         e.stopPropagation();
 
         var user = $(this).data("id");
-        console.log('lol');
 
         window.location = "profile.php?ID=" + user;
     });
@@ -150,6 +146,7 @@ $(document).ready(function(){
             $(".dog_card_bubble_container").remove();
         }
 
+      
         $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
         $(".dog_card_container").children().each(function(){
             $('.dog_card_bubble_container').append('<div class="bubble"></div>');
@@ -157,8 +154,9 @@ $(document).ready(function(){
 
         $(".bubble").first().addClass('-active');
 
+
         $(".dog_card_container").swipe({
-            swipe:function(event, direction, distance, duration, fingerCount){
+            swipe:function(event, direction, distance, duration, allowPageScroll){
 
                 $(".bubble").each(function(){
                 if($(this).hasClass('-active')){
@@ -171,6 +169,9 @@ $(document).ready(function(){
                 }
                 if (direction == "right"  && x > 0){
                     x -= 1;
+                }
+                if (direction == "up" || direction == "down"){
+                    $(this).swipe({allowPageScroll:"auto"});
                 }
 
                 $(this).children().each(function(){
@@ -202,11 +203,7 @@ $(document).ready(function(){
             url:"src/php/managefriend.php",
         })
         .done(function(result){ 
-            localStorage.setItem('km', $('#slider').val());
-            localStorage.setItem('type', $('form input[type=radio]:checked').val());
-
-            console.log(result);
-
+        
             let data = JSON.parse(result);
             console.log(data);
             let member;
@@ -230,18 +227,15 @@ $(document).ready(function(){
                 
 
                 for( let i = 0; i < data.length; i++){
-                    member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">'+data[i].km+' km</span></div>'; 
+                    member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
                     $(".member__filtred .container .row .col .member_widget_container").append(member);
                 }
-
-                console.log(result);
 
                 $(".view").click(function(e){
                     e.preventDefault();
                     e.stopPropagation();
             
                     var user = $(this).data("id");
-                    console.log('lol');
             
                     window.location = "profile.php?ID=" + user;
                 });
@@ -260,99 +254,63 @@ $(document).ready(function(){
         });
     });
 
-    if (localStorage.km !== undefined && localStorage.type !== undefined){
-
-        $.ajax({
-            method: "GET",
-            data:{
-                walk:localStorage.getItem('type'),
-                km : localStorage.getItem('km')
-            },
-            url:"src/php/managefriend.php",
-        })
-        .done(function(result){ 
-
-            var scroll = localStorage.getItem("scroll");
-
-            // if($('body').is('.members'))
-            //     setTimeout(function(){
-            //         if (scroll >= 1)
-            //             $('html, body').animate({scrollTop: '+='+scroll}, 800);
-            //     },1000);
-
-            let data = JSON.parse(result);
-            console.log(data);
-            let member;
-
-            if(data.length == 0){
-
-            }else{
-                
-                if($('.member_widget_container'))
-                $('.member_widget_container').remove();
-
-                if($('.tag_container'))
-                    $('.tag_container').remove();
-
-                if (localStorage.getItem('type') !== 'undefined')
-                    $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+localStorage.getItem('type')+'</span></div><div class="tags"><span>'+localStorage.getItem('km')+'km</span></div></div>');
-                else
-                    $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+localStorage.getItem('km')+'km</span></div></div>');
-            
-                
-                $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
-
-                for( let i = 0; i < data.length; i++){
-                    member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
-                    $(".member__filtred .container .row .col .member_widget_container").append(member);
-                }
-
-                console.log(result);
-
-                $(".view").click(function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
-            
-                    // localStorage.setItem('scroll', $(window).scrollTop());
-                    var user = $(this).data("id");
-                    console.log('lol');
-            
-                    window.location = "profile.php?ID=" + user;
-                });
-            }
-
-            $(".members__handler__container").css('background','transparent'); 
-
-            setTimeout(function(){
-                $(".members__handler__container").css('transform','translateY(100%)'); 
-            }, 750);
-
-            setTimeout(function(){
-                $(".members__handler__container").css('display','none'); 
-                $("body").css('overflow','auto');
-            }, 1250);
-
-        });
-    }
-
     $('#filter').click(function(){
 
-        $(".members__handler").find("input:radio").prop("checked", false);
-        $(".label").each(function(){
-            if($(this).hasClass('selected'))
-                $(this).removeClass('selected')
-        });
+        $("html, body").animate({ scrollTop: 0 }, "slow");
 
-        $("body").css('overflow','hidden');
-        $(".members__handler__container").css('display','block');
+        if($('body').is('.walk')){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1;
+            var yyyy = today.getFullYear();
+            var hour = today.getHours();
+            if(dd<10){
+                    dd='0'+dd
+                } 
+                if(mm<10){
+                    mm='0'+mm
+                } 
+    
+            today = yyyy+'-'+mm+'-'+dd;
+            document.getElementById("date").setAttribute("min", today);
+            document.getElementById("date").setAttribute("value", today);
+        }
 
-        setTimeout(function(){
-            $(".members__handler__container").css('transform','translateY(0%)'); 
-        }, 500);
+        if($('body').is('.walk')){
+            $(".walk__handler").find("input:radio").prop("checked", false);
+            $(".label").each(function(){
+                if($(this).hasClass('selected'))
+                    $(this).removeClass('selected')
+            });
 
-        setTimeout(function(){
-            $(".members__handler__container").css('background','#00000024'); 
-        }, 1500);
+            $("body").css('overflow','hidden');
+            $(".walk__handler__container").css('display','block');
+
+            setTimeout(function(){
+                $(".walk__handler__container").css('transform','translateY(0%)'); 
+            }, 500);
+
+            setTimeout(function(){
+                $(".walk__handler__container").css('background','#00000024'); 
+            }, 1500);
+        }else{
+            $(".members__handler").find("input:radio").prop("checked", false);
+            $(".label").each(function(){
+                if($(this).hasClass('selected'))
+                    $(this).removeClass('selected')
+            });
+
+            $("body").css('overflow','hidden');
+            $(".members__handler__container").css('display','block');
+
+            setTimeout(function(){
+                $(".members__handler__container").css('transform','translateY(0%)'); 
+            }, 500);
+
+            setTimeout(function(){
+                $(".members__handler__container").css('background','#00000024'); 
+            }, 1500);
+        }
     });
 
     $('.dog_delete').click(function(){
@@ -371,7 +329,7 @@ $(document).ready(function(){
         });
 
         $(document.body).css('overflow','hidden');
-        $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -small"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="dog_handler_button_container"><button id="dog_accepted" class="button -color -blue -small">Oui</button><button id="dog_denied" class="button -color -blue -small">Non</button><div></div></div></div></div></div>')
+        $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -small"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="dog_handler_button_container"><button id="dog_accepted" class="button -color -blue -right">Oui</button><button id="dog_denied" class="button -color -blue">Non</button><div></div></div></div></div></div>')
         $('.dog_handler').css('top',position);
 
         let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
@@ -425,7 +383,7 @@ $(document).ready(function(){
         let name = $(this).parent().children().eq(1).html();
 
         $(document.body).css('overflow','hidden');
-        $(document.body).append('<div class="friend_handler"><div class="friend_handler_container"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="friend_handler_button_container"><button id="friend_deleted" class="button -color -blue -small">Oui</button><button id="friend_saved" class="button -color -blue -small">Non</button><div></div></div></div></div></div>')
+        $(document.body).append('<div class="friend_handler"><div class="friend_handler_container"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="friend_handler_button_container"><button id="friend_deleted" class="button -color -blue -right">Oui</button><button id="friend_saved" class="button -color -blue">Non</button><div></div></div></div></div></div>')
         $('.friend_handler').css('top',position);
 
         let position_popup = (size / 2) - (($('.friend_handler_container').height() + 40) / 2);
@@ -445,7 +403,6 @@ $(document).ready(function(){
 				url:"src/php/deleteFriend.php",
 			})
 			.done(function(result){ 
-                console.log(result);
                 let divToDelete;
                 $('.friend_widget').each(function(){
                     if($(this).children().eq(2).data('friend') === friend){
@@ -547,6 +504,7 @@ $(document).ready(function(){
 
         today = yyyy+'-'+mm+'-'+dd;
         document.getElementById("date").setAttribute("min", today);
+        document.getElementById("date").setAttribute("value", today);
         document.getElementById("time").setAttribute("min", hour);
     }
 
@@ -554,10 +512,45 @@ $(document).ready(function(){
         window.location = "new_walk.php";
     });
 
+    $("#next").click(function(e){
+
+        e.preventDefault();
+
+        $('#event_information').css('display','none');
+        $('.walk__dog').css('display','block');
+
+        if($('body').is('.new_walk') || $('body').is('.walk_detail')){
+            $('.dog_card').click(function(){
+                if(!$(this).hasClass('-active')){
+                    $(this).addClass('-active');
+                }else{
+                    $(this).removeClass('-active');
+                }
+            })
+        }
+
+        if($('body').is('.walk_detail')){
+            console.log('lol');
+            $('.submit__button').remove();
+            $(window).scrollTop($('.walk__add__dog').offset().top);
+        }
+    });
+
     $("#validate").click(function(e){
         e.preventDefault();
 
         var date = $("#date").val() + " " + $("#time").val();
+
+        let dogSelected = [];
+        let x = 0;
+
+        $('.dog_card').each(function(){
+            if($(this).hasClass('-active')){
+                dogSelected.push($(this).data('id'));
+            }
+        });
+
+        console.log(dogSelected);
 
         $.get(
             'src/php/add_event.php',
@@ -569,6 +562,7 @@ $(document).ready(function(){
                 TYPE : $("#walk_type").val(),
                 DATE : date,
                 LENGTH : $("#length").val(),
+                DOG : dogSelected
             },
 
             function(data){
@@ -578,6 +572,135 @@ $(document).ready(function(){
             },
             'text'
         );
+    });
+
+    $('#submit__walks').click(function(e){
+        e.preventDefault();
+
+        $.ajax({
+            method: "GET",
+            data:{
+                walk:$('form input[type=radio]:checked').val(),
+                km : $('#slider').val(),
+                date : $('#date').val()
+            },
+            url:"src/php/managewalk.php",
+        })
+        .done(function(result){ 
+            console.log(result);
+            console.log(JSON.parse(result));
+            data = JSON.parse(result);
+
+            //savoir le jour
+            var jour = new Array(7);
+            jour[0] = "Lundi";
+            jour[1] = "Mardi";
+            jour[2] = "Mercredi";
+            jour[3] = "Jeudi";
+            jour[4] = "Vendredi";
+            jour[5] = "Samedi";
+            jour[6] = "Dimanche";
+
+            //savoir le mois
+            var mois = new Array(12);
+            mois[0] = "Janvier";
+            mois[1] = "Février";
+            mois[2] = "Mars";
+            mois[3] = "Avril";
+            mois[4] = "Mai";
+            mois[5] = "Juin";
+            mois[6] = "Juillet";
+            mois[7] = "Août";
+            mois[8] = "Septembre";
+            mois[9] = "Octobre";
+            mois[10] = "Novembre";
+            mois[11] = "Décembre";
+
+            if($('.walk__container'))
+                    $('.walk__container').remove();
+
+            if($('.tag_container'))
+                $('.tag_container').remove();
+
+            if($('.walk__noresult'))
+                $('.walk__noresult').remove();
+            
+            if (data.length >= 1){
+
+                if ($('form input[type=radio]:checked').val() != undefined)
+                    $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+                else
+                $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+
+                console.log(data.length);
+
+                $('.content_container .container .row .col').append('<div class="walk__container"></div>');
+            
+                for( let i = 0; i < data.length; i++){
+                    let date = new Date(data[i]['DATE_START']);
+                    let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
+                    let hour = hourSplit[0] + ":" + hourSplit[1];
+                    let day = jour[date.getDay()];
+                    let month = mois[date.getMonth()];
+                    let dayNumber = date.getDate();
+
+                    let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span>'+'<span class="walk__name">'+data[i]['WALK']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">Durée : '+data[i]['LENGTH']+' heures</span></div><div class="town__container"><span class="">'+data[i]['town_name']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="location__container"><span class="">'+data[i]['LOCATION']+'</span></div><div class="button__container"><button class="button -color -blue -round get_to_walk" data-id='+data[i]['ID']+'>Voir plus</button></div>';
+                    $('.walk__container').append('<div class="walk__card">'+walk+'</div>');
+                }
+            }else{
+                $('.content_container .container .row .col').append('<div class="walk__noresult">Aucun resultat pour la recherche</div>');
+            }
+
+            $(".walk__handler__container").css('background','transparent'); 
+
+            setTimeout(function(){
+                $(".walk__handler__container").css('transform','translateY(100%)'); 
+            }, 750);
+
+            setTimeout(function(){
+                $(".walk__handler__container").css('display','none'); 
+                $("body").css('overflow','auto');
+            }, 1250);
+
+            $('.get_to_walk').click(function(){
+                console.log('lol');
+                window.location = "walk_detail?ID="+$(this).data('id');
+            });
+        });
+    });
+
+    $('#validate__sign').click(function(e){
+        console.log('lol');
+
+        let dogSelected = [];
+        let id_event = $('#validate__sign').data('id'); 
+        console.log(id_event);
+        let x = 0;
+
+        $('.dog_card').each(function(){
+            console.log('bite');
+            if($(this).hasClass('-active')){
+                dogSelected.push($(this).data('id'));
+            }
+        });
+
+        console.log(dogSelected);
+
+        if(dogSelected.length > 0){
+            $.ajax({
+                method: "GET",
+                data:{
+                   DOG : dogSelected,
+                   ID : id_event
+                },
+                url:"src/php/joinwalk.php",
+            })
+            .done(function(result){ 
+                console.log(result);
+                if (result == "success")  
+                    document.location.reload(true);
+            });
+        }
     });
 });
 

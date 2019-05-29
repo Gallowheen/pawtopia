@@ -17,10 +17,13 @@
     font-size: 28px;
     display: inline-block;
     margin-left : 32px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .title{
-    margin-top: 12px;
+    height: 60px;
 }
 
 .right {

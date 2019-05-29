@@ -10,6 +10,7 @@ body {
   font-family: "Fira Sans", sans-serif;
   margin: 0;
   font-size: 32px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -17,6 +18,7 @@ body {
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -24,13 +26,18 @@ body {
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.h3.-center {
+  text-align: center;
+}
 .h4 {
   font-family: "Fira Sans", sans-serif;
   font-size: 20px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -60,43 +67,35 @@ body {
   font-size: 14px;
 }
 .button.-color {
-  width: 200px;
+  padding: 12px 32px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  margin: 20px;
-  height: 55px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  border-radius: 50px;
-  transition: all 0.4s ease-in-out;
-}
-.button.-color:hover {
-  background-position: 100% 0;
-  transition: all 0.4s ease-in-out;
-}
-.button.-color:focus {
-  outline: none;
-}
-.button.-color.-blue {
   border: 2px solid #003780;
   color: #003780;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+}
+.button.-color.-blue {
+  background-color: #003780;
+  border: none;
+  color: white;
+}
+.button.-color.-add {
+  font-size: 14px;
+  padding: 8px;
 }
 .button.-color.-green {
-  border: 2px solid #007C21;
-  color: #007C21;
-}
-.button.-small {
-  width: 100px;
-  margin: 8px;
+  background: #007C21;
 }
 .button.-nomargin {
   margin: 0;
 }
-.button.-margintop {
-  margin: 12px 0px 0px 0px;
+.button.-round {
+  border-radius: 25px;
+}
+.button.-right {
+  margin-right: 16px;
 }
 /* --------------------------------
 
@@ -367,7 +366,7 @@ Generated using nucleoapp.com
 }
 .input.-time {
   width: 30%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   text-align: center;
   padding: 8px 8px 8px 16px;
 }
@@ -591,6 +590,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .input__container.-center {
   text-align: center;
 }
+.input__container.-right {
+  text-align: right;
+}
 .input__container.-first {
   margin-top: 0px;
 }
@@ -645,17 +647,21 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 @media only screen and (min-aspect-ratio: 13/9) {
   .mobile {
+    display: none;
+  }
+
+  .desktop {
     display: block;
   }
 
   .wip {
-    display: none;
+    display: block;
   }
 }
 .content_container {
   height: calc(100% - 120px);
-  padding-top: 92px;
-  margin-bottom: 60px;
+  padding-top: 80px;
+  margin-bottom: 80px;
 }
 
 .avatars {
@@ -674,6 +680,9 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .avatar.-negative {
   margin-top: -48px;
+}
+.avatar.-noMargin {
+  margin-top: 0px;
 }
 .avatar.-top {
   margin-top: 16px;
@@ -698,12 +707,11 @@ input[type=range]::-webkit-slider-runnable-track {
   left: 24px;
 }
 .avatar.-friendlist {
-  border-radius: 0;
-  height: 100%;
+  height: 75px;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100px;
+  top: 15px;
+  left: 15px;
+  width: 75px;
   margin-top: 0;
 }
 
@@ -766,10 +774,13 @@ input[type=range]::-webkit-slider-runnable-track {
 .information.-first {
   margin-bottom: 16px;
 }
+.information.-top {
+  margin-top: 32px;
+}
 
 .information_name {
   margin-top: 16px;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -786,6 +797,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .information_group.-dog {
   padding: 0;
 }
+.information_group.-walk {
+  margin-bottom: 8px;
+}
 
 .information_group:last-child {
   margin-bottom: 0px;
@@ -795,6 +809,9 @@ input[type=range]::-webkit-slider-runnable-track {
   font-weight: bold;
   font-size: 20px;
   color: #0077C0;
+}
+.information_title.-top {
+  margin-top: 24px;
 }
 
 .my_pet__container {
@@ -881,15 +898,22 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .dog_card {
   min-width: 100%;
-  min-height: 300px;
   padding: 24px;
   background: white;
   margin-right: 16px;
   position: relative;
-  border-bottom: 5px solid #0287D0;
-  border-top: 1px solid #0287D0;
-  border-left: 1px solid #0287D0;
-  border-right: 1px solid #0287D0;
+  border-bottom: 5px solid #0067B0;
+  border-top: 1px solid #0067B0;
+  border-left: 1px solid #0067B0;
+  border-right: 1px solid #0067B0;
+}
+.dog_card.-walk {
+  border: none;
+  margin-right: 0px;
+  min-width: 45%;
+}
+.dog_card.-active {
+  box-shadow: 1px 1px 10px 0px #0067B0;
 }
 
 .dog_name {
@@ -921,6 +945,9 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 32px;
   position: relative;
   text-align: center;
+}
+.dog_button.-walk {
+  margin-bottom: 8px;
 }
 .dog_button.-add {
   margin-bottom: 0px;
@@ -1001,12 +1028,10 @@ button {
   width: 100%;
   position: relative;
   background: white;
-  padding: 8px;
+  padding: 16px;
   margin-bottom: 32px;
-  border-bottom: 5px solid #0287D0;
-  border-top: 1px solid #0287D0;
-  border-left: 1px solid #0287D0;
-  border-right: 1px solid #0287D0;
+  border-bottom: 1px solid #0067B0;
+  box-shadow: 1px 1px 5px #00000040;
 }
 .friend_widget.-small {
   height: 100px;
@@ -1016,6 +1041,10 @@ button {
   border-radius: 50%;
   margin-bottom: 24px;
   margin-top: 24px;
+  border-bottom: 5px solid #0067B0;
+  border-top: 1px solid #0067B0;
+  border-left: 1px solid #0067B0;
+  border-right: 1px solid #0067B0;
 }
 
 .more__friend {
@@ -1042,10 +1071,10 @@ button {
   text-align: center;
   z-index: 100;
   background: white;
-  border-bottom: 5px solid #0287D0;
-  border-top: 1px solid #0287D0;
-  border-left: 1px solid #0287D0;
-  border-right: 1px solid #0287D0;
+  border-bottom: 5px solid #0067B0;
+  border-top: 1px solid #0067B0;
+  border-left: 1px solid #0067B0;
+  border-right: 1px solid #0067B0;
 }
 
 .member__content {
@@ -1053,22 +1082,24 @@ button {
   padding-top: 80px;
 }
 
-.members__handler__container {
-  background: #00000024;
+.members__handler__container, .walk__handler__container {
+  background: transparent;
   height: calc(100% - 120px);
   width: 100%;
   position: absolute;
   bottom: 60px;
   transition: all 1s;
+  display: none;
+  transform: translateY(100%);
 }
 
-.members__handler {
+.members__handler, .walk__handler {
   position: absolute;
   width: 100vw;
   background: white;
   padding-top: 16px;
   bottom: 0;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
 }
 
 .range__number {
@@ -1081,11 +1112,11 @@ button {
 }
 
 .tags {
-  background: #003780;
-  color: white;
+  color: #003780;
   padding: 8px;
   font-size: 14px;
   margin-right: 16px;
+  border-bottom: 3px solid #003780;
 }
 
 .slider {
@@ -1096,6 +1127,11 @@ button {
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
+}
+
+.submit__button {
+  width: 100%;
+  margin-top: 8px;
 }
 
 .slider__value, .submit__button {
@@ -1122,12 +1158,13 @@ button {
 
 .filter__title {
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  color: #003780;
 }
 
 .label {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   position: relative;
   transition: all 0.5s;
@@ -1136,7 +1173,7 @@ button {
 .button_choice {
   display: flex;
   justify-content: space-around;
-  margin: 24px 0 16px 0;
+  margin: 0px;
 }
 
 .button_container {
@@ -1159,6 +1196,64 @@ button {
   margin-bottom: 16px;
 }
 
+.walk__dog {
+  display: none;
+}
+
+.walk__dog__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.date {
+  margin-bottom: 16px;
+}
+
+.walk__card {
+  padding: 16px;
+  background: white;
+  box-shadow: 1px 1px 9px #00000052;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #0067B0;
+}
+.walk__card:last-child {
+  margin-bottom: 0px;
+}
+
+.button__container {
+  text-align: center;
+  margin: 16px 0 0px 0;
+}
+
+.date__container, .town__container, .location__container {
+  margin: 8px 0px;
+}
+
+.name__container, .date__container {
+  position: relative;
+}
+
+.walk__name {
+  position: absolute;
+  right: 0;
+}
+
+.informations {
+  margin-bottom: 24px;
+}
+
+.chien__container, .master__container {
+  margin: 0px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.chien__container {
+  margin-bottom: 32px;
+}
+
 body {
   font-family: "Cabin", sans-serif !important;
   font-size: 18px;
@@ -1171,6 +1266,7 @@ body {
   font-family: "Fira Sans", sans-serif;
   margin: 0;
   font-size: 32px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -1178,6 +1274,7 @@ body {
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -1185,13 +1282,18 @@ body {
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.h3.-center {
+  text-align: center;
+}
 .h4 {
   font-family: "Fira Sans", sans-serif;
   font-size: 20px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -1221,43 +1323,35 @@ body {
   font-size: 14px;
 }
 .button.-color {
-  width: 200px;
+  padding: 12px 32px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  margin: 20px;
-  height: 55px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  border-radius: 50px;
-  transition: all 0.4s ease-in-out;
-}
-.button.-color:hover {
-  background-position: 100% 0;
-  transition: all 0.4s ease-in-out;
-}
-.button.-color:focus {
-  outline: none;
-}
-.button.-color.-blue {
   border: 2px solid #003780;
   color: #003780;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+}
+.button.-color.-blue {
+  background-color: #003780;
+  border: none;
+  color: white;
+}
+.button.-color.-add {
+  font-size: 14px;
+  padding: 8px;
 }
 .button.-color.-green {
-  border: 2px solid #007C21;
-  color: #007C21;
-}
-.button.-small {
-  width: 100px;
-  margin: 8px;
+  background: #007C21;
 }
 .button.-nomargin {
   margin: 0;
 }
-.button.-margintop {
-  margin: 12px 0px 0px 0px;
+.button.-round {
+  border-radius: 25px;
+}
+.button.-right {
+  margin-right: 16px;
 }
 /* --------------------------------
 
@@ -1528,7 +1622,7 @@ Generated using nucleoapp.com
 }
 .input.-time {
   width: 30%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   text-align: center;
   padding: 8px 8px 8px 16px;
 }
@@ -1712,6 +1806,7 @@ body {
   font-family: "Fira Sans", sans-serif;
   margin: 0;
   font-size: 32px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -1719,6 +1814,7 @@ body {
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -1726,13 +1822,18 @@ body {
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.h3.-center {
+  text-align: center;
+}
 .h4 {
   font-family: "Fira Sans", sans-serif;
   font-size: 20px;
+  line-height: 1.6;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -1762,43 +1863,35 @@ body {
   font-size: 14px;
 }
 .button.-color {
-  width: 200px;
+  padding: 12px 32px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  margin: 20px;
-  height: 55px;
-  text-align: center;
-  border: none;
-  background-size: 300% 100%;
-  border-radius: 50px;
-  transition: all 0.4s ease-in-out;
-}
-.button.-color:hover {
-  background-position: 100% 0;
-  transition: all 0.4s ease-in-out;
-}
-.button.-color:focus {
-  outline: none;
-}
-.button.-color.-blue {
   border: 2px solid #003780;
   color: #003780;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+}
+.button.-color.-blue {
+  background-color: #003780;
+  border: none;
+  color: white;
+}
+.button.-color.-add {
+  font-size: 14px;
+  padding: 8px;
 }
 .button.-color.-green {
-  border: 2px solid #007C21;
-  color: #007C21;
-}
-.button.-small {
-  width: 100px;
-  margin: 8px;
+  background: #007C21;
 }
 .button.-nomargin {
   margin: 0;
 }
-.button.-margintop {
-  margin: 12px 0px 0px 0px;
+.button.-round {
+  border-radius: 25px;
+}
+.button.-right {
+  margin-right: 16px;
 }
 /* --------------------------------
 
@@ -2069,7 +2162,7 @@ Generated using nucleoapp.com
 }
 .input.-time {
   width: 30%;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   text-align: center;
   padding: 8px 8px 8px 16px;
 }
@@ -2220,10 +2313,13 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 28px;
   display: inline-block;
   margin-left: 32px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .title {
-  margin-top: 12px;
+  height: 60px;
 }
 
 .right {
