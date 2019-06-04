@@ -146,8 +146,11 @@ $(document).ready(function(){
             $(".dog_card_bubble_container").remove();
         }
 
-      
-        $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
+        if($('body').is('.members'))
+            $(".my_pet__container .container--full .row .col").append('<div class="dog_card_bubble_container"></div>');
+        else    
+            $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
+
         $(".dog_card_container").children().each(function(){
             $('.dog_card_bubble_container').append('<div class="bubble"></div>');
         });
@@ -186,6 +189,40 @@ $(document).ready(function(){
 
     initSwipe();
 
+    if($('body').is('.members')){
+        $.ajax({
+            method: "GET",
+            url:"src/php/showcase_member.php",
+        })
+        .done(function(result){ 
+            let data = JSON.parse(result);
+            console.log(data);
+            let member;
+
+            if(data.length == 0){
+
+            }else{
+                var x = 0;
+
+                for( let i = 0; i < data.length && x <= 5; i++){
+                    //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
+                    member = '<button class="button view" data-id="'+data[i].ID+'"><div class="friend_widget -small"><img class="avatar avatar -topFriend" src="'+data[i].AVATAR+'"/><p class="friend__username">'+data[i].USERNAME+'</p></div>';
+                    $(".member__filtred .container .row .col .showcase__member").append(member);
+                    x++;
+                }
+
+                $(".view").click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+            
+                    var user = $(this).data("id");
+            
+                    window.location = "profile.php?ID=" + user;
+                });
+            }
+        });
+    }
+
     $(document).on('input', '#slider', function() {
         $('#slider_value').html( $(this).val() + " km" );
     });
@@ -205,7 +242,7 @@ $(document).ready(function(){
         .done(function(result){ 
         
             let data = JSON.parse(result);
-            console.log(data);
+            //console.log(data);
             let member;
 
             if(data.length == 0){
@@ -225,9 +262,8 @@ $(document).ready(function(){
 
                 $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
                 
-
                 for( let i = 0; i < data.length; i++){
-                    member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
+                    member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
                     $(".member__filtred .container .row .col .member_widget_container").append(member);
                 }
 
@@ -238,6 +274,28 @@ $(document).ready(function(){
                     var user = $(this).data("id");
             
                     window.location = "profile.php?ID=" + user;
+                });
+
+                $(".test").click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+            
+                    var user = $(this).data("id");
+                    var container = $(this);
+                    console.log($(this));
+
+                    $.ajax({
+                        method: "GET",
+                        url:"src/php/simple_profile.php?ID="+user,
+                    })
+                    .done(function(result){ 
+                        console.log(result);
+                        container.append(result);
+                        let height = container.children().eq(3).height();
+                        console.log(container.children());
+                        container.animate({ height: height + 100 }, "slow");
+                        initSwipe();
+                    });
                 });
             }
 
@@ -250,6 +308,7 @@ $(document).ready(function(){
             setTimeout(function(){
                 $(".members__handler__container").css('display','none'); 
                 $("body").css('overflow','auto');
+                $(".showcase__member").css("height","0px");
             }, 1250);
         });
     });
@@ -451,7 +510,88 @@ $(document).ready(function(){
             let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
             $('.dog_handler_container').css('top',position_popup);
             $('.dog_handler_container').animate({"opacity": 1}, "normal");
+
+            $('#addDog').click(function(){
+                if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
+                    if($('.dog_name').last().text() == "Nom")
+                        $('.dog_name').last().addClass('error');
+                    if($('#breed').val() == null)
+                        $('#breed').addClass("-error");
+                }else{
+                    var uploadfiles = document.querySelector('#uploadfiles');
+
+                    let name = $('.dog_name').last().text();
+                    let breed = $('#breed').val();
+                    let age = $('#age').val();
+                    let sexe = $('#sexe').val();
+                    let image;
+
+                    if (uploadfiles.files.length > 0){
+                        image = uploadfiles.files[0].name;
+                    }else{
+                        image = "none";
+                    }
+
+                    //console.log(image);
+
+                    $.ajax({
+                        method: "GET",
+                        url:"src/php/addDog.php",
+                        data:{
+                            name:name,
+                            breed:breed,
+                            age:age,
+                            sexe:sexe,
+                            image:image
+                        },
+                    })
+                    .done(function(result){ 
+                        //console.log(result);
+                        var files = uploadfiles.files;
+                        for(var i=0; i<files.length; i++){
+                            uploadFile(uploadfiles.files[i],name);
+                        }
+        
+                        setTimeout(function(){
+                            $('.dog_handler').animate({"opacity": 0}, "normal"); 
+                        }, 750);
+
+                        setTimeout(function(){
+                            $('.dog_handler').remove();
+                            $(document).off();
+                            $(document.body).css('overflow','scroll');
+                        }, 1250);
+
+                        document.location.reload(true);
+
+                    });
+                }
+            });
+
+            $('#uploadfiles').on("change", function(){ 
+
+                // var uploadfiles = $('#uploadfiles');
+                // var files = uploadfiles.files;
+                // for(var i=0; i<files.length; i++){
+                //     uploadFile(uploadfiles.files[i]);
+                // }
+                if (gallery.children.length == 0){
+                    var files = this.files;
+                    for(var i=0; i<files.length; i++){
+                        previewImage(this.files[i]);
+                    }
+                }
+
+                $('.label-file').hide();
+                let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
+                $('.dog_handler_container').css('top',position_popup);
+            });
         });
+    });
+
+    $("#discover").click(function(e){
+        e.preventDefault();
+        return window.location.href = "members.php";
     });
 
     $('.label').click(function(){
@@ -484,7 +624,7 @@ $(document).ready(function(){
             url:"src/php/add_event.php",
         })
         .done(function(result){ 
-            console.log(result);
+            //console.log(result);
         });
     });
 
@@ -530,7 +670,7 @@ $(document).ready(function(){
         }
 
         if($('body').is('.walk_detail')){
-            console.log('lol');
+            //console.log('lol');
             $('.submit__button').remove();
             $(window).scrollTop($('.walk__add__dog').offset().top);
         }
@@ -550,7 +690,7 @@ $(document).ready(function(){
             }
         });
 
-        console.log(dogSelected);
+        //console.log(dogSelected);
 
         $.get(
             'src/php/add_event.php',
@@ -587,8 +727,8 @@ $(document).ready(function(){
             url:"src/php/managewalk.php",
         })
         .done(function(result){ 
-            console.log(result);
-            console.log(JSON.parse(result));
+            //console.log(result);
+            //console.log(JSON.parse(result));
             data = JSON.parse(result);
 
             //savoir le jour
@@ -632,7 +772,7 @@ $(document).ready(function(){
                 else
                 $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
 
-                console.log(data.length);
+                //console.log(data.length);
 
                 $('.content_container .container .row .col').append('<div class="walk__container"></div>');
             
@@ -663,28 +803,28 @@ $(document).ready(function(){
             }, 1250);
 
             $('.get_to_walk').click(function(){
-                console.log('lol');
+                //console.log('lol');
                 window.location = "walk_detail?ID="+$(this).data('id');
             });
         });
     });
 
     $('#validate__sign').click(function(e){
-        console.log('lol');
+        //console.log('lol');
 
         let dogSelected = [];
         let id_event = $('#validate__sign').data('id'); 
-        console.log(id_event);
+        //console.log(id_event);
         let x = 0;
 
         $('.dog_card').each(function(){
-            console.log('bite');
+            //console.log('bite');
             if($(this).hasClass('-active')){
                 dogSelected.push($(this).data('id'));
             }
         });
 
-        console.log(dogSelected);
+        //console.log(dogSelected);
 
         if(dogSelected.length > 0){
             $.ajax({
@@ -696,7 +836,7 @@ $(document).ready(function(){
                 url:"src/php/joinwalk.php",
             })
             .done(function(result){ 
-                console.log(result);
+                //console.log(result);
                 if (result == "success")  
                     document.location.reload(true);
             });
@@ -707,15 +847,84 @@ $(document).ready(function(){
 $('body').on('click', '[data-editable]', function(){
   
     var $el = $(this);
+    let value = $(this).html();
                 
-    var $input = $('<input type="number"/>').val( $el.text() );
+    var $input = $('<input />').val( $el.text() );
+    //console.log(value);
     $el.replaceWith( $input );
     
     var save = function(){
-      var $p = $('<p data-editable />').text( $input.val() );
-      $input.replaceWith( $p );
+        let value = $p
+        var $p = $('<p data-editable class="dog_name"'+ value +'><i class="icon edit icon-ic_edit_48px"></i></p>').text( $input.val() );
+        if ($(this).is(':empty')){
+            $input.replaceWith( $p );
+        }
     };
 
     $input.one('blur', save).focus();
     
 });
+
+function previewImage(file) {
+    var gallery = $('#gallery');
+    var imageType = /image.*/;
+
+    if (!file.type.match(imageType)) {
+        throw "File Type must be an image";
+    }
+
+    var thumb = document.createElement("div");
+    thumb.classList.add('thumbnail');
+
+    var img = document.createElement("img");
+    img.classList.add('dog_img');
+    img.classList.add('-add');
+    img.file = file;
+    thumb.appendChild(img);
+    gallery.html(thumb);
+
+    var reader = new FileReader();
+    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+    reader.readAsDataURL(file);
+
+    galleryButton = document.getElementById("gallery__button");
+    var button = document.createElement("button");
+    button.id = "deleteImage";
+    button.setAttribute('type', 'button');
+    button.classList.add('icon');
+    button.classList.add('close-icon');
+    button.classList.add('-dogAdd');
+    galleryButton.appendChild(button);
+
+    var deleteImg = document.getElementById("deleteImage");
+    deleteImage.addEventListener("click", function(){
+        var gallery = document.getElementById("gallery");
+        var galleryButton = document.getElementById("gallery__button");
+        if (gallery.children.length != 0){
+            gallery.removeChild(gallery.childNodes[0]);
+            galleryButton.removeChild(galleryButton.childNodes[0]);
+        }
+
+        $('.label-file').show();
+        let size = $(window).height();
+        let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
+        $('.dog_handler_container').css('top',position_popup);
+
+
+    });
+}
+
+function uploadFile(file, name){
+    var url = 'src/php/uploadFile.php?name='+name;
+    var name = name;
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData();
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            //console.log(xhr.responseText);
+        }
+    };
+    fd.append("upload_file", file);
+    xhr.send(fd);
+}

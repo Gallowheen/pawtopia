@@ -14,12 +14,20 @@
 }
 
 .header__title{
-    font-size: 28px;
+    font-size: 18px;
     display: inline-block;
-    margin-left : 32px;
+    margin-left : 16px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &.-left{
+        margin-left: 40px;
+    }
 }
 
 .title{
@@ -49,7 +57,7 @@
 .right, .left, .down, .up{
     border: solid white;
     border-width: 0 3px 3px 0;
-    padding: 8px;
+    padding: 6px;
     position: absolute;
-    top: 20px;
+    top: 37.5%;
 }

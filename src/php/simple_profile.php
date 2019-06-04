@@ -1,5 +1,5 @@
 <?php 
-    require_once("src/php/bdd.php");
+    require_once("bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
@@ -11,11 +11,6 @@
             $rows[] = $row;
         }
         return $rows;
-    }
-
-    if(!isset($_SESSION['ID'])){
-        header('Location:index.php');
-        exit;
     }
 
     $user;
@@ -47,46 +42,6 @@
     
     $error = false;
 ?>
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Pawtopia | Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/app.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
-    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
-    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Méta Google -->
-    <meta name="title" content="Pawtopia" />
-    <meta name="description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-
-    <!-- Métas Facebook Opengraph -->
-    <meta property="og:title" content="Pawtopia" />
-    <meta property="og:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta property="og:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta property="og:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    <meta property="og:type" content="website"/>
-
-    <!-- Métas Twitter Card -->
-    <meta name="twitter:title" content="Pawtopia" />
-    <meta name="twitter:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    </head>
-    <?php 
-        include ('src/php/header.php');
-    ?>
-    <body>
         <?php
         if ($error){ ?>
         <div class="error__container">
@@ -100,9 +55,9 @@
         }else{
 
             ?>
-        <div class="content_container">
+        <div class="content_container -small">
             <div class="avatar__container">
-                <div class="container">
+                <div class="container--full">
                     <div class="row">
                         <div class="col">
                             <?php 
@@ -189,7 +144,7 @@
                 </div>
             </div>
             <div class="my_pet__container">
-                <div class="container">
+                <div class="container--full">
                     <div class="row">
                         <div class="col">
                             <!-- DOG VIEWER FUNCTION -->   
@@ -205,7 +160,7 @@
                                         <h3 class="information h3">Ses compagnons (0)</h3>                        
                                     <?php
                                     }else{ ?>
-                                        <h3 class="information h3">Ses compagnons (0)</h3>
+                                        <h3 class="information h3">Mes compagnons (0)</h3>
                                     <?php
                                     }
                                     if(!empty($_GET))
@@ -276,7 +231,7 @@
                 </div>
             </div>
             <div class="friend__container">
-                <div class="container">
+                <div class="container--full">
                     <div class="row">
                         <div class="col">
                             <?php
@@ -421,7 +376,7 @@
                 </div>
             </div>
             <div class="information__container">
-                <div class="container">
+                <div class="container--full">
                     <div class="row">
                         <div class="col">
                             <h3 class="information h3">Informations</h3>
@@ -449,38 +404,10 @@
                     </div>
                 </div>
             </div>
-            <div class="reviews__container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="information h3">Mes reviews</h3>
-                            <!-- REVIEW FUNCTION -->   
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="last_event__container">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h3 class="information h3">Mes derniers événements</h3>
-                            <!-- LAST_EVENT FUNCTION -->   
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <?php
         }
     ?>
-    </body>
     <?php 
-        include('src/php/footer.php');
-    ?>
-    <script src="src/scripts/jquery-3.4.0.min.js"></script>
-    <script src="src/scripts/bootstrap.min.js"></script>
-    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
-    <script src="src/scripts/app.js"></script>
 
-</html>
+    ?>
+

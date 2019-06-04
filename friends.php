@@ -182,7 +182,7 @@
                                     //own profile
                                     if (empty($_GET)){
                                         if($result_friend_mutual->num_rows <= 1){
-                                            echo "<h4 class='h4'>Vous n'avez actuellement aucun ami.</h4>";
+                                            echo "<div class='discover'><button id='discover' class='button -color'>Découvrez nos membres</button></div>";
                                         }else{   
                                             echo '<div class="friend_widget_container">';
                                             $friends_global = [];

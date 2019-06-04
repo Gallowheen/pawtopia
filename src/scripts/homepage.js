@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
-    var login = true;
+    let height = $( window ).height();
+    let resized = false;
+
+    let login = true;
 
     $("#submit").click(function(e){
         e.preventDefault();
@@ -17,7 +20,7 @@ $(document).ready(function(){
                 if(data == 'Success'){
                     return window.location.href = "home.php";
                 }else{
-                    $("#log_error").append("<p>La connexion a echouée</p>"); 
+                    $("#log_error").html("<p>La connexion a echouée</p>"); 
                 }
             },
             'text'
@@ -26,19 +29,31 @@ $(document).ready(function(){
 
     $( window ).resize(function(){
         if($('body').is('.landing')){
-            if ( $('.logo').css('display') == 'none')
-                $('.logo').css('display','block');
-            else
-                $('.logo').css('display','none');
 
-            if ($('.container__action').css('position') == 'absolute'){
-                $('.container__action').css('position','relative'); 
-                $('.container__action').css('padding-top','20px');
-                $('body').css('overflow','auto');  
-            } else {
+            console.log($( window ).height());
+            console.log(height + 50);
+
+            if ( $( window ).height() + 50 < height && resized == false ){
+                if ( $('.logo').css('display') == 'none')
+                    $('.logo').css('display','block');
+                else
+                    $('.logo').css('display','none');
+
+                if ($('.container__action').css('position') == 'absolute'){
+                    $('.container__action').css('position','relative'); 
+                    $('.container__action').css('padding-top','20px');
+                    $('body').css('overflow','auto');  
+                } else {
+                    $('.container__action').css('position','absolute'); 
+                    $('body').css('overflow','hidden');    
+                } 
+                resized = true;
+            }else{
+                resized = false;
+                $('.logo').css('display','block');
                 $('.container__action').css('position','absolute'); 
-                $('body').css('overflow','hidden');    
-            } 
+                $('body').css('overflow','hidden'); 
+            }
         }
     });
 
