@@ -139,11 +139,18 @@
 
                                     foreach ($friends_invite as $friend) :  
 
-                                        //echo "<button class='handle_friend' data-user='$friend'>$friend</button>";
-                                        echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">'; ?>
-                                        <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"
+                                        $query = $link->prepare("SELECT * FROM user WHERE ID = ? ");
+                                        $query->bind_param("i", $friend);
+                                        $query->execute();
+                                    
+                                        $result = $query->get_result(); 
+                                        $row = $result->fetch_assoc();
+            
+                                        echo '<div data-id="'.$row['ID'].'" class="view friend_widget">'; ?>
+                                        <img class="avatar -friendlist" src="<?php echo $row['AVATAR']?>">
                                         <?php
-                                        echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';
+                                        echo '<span class="friend_name">'.$row['USERNAME'].'</span>';
+                                        echo '<div class="button__handler"><button id="accept" class="button -color -green -lowpadding" data-user="'.$row['ID'].'">Accepter</button><button id="refuse" class="button -color -red -lowpadding -noBorder" data-user="'.$row['ID'].'">Refuser</button></div>';
                                         echo '</div>';  
                                     endforeach;
                                     echo '</div>';

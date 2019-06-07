@@ -3,6 +3,7 @@ $(document).ready(function(){
     // CREATE YES BUTTON
     $("#accept").click(function(e){
         e.preventDefault();
+        e.stopPropagation();
         var user = $(this).data("user");
     
         $.ajax({
@@ -11,13 +12,13 @@ $(document).ready(function(){
             url:"src/php/accept_friend.php",
         })
         .done(function(result){ 
-
+            document.location.reload(true);
         });
     });
     // CREAT NO BUTTON
     $("#refuse").click(function(e){
         e.preventDefault();
-
+        e.stopPropagation();
         var user = $(this).data("user");
     
         $.ajax({
@@ -26,13 +27,14 @@ $(document).ready(function(){
             url:"src/php/refuse_friend.php",
         })
         .done(function(result){ 
-            
+            document.location.reload(true);
         });
     });
 
     $(".view").click(function(e){
         e.preventDefault();
         e.stopPropagation();
+        console.log(e);
 
         var user = $(this).data("id");
 
@@ -365,7 +367,6 @@ $(document).ready(function(){
     })
 
     $('.friend_delete').click(function(e){
-
         e.preventDefault();
         e.stopPropagation();
         //On récupère l'ID de l'ami
@@ -689,8 +690,8 @@ $(document).ready(function(){
             mois[10] = "Novembre";
             mois[11] = "Décembre";
 
-            if($('.walk__container'))
-                    $('.walk__container').remove();
+            if($('.walk__container__result'))
+                $('.walk__container__result').remove();
 
             if($('.tag_container'))
                 $('.tag_container').remove();
@@ -707,7 +708,7 @@ $(document).ready(function(){
 
                 //console.log(data.length);
 
-                $('.content_container .container .row .col').append('<div class="walk__container"></div>');
+                $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
             
                 for( let i = 0; i < data.length; i++){
                     let date = new Date(data[i]['DATE_START']);
@@ -717,8 +718,8 @@ $(document).ready(function(){
                     let month = mois[date.getMonth()];
                     let dayNumber = date.getDate();
 
-                    let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span>'+'<span class="walk__name">'+data[i]['WALK']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">Durée : '+data[i]['LENGTH']+' heures</span></div><div class="town__container"><span class="">'+data[i]['town_name']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="location__container"><span class="">'+data[i]['LOCATION']+'</span></div><div class="button__container"><button class="button -color -blue -round get_to_walk" data-id='+data[i]['ID']+'>Voir plus</button></div>';
-                    $('.walk__container').append('<div class="walk__card">'+walk+'</div>');
+                    let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['town_name']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                    $('.walk__container__result').append('<div class="walk__card test">'+walk+'</div>');
                 }
             }else{
                 $('.content_container .container .row .col').append('<div class="walk__noresult">Aucun resultat pour la recherche</div>');
@@ -733,6 +734,10 @@ $(document).ready(function(){
             setTimeout(function(){
                 $(".walk__handler__container").css('display','none'); 
                 $("body").css('overflow','auto');
+
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $(".walk__container__result").offset().top
+                }, 500);
             }, 1250);
 
             $('.get_to_walk').click(function(){
@@ -775,6 +780,78 @@ $(document).ready(function(){
             });
         }
     });
+
+    if($('body').is('.walk') ||  $('body').is('.home')){
+        $.ajax({
+            method: "GET",
+            url:"src/php/get_user_walk.php",
+        })
+        .done(function(result){ 
+            console.log(result);
+
+            data = JSON.parse(result);
+
+            //savoir le jour
+            var jour = new Array(7);
+            jour[0] = "Lundi";
+            jour[1] = "Mardi";
+            jour[2] = "Mercredi";
+            jour[3] = "Jeudi";
+            jour[4] = "Vendredi";
+            jour[5] = "Samedi";
+            jour[6] = "Dimanche";
+
+            //savoir le mois
+            var mois = new Array(12);
+            mois[0] = "Janvier";
+            mois[1] = "Février";
+            mois[2] = "Mars";
+            mois[3] = "Avril";
+            mois[4] = "Mai";
+            mois[5] = "Juin";
+            mois[6] = "Juillet";
+            mois[7] = "Août";
+            mois[8] = "Septembre";
+            mois[9] = "Octobre";
+            mois[10] = "Novembre";
+            mois[11] = "Décembre";
+            
+            if (data.length >= 1){
+
+                //console.log(data.length);
+
+                $('.content_container .container .row .col .user_walk').append('<div class="walk__container"></div>');
+            
+                for( let i = 0; i < data.length; i++){
+                    let date = new Date(data[i]['DATE_START']);
+                    let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
+                    let hour = hourSplit[0] + ":" + hourSplit[1];
+                    let day = jour[date.getDay()];
+                    let month = mois[date.getMonth()];
+                    let dayNumber = date.getDate();
+
+                    let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['town_name']+'</span></div><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                    $('.walk__container').append('<div class="walk__card test">'+walk+'</div>');
+                }
+
+                $('.get_to_walk').click(function(){
+                    //console.log('lol');
+                    window.location = "walk_detail?ID="+$(this).data('id');
+                });
+
+                if (data.length > 1){
+                    $('.content_container .container .row .col .user_walk').css({
+                        "max-height": "220px",
+                        "overflow" : "scroll"
+                    })
+                }
+
+
+            }else{
+                $('.content_container .container .row .col .user_walk').html("<p>Vous n'êtes inscrit à aucune balades</p>");
+            }
+        });
+    }
 });
 
 $('body').on('click', '[data-editable]', function(){

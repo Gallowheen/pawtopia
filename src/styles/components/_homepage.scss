@@ -306,6 +306,10 @@
   }
 }
 
+.friend_pending{
+  margin-bottom: 16px;
+}
+
 .friend__username{
   margin: 8px 0px;
   white-space: nowrap;
@@ -491,6 +495,7 @@
   width: 90%;
   margin-left: 5%;
 }
+
 
 .dog_handler_button_container, .friend_handler_button_container{
   display: flex;
@@ -730,6 +735,21 @@
   }
 }
 
+.button__handler{
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  button{
+    font-size: 12px !important;
+
+    &:first-child{
+      margin-right: 8px;
+    }
+  }
+}
+
 .more__friend{
   text-align: center;
   margin-top: 24px;
@@ -933,11 +953,35 @@
   background: white;
   box-shadow: 1px 1px 9px #00000052;
   margin-bottom: 16px;
-  border-bottom : 2px solid #0067B0;
+  border : 2px solid #0067b030;
 
   &:last-child{
     margin-bottom: 0px;
   }
+}
+
+.name__container{
+  font-size: 20px;
+  font-weight: bold;
+  color : #0067B0;
+  margin-bottom: 16px;
+}
+
+.town__container{
+  .icon{
+    color: #0077c0;
+    font-size: 28px;
+    transform: translateY(20%);
+    margin-right: 16px;
+  }
+}
+
+.date__container{
+  font-size: 16px;
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+  flex-wrap: wrap;
 }
 
 .button__container{
@@ -953,17 +997,8 @@
   position: relative;
 }
 
-.walk__name{
-  position: absolute;
-  right: 0;
-}
-
 .informations{
   margin-bottom: 24px;
-}
-
-.chiens, .master{
-
 }
 
 .chien__container, .master__container{
@@ -975,4 +1010,30 @@
 
 .chien__container{
   margin-bottom: 32px;
+}
+
+.user_walk{
+  //margin-bottom: 32px;
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(73,129,189, .5);
+  } 
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-scrollbar:vertical {
+    width: 11px;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: 11px;
+  }
+
+  .walk__card {
+    box-shadow: none;
+  }
 }

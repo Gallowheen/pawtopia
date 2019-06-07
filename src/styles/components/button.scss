@@ -91,12 +91,31 @@
       }
 
       &.-green {
-        background: #007C21;
+        color: #007C21;
+        border: 1px solid #007c21;
+        background: transparent;
+      }
+
+      &.-red{
+        background : #D73C2C;
+        color: white;
+      }
+
+      &.-noBorder{
+        border: none;
+      }
+
+      &.-walk{
+        padding: 8px 16px;
       }
     }
 
     &.-nomargin{
       margin: 0;
+    }
+
+    &.-lowpadding{
+      padding: 4px;
     }
 
     &.-round{

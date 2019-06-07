@@ -46,15 +46,22 @@
     <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
     <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
   </head>
-  <body> 
+  <body class="home"> 
     <?php 
       include ('src/php/header.php');
     ?>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class=content_container>
-            <h3 class="information -space h3">Demandes d'amis</h3>
+    <div class=content_container>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="statuts">
+              <i class="icon icon__friend icon-ic_people_48px"></i>
+              <i class="icon icon__friend icon-email-84"></i>
+            </div>
+            <h3 class="h3 -title">Vos balades à venir</h3>
+              <div class="user_walk">
+                  
+              </div>
           </div>
         </div>
       </div>

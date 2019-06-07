@@ -6,6 +6,15 @@
 
     $pagename = 'Balades';
 
+    //Function to return table of result
+    function resultToArray($result) {
+        $rows = array();
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     if(!isset($_SESSION['ID'])){
         header('Location:index.php');
         exit;
@@ -58,7 +67,11 @@
                         <div class="input__container -first -right">
                             <button class="button -color -blue -add" id="new_walk">Créer une balade</button>
                         </div>
-                        <h3 class="h3">Aidez nous à trouver votre balade idéale</h3>
+                        <h3 class="h3 -title">Vos balades à venir</h3>
+                        <div class="user_walk">
+                            
+                        </div>
+                        <h3 class="h3 -title">Trouvez votre balade idéale</h3>
                         <div class="find__more">
                             <button class="button -color" id="filter">Trouver votre balade</button>
                         </div>
