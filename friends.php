@@ -135,9 +135,18 @@
                                         }   
                                     endforeach;
 
-                                    foreach ($friends_invite as $friend) :           
-                                        echo "<button class='handle_friend' data-user='$friend'>$friend</button>";
+                                    echo '<div class="friend_widget_container">';
+
+                                    foreach ($friends_invite as $friend) :  
+
+                                        //echo "<button class='handle_friend' data-user='$friend'>$friend</button>";
+                                        echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">'; ?>
+                                        <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"
+                                        <?php
+                                        echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';
+                                        echo '</div>';  
                                     endforeach;
+                                    echo '</div>';
                                 }
                             }
                             ?>
@@ -210,7 +219,7 @@
 
                                             foreach ($newArray as $friend) :
                                                 echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';?>
-                                                <img class="avatar avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
+                                                <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
                                                 echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';?>
                                                 <button data-friend=<?php echo '"'.$friend["ID"].'"' ?> class="friend_delete icon close-icon -friendlist"></button>
@@ -263,7 +272,7 @@
 
                                             foreach ($newArray as $friend) :
                                                 echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';?>
-                                                <img class="avatar avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
+                                                <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
                                                 echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';
                                                 echo '</div>';  
@@ -276,16 +285,6 @@
                             ?>   
                         </div>
                     </div>   
-                </div>
-            </div>
-            <div class="friends__handler__container">
-                <div class="friends__handler">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,129 +1,33 @@
 $(document).ready(function(){ 
 
-    $(".handle_friend").click(function(e){
+    // CREATE YES BUTTON
+    $("#accept").click(function(e){
+        e.preventDefault();
+        var user = $(this).data("user");
+    
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/accept_friend.php",
+        })
+        .done(function(result){ 
+
+        });
+    });
+    // CREAT NO BUTTON
+    $("#refuse").click(function(e){
         e.preventDefault();
 
-        $(document).mouseup(function (e){
-            if (!$('.friends__handler').find("*").is(e.target) && !$('.friends__handler').is(e.target)){
-                $(".friends__handler__container").css('background','transparent'); 
-
-                setTimeout(function(){
-                    $(".friends__handler__container").css('transform','translateY(100%)'); 
-                    $("body").css('overflow','auto');
-                }, 1000);
-
-                setTimeout(function(){
-                    $(".friends__handler__container").css('display','none');
-                }, 1500);
-                $(document).off();
-            }
-        });
-
-            var user = $(this).data("user");
-        
-			$.ajax({
-				method: "GET",
-				data:{ID:user},
-				url:"src/php/print_friend_request.php",
-			})
-			.done(function(result){ 
-                $("body").css('overflow','hidden');
-                $(".friends__handler__container").css('display','block');
-
-                setTimeout(function(){
-                    $(".friends__handler__container").css('transform','translateY(0%)'); 
-                }, 500);
-
-                setTimeout(function(){
-                    $(".friends__handler__container").css('background','#00000024'); 
-                }, 1500);
-                           
-                $(".friends__handler .container .row .col").html(result);
-
-
-                $('.friends__handler .avatar').click(function(){
-
-                    let user = $(this).data('id');
-
-                    window.location = "profile.php?ID=" + user;
-                });
-                // CREATE YES BUTTON
-                $("#accept").click(function(e){
-                    e.preventDefault();
-                    var user = $(this).data("user");
-                
-                    $.ajax({
-                        method: "GET",
-                        data:{ID:user},
-                        url:"src/php/accept_friend.php",
-                    })
-                    .done(function(result){ 
-
-                        let data = JSON.parse(result);
-
-                        //On vérifie que la demande soit acceptée
-                        if (data[0] === "success"){
-                            $('.result').append('Vous êtes maintenant amis');
-
-                            setTimeout(function(){
-                                $(".friends__handler__container").css('background','transparent'); 
-                            }, 500);
-
-                            setTimeout(function(){
-                                $(".friends__handler__container").css('transform','translateY(100%)'); 
-                                $("body").css('overflow','auto');
-                            }, 2000);
-
-                            setTimeout(function(){
-                                $(".friends__handler__container").css('display','none');
-                                $('.handle_friend[data-user="'+user+'"]').remove()
-                            }, 2500);
-  
-                        }else{
-                            $('.result').append('Une erreur est survenue, veuillez réessayer plus tard');
-                        }
-
-                        //On crée 'facticement' l'entrée de l'ami dans la liste
-                        $('.friend_widget_container').append('<div class="friend_widget"><img class="avatar avatar--small" src="'+data[1].AVATAR+'"/><p>'+data[1].USERNAME+'</p></div>');
-                        //On ajoute +1 au nombre d'ami
-                        $('.information').html('Mes amis (' + $('.friend_widget_container div').length + ')')   
-                        //On ajoute le message : pas de demande en attente si nécéssaire
-                        if ($('.friend_pending div p').length === 0){
-                            setTimeout(function(){
-                                $('.friend_pending .col-12').append('<p>Aucune demande en attente</p>');
-                            }, 2500);
-                        }
-                    });
-                });
-                // CREAT NO BUTTON
-                $("#refuse").click(function(e){
-                    e.preventDefault();
+        var user = $(this).data("user");
+    
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/refuse_friend.php",
+        })
+        .done(function(result){ 
             
-                    var user = $(this).data("user");
-                
-                    $.ajax({
-                        method: "GET",
-                        data:{ID:user},
-                        url:"src/php/refuse_friend.php",
-                    })
-                    .done(function(result){ 
-                        setTimeout(function(){
-                            $(".friends__handler__container").css('background','transparent'); 
-                        }, 500);
-
-                        setTimeout(function(){
-                            $(".friends__handler__container").css('transform','translateY(100%)'); 
-                            $("body").css('overflow','auto');
-                        }, 2000);
-
-                        setTimeout(function(){
-                            $(".friends__handler__container").css('display','none');
-                            $('.handle_friend[data-user="'+user+'"]').remove();
-                            $('.friend_pending .col-12').append('<p>Aucune demande en attente</p>');
-                        }, 2500);
-                    });
-                });
-			});
+        });
     });
 
     $(".view").click(function(e){
@@ -206,7 +110,7 @@ $(document).ready(function(){
 
                 for( let i = 0; i < data.length && x <= 5; i++){
                     //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
-                    member = '<button class="button view" data-id="'+data[i].ID+'"><div class="friend_widget -small"><img class="avatar avatar -topFriend" src="'+data[i].AVATAR+'"/><p class="friend__username">'+data[i].USERNAME+'</p></div>';
+                    member = '<button class="button view" data-id="'+data[i].ID+'"><div class="friend_widget -small"><img class="avatar -topFriend" src="'+data[i].AVATAR+'"/><p class="friend__username">'+data[i].USERNAME+'</p></div>';
                     $(".member__filtred .container .row .col .showcase__member").append(member);
                     x++;
                 }
@@ -263,18 +167,10 @@ $(document).ready(function(){
                 $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
                 
                 for( let i = 0; i < data.length; i++){
-                    member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
+                    member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+data[i].AVATAR+'"><div class="container__info"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div></div></div>'; 
                     $(".member__filtred .container .row .col .member_widget_container").append(member);
                 }
-
-                $(".view").click(function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
-            
-                    var user = $(this).data("id");
-            
-                    window.location = "profile.php?ID=" + user;
-                });
+ 
 
                 $(".test").click(function(e){
                     e.preventDefault();
@@ -282,19 +178,56 @@ $(document).ready(function(){
             
                     var user = $(this).data("id");
                     var container = $(this);
-                    console.log($(this));
 
                     $.ajax({
                         method: "GET",
                         url:"src/php/simple_profile.php?ID="+user,
                     })
                     .done(function(result){ 
-                        console.log(result);
-                        container.append(result);
-                        let height = container.children().eq(3).height();
-                        console.log(container.children());
-                        container.animate({ height: height + 100 }, "slow");
-                        initSwipe();
+
+                        if ( container.hasClass('expanded')){
+                            
+                        }else{
+                            container.append(result);
+                            container.addClass('expanded');
+                            let tap = container.children().eq(1).children().eq(2);
+
+                            let height = container.children().eq(1).height();
+                            container.animate({ height: height + 75}, "fast");
+                            setTimeout(function(){
+                                tap.animate({opacity : 1},"slow");
+                            },250);
+                            container.children().eq(0).hide();
+                            initSwipe();
+
+                            $(".view").click(function(e){
+                                e.preventDefault();
+                                e.stopPropagation();
+                        
+                                var user = $(this).data("id");
+                        
+                                window.location = "profile.php?ID=" + user;
+                            });
+                        }   
+                        
+                        $('.tapToClose').click(function(e){  
+                            e.stopPropagation();
+
+                            var container = $(this).parent().parent();
+                            var child = $(this).parent().parent().eq(0).children().eq(1);
+                            $(this).parent().parent().removeClass('expanded');
+                            $(this).parent().parent().children().eq(0).css("display","block"); 
+                            $(this).parent().parent().css("height", "75px");
+                            $([document.documentElement, document.body]).animate({
+                                scrollTop: container.offset().top - 100
+                            }, 1000);
+                            console.log(child);
+                            child.animate({opacity : 0},"slow");
+
+                            setTimeout(function(){
+                                child.remove();     
+                            },250);   
+                        });
                     });
                 });
             }

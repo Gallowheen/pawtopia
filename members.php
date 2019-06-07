@@ -51,7 +51,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h3 class="h3">Trouvez votre partenaire de balade idéale</h3>
+                            <h3 class="h3 -title">Trouvez votre partenaire de balade idéale</h3>
                             <div class="showcase__member"></div>
                             <div class="find__more">
                                 <button class="button -color" id="filter">Découvrez nos membres</button>
