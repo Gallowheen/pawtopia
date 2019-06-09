@@ -184,6 +184,40 @@
 }
 
 
+// HOME//
+
+.statuts{
+  text-align: right;
+
+  a{
+    color : #0067B0;
+  }
+
+  .status__icon{
+    font-size: 36px;
+    color : #0067B0;
+    display: inline-block;
+    position: relative;
+
+    &:first-child{
+      margin-right: 16px;
+    }
+  }
+
+  .ping{
+    font-size: 12px;
+    background: #D73C2C;
+    border-radius: 50%;
+    color: white;
+    display: block;
+    width: 18px;
+    text-align: center;
+    height: 18px;
+    position: absolute;
+    right: -8px;
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 .title{

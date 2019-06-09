@@ -21,6 +21,7 @@ $icon-ic_map_48px: unicode(ea0e);
 $icon-ic_pets_48px: unicode(ea0f);
 $icon-ic_check_48px: unicode(ea10);
 $icon-email-84: unicode(ea11);
+$icon-ic_sms_48px: unicode(ea12);
 
 .icon-home-52::before {
   content: $icon-home-52;
@@ -84,5 +85,9 @@ $icon-email-84: unicode(ea11);
 
 .icon-email-84::before {
   content: $icon-email-84;
+}
+
+.icon-ic_sms_48px::before {
+  content: $icon-ic_sms_48px;
 }
 

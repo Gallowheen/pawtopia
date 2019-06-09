@@ -43,6 +43,9 @@ body {
   font-size: 20px;
   margin-top: 16px;
 }
+.h3.-space {
+  margin-bottom: 24px;
+}
 .h4 {
   font-family: "Fira Sans", sans-serif;
   font-size: 20px;
@@ -360,6 +363,10 @@ Generated using nucleoapp.com
 
 .icon-email-84::before {
   content: "\ea11";
+}
+
+.icon-ic_sms_48px::before {
+  content: "\ea12";
 }
 
 .input {
@@ -711,6 +718,34 @@ input[type=range]::-webkit-slider-runnable-track {
     display: block;
   }
 }
+.statuts {
+  text-align: right;
+}
+.statuts a {
+  color: #0067B0;
+}
+.statuts .status__icon {
+  font-size: 36px;
+  color: #0067B0;
+  display: inline-block;
+  position: relative;
+}
+.statuts .status__icon:first-child {
+  margin-right: 16px;
+}
+.statuts .ping {
+  font-size: 12px;
+  background: #D73C2C;
+  border-radius: 50%;
+  color: white;
+  display: block;
+  width: 18px;
+  text-align: center;
+  height: 18px;
+  position: absolute;
+  right: -8px;
+}
+
 .title .home {
   font-size: 32px;
   top: 50%;
@@ -1554,6 +1589,9 @@ body {
   font-size: 20px;
   margin-top: 16px;
 }
+.h3.-space {
+  margin-bottom: 24px;
+}
 .h4 {
   font-family: "Fira Sans", sans-serif;
   font-size: 20px;
@@ -1871,6 +1909,10 @@ Generated using nucleoapp.com
 
 .icon-email-84::before {
   content: "\ea11";
+}
+
+.icon-ic_sms_48px::before {
+  content: "\ea12";
 }
 
 .input {
@@ -2066,7 +2108,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .nav_button_group {
-  width: 25%;
+  width: 20%;
   text-align: center;
   padding: 6px;
 }
@@ -2139,6 +2181,9 @@ body {
 .h3.-small {
   font-size: 20px;
   margin-top: 16px;
+}
+.h3.-space {
+  margin-bottom: 24px;
 }
 .h4 {
   font-family: "Fira Sans", sans-serif;
@@ -2457,6 +2502,10 @@ Generated using nucleoapp.com
 
 .icon-email-84::before {
   content: "\ea11";
+}
+
+.icon-ic_sms_48px::before {
+  content: "\ea12";
 }
 
 .input {

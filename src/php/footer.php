@@ -25,6 +25,10 @@
                     <a class="link_footer" href="walk.php"><i class="icon icon__footer icon-calendar-60"></i></a>
                     <span class="icon__name">Balades</span>
                 </div>
+                <div class="nav_button_group">
+                    <a class="link_footer" href="message.php"><i class="icon icon__footer icon__friend icon-ic_sms_48px"></i></a>
+                    <span class="icon__name">Messages</span>
+                </div>
             </div>
         </div>
     </div>

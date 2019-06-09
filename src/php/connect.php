@@ -19,6 +19,7 @@
     $id = $row['ID'];
     $town = $row['TOWN_ID'];
     $avatar = $row['AVATAR'];
+    $name = $row['USERNAME'];
  
     if( isset($_POST['username']) && isset($_POST['password']) ){
  

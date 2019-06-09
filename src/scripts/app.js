@@ -781,7 +781,7 @@ $(document).ready(function(){
         }
     });
 
-    if($('body').is('.walk') ||  $('body').is('.home')){
+    if($('body').is('.walk') || $('body').is('.home')){
         $.ajax({
             method: "GET",
             url:"src/php/get_user_walk.php",
@@ -839,7 +839,7 @@ $(document).ready(function(){
                     window.location = "walk_detail?ID="+$(this).data('id');
                 });
 
-                if (data.length > 1){
+                if (data.length > 1 && $('body').is('.walk') || $('body').is('.home')){
                     $('.content_container .container .row .col .user_walk').css({
                         "max-height": "220px",
                         "overflow" : "scroll"
@@ -851,6 +851,90 @@ $(document).ready(function(){
                 $('.content_container .container .row .col .user_walk').html("<p>Vous n'êtes inscrit à aucune balades</p>");
             }
         });
+    }
+
+    /// MESSAGE
+
+    if($('body').is('.message')){
+
+        $.ajax({
+            method: "GET",
+            url:"src/php/showcase_message.php",
+        })
+        .done(function(result){ 
+            console.log(result);
+            data = JSON.parse(result);
+            console.log(data);
+            let userID = $('body').data('id');
+            let user = [];
+            let userList = [];
+            let banlist = [];
+            let found = false;
+
+            for (i = 0; i < data.length; i++){
+                if (user.length > 0){
+                    let error = false;
+                    let userToAdd;
+                    for (k = 0; k < user.length; k++){            
+                        if (data[i].ID_USER1 == userID){
+                            if(data[i].ID_USER2 == user[k]){
+                                error = true;
+                            }else{
+                                userToAdd = "USER1";
+                            }
+                        }else{
+                            if(data[i].ID_USER1 == user[k]){
+                                error = true;
+                            }else{
+                                userToAdd = "USER2";
+                            }
+                        }
+                    }
+                    if(!error){
+                        if(userToAdd == "USER1"){
+                            user.push(data[i].ID_USER2);
+                        }else{
+                            user.push(data[i].ID_USER1);
+                        }
+                    }
+                }else{
+                    if (data[i].ID_USER1 != userID) 
+                        user.push(data[i].ID_USER1);
+                    else
+                        user.push(data[i].ID_USER2);
+                }
+            }
+
+            console.log(user);
+
+            for (i = 0; i < data.length; i++){   
+                for(k = 0; k < user.length; k++){ 
+                    found = false;             
+                    if (banlist.length > 0){
+                        if (!banlist.includes(user[k])){
+                            if (data[i].ID_USER1 == user[k] ){
+                                userList.push(data[i]);
+                                found = true;
+                            }
+                            if (data[i].ID_USER2 == user[k] ){
+                                userList.push(data[i]);
+                                found = true;
+                            }
+                        }   
+                    }else{
+                        if (data[i].ID_USER1 == user[k])
+                            userList.push(data[i]);   
+                        if (data[i].ID_USER2 == user[k])
+                            userList.push(data[i]);
+                        banlist.push(user[k]);
+                    }
+                    if (found)
+                        banlist.push(user[k]); 
+                }
+            }
+
+            console.log(userList);
+        })
     }
 });
 
