@@ -1017,7 +1017,7 @@ $(document).ready(function(){
                 },10);
 
                 
-                let realHeight  = $('.messages')[0].scrollHeight;
+                let realHeight  = $('.messages').scrollTop() + $('.message__body').height();
 
                 setTimeout(function(){
                     $('.messages').animate({
