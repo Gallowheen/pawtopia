@@ -46,6 +46,16 @@ $(document).ready(function(){
         window.location = "profile.php?ID=" + user;
     });
 
+    $(".edit-profile").click(function(e){
+        $.ajax({
+            method: "POST",
+            url:"src/php/edit_profile_view"
+        })
+        .done(function(result) {
+            $(".information_editable").html(result);
+        });
+    });
+
     function initSwipe(){
         //var x = nombre de swipe
         var x = 0;

@@ -424,7 +424,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <h3 class="information h3">Informations</h3>
+                            <?php
+                                $editBouton = "";
+                                if(empty($_GET))
+                                    $editBouton = "<button class='button -color edit-profile'>Éditer</button>";
+                            ?>
+                            <h3 class="information h3">Informations <?= $editBouton ?> </h3>
+                            <div class="information_editable">
                                 <?php
                                     $town_check_query = $link->prepare("SELECT NAME FROM towns WHERE ID = ? ");
 
@@ -444,7 +450,8 @@
                                         echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>L'utilisateur n'a pas encore de biographie</p></div>";
                                     if ( $row['WALK'])
                                         echo"<div class='information_group'><p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p></div>";
-                            ?>
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>

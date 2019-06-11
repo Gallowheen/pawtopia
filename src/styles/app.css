@@ -122,6 +122,11 @@ body {
 .button.-color.-walk {
   padding: 8px 16px;
 }
+.button.edit-profile {
+  float: right;
+  font-size: 16px;
+  padding: 4px 8px 4px 8px;
+}
 .button.-nomargin {
   margin: 0;
 }
@@ -1795,6 +1800,11 @@ body {
 .button.-color.-walk {
   padding: 8px 16px;
 }
+.button.edit-profile {
+  float: right;
+  font-size: 16px;
+  padding: 4px 8px 4px 8px;
+}
 .button.-nomargin {
   margin: 0;
 }
@@ -2399,6 +2409,11 @@ body {
 }
 .button.-color.-walk {
   padding: 8px 16px;
+}
+.button.edit-profile {
+  float: right;
+  font-size: 16px;
+  padding: 4px 8px 4px 8px;
 }
 .button.-nomargin {
   margin: 0;
