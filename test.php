@@ -89,5 +89,6 @@
   </body>
   <script src="src/scripts/jquery-3.4.0.min.js"></script>
   <script src="src/scripts/bootstrap.min.js"></script>
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
   <script src="src/scripts/app.js"></script>
 </html>

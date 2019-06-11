@@ -83,6 +83,19 @@
     padding: 8px;
     width: 90%;
     margin-left: 24px;
+
+    &::placeholder
+    {
+      color: black;
+      opacity: 1;
+    }
+  }
+
+  &.-message{
+    position: fixed;
+    bottom: 76px;
+    margin-left: 4px;
+    width: 80%;
   }
 
   &.-time{

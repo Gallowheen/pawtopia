@@ -1,5 +1,10 @@
 $(document).ready(function(){ 
 
+    var pubnub = new PubNub({
+	    subscribeKey: 'sub-c-1ef083d0-dc62-11e8-911d-e217929ad048', // always required
+	    publishKey: 'pub-c-07c00e21-e522-43ef-965d-f81e60f7a47f' // only required if publishing
+	});
+
     // CREATE YES BUTTON
     $("#accept").click(function(e){
         e.preventDefault();
@@ -787,9 +792,6 @@ $(document).ready(function(){
             url:"src/php/get_user_walk.php",
         })
         .done(function(result){ 
-            console.log(result);
-
-            data = JSON.parse(result);
 
             //savoir le jour
             var jour = new Array(7);
@@ -816,7 +818,9 @@ $(document).ready(function(){
             mois[10] = "Novembre";
             mois[11] = "Décembre";
             
-            if (data.length >= 1){
+            if (result.length >= 1){
+
+                data = JSON.parse(result);
 
                 //console.log(data.length);
 
@@ -862,79 +866,220 @@ $(document).ready(function(){
             url:"src/php/showcase_message.php",
         })
         .done(function(result){ 
-            console.log(result);
-            data = JSON.parse(result);
-            console.log(data);
+            //console.log(result);
+            if(result != "noMsg")
+                data = JSON.parse(result);
+            //console.log(data);
             let userID = $('body').data('id');
             let user = [];
             let userList = [];
             let banlist = [];
             let found = false;
 
-            for (i = 0; i < data.length; i++){
-                if (user.length > 0){
-                    let error = false;
-                    let userToAdd;
-                    for (k = 0; k < user.length; k++){            
-                        if (data[i].ID_USER1 == userID){
-                            if(data[i].ID_USER2 == user[k]){
-                                error = true;
+            if (typeof data !== 'undefined' && data.length > 0){
+                for (i = 0; i < data.length; i++){
+                    if (user.length > 0){
+                        let error = false;
+                        let userToAdd;
+                        for (k = 0; k < user.length; k++){            
+                            if (data[i].ID_USER1 == userID){
+                                if(data[i].ID_USER2 == user[k]){
+                                    error = true;
+                                }else{
+                                    userToAdd = "USER1";
+                                }
                             }else{
-                                userToAdd = "USER1";
-                            }
-                        }else{
-                            if(data[i].ID_USER1 == user[k]){
-                                error = true;
-                            }else{
-                                userToAdd = "USER2";
+                                if(data[i].ID_USER1 == user[k]){
+                                    error = true;
+                                }else{
+                                    userToAdd = "USER2";
+                                }
                             }
                         }
-                    }
-                    if(!error){
-                        if(userToAdd == "USER1"){
-                            user.push(data[i].ID_USER2);
-                        }else{
-                            user.push(data[i].ID_USER1);
+                        if(!error){
+                            if(userToAdd == "USER1"){
+                                user.push(data[i].ID_USER2);
+                            }else{
+                                user.push(data[i].ID_USER1);
+                            }
                         }
-                    }
-                }else{
-                    if (data[i].ID_USER1 != userID) 
-                        user.push(data[i].ID_USER1);
-                    else
-                        user.push(data[i].ID_USER2);
-                }
-            }
-
-            console.log(user);
-
-            for (i = 0; i < data.length; i++){   
-                for(k = 0; k < user.length; k++){ 
-                    found = false;             
-                    if (banlist.length > 0){
-                        if (!banlist.includes(user[k])){
-                            if (data[i].ID_USER1 == user[k] ){
-                                userList.push(data[i]);
-                                found = true;
-                            }
-                            if (data[i].ID_USER2 == user[k] ){
-                                userList.push(data[i]);
-                                found = true;
-                            }
-                        }   
                     }else{
-                        if (data[i].ID_USER1 == user[k])
-                            userList.push(data[i]);   
-                        if (data[i].ID_USER2 == user[k])
-                            userList.push(data[i]);
-                        banlist.push(user[k]);
+                        if (data[i].ID_USER1 != userID) 
+                            user.push(data[i].ID_USER1);
+                        else
+                            user.push(data[i].ID_USER2);
                     }
-                    if (found)
-                        banlist.push(user[k]); 
                 }
-            }
 
-            console.log(userList);
+                console.log(user);
+
+                for (i = 0; i < data.length; i++){   
+                    for(k = 0; k < user.length; k++){ 
+                        found = false;             
+                        if (banlist.length > 0){
+                            if (!banlist.includes(user[k])){
+                                if (data[i].ID_USER1 == user[k] ){
+                                    userList.push(data[i]);
+                                    found = true;
+                                }
+                                if (data[i].ID_USER2 == user[k] ){
+                                    userList.push(data[i]);
+                                    found = true;
+                                }
+                            }   
+                        }else{
+                            if (data[i].ID_USER1 == user[k])
+                                userList.push(data[i]);   
+                            if (data[i].ID_USER2 == user[k])
+                                userList.push(data[i]);
+                            banlist.push(user[k]);
+                        }
+                        if (found)
+                            banlist.push(user[k]); 
+                    }
+                }
+
+                console.log(userList);
+
+                userList.sort((a, b) => (a.STATUT > b.STATUT) ? -1 : 1);
+                console.log(userList);
+
+                userList.forEach(element => {
+
+                    let ID;
+
+                    if(element.ID_USER1 != $('body').data('id')){
+                        ID = element.ID_USER1;
+                    }
+                    else{
+                        ID = element.ID_USER2;
+                    }
+                    if(element.STATUT == "Unread" && element.ID_USER1 != $('body').data('id'))
+                        member = '<div data-id="'+ID+'" class="toMessage statut-0 friend_widget -message -hidden -unread"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>'; 
+                    else
+                        member = '<div data-id="'+ID+'" class="toMessage statut-1 friend_widget -message -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>'; 
+                    $(".content_container .container .row .col .message__container").append(member);
+                });
+
+                var divElement = $('.content_container .container .row .col .message__container').find('.toMessage');
+                divElement.sort(sortMe);
+
+                function sortMe(a, b) { 
+                    return a.className.match(/statut-(\d)/)[1] - b.className.match(/statut-(\d)/)[1];
+                }
+
+                $('content_container .container .row .col .message__container').html(' ');
+                $('.content_container .container .row .col .message__container').append(divElement);
+
+                $('.toMessage').click(function(){
+
+                    let IDuser = $(this).data('id');
+                    $.ajax({
+                        method: "GET",
+                        data: {ID:IDuser},
+                        url:"src/php/updateMessageStatus.php",
+                    })
+                    .done(function(result){ 
+                        console.log(result);
+                    })
+
+                    setTimeout(function(){
+                        window.location = "getMessage.php?ID=" + IDuser; 
+                    },50);           
+                });
+            }
         })
+    }
+        
+    if($('body').is('.getMessage')){
+
+        var pubnub = new PubNub({
+		    subscribeKey: 'sub-c-1ef083d0-dc62-11e8-911d-e217929ad048', // always required
+		    publishKey: 'pub-c-07c00e21-e522-43ef-965d-f81e60f7a47f' // only required if publishing
+		});
+
+		pubnub.subscribe({
+			channels : ['message'],
+		});
+
+		pubnub.addListener({
+		    message: function(message) {
+                //console.log(message.message);
+                
+                $('.messages').append(message.message);  
+                            
+                setTimeout(function(){
+                    if ($('.messages').children().last().data('id') == $('body').data('me')){
+                        console.log("APRES");
+                        console.log($('.messages').children().last().prev(".message__body"));
+                        $('.messages').children().last().remove();
+                    }
+                },10);
+
+                
+                let realHeight  = $('.messages')[0].scrollHeight;
+
+                setTimeout(function(){
+                    $('.messages').animate({
+                        scrollTop: realHeight
+                    }, 500);
+                },100);
+            
+			}
+		});
+
+        $('body').css('overflow','hidden');
+
+        $('.message__viewer__container').css('height',$(window).height()  - 220+'px');
+        $('.messages').css('height',$(window).height()  - 220+'px');
+        $('.message__viewer__container').css('position','relative');
+
+        let realHeight  = $('.messages')[0].scrollHeight;
+
+        setTimeout(function(){
+            $('.messages').animate({
+                scrollTop: realHeight
+            }, 500);
+        },500);
+
+        $('.sendMessage').click(function(){
+
+            let user2 = $('body').data('id');
+            //console.log(user2);
+            if($('#message').val() != ""){
+                $.ajax({
+                    method: "GET",
+                    data: {ID:user2,MESSAGE:$('#message').val()},
+                    url:"src/php/insertMessage.php",
+                })
+                .done(function(result){ 
+                    //console.log(result);
+                    $.ajax({
+                        method: "GET",
+                        data: {ID:user2},
+                        url:"src/php/getLastMessage.php",
+                    })
+                    .done(function(result){ 
+                        //console.log(result);
+                        setTimeout(function(){
+                            $('.messages').append(result);
+                        },500);
+                        
+                        $('.messages').animate({
+                            scrollTop: realHeight
+                        }, 500);
+
+                        if($('#message').hasClass('-error')){
+                            $('#message').removeClass('-error');
+                        }
+
+                        $('#message').val('');
+                    })
+                })
+            }else{
+                $('#message').addClass('-error');
+            }
+        });
     }
 });
 

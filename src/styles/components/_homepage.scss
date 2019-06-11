@@ -24,7 +24,7 @@
   top: 7.5%;
 
   &.-small{
-    width: 15%;
+    width: 60px;
     right: 50%;
     top: 15%;
     transform: translateX(50%);
@@ -229,7 +229,7 @@
   }
 }
 .content_container{
-  height: calc(100% - 120px);
+  //height: calc(100% - 120px);
   padding-top: 80px;
   margin-bottom: 80px;
 
@@ -237,6 +237,10 @@
     height: auto;
     padding-top: 0px;
     margin-bottom: 0px;
+  }
+
+  &.-message{
+    margin-bottom: 60px
   }
 }
 
@@ -306,6 +310,13 @@
     left: 15px;
     width: 50px;
     margin-top: 0;
+  }
+
+  &.-message{
+    margin-top: 0;
+    height: 32px;
+    width: 32px;
+    margin-right: 16px;
   }
 }
 
@@ -382,6 +393,20 @@
   }
 }
 
+.friend_message{
+  max-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  position : relative; 
+  display : block;
+  transform: translateY(-20%);
+  left: 0px;
+  font-size: 12px;
+}
+
 .information__container{
   margin-top : 32px;
 
@@ -418,6 +443,10 @@
 
   &.-top{
     margin-top : 32px;
+  }
+
+  &.-blue{
+    color: #0067B0;
   }
 }
 
@@ -749,6 +778,10 @@
   border-bottom: 1px solid #0067B0;
   box-shadow: 1px 1px 5px #00000040;
 
+  &.-message{
+    margin-bottom: 16px;
+  }
+
   &.-small{
     height : 100px;
     width : 100px;
@@ -766,6 +799,11 @@
   &.-hidden{
     overflow: hidden;
     transition : .4s all;
+  }
+
+  &.-unread{
+    background: #0067B0;
+    color: white;
   }
 }
 
@@ -869,6 +907,17 @@
   padding: 3px;
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
+
+  &.-right{
+    position: fixed;
+    bottom: 90px;
+    margin-left: 4px;
+    height: 18px;
+    width: 19px;
+    transform: rotate(-45deg);
+    border-color: #003780;
+    right: 15px;
+  }
 }
 
 .range__number{
@@ -1070,4 +1119,70 @@
   .walk__card {
     box-shadow: none;
   }
+}
+
+.message__viewer{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  transform: translateX(100%);
+  transition: 1s all;
+  z-index: 10000;
+  background: white;
+  opacity: 0;
+}
+
+.message__content{
+  margin-top: 8px;
+  padding: 8px 8px 8px 16px;
+  border-radius: 0px 15px 15px 7.5px;
+  background: #0067b0;
+  color: white;
+  font-size: 16px;
+
+  &.-other{
+    background : #003780;
+    margin-top: 0px;
+    padding: 8px 16px 8px 8px;
+    border-radius: 15px 0px 7.5px 15px;
+  }
+}
+
+.message__info{
+  display: flex;
+  color : #003780;
+  font-weight: bold;
+}
+
+.message__date{
+  font-size: 12px;
+  font-weight: bold;
+  text-align: right;
+
+  &.-other{
+    text-align: left;
+  }
+}
+
+.message__body{
+  margin-top: 16px;
+  width: 80%;
+
+  &:first-child{
+    margin-top: 0px;
+  }
+
+  &.-other{
+    margin-left:20%;
+    text-align:right;
+  }
+}
+
+.message__name{
+  margin-top: 4px;
+}
+
+.messages{
+  overflow-y: scroll;
 }

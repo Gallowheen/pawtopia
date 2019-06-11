@@ -117,7 +117,7 @@
                                 //other profile, we don't have to see what's going on on their channel
                             }
                             else{
-                                echo "<h3 class='information -first'>Invitation reçue</h3>";
+                                echo "<h3 class='h3 information -first -blue'>Invitation reçue</h3>";
                                 $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
                                 $query_friend_invite->bind_param("i", $user);
                                 $query_friend_invite->execute();
@@ -182,9 +182,9 @@
 
 
                                 if ((count($row_friends_mutual)-1) < 0){ ?>
-                                    <h3 class="information">Mes amis</h3><?php
+                                    <h3 class="h3 information -blue">Mes amis</h3><?php
                                 }else{?>
-                                        <h3 class="information">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
+                                    <h3 class="h3 information -blue">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
                                 }
                             ?>      
                             <?php
@@ -302,5 +302,6 @@
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
     <script src="src/scripts/bootstrap.min.js"></script>
     <script src="src/scripts/jquery.touchSwipe.min.js"></script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
     <script src="src/scripts/app.js"></script>
 </html>

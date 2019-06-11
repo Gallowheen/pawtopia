@@ -31,40 +31,40 @@
         
     }else{
         $rows = resultToArray($result);   
-    }
 
-    $get_event = array();
-    $valid_event = array();
-    
-    foreach ( $rows as $test ){
+        $get_event = array();
+        $valid_event = array();
+        
+        foreach ( $rows as $test ){
 
-        $query = $link->prepare("SELECT * FROM event WHERE ID = ?");
-        $query->bind_param("i", $test['ID_EVENT']);
-        $query->execute();
+            $query = $link->prepare("SELECT * FROM event WHERE ID = ?");
+            $query->bind_param("i", $test['ID_EVENT']);
+            $query->execute();
 
-        $result = $query->get_result();
-        if($result->num_rows === 0){
-            
-        }else{
-            $rows_event = resultToArray($result);   
+            $result = $query->get_result();
+            if($result->num_rows === 0){
+                
+            }else{
+                $rows_event = resultToArray($result);   
 
-            foreach ($rows_event as $event){
-                array_push($get_event,$event);
+                foreach ($rows_event as $event){
+                    array_push($get_event,$event);
+                }
+            }
+            //var_dump($rows_event);
+        }
+
+        foreach ($get_event as $event){
+            if ($event['DATE_START'] > date("Y-m-d")){
+                array_push($valid_event,$event);
+                // $valid_event[] = $event;
             }
         }
-        //var_dump($rows_event);
-    }
 
-    foreach ($get_event as $event){
-        if ($event['DATE_START'] > date("Y-m-d")){
-            array_push($valid_event,$event);
-            // $valid_event[] = $event;
+        foreach ($valid_event as $cle => $event){
+            $valid_event[$cle]['town_name'] = $town_name;
         }
-    }
 
-    foreach ($valid_event as $cle => $event){
-        $valid_event[$cle]['town_name'] = $town_name;
+        echo json_encode($valid_event);
     }
-
-    echo json_encode($valid_event);
 ?>
