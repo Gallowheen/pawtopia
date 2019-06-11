@@ -1135,17 +1135,19 @@
 
 .message__content{
   margin-top: 8px;
-  padding: 8px 8px 8px 16px;
+  padding: 8px 16px 8px 16px;
   border-radius: 0px 15px 15px 7.5px;
   background: #0067b0;
   color: white;
   font-size: 16px;
+  width: fit-content;
 
   &.-other{
     background : #003780;
     margin-top: 0px;
-    padding: 8px 16px 8px 8px;
+    padding: 8px 16px 8px 16px;
     border-radius: 15px 0px 7.5px 15px;
+    float: right;
   }
 }
 
@@ -1158,7 +1160,8 @@
 .message__date{
   font-size: 12px;
   font-weight: bold;
-  text-align: right;
+  /*text-align: right;*/
+  clear: both;
 
   &.-other{
     text-align: left;
