@@ -61,6 +61,7 @@ body {
   cursor: pointer;
   font-family: "Fira Sans", sans-serif;
   outline: none !important;
+  transition: 1s all;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -896,7 +897,7 @@ input[type=range]::-webkit-slider-runnable-track {
   top: 50%;
   position: absolute;
   transform: translateY(-50%);
-  left: 120px;
+  left: 80px;
 }
 .friend_name.-member {
   position: relative;
@@ -975,6 +976,15 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .information_space.-empty {
   margin-bottom: 24px;
+}
+
+.chat {
+  font-size: 24px;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  right: 45px;
+  color: #003780;
 }
 
 .information_group {
@@ -1610,17 +1620,19 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .message__content {
   margin-top: 8px;
-  padding: 8px 8px 8px 16px;
+  padding: 8px 16px 8px 16px;
   border-radius: 0px 15px 15px 7.5px;
   background: #0067b0;
   color: white;
   font-size: 16px;
+  width: fit-content;
 }
 .message__content.-other {
   background: #003780;
   margin-top: 0px;
-  padding: 8px 16px 8px 8px;
+  padding: 8px 16px 8px 16px;
   border-radius: 15px 0px 7.5px 15px;
+  float: right;
 }
 
 .message__info {
@@ -1632,7 +1644,8 @@ input[type=range]::-webkit-slider-runnable-track {
 .message__date {
   font-size: 12px;
   font-weight: bold;
-  text-align: right;
+  /*text-align: right;*/
+  clear: both;
 }
 .message__date.-other {
   text-align: left;
@@ -1721,6 +1734,7 @@ body {
   cursor: pointer;
   font-family: "Fira Sans", sans-serif;
   outline: none !important;
+  transition: 1s all;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
@@ -2325,6 +2339,7 @@ body {
   cursor: pointer;
   font-family: "Fira Sans", sans-serif;
   outline: none !important;
+  transition: 1s all;
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
