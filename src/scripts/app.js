@@ -235,6 +235,21 @@ $(document).ready(function(){
                                 child.remove();     
                             },250);   
                         });
+
+                        $('.add__friend').click(function(){
+                            console.log('lol');
+                    
+                            let user = $(this).data("id");
+                            $.ajax({
+                                method: "GET",
+                                data:{ID:user},
+                                url:"src/php/add_friend.php",
+                            })
+                            .done(function(result){ 
+                                $('.avatar__container #add_friend').remove();
+                                $('.avatar__container .container--full .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
+                            });
+                        });
                     });
                 });
             }
@@ -485,7 +500,7 @@ $(document).ready(function(){
                         },
                     })
                     .done(function(result){ 
-                        //console.log(result);
+                        console.log(result);
                         var files = uploadfiles.files;
                         for(var i=0; i<files.length; i++){
                             uploadFile(uploadfiles.files[i],name);
@@ -501,7 +516,7 @@ $(document).ready(function(){
                             $(document.body).css('overflow','scroll');
                         }, 1250);
 
-                        document.location.reload(true);
+                        //document.location.reload(true);
 
                     });
                 }
@@ -544,6 +559,7 @@ $(document).ready(function(){
     });
 
     $('#add_friend').click(function(){
+        console.log('lol');
 
         let user = $(this).data("id");
         $.ajax({
@@ -993,6 +1009,48 @@ $(document).ready(function(){
         
     if($('body').is('.getMessage')){
 
+        $('#message').keypress(function (e) {
+            var key = e.which;
+            if(key == 13)  // the enter key code
+            {
+                let user2 = $('body').data('id');
+                //console.log(user2);
+                if($('#message').val() != ""){
+                    $.ajax({
+                        method: "GET",
+                        data: {ID:user2,MESSAGE:$('#message').val()},
+                        url:"src/php/insertMessage.php",
+                    })
+                    .done(function(result){ 
+                        //console.log(result);
+                        $.ajax({
+                            method: "GET",
+                            data: {ID:user2},
+                            url:"src/php/getLastMessage.php",
+                        })
+                        .done(function(result){ 
+                            //console.log(result);
+                            setTimeout(function(){
+                                $('.messages').append(result);
+                            },500);
+                            
+                            $('.messages').animate({
+                                scrollTop: realHeight
+                            }, 500);
+
+                            if($('#message').hasClass('-error')){
+                                $('#message').removeClass('-error');
+                            }
+
+                            $('#message').val('');
+                        })
+                    })
+                }else{
+                    $('#message').addClass('-error');
+                }
+            }
+        });
+
         var pubnub = new PubNub({
 		    subscribeKey: 'sub-c-1ef083d0-dc62-11e8-911d-e217929ad048', // always required
 		    publishKey: 'pub-c-07c00e21-e522-43ef-965d-f81e60f7a47f' // only required if publishing
@@ -1017,7 +1075,7 @@ $(document).ready(function(){
                 },10);
 
                 
-                let realHeight  = $('.messages').scrollTop() + $('.message__body').height();
+                let realHeight  = $('.messages').scrollTop() + ($('.message__body').height() * 2);
 
                 setTimeout(function(){
                     $('.messages').animate({

@@ -87,8 +87,7 @@
                                     if ($row_friend['MUTUAL']){
                                         echo '<div><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Ami</button></div>';
                                     }else{
-                                        
-                                            echo '<div id="friend__button"><button id="add_friend" data-id="'.$_GET['ID'].'" class="friend__button button -friend"><i class="icon icon__friend icon icon-ic_person_add_48px"></i>Ajouter</button></div>';
+                                            echo '<div class="add__friend "><button id="add_friend" data-id="'.$_GET['ID'].'" class="friend__button add__friend button -friend"><i class="icon icon__friend icon icon-ic_person_add_48px"></i>Ajouter</button></div>';
                                         }
                                     }
                                 }

@@ -465,6 +465,15 @@
   }
 }
 
+.chat{
+  font-size: 24px;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  right: 45px;
+  color: #003780;
+}
+
 .information_group{
   padding: 8px 16px;
   color: black;
