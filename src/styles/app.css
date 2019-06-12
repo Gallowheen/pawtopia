@@ -567,6 +567,10 @@ input[type=range]::-webkit-slider-runnable-track {
 .select.-error {
   animation: bounce 1s forwards;
 }
+.select.-nomargin {
+  margin-left: 0;
+  width: 100%;
+}
 .select.-small {
   width: 80%;
 }
@@ -664,6 +668,11 @@ input[type=range]::-webkit-slider-runnable-track {
   position: relative;
   margin: 32px 0px;
 }
+.input__container .icon__friend {
+  font-size: 32px;
+  color: #0067B0;
+  margin-right: 16px;
+}
 .input__container.-center {
   text-align: center;
 }
@@ -672,6 +681,11 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .input__container.-first {
   margin-top: 0px;
+}
+.input__container.-flex {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
 }
 
 .choice {
@@ -1142,7 +1156,6 @@ input[type=range]::-webkit-slider-runnable-track {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 24px;
-  margin-bottom: 32px;
 }
 .dog_name .edit {
   margin-left: 16px;
@@ -1170,7 +1183,7 @@ input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   color: #0067B0;
   font-weight: bold;
-  margin: 0;
+  margin-top: 20px;
 }
 
 .input-file {
@@ -1252,7 +1265,12 @@ input[type=range]::-webkit-slider-runnable-track {
 .close-icon.-dogAdd {
   width: 35px;
   height: 35px;
-  top: 80px;
+  top: 100px;
+}
+.close-icon.-imgAdd {
+  width: 35px;
+  height: 35px;
+  top: 160px;
 }
 
 .reviews__container {
@@ -1674,6 +1692,18 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .messages {
   overflow-y: scroll;
+}
+
+.edit__profile {
+  text-align: center;
+}
+
+.thumbnail {
+  margin-bottom: 20px;
+}
+
+.edit__user {
+  margin-right: 8px;
 }
 
 body {
@@ -2244,6 +2274,10 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .select.-error {
   animation: bounce 1s forwards;
+}
+.select.-nomargin {
+  margin-left: 0;
+  width: 100%;
 }
 .select.-small {
   width: 80%;
@@ -2854,6 +2888,10 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .select.-error {
   animation: bounce 1s forwards;
+}
+.select.-nomargin {
+  margin-left: 0;
+  width: 100%;
 }
 .select.-small {
   width: 80%;

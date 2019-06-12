@@ -19,8 +19,20 @@
     while ( $results[] = mysqli_fetch_object ( $query ) );
     array_pop ( $results );
 ?>
-    <div class="input__container">
-        <select required placeholder="Votre ville" class="select -transparent register__town" name="town" id="town">
+    <div class="edit__profile">
+        <?php
+        echo '<div>';
+        echo '<p class="error"></p>';
+        echo '<div id="gallery"><img class="avatar" src="'.$user['AVATAR'].'"/></div>';
+        echo '<div id="gallery__button"></div></div>';
+        echo'<label for="uploadfiles" class="label-file">Choisir une image</label><input class="input-file" type="file" id="uploadfiles" accept="image/*"></input>';
+        echo'<div class="dog_button -add">';
+        
+        ?>
+    </div>
+    <div class="input__container -flex">
+        <i class="icon icon__friend information__city icon-home-52"></i>
+        <select class="select -walk -nomargin" required placeholder="Votre ville" class="select -transparent register__town" name="town" id="town">
             <option value="" disabled hidden>Choisissez votre ville</option>
             <?php foreach ( $results as $option ) : ?>
             	<?php
@@ -38,10 +50,10 @@
     	if($user['BIO'])
     		$bio = $user['BIO'];
     ?>
-        <div class='information_group'><p class='information_title'>Biographie</p><textarea class='information_space' placeholder='Entrez une biographie...'><?= $bio ?></textarea></div>
+        <div class='information_group'><p class='information_title'>Biographie</p><textarea id="bio" class='select -walk -nomargin' placeholder='Entrez une biographie...'><?= $bio ?></textarea></div>
 
         <div class='information_group'><p class='information_title'>Type de balade</p>
-        <select>
+        <select id="walk" class="select -walk -nomargin">
     <?php
     	$types = array("Récréative", "Sportive", "Découverte");
     	$walk = 0;
@@ -55,4 +67,4 @@
     ?>
     	</select>
 	</div>
-	<input type='button' value='Enregistrer' />
+	<input class="button -color -blue" type='button' id="update" value='Enregistrer' />

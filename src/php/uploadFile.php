@@ -16,17 +16,35 @@ $result = $query->get_result();
 $row = $result->fetch_assoc();
 
 $owner_name = $row['USERNAME'];
-$name = $_GET['name'];
+if (isset($_GET['name']))
+    $name = $_GET['name'];
 
-if (isset($_FILES['upload_file'])) {
-    if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/dogs/'.$name.'/'. $_FILES['upload_file']['name'])){
-      
+$page = $_GET['page'];
+
+if($page == "dog"){
+    if (isset($_FILES['upload_file'])) {
+        if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/dogs/'.$name.'/'. $_FILES['upload_file']['name'])){
+        
+        } else {
+    
+        }
+        exit;
     } else {
- 
+        echo "No files uploaded ...";
     }
-    exit;
-} else {
-    echo "No files uploaded ...";
+}else{
+    echo "lol";
+    echo $_FILES['upload_file']['tmp_name'];
+    if (isset($_FILES['upload_file'])) {
+        if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/avatar/'. $_FILES['upload_file']['name'])){
+        
+        } else {
+    
+        }
+        exit;
+    } else {
+        echo "No files uploaded ...";
+    }
 }
 
 ?>

@@ -53,6 +53,70 @@ $(document).ready(function(){
         })
         .done(function(result) {
             $(".information_editable").html(result);
+
+            $('#uploadfiles').on("change", function(){ 
+
+                // var uploadfiles = $('#uploadfiles');
+                // var files = uploadfiles.files;
+                // for(var i=0; i<files.length; i++){
+                //     uploadFile(uploadfiles.files[i]);
+                // }
+
+                if(this.files[0].size > 2000000){
+                    $('.error').html("Image trop grande");
+                }else{
+                    console.log(gallery);
+                    if (gallery.children.length <= 1){
+                        var files = this.files;
+                        for(var i=0; i<files.length; i++){
+                            previewImage(this.files[i]);
+                        }
+                    }
+
+                    $('.label-file').hide();
+                    $('.error').html('');
+                }
+            });
+
+            $("#update").click(function(e){
+
+                var uploadfiles = document.querySelector('#uploadfiles');
+
+                let bio = $('#bio').val();
+                let walk = $('#walk').val();
+                let town = $('#town').val();
+                let image;
+
+                if (uploadfiles.files.length > 0){
+                    image = uploadfiles.files[0].name;
+                }else{
+                    image = "none";
+                }
+
+                $.ajax({
+                    method: "GET",
+                    url:"src/php/updateProfile.php",
+                    data:{
+                        bio:bio,
+                        town:town,
+                        walk:walk,
+                        image:image
+                    },
+                })
+                .done(function(result){ 
+
+                    var uploadfiles = document.querySelector('#uploadfiles');
+                    var page = "user";
+                    var files = uploadfiles.files;
+
+                    for(var i=0; i<files.length; i++){
+                        uploadFile(uploadfiles.files[i],name,page);
+                    }
+                    setTimeout(function(){
+                        document.location.reload(true);
+                    },500);
+                });
+            });
         });
     });
 
@@ -117,7 +181,6 @@ $(document).ready(function(){
         })
         .done(function(result){ 
             let data = JSON.parse(result);
-            console.log(data);
             let member;
 
             if(data.length == 0){
@@ -163,7 +226,6 @@ $(document).ready(function(){
         .done(function(result){ 
         
             let data = JSON.parse(result);
-            //console.log(data);
             let member;
 
             if(data.length == 0){
@@ -238,7 +300,6 @@ $(document).ready(function(){
                             $([document.documentElement, document.body]).animate({
                                 scrollTop: container.offset().top - 100
                             }, 1000);
-                            console.log(child);
                             child.animate({opacity : 0},"slow");
 
                             setTimeout(function(){
@@ -247,7 +308,6 @@ $(document).ready(function(){
                         });
 
                         $('.add__friend').click(function(){
-                            console.log('lol');
                     
                             let user = $(this).data("id");
                             $.ajax({
@@ -496,8 +556,6 @@ $(document).ready(function(){
                         image = "none";
                     }
 
-                    //console.log(image);
-
                     $.ajax({
                         method: "GET",
                         url:"src/php/addDog.php",
@@ -510,10 +568,10 @@ $(document).ready(function(){
                         },
                     })
                     .done(function(result){ 
-                        console.log(result);
                         var files = uploadfiles.files;
+                        var page = "dog";
                         for(var i=0; i<files.length; i++){
-                            uploadFile(uploadfiles.files[i],name);
+                            uploadFile(uploadfiles.files[i],name,page);
                         }
         
                         setTimeout(function(){
@@ -569,8 +627,6 @@ $(document).ready(function(){
     });
 
     $('#add_friend').click(function(){
-        console.log('lol');
-
         let user = $(this).data("id");
         $.ajax({
             method: "GET",
@@ -589,7 +645,7 @@ $(document).ready(function(){
             url:"src/php/add_event.php",
         })
         .done(function(result){ 
-            //console.log(result);
+
         });
     });
 
@@ -655,8 +711,6 @@ $(document).ready(function(){
             }
         });
 
-        //console.log(dogSelected);
-
         $.get(
             'src/php/add_event.php',
             {
@@ -692,8 +746,6 @@ $(document).ready(function(){
             url:"src/php/managewalk.php",
         })
         .done(function(result){ 
-            //console.log(result);
-            //console.log(JSON.parse(result));
             data = JSON.parse(result);
 
             //savoir le jour
@@ -737,8 +789,6 @@ $(document).ready(function(){
                 else
                 $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
 
-                //console.log(data.length);
-
                 $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
             
                 for( let i = 0; i < data.length; i++){
@@ -772,28 +822,22 @@ $(document).ready(function(){
             }, 1250);
 
             $('.get_to_walk').click(function(){
-                //console.log('lol');
                 window.location = "walk_detail?ID="+$(this).data('id');
             });
         });
     });
 
     $('#validate__sign').click(function(e){
-        //console.log('lol');
 
         let dogSelected = [];
         let id_event = $('#validate__sign').data('id'); 
-        //console.log(id_event);
         let x = 0;
 
         $('.dog_card').each(function(){
-            //console.log('bite');
             if($(this).hasClass('-active')){
                 dogSelected.push($(this).data('id'));
             }
         });
-
-        //console.log(dogSelected);
 
         if(dogSelected.length > 0){
             $.ajax({
@@ -805,7 +849,6 @@ $(document).ready(function(){
                 url:"src/php/joinwalk.php",
             })
             .done(function(result){ 
-                //console.log(result);
                 if (result == "success")  
                     document.location.reload(true);
             });
@@ -848,8 +891,6 @@ $(document).ready(function(){
 
                 data = JSON.parse(result);
 
-                //console.log(data.length);
-
                 $('.content_container .container .row .col .user_walk').append('<div class="walk__container"></div>');
             
                 for( let i = 0; i < data.length; i++){
@@ -865,7 +906,6 @@ $(document).ready(function(){
                 }
 
                 $('.get_to_walk').click(function(){
-                    //console.log('lol');
                     window.location = "walk_detail?ID="+$(this).data('id');
                 });
 
@@ -892,10 +932,8 @@ $(document).ready(function(){
             url:"src/php/showcase_message.php",
         })
         .done(function(result){ 
-            //console.log(result);
             if(result != "noMsg")
                 data = JSON.parse(result);
-            //console.log(data);
             let userID = $('body').data('id');
             let user = [];
             let userList = [];
@@ -937,8 +975,6 @@ $(document).ready(function(){
                     }
                 }
 
-                console.log(user);
-
                 for (i = 0; i < data.length; i++){   
                     for(k = 0; k < user.length; k++){ 
                         found = false;             
@@ -965,11 +1001,7 @@ $(document).ready(function(){
                     }
                 }
 
-                console.log(userList);
-
                 userList.sort((a, b) => (a.STATUT > b.STATUT) ? -1 : 1);
-                console.log(userList);
-
                 userList.forEach(element => {
 
                     let ID;
@@ -1006,7 +1038,6 @@ $(document).ready(function(){
                         url:"src/php/updateMessageStatus.php",
                     })
                     .done(function(result){ 
-                        console.log(result);
                     })
 
                     setTimeout(function(){
@@ -1024,7 +1055,6 @@ $(document).ready(function(){
             if(key == 13)  // the enter key code
             {
                 let user2 = $('body').data('id');
-                //console.log(user2);
                 if($('#message').val() != ""){
                     $.ajax({
                         method: "GET",
@@ -1032,14 +1062,14 @@ $(document).ready(function(){
                         url:"src/php/insertMessage.php",
                     })
                     .done(function(result){ 
-                        //console.log(result);
+                
                         $.ajax({
                             method: "GET",
                             data: {ID:user2},
                             url:"src/php/getLastMessage.php",
                         })
                         .done(function(result){ 
-                            //console.log(result);
+                   
                             setTimeout(function(){
                                 $('.messages').append(result);
                             },500);
@@ -1072,14 +1102,13 @@ $(document).ready(function(){
 
 		pubnub.addListener({
 		    message: function(message) {
-                //console.log(message.message);
+     
                 
                 $('.messages').append(message.message);  
                             
                 setTimeout(function(){
                     if ($('.messages').children().last().data('id') == $('body').data('me')){
-                        console.log("APRES");
-                        console.log($('.messages').children().last().prev(".message__body"));
+                    
                         $('.messages').children().last().remove();
                     }
                 },10);
@@ -1113,7 +1142,7 @@ $(document).ready(function(){
         $('.sendMessage').click(function(){
 
             let user2 = $('body').data('id');
-            //console.log(user2);
+          
             if($('#message').val() != ""){
                 $.ajax({
                     method: "GET",
@@ -1121,14 +1150,14 @@ $(document).ready(function(){
                     url:"src/php/insertMessage.php",
                 })
                 .done(function(result){ 
-                    //console.log(result);
+                  
                     $.ajax({
                         method: "GET",
                         data: {ID:user2},
                         url:"src/php/getLastMessage.php",
                     })
                     .done(function(result){ 
-                        //console.log(result);
+                
                         setTimeout(function(){
                             $('.messages').append(result);
                         },500);
@@ -1157,7 +1186,6 @@ $('body').on('click', '[data-editable]', function(){
     let value = $(this).html();
                 
     var $input = $('<input />').val( $el.text() );
-    //console.log(value);
     $el.replaceWith( $input );
     
     var save = function(){
@@ -1185,14 +1213,14 @@ function previewImage(file) {
 
     var img = document.createElement("img");
     img.classList.add('dog_img');
-    img.classList.add('-add');
     img.file = file;
     thumb.appendChild(img);
     gallery.html(thumb);
 
     var reader = new FileReader();
     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(file.slice(0,10 * 4096 * 4096));
+    console.log(reader);
 
     galleryButton = document.getElementById("gallery__button");
     var button = document.createElement("button");
@@ -1200,7 +1228,13 @@ function previewImage(file) {
     button.setAttribute('type', 'button');
     button.classList.add('icon');
     button.classList.add('close-icon');
-    button.classList.add('-dogAdd');
+    if($('.edit__profile').length != 0){ 
+        button.classList.add('-imgAdd');
+    }
+    else{
+        button.classList.add('-dogAdd');
+    }
+    
     galleryButton.appendChild(button);
 
     var deleteImg = document.getElementById("deleteImage");
@@ -1221,15 +1255,20 @@ function previewImage(file) {
     });
 }
 
-function uploadFile(file, name){
-    var url = 'src/php/uploadFile.php?name='+name;
+function uploadFile(file, name, page){
+
+    if (name != "")
+        var url = 'src/php/uploadFile.php?name='+name+'&'+'page='+page;
+    else
+        var url = 'src/php/uploadFile.php?page='+page;
+
     var name = name;
     var xhr = new XMLHttpRequest();
     var fd = new FormData();
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            //console.log(xhr.responseText);
+            console.log(xhr.responseText);
         }
     };
     fd.append("upload_file", file);

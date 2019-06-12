@@ -106,6 +106,12 @@
   position: relative;
   margin: 32px 0px;
 
+  .icon__friend{
+    font-size: 32px;
+    color: #0067B0;
+    margin-right: 16px;
+  }
+  
   &.-center{
     text-align : center;
   }
@@ -116,6 +122,12 @@
 
   &.-first{
     margin-top : 0px;
+  }
+
+  &.-flex{
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
   }
 }
 
@@ -639,7 +651,6 @@
   text-transform: capitalize;
   font-weight: bold;
   font-size: 24px;
-  margin-bottom: 32px;
 
   .edit{
     margin-left: 16px;
@@ -667,7 +678,7 @@
   cursor: pointer;
   color: #0067B0;
   font-weight: bold;
-  margin: 0;
+  margin-top: 20px;
 }
 
 .input-file {
@@ -687,8 +698,9 @@
 }
 
 .error{
-  color : red;
+  color: #C72C1C;
   animation: bounce 1s;
+  font-weight: bold;
 }
 
 .dog_button_container{
@@ -751,7 +763,13 @@
   &.-dogAdd{
     width: 35px;
     height: 35px;
-    top: 80px;
+    top: 100px;
+  }
+
+  &.-imgAdd{
+    width: 35px;
+    height: 35px;
+    top: 160px;
   }
 }
 .reviews__container{
@@ -1197,4 +1215,18 @@
 
 .messages{
   overflow-y: scroll;
+}
+
+// EDIT
+
+.edit__profile{
+  text-align: center;
+}
+
+.thumbnail{
+  margin-bottom: 20px;
+}
+
+.edit__user{
+  margin-right: 8px;
 }

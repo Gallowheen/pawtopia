@@ -427,7 +427,7 @@
                             <?php
                                 $editBouton = "";
                                 if(empty($_GET))
-                                    $editBouton = "<button class='button -color edit-profile'>Éditer</button>";
+                                    $editBouton = "<button class='button -color -blue edit-profile'><i class='icon edit edit__user icon-ic_edit_48px'></i>Éditer</button>";
                             ?>
                             <h3 class="information h3">Informations <?= $editBouton ?> </h3>
                             <div class="information_editable">

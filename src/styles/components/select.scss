@@ -102,6 +102,11 @@
     animation: bounce 1s forwards;
   }
 
+  &.-nomargin{
+    margin-left: 0;
+    width: 100%;
+  }
+
   &.-small{
     width: 80%;
   }
