@@ -20,9 +20,18 @@ if (isset($_GET['name']))
     $name = $_GET['name'];
 
 $page = $_GET['page'];
+echo $_FILES['upload_file']['tmp_name'];
 
 if($page == "dog"){
     if (isset($_FILES['upload_file'])) {
+
+        //CREATE NEW DIR
+        $filename = "../../users/" . $_SESSION['ID'] . "_" . $owner_name.'/dogs/'.$name;
+        if (!file_exists($filename)) {
+            $newDirectory = "../../users/" . $_SESSION['ID'] . "_" . $owner_name.'/dogs/'.$name;
+            mkdir($newDirectory, 0777);
+        }
+
         if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/dogs/'.$name.'/'. $_FILES['upload_file']['name'])){
         
         } else {
@@ -37,7 +46,7 @@ if($page == "dog"){
     echo $_FILES['upload_file']['tmp_name'];
     if (isset($_FILES['upload_file'])) {
         if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/avatar/'. $_FILES['upload_file']['name'])){
-        
+            
         } else {
     
         }

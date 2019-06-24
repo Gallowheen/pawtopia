@@ -187,12 +187,12 @@
                                             $rows = resultToArray($result);  
 
                                             foreach ( $rows as $master ) :?>
-                                                    <div>
+                                                    <div class="center">
                                                         <?php
                                                         echo "<h4 class='h4 dog_name'>".$master['USERNAME']."</h4>";
                                                         ?>
                                                         <?php
-                                                        echo '<img class="dog_img avatar -small -noMargin" src="'.$master['AVATAR'].'">';?>
+                                                        echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="'.$master['AVATAR'].'">';?>
                                                     </div>
                                                 <?php    
                                             endforeach;
@@ -221,7 +221,7 @@
                                         $rows = resultToArray($result);  
 
                                         foreach ( $rows as $dog ) :?>
-                                                <div>
+                                                <div class="center">
                                                     <?php
                                                     echo "<h4 class='h4 dog_name'>".$dog['NAME']."</h4>";
                                                     ?>
@@ -243,10 +243,21 @@
                     $result = $query->get_result();
                     if($result->num_rows === 0){
                         $row_user = $result->fetch_assoc();
+
+                        $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1");
+                        $query->bind_param("i", $_SESSION['ID']);
+                        $query->execute();
+
+                        $result = $query->get_result();
+                        $rows = resultToArray($result);  
+                        if($result->num_rows === 0){
+                            echo '<p class="error -center">Vous devez avoir au moins un compagnon pour participer à une balade</p>';
+                        }else{
                         ?>
                         <div class="submit__button">
                             <button class="button -color -blue" id="next" type="submit">Je participe</button>
                         </div>
+                        <?php } ?>
                         <div class="walk__add__dog">
                         <?php 
                             // On récupère les chiens
@@ -259,12 +270,13 @@
                             ?>
                             <div class="walk__dog">
                                 <h3 class="h3 information -top">Votre partenaire de balade</h3>
+                                <p class="information -blue">Selectionner au moins un compagnon pour vous inscrire</p>
                                 <div class="walk__dog__container">
                                     <?php
                                     foreach ( $rows as $dog ) :?>
                                     <div class="dog_card -walk" data-id="<?php echo $dog['ID']?>">
                                         <?php
-                                        echo "<h4 class='h4 dog_name'>".$dog['NAME']."</h4>";
+                                        echo "<h4 class='h4 dog_name -walk'>".$dog['NAME']."</h4>";
                                         ?>
                                         <div class="dog_button -walk">
                                         <?php

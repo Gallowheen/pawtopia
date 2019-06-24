@@ -198,8 +198,12 @@
 
 // HOME//
 
+.reminder{
+  margin-bottom: 32px;
+}
 .statuts{
   text-align: right;
+  margin-bottom: 24px;
 
   a{
     color : #0067B0;
@@ -460,6 +464,10 @@
   &.-blue{
     color: #0067B0;
   }
+
+  &.-red{
+    color: #C72C1C;
+  }
 }
 
 .information_name{
@@ -475,15 +483,6 @@
   &.-empty{
     margin-bottom: 24px;
   }
-}
-
-.chat{
-  font-size: 24px;
-  top: 50%;
-  position: absolute;
-  transform: translateY(-50%);
-  right: 45px;
-  color: #003780;
 }
 
 .information_group{
@@ -635,11 +634,14 @@
   border-top: 1px solid #0067B0;
   border-left: 1px solid #0067B0;
   border-right: 1px solid #0067B0;
+  transition: .5s all;
 
   &.-walk{
     border : none;
     margin-right: 0px;
     min-width: 45%;
+    margin-top: 16px;
+    box-shadow: 2px 3px 3px 0px #00000036;
   }
 
   &.-active{
@@ -651,6 +653,18 @@
   text-transform: capitalize;
   font-weight: bold;
   font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+
+  &.-nolimit{
+    max-width: auto; 
+  }
+
+  &.-walk{
+    font-size: 16px;
+  }
 
   .edit{
     margin-left: 16px;
@@ -701,6 +715,10 @@
   color: #C72C1C;
   animation: bounce 1s;
   font-weight: bold;
+
+  &.-center{
+    text-align: center;
+  }
 }
 
 .dog_button_container{
@@ -807,6 +825,19 @@
 
   &.-message{
     margin-bottom: 16px;
+  }
+
+  &.-opacity{
+    opacity: .1;
+  }
+
+  .chat{
+    font-size: 24px;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-37.5%);
+    right: 45px;
+    color: #003780;
   }
 
   &.-small{
@@ -1036,6 +1067,10 @@
 
 // WALK
 
+.user_walk{
+  margin-bottom: 16px;
+}
+
 .input__name{
   display: block;
   color : #003780;
@@ -1229,4 +1264,12 @@
 
 .edit__user{
   margin-right: 8px;
+}
+
+.center{
+  text-align: center;
+}
+
+.align-right{
+  text-align: right;
 }

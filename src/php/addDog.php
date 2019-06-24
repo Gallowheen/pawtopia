@@ -9,7 +9,7 @@
 
     if (empty($_GET)){
         echo '<div class="dog_card">';
-            echo "<h4 data-editable class='dog_name'>Nom<i class='icon edit icon-ic_edit_48px'></i></h4>";
+            echo "<h4 data-editable class='dog_name -nolimit'>Nom<i class='icon edit icon-ic_edit_48px'></i></h4>";
                 echo'<label for="uploadfiles" class="label-file">Choisir une image</label><input class="input-file" type="file" id="uploadfiles" accept="image/*"></input>';
                 echo'<div class="dog_button -add">';
             //echo '<div class="dog_img -add"><i class="icon dog_add_icon icon-ic_photo_camera_48px"></i></div></div>';
@@ -77,10 +77,6 @@
         }else{
             $picture = 'users/'.$_SESSION['ID'].'_'.$owner_name.'/dogs/'.$name.'/'.$picture;
         }
-
-        //CREATE NEW DIR
-        $newDirectory = "../../users/" . $_SESSION['ID'] . "_" . $owner_name.'/dogs/'.$name;
-        mkdir($newDirectory, 0777);
 
         $query = $link->prepare("INSERT INTO `dog`(`BREED_ID`, `GENDER`, `AGE`, `PICTURE`, `OWNER_ID`, `NAME`, `ACTIVE`)  VALUES (?,?,?,?,?,?,?)");
         $query->bind_param("isissss", $breed, $gender, $age, $picture, $owner, $name, $active);

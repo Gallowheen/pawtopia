@@ -92,7 +92,7 @@
     <?php 
         include ('src/php/header.php');
     ?>
-    <body>
+    <body class="friends">
         
 
         <?php
@@ -225,7 +225,8 @@
                                             ksort($newArray);
 
                                             foreach ($newArray as $friend) :
-                                                echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';?>
+                                                echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';
+                                                echo '<button data-id="'.$friend['ID'].'" class="button chat"><i  class="icon icon-ic_sms_48px"></i></button>';?>
                                                 <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
                                                 echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';?>
@@ -279,7 +280,7 @@
 
                                             foreach ($newArray as $friend) :
                                                 echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';
-                                                echo '<i class="icon chat icon-ic_sms_48px"></i>';?>
+                                                echo '<button data-id="'.$friend['ID'].'" class="button chat"><i class="ico icon-ic_sms_48px"></i>';?>
                                                 <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
                                                 echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';

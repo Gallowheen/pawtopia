@@ -1,5 +1,7 @@
 $(document).ready(function(){ 
 
+    var ready = false;
+
     var pubnub = new PubNub({
 	    subscribeKey: 'sub-c-1ef083d0-dc62-11e8-911d-e217929ad048', // always required
 	    publishKey: 'pub-c-07c00e21-e522-43ef-965d-f81e60f7a47f' // only required if publishing
@@ -39,7 +41,7 @@ $(document).ready(function(){
     $(".view").click(function(e){
         e.preventDefault();
         e.stopPropagation();
-        console.log(e);
+        //console.log(e);
 
         var user = $(this).data("id");
 
@@ -55,17 +57,17 @@ $(document).ready(function(){
             $(".information_editable").html(result);
 
             $('#uploadfiles').on("change", function(){ 
-
+                $("#update").prop('disabled', true);
                 // var uploadfiles = $('#uploadfiles');
                 // var files = uploadfiles.files;
                 // for(var i=0; i<files.length; i++){
                 //     uploadFile(uploadfiles.files[i]);
                 // }
 
-                if(this.files[0].size > 2000000){
-                    $('.error').html("Image trop grande");
-                }else{
-                    console.log(gallery);
+                // if(this.files[0].size > 2000000){
+                //     $('.error').html("Image trop grande");
+                // }else{
+                    //console.log(gallery);
                     if (gallery.children.length <= 1){
                         var files = this.files;
                         for(var i=0; i<files.length; i++){
@@ -73,9 +75,17 @@ $(document).ready(function(){
                         }
                     }
 
+                    var uploadfiles = document.querySelector('#uploadfiles');
+                    var page = "user";
+                    var files = uploadfiles.files;
+
+                    for(var i=0; i<files.length; i++){
+                        uploadFile(uploadfiles.files[i],name,page);
+                    }
+
                     $('.label-file').hide();
                     $('.error').html('');
-                }
+                // }
             });
 
             $("#update").click(function(e){
@@ -105,16 +115,11 @@ $(document).ready(function(){
                 })
                 .done(function(result){ 
 
-                    var uploadfiles = document.querySelector('#uploadfiles');
-                    var page = "user";
-                    var files = uploadfiles.files;
+                    //console.log(result);
 
-                    for(var i=0; i<files.length; i++){
-                        uploadFile(uploadfiles.files[i],name,page);
-                    }
-                    setTimeout(function(){
-                        document.location.reload(true);
-                    },500);
+                    // setTimeout(function(){
+                    document.location.reload(true);
+                    // },2000);
                 });
             });
         });
@@ -180,6 +185,7 @@ $(document).ready(function(){
             url:"src/php/showcase_member.php",
         })
         .done(function(result){ 
+            //console.log(result);
             let data = JSON.parse(result);
             let member;
 
@@ -456,6 +462,17 @@ $(document).ready(function(){
         });
     })
 
+    if($('body').is('.friends')){
+        $('.chat').click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            //console.log($(this).data('id'));
+
+            window.location = "getMessage.php?ID=" + $(this).data('id');
+        });
+    }
+
     $('.friend_delete').click(function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -568,12 +585,7 @@ $(document).ready(function(){
                         },
                     })
                     .done(function(result){ 
-                        var files = uploadfiles.files;
-                        var page = "dog";
-                        for(var i=0; i<files.length; i++){
-                            uploadFile(uploadfiles.files[i],name,page);
-                        }
-        
+                    
                         setTimeout(function(){
                             $('.dog_handler').animate({"opacity": 0}, "normal"); 
                         }, 750);
@@ -584,7 +596,7 @@ $(document).ready(function(){
                             $(document.body).css('overflow','scroll');
                         }, 1250);
 
-                        //document.location.reload(true);
+                        document.location.reload(true);
 
                     });
                 }
@@ -597,16 +609,29 @@ $(document).ready(function(){
                 // for(var i=0; i<files.length; i++){
                 //     uploadFile(uploadfiles.files[i]);
                 // }
-                if (gallery.children.length == 0){
-                    var files = this.files;
-                    for(var i=0; i<files.length; i++){
-                        previewImage(this.files[i]);
-                    }
-                }
 
-                $('.label-file').hide();
-                let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
-                $('.dog_handler_container').css('top',position_popup);
+                if ($('.dog_name').last().text() != "Nom"){
+                    $("#addDog").prop('disabled', true);
+                    if (gallery.children.length == 0){
+                        var files = this.files;
+                        for(var i=0; i<files.length; i++){
+                            previewImage(this.files[i]);
+                        }
+
+                        var files = uploadfiles.files;
+                        var page = "dog";
+                        var name = $('.dog_name').last().text();
+                        for(var i=0; i<files.length; i++){            
+                            uploadFile(uploadfiles.files[i],name,page);
+                        }
+                    }
+
+                    $('.label-file').hide();
+                    let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
+                    $('.dog_handler_container').css('top',position_popup);
+                }else{
+                    $('.dog_name').last().addClass('error');
+                }
             });
         });
     });
@@ -635,7 +660,9 @@ $(document).ready(function(){
         })
         .done(function(result){ 
             $('.avatar__container #friend__button').remove();
-            $('.avatar__container .container .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
+            let button = '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+            $(button).insertBefore($('.avatar__container .container .row .col .avatars'));
+            //$('.avatar__container .container .row .col').append('<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
         });
     });
 
@@ -674,26 +701,80 @@ $(document).ready(function(){
     });
 
     $("#next").click(function(e){
-
+        
+        error = [];
         e.preventDefault();
 
-        $('#event_information').css('display','none');
-        $('.walk__dog').css('display','block');
-
-        if($('body').is('.new_walk') || $('body').is('.walk_detail')){
-            $('.dog_card').click(function(){
-                if(!$(this).hasClass('-active')){
-                    $(this).addClass('-active');
-                }else{
-                    $(this).removeClass('-active');
-                }
-            })
+        if($('body').is('.new_walk')){
+            if($("#walk_name").val() == null){
+                error.push("true");
+                $("#walk_name").addClass('-error');
+            }
+            if( $("#town").val() == null){
+                error.push("true");
+                $("#town").addClass('-error');
+            }
+            if( $("#info").val() == ""){
+                error.push("true");
+                $("#info").addClass('-error');
+            }
+            if( $("#walk_type").val() == null){
+                error.push("true");
+                $("#walk_type").addClass('-error');
+            }
+            if( $("#date").val() == null){
+                error.push("true");
+                $("#date").addClass('-error');
+            }
+            if($("#time").val() ==""){
+                error.push("true");
+                $("#time").addClass('-error');
+            }
+            if( $("#length").val() == null){
+                error.push("true");
+                $("#length").addClass('-error');
+            }
         }
 
-        if($('body').is('.walk_detail')){
-            //console.log('lol');
-            $('.submit__button').remove();
-            $(window).scrollTop($('.walk__add__dog').offset().top);
+        if (error.length == 0){
+
+            $('#event_information').css('display','none');
+            $('.walk__dog').css('display','block');
+
+            if($('.walk__dog__container').length <= 0){
+                $('.walk__dog').append('<div class="information error">Vous devez avoir au moins un compagnon pour créer une balade</div>');
+                $("#validate").prop('disabled', true);
+            }
+
+            if($('body').is('.new_walk') || $('body').is('.walk_detail')){
+                $('.dog_card').click(function(){
+                    if(!$(this).hasClass('-active')){
+                        $(this).addClass('-active');
+                    }else{
+                        $(this).removeClass('-active');
+                    }
+    
+                    var selected = false;
+    
+                    for(i = 0; i < $('.dog_card').length && !selected; i++){
+                        if ($('.dog_card').eq(i).hasClass('-active')){
+                            selected = true;
+                        }
+                    }
+                    //console.log(selected);
+                    if(!selected)
+                        $("#validate__sign").prop('disabled', true);
+                    else
+                        $("#validate__sign").prop('disabled', false);
+                })
+            }
+    
+            if($('body').is('.walk_detail')){
+                //console.log('lol');
+                $("#validate__sign").prop('disabled', true);
+                $('.submit__button').remove();
+                $(window).scrollTop($('.walk__add__dog').offset().top);
+            }
         }
     });
 
@@ -747,6 +828,7 @@ $(document).ready(function(){
         })
         .done(function(result){ 
             data = JSON.parse(result);
+            //console.log(result);
 
             //savoir le jour
             var jour = new Array(7);
@@ -862,63 +944,70 @@ $(document).ready(function(){
         })
         .done(function(result){ 
 
-            //savoir le jour
-            var jour = new Array(7);
-            jour[0] = "Lundi";
-            jour[1] = "Mardi";
-            jour[2] = "Mercredi";
-            jour[3] = "Jeudi";
-            jour[4] = "Vendredi";
-            jour[5] = "Samedi";
-            jour[6] = "Dimanche";
-
-            //savoir le mois
-            var mois = new Array(12);
-            mois[0] = "Janvier";
-            mois[1] = "Février";
-            mois[2] = "Mars";
-            mois[3] = "Avril";
-            mois[4] = "Mai";
-            mois[5] = "Juin";
-            mois[6] = "Juillet";
-            mois[7] = "Août";
-            mois[8] = "Septembre";
-            mois[9] = "Octobre";
-            mois[10] = "Novembre";
-            mois[11] = "Décembre";
-            
-            if (result.length >= 1){
-
+            if(result){
                 data = JSON.parse(result);
 
-                $('.content_container .container .row .col .user_walk').append('<div class="walk__container"></div>');
-            
-                for( let i = 0; i < data.length; i++){
-                    let date = new Date(data[i]['DATE_START']);
-                    let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
-                    let hour = hourSplit[0] + ":" + hourSplit[1];
-                    let day = jour[date.getDay()];
-                    let month = mois[date.getMonth()];
-                    let dayNumber = date.getDate();
+                //savoir le jour
+                var jour = new Array(7);
+                jour[0] = "Lundi";
+                jour[1] = "Mardi";
+                jour[2] = "Mercredi";
+                jour[3] = "Jeudi";
+                jour[4] = "Vendredi";
+                jour[5] = "Samedi";
+                jour[6] = "Dimanche";
 
-                    let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['town_name']+'</span></div><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
-                    $('.walk__container').append('<div class="walk__card test">'+walk+'</div>');
+                //savoir le mois
+                var mois = new Array(12);
+                mois[0] = "Janvier";
+                mois[1] = "Février";
+                mois[2] = "Mars";
+                mois[3] = "Avril";
+                mois[4] = "Mai";
+                mois[5] = "Juin";
+                mois[6] = "Juillet";
+                mois[7] = "Août";
+                mois[8] = "Septembre";
+                mois[9] = "Octobre";
+                mois[10] = "Novembre";
+                mois[11] = "Décembre";
+                
+                if (data.length > 0){  
+
+                    $('.content_container .container .row .col .user_walk').append('<div class="walk__container"></div>');
+                
+                    for( let i = 0; i < data.length; i++){
+                        let date = new Date(data[i]['DATE_START']);
+                        let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
+                        let hour = hourSplit[0] + ":" + hourSplit[1];
+                        let day = jour[date.getDay()];
+                        let monthNumber = date.getMonth()+1;
+                        let month = mois[date.getMonth()];
+                        let dayNumber = date.getDate();
+                        let year = date.getFullYear();
+
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['town_name']+'</span></div><div class="align-right"><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                        $('.walk__container').append('<div class="walk__card test">'+walk+'</div>');
+                    }
+
+                    $('.get_to_walk').click(function(){
+                        window.location = "walk_detail?ID="+$(this).data('id');
+                    });
+
+                    if (data.length > 1 && $('body').is('.walk') || $('body').is('.home')){
+                        $('.content_container .container .row .col .user_walk').css({
+                            "max-height": "240px",
+                            "overflow" : "scroll"
+                        })
+                    }
+
+
                 }
-
-                $('.get_to_walk').click(function(){
-                    window.location = "walk_detail?ID="+$(this).data('id');
-                });
-
-                if (data.length > 1 && $('body').is('.walk') || $('body').is('.home')){
-                    $('.content_container .container .row .col .user_walk').css({
-                        "max-height": "220px",
-                        "overflow" : "scroll"
-                    })
-                }
-
-
             }else{
-                $('.content_container .container .row .col .user_walk').html("<p>Vous n'êtes inscrit à aucune balades</p>");
+                if($('body').is('.home'))
+                    $('.content_container .container .row .col .user_walk').html("<p class='information'>Vous n'êtes inscrit à aucune balades pour le moment !</p><div class='center'><a href='walk.php'><button class='button -color'>Découvrez les balades</button></a></div>");
+                else
+                    $('.content_container .container .row .col .user_walk').html("<p class='information'>Vous n'êtes inscrit à aucune balades pour le moment !</p>");
             }
         });
     }
@@ -1044,6 +1133,8 @@ $(document).ready(function(){
                         window.location = "getMessage.php?ID=" + IDuser; 
                     },50);           
                 });
+            }else{
+                $(".content_container .container .row .col .message__container").append('<h3 class="h3 -title">Aucun message pour le moment</h3>');
             }
         })
     }
@@ -1105,13 +1196,19 @@ $(document).ready(function(){
      
                 
                 $('.messages').append(message.message);  
-                            
+                $('.messages').children().last().css('opacity','0');
+
                 setTimeout(function(){
                     if ($('.messages').children().last().data('id') == $('body').data('me')){
                     
                         $('.messages').children().last().remove();
+                        $('.messages').children().last().css('opacity','1');
+                    }else{
+                         $('.messages').children().last().css('opacity','1');
                     }
                 },10);
+
+                //$('.messages').children().last().css('opacity','1');
 
                 
                 let realHeight  = $('.messages').scrollTop() + ($('.message__body').height() * 2);
@@ -1190,7 +1287,7 @@ $('body').on('click', '[data-editable]', function(){
     
     var save = function(){
         let value = $p
-        var $p = $('<p data-editable class="dog_name"'+ value +'><i class="icon edit icon-ic_edit_48px"></i></p>').text( $input.val() );
+        var $p = $('<p data-editable class="dog_name -nolimit"'+ value +'><i class="icon edit icon-ic_edit_48px"></i></p>').text( $input.val() );
         if ($(this).is(':empty')){
             $input.replaceWith( $p );
         }
@@ -1220,7 +1317,7 @@ function previewImage(file) {
     var reader = new FileReader();
     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
     reader.readAsDataURL(file.slice(0,10 * 4096 * 4096));
-    console.log(reader);
+    //console.log(reader);
 
     galleryButton = document.getElementById("gallery__button");
     var button = document.createElement("button");
@@ -1257,18 +1354,23 @@ function previewImage(file) {
 
 function uploadFile(file, name, page){
 
+    //console.log(name);
+
     if (name != "")
         var url = 'src/php/uploadFile.php?name='+name+'&'+'page='+page;
     else
         var url = 'src/php/uploadFile.php?page='+page;
-
     var name = name;
     var xhr = new XMLHttpRequest();
     var fd = new FormData();
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(xhr.responseText);
+            //console.log(xhr.responseText);
+            if (name != "")
+                $("#addDog").prop('disabled', false);
+            else 
+                $("#update").prop('disabled', false);
         }
     };
     fd.append("upload_file", file);

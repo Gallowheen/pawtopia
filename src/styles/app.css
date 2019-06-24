@@ -66,6 +66,9 @@ body {
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.button:disabled {
+  background: #ccc !important;
+}
 .button.-transparent {
   background: transparent;
   border: 1px solid white;
@@ -395,6 +398,9 @@ Generated using nucleoapp.com
     transform: translateX(0px);
     border-bottom-color: red;
   }
+}
+.input:disabled {
+  background: #ccc !important;
 }
 .input.-transparent {
   border: none;
@@ -749,8 +755,13 @@ input[type=range]::-webkit-slider-runnable-track {
     display: block;
   }
 }
+.reminder {
+  margin-bottom: 32px;
+}
+
 .statuts {
   text-align: right;
+  margin-bottom: 24px;
 }
 .statuts a {
   color: #0067B0;
@@ -982,6 +993,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .information.-blue {
   color: #0067B0;
 }
+.information.-red {
+  color: #C72C1C;
+}
 
 .information_name {
   margin-top: 16px;
@@ -995,15 +1009,6 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .information_space.-empty {
   margin-bottom: 24px;
-}
-
-.chat {
-  font-size: 24px;
-  top: 50%;
-  position: absolute;
-  transform: translateY(-50%);
-  right: 45px;
-  color: #003780;
 }
 
 .information_group {
@@ -1141,11 +1146,14 @@ input[type=range]::-webkit-slider-runnable-track {
   border-top: 1px solid #0067B0;
   border-left: 1px solid #0067B0;
   border-right: 1px solid #0067B0;
+  transition: 0.5s all;
 }
 .dog_card.-walk {
   border: none;
   margin-right: 0px;
   min-width: 45%;
+  margin-top: 16px;
+  box-shadow: 2px 3px 3px 0px #00000036;
 }
 .dog_card.-active {
   box-shadow: 1px 1px 10px 0px #0067B0;
@@ -1156,6 +1164,16 @@ input[type=range]::-webkit-slider-runnable-track {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+.dog_name.-nolimit {
+  max-width: none;
+}
+.dog_name.-walk {
+  font-size: 16px;
 }
 .dog_name .edit {
   margin-left: 16px;
@@ -1202,8 +1220,12 @@ input[type=range]::-webkit-slider-runnable-track {
   }
 }
 .error {
-  color: red;
+  color: #C72C1C;
   animation: bounce 1s;
+  font-weight: bold;
+}
+.error.-center {
+  text-align: center;
 }
 
 .dog_button_container {
@@ -1311,6 +1333,17 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .friend_widget.-message {
   margin-bottom: 16px;
+}
+.friend_widget.-opacity {
+  opacity: 0.1;
+}
+.friend_widget .chat {
+  font-size: 24px;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-37.5%);
+  right: 45px;
+  color: #003780;
 }
 .friend_widget.-small {
   height: 100px;
@@ -1528,6 +1561,10 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 32px;
 }
 
+.user_walk {
+  margin-bottom: 16px;
+}
+
 .input__name {
   display: block;
   color: #003780;
@@ -1678,6 +1715,10 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-top: 16px;
   width: 80%;
 }
+
+.message__body.-hidden {
+  opacity: 0;
+}
 .message__body:first-child {
   margin-top: 0px;
 }
@@ -1704,6 +1745,14 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .edit__user {
   margin-right: 8px;
+}
+
+.center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
 }
 
 body {
@@ -1773,6 +1822,9 @@ body {
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
+}
+.button:disabled {
+  background: #ccc !important;
 }
 .button.-transparent {
   background: transparent;
@@ -2103,6 +2155,9 @@ Generated using nucleoapp.com
     transform: translateX(0px);
     border-bottom-color: red;
   }
+}
+.input:disabled {
+  background: #ccc !important;
 }
 .input.-transparent {
   border: none;
@@ -2388,6 +2443,9 @@ body {
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.button:disabled {
+  background: #ccc !important;
+}
 .button.-transparent {
   background: transparent;
   border: 1px solid white;
@@ -2718,6 +2776,9 @@ Generated using nucleoapp.com
     border-bottom-color: red;
   }
 }
+.input:disabled {
+  background: #ccc !important;
+}
 .input.-transparent {
   border: none;
   border-bottom: 1px solid white;
@@ -2906,7 +2967,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .header, .footer {
   height: 60px;
   width: 100%;
-  background-color: #007C21;
+  background-color: #36A54E;
 }
 
 .header__title {
@@ -2955,6 +3016,24 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 6px;
   position: absolute;
   top: 37.5%;
+}
+
+.friend__message{
+  font-size: 32px;
+  color: #003780;
+  position: absolute;
+  right: 105px;
+  top: 5px;
+}
+
+.friend__message.-friend{
+  right: 125px;
+}
+
+.friend__link{
+  height: 32px;
+  width: 32px;
+  display: block;
 }
 
 /*# sourceMappingURL=app.css.map */

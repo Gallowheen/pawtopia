@@ -207,7 +207,7 @@
                                 ?>
                             </div>
                         </div>  
-                        <input class="input -transparent -walk -message" placeholder="Envoyer votre message ..." type="text" id="message" name="message" required maxlength="256">
+                        <input class="input -walk -message" placeholder="Envoyer votre message ..." type="text" id="message" name="message" required maxlength="256">
                         <i class="icon icon__up -right sendMessage"></i>     
                     </div>
                 </div>

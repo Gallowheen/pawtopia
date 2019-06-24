@@ -122,7 +122,7 @@
     foreach ($row as $message){
         //$pubnub->publish('message' array('from' => 'test', 'message' => '<div data-id="'.$_SESSION['ID'].'" class="message__body"><div class="message__info"><img class="avatar -message" src="'.$message['AVATAR'].'"/><div class="message__name">'.$message['USERNAME'].'</div></div><div class="message__content">'.$message['CONTENT'].'</div><div class="message__date">'.$time.'</div></div>'));
         //$pubnub->publish({"from":"hello", "message": '<div data-id="'.$_SESSION['ID'].'" class="message__body"><div class="message__info"><img class="avatar -message" src="'.$message['AVATAR'].'"/><div class="message__name">'.$message['USERNAME'].'</div></div><div class="message__content">'.$message['CONTENT'].'</div><div class="message__date">'.$time.'</div></div>'});
-        $pubnub->publish("message", '<div data-id="'.$_SESSION['ID'].'" class="message__body"><div class="message__info"><img class="avatar -message" src="'.$message['AVATAR'].'"/><div class="message__name">'.$message['USERNAME'].'</div></div><div class="message__content">'.$message['CONTENT'].'</div><div class="message__date">'.$time.'</div></div>');
+        $pubnub->publish("message", '<div data-id="'.$_SESSION['ID'].'" class="message__body -hidden"><div class="message__info"><img class="avatar -message" src="'.$message['AVATAR'].'"/><div class="message__name">'.$message['USERNAME'].'</div></div><div class="message__content">'.$message['CONTENT'].'</div><div class="message__date">'.$time.'</div></div>');
     }
     
 

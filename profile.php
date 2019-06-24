@@ -130,12 +130,12 @@
                                     $row_friend_requested = $result_friend_requested->fetch_assoc();
 
                                     if ($row_friend['MUTUAL']){
-                                        echo '<div><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Ami</button></div>';
+                                        echo '<div><a class="friend__link" href="getMessage.php?ID='.$_GET["ID"].'"><i class="icon friend__message icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Ami</button></div>';
                                     }else{
                                         if($row_friend_requested){
-                                            echo '<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+                                            echo '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='.$_GET["ID"].'"><i class="icon icon__friend friend__message -friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
                                         }else{
-                                            echo '<div id="friend__button"><button id="add_friend" data-id="'.$_GET['ID'].'" class="friend__button button -friend"><i class="icon icon__friend icon icon-ic_person_add_48px"></i>Ajouter</button></div>';
+                                            echo '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button id="add_friend" data-id="'.$_GET['ID'].'" class="friend__button button -friend"><i class="icon icon__friend icon icon-ic_person_add_48px"></i>Ajouter</button></div>';
                                         }
                                     }
                                 }
@@ -236,7 +236,7 @@
                                         ?>
                                             <div class="dog_card">
                                                 <?php
-                                                echo "<h4 class='h4 dog_name'>".$dog['NAME']."</h4>";
+                                                echo "<h4 class='h4 dog_name -nolimit'>".$dog['NAME']."</h4>";
                                                 ?>
                                                 <div class="dog_button">
                                                 <?php
@@ -456,12 +456,12 @@
                     </div>
                 </div>
             </div>
-            <div class="reviews__container">
+            <!-- <div class="reviews__container">
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <h3 class="information h3">Mes reviews</h3>
-                            <!-- REVIEW FUNCTION -->   
+                            REVIEW FUNCTION   
                         </div>
                     </div>
                 </div>
@@ -471,11 +471,11 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="information h3">Mes derniers événements</h3>
-                            <!-- LAST_EVENT FUNCTION -->   
+                            LAST_EVENT FUNCTION   
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <?php

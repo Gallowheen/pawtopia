@@ -126,6 +126,8 @@ $(document).ready(function(){
 
             function(data){
 
+            	console.log(data);
+
                 $("#resultat").html(" ");
                 $("#username_error").html(" ");
                 $("#email_error").html(" ");
