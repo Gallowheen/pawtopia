@@ -1170,7 +1170,7 @@ input[type=range]::-webkit-slider-runnable-track {
   max-width: 100px;
 }
 .dog_name.-nolimit {
-  max-width: none;
+  max-width: auto;
 }
 .dog_name.-walk {
   font-size: 16px;
@@ -1715,10 +1715,6 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-top: 16px;
   width: 80%;
 }
-
-.message__body.-hidden {
-  opacity: 0;
-}
 .message__body:first-child {
   margin-top: 0px;
 }
@@ -1753,6 +1749,24 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .align-right {
   text-align: right;
+}
+
+.friend__message {
+  font-size: 32px !important;
+  color: #003780;
+  position: absolute;
+  right: 105px;
+  top: 5px;
+}
+
+.friend__message.-friend {
+  right: 125px;
+}
+
+.friend__link {
+  height: 32px;
+  width: 32px;
+  display: block;
 }
 
 body {
@@ -2353,8 +2367,15 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .link_footer {
   color: white;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #36a54e;
   display: block;
   font-size: 0;
+}
+.link_footer.-active {
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: #36a54e;
+  -webkit-text-fill-color: #36a54e;
 }
 
 .footer .icon__footer {
@@ -2362,17 +2383,21 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .icon__name {
-  font-size: 12px;
+  font-size: 14px;
   display: block;
   margin-top: 4px;
+  color: #36a54e;
+}
+.icon__name.-active {
+  font-weight: bold;
 }
 
 .footer {
   position: fixed;
   bottom: 0;
-  z-index: 10;
-  color: white;
   z-index: 150;
+  background: white;
+  box-shadow: 1px 1px 8px 1px #00000040;
 }
 
 body {
@@ -2962,12 +2987,12 @@ input[type=range]::-webkit-slider-runnable-track {
   color: white;
   position: fixed;
   z-index: 100;
+  background-color: #36A54E;
 }
 
 .header, .footer {
   height: 60px;
   width: 100%;
-  background-color: #36A54E;
 }
 
 .header__title {
@@ -3016,24 +3041,6 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 6px;
   position: absolute;
   top: 37.5%;
-}
-
-.friend__message{
-  font-size: 32px;
-  color: #003780;
-  position: absolute;
-  right: 105px;
-  top: 5px;
-}
-
-.friend__message.-friend{
-  right: 125px;
-}
-
-.friend__link{
-  height: 32px;
-  width: 32px;
-  display: block;
 }
 
 /*# sourceMappingURL=app.css.map */

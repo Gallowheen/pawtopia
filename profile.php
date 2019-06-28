@@ -86,7 +86,7 @@
     <?php 
         include ('src/php/header.php');
     ?>
-    <body>
+    <body class="profile">
         <?php
         if ($error){ ?>
         <div class="error__container">

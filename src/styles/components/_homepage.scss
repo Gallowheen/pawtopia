@@ -1273,3 +1273,21 @@
 .align-right{
   text-align: right;
 }
+
+.friend__message{
+  font-size: 32px !important;
+  color: #003780;
+  position: absolute;
+  right: 105px;
+  top: 5px;
+}
+
+.friend__message.-friend{
+  right: 125px;
+}
+
+.friend__link{
+  height: 32px;
+  width: 32px;
+  display: block;
+}

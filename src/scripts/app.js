@@ -1,5 +1,46 @@
 $(document).ready(function(){ 
 
+    if($('body').is('.home')){
+        $('.nav_button_group').each(function(){
+            if($(this).hasClass('home')){
+                $(this).children().eq(0).addClass('-active');
+                $(this).children().eq(1).addClass('-active');
+            }
+        });
+    }
+    if($('body').is('.profile')){
+        $('.nav_button_group').each(function(){
+            if($(this).hasClass('profile')){
+                $(this).children().eq(0).addClass('-active');
+                $(this).children().eq(1).addClass('-active');
+            }
+        });
+    }
+    if($('body').is('.members')){
+        $('.nav_button_group').each(function(){
+            if($(this).hasClass('members')){
+                $(this).children().eq(0).addClass('-active');
+                $(this).children().eq(1).addClass('-active');
+            }
+        });
+    }
+    if($('body').is('.walk')){
+        $('.nav_button_group').each(function(){
+            if($(this).hasClass('walk')){
+                $(this).children().eq(0).addClass('-active');
+                $(this).children().eq(1).addClass('-active');
+            }
+        });
+    }
+    if($('body').is('.message')){
+        $('.nav_button_group').each(function(){
+            if($(this).hasClass('message')){
+                $(this).children().eq(0).addClass('-active');
+                $(this).children().eq(1).addClass('-active');
+            }
+        });
+    }
+
     var ready = false;
 
     var pubnub = new PubNub({
