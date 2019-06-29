@@ -2,17 +2,17 @@
     <title>Pawtopia | <?= $pagename ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/app.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
-    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
-    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/src/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/src/styles/app.css">
+    <link rel="stylesheet" type="text/css" href="/src/styles/sanitize.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/img/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/src/assets/img/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/assets/img/logo/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/src/assets/img/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/src/assets/img/logo/favicon.ico">
     <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
+    <meta name="msapplication-config" content="/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <!-- Méta Google -->
     <meta name="title" content="Pawtopia" />
