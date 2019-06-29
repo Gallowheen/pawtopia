@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -30,46 +30,16 @@
 
         }
         $row = $result->fetch_assoc();
-    }  
+    }
 
     $pagename = $row['NAME'];
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pawtopia | Walk detail</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/app.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
-    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
-    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Méta Google -->
-    <meta name="title" content="Pawtopia" />
-    <meta name="description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-
-    <!-- Métas Facebook Opengraph -->
-    <meta property="og:title" content="Pawtopia" />
-    <meta property="og:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta property="og:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta property="og:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    <meta property="og:type" content="website"/>
-
-    <!-- Métas Twitter Card -->
-    <meta name="twitter:title" content="Pawtopia" />
-    <meta name="twitter:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    </head>
+    <?php
+        include ('src/php/head.php');
+    ?>
     <body class="walk_detail">
         <?php
             include ('src/php/header.php');
@@ -79,27 +49,27 @@
                 <div class="row">
                     <div class="col">
                         <h3 class="information -first h3">Informations</h3>
-                        <div class="informations">                       
-                            <?php 
+                        <div class="informations">
+                            <?php
                                 $query = $link->prepare("SELECT * FROM event WHERE ID = ?");
                                 $query->bind_param("i", $walk);
                                 $query->execute();
-                        
+
                                 $result = $query->get_result();
                                 $row = $result->fetch_assoc();
 
-                                $id_event = $row['ID'];         
+                                $id_event = $row['ID'];
 
                                 $town_check_query = $link->prepare("SELECT NAME FROM towns WHERE ID = ? ");
 
                                 $town_check_query->bind_param("i", $row['TOWN_ID'] );
                                 $town_check_query->execute();
-                            
-                                $result_town = $town_check_query->get_result(); 
+
+                                $result_town = $town_check_query->get_result();
                                 $row_city = $result_town->fetch_assoc();
 
-                                $townToInsert = $row_city['NAME']; 
-                            
+                                $townToInsert = $row_city['NAME'];
+
                                 $jour = [];
                                 $jour[0] = "Lundi";
                                 $jour[1] = "Mardi";
@@ -170,13 +140,13 @@
                             </div>
                             <div class="master">
                                 <div class="master__container">
-                                    <?php 
+                                    <?php
                                         $query = $link->prepare("SELECT * FROM event_attendee WHERE ID_EVENT = ?");
                                         $query->bind_param("i", $id_event);
                                         $query->execute();
-                                
+
                                         $result = $query->get_result();
-                                        $rows_attendee = resultToArray($result); 
+                                        $rows_attendee = resultToArray($result);
 
                                         foreach($rows_attendee as $attendee){
                                             $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
@@ -184,7 +154,7 @@
                                             $query->execute();
 
                                             $result = $query->get_result();
-                                            $rows = resultToArray($result);  
+                                            $rows = resultToArray($result);
 
                                             foreach ( $rows as $master ) :?>
                                                     <div class="center">
@@ -194,7 +164,7 @@
                                                         <?php
                                                         echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="'.$master['AVATAR'].'">';?>
                                                     </div>
-                                                <?php    
+                                                <?php
                                             endforeach;
                                         }
                                     ?>
@@ -205,20 +175,20 @@
                             </div>
                             <div class="chiens">
                                 <div class="chien__container">
-                            <?php 
+                            <?php
                                     $query = $link->prepare("SELECT * FROM event_dog WHERE ID_EVENT = ?");
                                     $query->bind_param("i", $id_event);
                                     $query->execute();
-                            
+
                                     $result = $query->get_result();
-                                    $rows_attendee = resultToArray($result); 
+                                    $rows_attendee = resultToArray($result);
                                     foreach($rows_attendee as $attendee){
                                         $query = $link->prepare("SELECT * FROM dog WHERE ID = ? and ACTIVE = 1");
                                         $query->bind_param("i", $attendee['ID_DOG']);
                                         $query->execute();
 
                                         $result = $query->get_result();
-                                        $rows = resultToArray($result);  
+                                        $rows = resultToArray($result);
 
                                         foreach ( $rows as $dog ) :?>
                                                 <div class="center">
@@ -228,7 +198,7 @@
                                                     <?php
                                                     echo '<img class="dog_img avatar -small -noMargin" src="'.$dog['PICTURE'].'">';?>
                                                 </div>
-                                            <?php    
+                                            <?php
                                         endforeach;
                                     }
                             ?>
@@ -239,7 +209,7 @@
                     $query = $link->prepare("SELECT * FROM event_attendee WHERE ID_ATTENDEE = ? AND ID_EVENT = ?");
                     $query->bind_param("ii", $_SESSION['ID'], $id_event);
                     $query->execute();
-            
+
                     $result = $query->get_result();
                     if($result->num_rows === 0){
                         $row_user = $result->fetch_assoc();
@@ -249,7 +219,7 @@
                         $query->execute();
 
                         $result = $query->get_result();
-                        $rows = resultToArray($result);  
+                        $rows = resultToArray($result);
                         if($result->num_rows === 0){
                             echo '<p class="error -center">Vous devez avoir au moins un compagnon pour participer à une balade</p>';
                         }else{
@@ -259,14 +229,14 @@
                         </div>
                         <?php } ?>
                         <div class="walk__add__dog">
-                        <?php 
+                        <?php
                             // On récupère les chiens
                             $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1");
                             $query->bind_param("i", $_SESSION['ID']);
                             $query->execute();
 
                             $result = $query->get_result();
-                            $rows = resultToArray($result);  
+                            $rows = resultToArray($result);
                             ?>
                             <div class="walk__dog">
                                 <h3 class="h3 information -top">Votre partenaire de balade</h3>
@@ -281,12 +251,12 @@
                                         <div class="dog_button -walk">
                                         <?php
                                         echo '<img class="dog_img avatar -small -noMargin" src="'.$dog['PICTURE'].'">';?>
-                                        
-                                        </div> 
-                                    </div> 
-                                    <?php    
+
+                                        </div>
+                                    </div>
+                                    <?php
                                     endforeach;
-                                    ?>      
+                                    ?>
                                 </div>
                                 <div class="input__container -center">
                                     <button class="input button -color -blue -nomargin" data-id="<?php echo $id_event ?>" id="validate__sign">Je valide</button>
@@ -300,7 +270,7 @@
             </div>
         </div>
     </body>
-    <?php 
+    <?php
         include('src/php/footer.php');
     ?>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>

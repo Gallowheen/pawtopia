@@ -20,7 +20,7 @@
             $dist = rad2deg($dist);
             $miles = $dist * 60 * 1.1515;
             $unit = strtoupper($unit);
-        
+
             if ($unit == "K") {
             return ($miles * 1.609344);
             } else if ($unit == "N") {
@@ -48,7 +48,7 @@
 
     $result = $query->get_result();
     if($result->num_rows === 0){
-        
+
     }
     $rows = array();
 
@@ -107,7 +107,7 @@
         }else
             $newArray[$user['km']] = $user;
     }
-    
+
     ksort($newArray);
 
     $newNewArray = [];

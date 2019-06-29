@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("bdd.php");
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -33,13 +33,13 @@
 
     $result = $query->get_result();
     if($result->num_rows === 0){
-        
+
     }else{
-        $rows = resultToArray($result);   
+        $rows = resultToArray($result);
 
         $get_event = array();
         $valid_event = array();
-        
+
         foreach ( $rows as $test ){
 
             $query = $link->prepare("SELECT * FROM event WHERE ID = ?");
@@ -48,9 +48,9 @@
 
             $result = $query->get_result();
             if($result->num_rows === 0){
-                
+
             }else{
-                $rows_event = resultToArray($result);   
+                $rows_event = resultToArray($result);
 
                 foreach ($rows_event as $event){
                     array_push($get_event,$event);

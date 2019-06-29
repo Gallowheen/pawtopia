@@ -37,8 +37,8 @@
                         <option value="11">11 ans</option>
                         <option value="12">12 ans</option>
                         <option value="13">13 ans</option>
-                        <option value="14">14 ans</option>        
-                        <option value="15">15 ans</option>               
+                        <option value="14">14 ans</option>
+                        <option value="15">15 ans</option>
                     </select>';
 
                     $sql = "SELECT * FROM breeds";
@@ -48,7 +48,7 @@
 
                     echo '<select required placeholder="Race" class="select -addDog" name="breed" id="breed">';
                             echo '<option value="" disabled selected hidden>Race</option>';
-                            foreach ( $results as $option ) : 
+                            foreach ( $results as $option ) :
                                 echo'<option value="'.$option->ID.'">'.$option->NAME.'</option>';
                             endforeach;
                         echo'</select>';

@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("bdd.php");
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
@@ -18,7 +18,7 @@
                     <i class="icon home icon-ic_home_48px"></i>
                     <h1 class="h1 header__title -left">
                 <?php } ?>
-                    <?php 
+                    <?php
                         $user;
                         if (empty($_GET['ID']))
                             $user = $_SESSION['ID'];
@@ -32,12 +32,12 @@
 
                             $result = $query->get_result();
                             if($result->num_rows === 0){
-                                
+
                             }
                             $row = $result->fetch_assoc();
 
                             echo $pagename;
-                        }       
+                        }
                     ?>
                     </h1>
                 </div>

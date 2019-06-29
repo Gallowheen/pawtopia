@@ -31,7 +31,7 @@
 
   &::placeholder
   {
- 
+
   }
 
   &:active,
@@ -43,16 +43,16 @@
 
   &.-error
   {
-   
+
   }
 
   &:invalid
   {
-   
+
   }
 
-  &:disabled { 
-    background: #ccc !important; 
+  &:disabled {
+    background: #ccc !important;
   }
 
   ////////////////////////////////////////////////////
@@ -69,7 +69,7 @@
 
     &:not(:placeholder-shown)
     {
-    
+
     }
 
     &::placeholder
@@ -196,5 +196,5 @@ input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   border: 1px solid #007C21;
 }
-  
-   
+
+

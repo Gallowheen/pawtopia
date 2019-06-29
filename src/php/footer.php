@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("bdd.php");
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");

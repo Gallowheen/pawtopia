@@ -1,43 +1,14 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
+    $pagename = "Let's walk together";
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pawtopia | Let's walk together</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="src/styles/app.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
-    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
-    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Méta Google -->
-    <meta name="title" content="Pawtopia" />
-    <meta name="description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-
-    <!-- Métas Facebook Opengraph -->
-    <meta property="og:title" content="Pawtopia" />
-    <meta property="og:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta property="og:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta property="og:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    <meta property="og:type" content="website"/>
-
-    <!-- Métas Twitter Card -->
-    <meta name="twitter:title" content="Pawtopia" />
-    <meta name="twitter:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    </head>
+    <?php
+        include ('src/php/head.php');
+    ?>
     <body class="landing">
         <div class="mobile">
             <div class="dotting"></div>
@@ -80,7 +51,7 @@
                                     <?php
                                         $link = mysqli_connect(HOST, USER, PWD, BASE);
                                         mysqli_query($link, "SET NAMES UTF8");
-                                        
+
                                         $sql = "SELECT * FROM towns";
                                         $query = mysqli_query($link,$sql);
                                         while ( $results[] = mysqli_fetch_object ( $query ) );
@@ -110,8 +81,8 @@
                                 <span class="choice">Se connecter</span>
                             </div>
                         </div>
-                    </div>       
-                </div>      
+                    </div>
+                </div>
             </div>
             <div class="container__introduction">
                 <div class="container">
@@ -121,8 +92,8 @@
                             <!-- <button class="button -transparent together">LET'S WALK TOGETHER</button> -->
                         </div>
                     </div>
-                </div>       
-            </div>      
+                </div>
+            </div>
         </div>
         <div class="desktop">
             <h1 class="wip">Ceci n'est pas une landing page</h1>

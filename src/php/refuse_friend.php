@@ -10,7 +10,7 @@
     $username1 = $_GET['ID'];
     $username2 = $_SESSION['ID'];
 
-    //On supprime la demande d'amis 
+    //On supprime la demande d'amis
     $query_user2_delete = $link->prepare("DELETE FROM `friends` WHERE ID_USER1 = ? AND ID_USER2 = ?");
     $query_user2_delete->bind_param("ii", $username1,$username2);
     $query_user2_delete->execute();

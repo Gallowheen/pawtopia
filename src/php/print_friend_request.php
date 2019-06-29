@@ -6,8 +6,8 @@
     require_once("bdd.php");
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
-    
-    
+
+
     $username1 = $_GET['ID'];
     $username2 = $_SESSION['ID'];
 

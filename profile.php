@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -36,53 +36,23 @@
             //redirect ?
         }
         $row = $result->fetch_assoc();
-    }  
+    }
 
 
-    if (empty($_GET)) 
+    if (empty($_GET))
         $pagename = 'Mon Profil';
     else{
         $pagename = 'Profil de '. $row['USERNAME'];
     }
-    
+
     $error = false;
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pawtopia | Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="src/styles/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/app.css">
-    <link rel="stylesheet" type="text/css" href="src/styles/sanitize.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/projets/tfe/beta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/projets/tfe/beta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/projets/tfe/beta/favicon-16x16.png">
-    <link rel="manifest" href="/projets/tfe/beta/site.webmanifest">
-    <link rel="mask-icon" href="/projets/tfe/beta/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/projets/tfe/beta/favicon.ico">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-config" content="/projets/tfe/beta/browserconfig.xml">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Méta Google -->
-    <meta name="title" content="Pawtopia" />
-    <meta name="description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-
-    <!-- Métas Facebook Opengraph -->
-    <meta property="og:title" content="Pawtopia" />
-    <meta property="og:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta property="og:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta property="og:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    <meta property="og:type" content="website"/>
-
-    <!-- Métas Twitter Card -->
-    <meta name="twitter:title" content="Pawtopia" />
-    <meta name="twitter:description" content="Pawtopia permet aux chiens et à leur maître de trouver des partenaires pour leurs balades." />
-    <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
-    <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
-    </head>
+    <?php
+        include ('src/php/head.php');
+    ?>
     <body class="profile">
         <?php
             include ('src/php/header.php');
@@ -96,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <?php    
+        <?php
         }else{
 
             ?>
@@ -105,11 +75,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <?php 
+                            <?php
                                 if ($row['PRIVATE'] == 1 )
                                     echo "<p class='private'>Ce profil est privé</p>";
                             ?>
-                            <?php 
+                            <?php
 
                                 if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
 
@@ -141,13 +111,13 @@
                                 }
 
                                 // SELECT AVATAR
-                            
+
                                 $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1 LIMIT 1");
                                 if (empty($_GET)){
                                     $query->bind_param("i", $_SESSION['ID']);
                                 }else{
-                                    $query->bind_param("i", $_GET['ID']); 
-                                }  
+                                    $query->bind_param("i", $_GET['ID']);
+                                }
                                 $query->execute();
 
                                 $result = $query->get_result();
@@ -165,7 +135,7 @@
                                     <img class="avatar avatar -dog" src="<?php echo $avatar_dog ?>"/>
                                     <img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>
                                 </div>
-                                   
+
                                 <?php
                                 }
                                 ?>
@@ -192,7 +162,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <!-- DOG VIEWER FUNCTION -->   
+                            <!-- DOG VIEWER FUNCTION -->
                             <?php
                                 $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1");
                                 $query->bind_param("i", $row['ID']);
@@ -202,7 +172,7 @@
                                 if($result->num_rows === 0){
                                     if(!empty($_GET)){
                                     ?>
-                                        <h3 class="information h3">Ses compagnons (0)</h3>                        
+                                        <h3 class="information h3">Ses compagnons (0)</h3>
                                     <?php
                                     }else{ ?>
                                         <h3 class="information h3">Ses compagnons (0)</h3>
@@ -215,12 +185,12 @@
                                         echo "<div class='dog_information_button'><button id='add_dog' class='button -color'>Ajouter un compagnon</button></div>";
                                     }
                                 }else{
-                                    $rows = resultToArray($result);   
+                                    $rows = resultToArray($result);
                                     if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
                                         <h3 class="information h3">Ses compagnons <?php echo '('.count($rows).')' ?></h3>
                                         <p class="information_space private"> Ce profil est privé</p>
                                         <?php
-                                    }else{              
+                                    }else{
                                         ?>
                                         <h3 class="information h3">Mes compagnons <?php echo '('.count($rows).')' ?></h3>
                                         <?php
@@ -245,7 +215,7 @@
                                                 <?php
                                                     }
                                                 echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';?>
-                                                
+
                                                 </div>
                                                 <div class='dog_information'>
                                                     <?php
@@ -262,7 +232,7 @@
                                                         echo '<div class="information_group -dog"><p><span class="information_title">Race :</span><span class="information_space">'.$row_breeds['NAME'].'</span></p></div>';
                                                     ?>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         <?php
                                         endforeach;
                                         ?>
@@ -283,24 +253,24 @@
                                 $friends = [];
                                 $friends_pending = [];
                                 $friends_invite= [];
-        
+
                                 $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
                                 $query_friend_mutual->bind_param("ii", $user, $user);
                                 $query_friend_mutual->execute();
-        
+
                                 $result_friend_mutual = $query_friend_mutual->get_result();
-                                $row_friends_mutual = resultToArray($result_friend_mutual);  
-                                            
-                                foreach ($row_friends_mutual as $friend) :          
+                                $row_friends_mutual = resultToArray($result_friend_mutual);
+
+                                foreach ($row_friends_mutual as $friend) :
                                     if(!in_array($friend['id_user1'],$friends)){
                                         if($friend['id_user1'] != $user)
-                                            array_push($friends, $friend['id_user1']);        
-                                    }   
+                                            array_push($friends, $friend['id_user1']);
+                                    }
                                 endforeach;
-        
+
                             ?>
                             <?php
-                                if ((count($row_friends_mutual)-1) <= 0){ 
+                                if ((count($row_friends_mutual)-1) <= 0){
                                     if(!empty($_GET)){
                                     ?>
                                         <h3 class="information h3">Ses amis (0)</h3><?php
@@ -322,7 +292,7 @@
                                     <?php
                                     }
                                 }
-                            ?>      
+                            ?>
                             <?php
                             if ($row['PRIVATE'] == 1 && !empty($_GET) && count($row_friends_mutual)-1 == 0){ ?>
                                 <p class="information_space private"> Ce profil est privé</p>
@@ -338,10 +308,10 @@
                                             <a href="friends.php"><button class="button -color">Plus d'amis</button></a>
                                         </div>
                                     <?php
-                                    }else{   
+                                    }else{
                                         echo '<div class="friend_widget_container -notEmpty">';
-                                        foreach ($friends as $friend) :           
-                                            
+                                        foreach ($friends as $friend) :
+
                                             $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ?");
                                             $query_friend_info->bind_param("i", $friend);
                                             $query_friend_info->execute();
@@ -351,7 +321,7 @@
                                                 //impossible
                                             }
                                             $row_friend_info = $result_friend_info->fetch_assoc();
-                                            
+
 
                                             echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';?>
                                             <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
@@ -366,7 +336,7 @@
                                         </div>
                                         <?php
 
-                                    }  
+                                    }
                                 //other one profile
                                 }else{
                                     $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
@@ -375,19 +345,19 @@
 
                                     $result_friend_mutual = $query_friend_mutual->get_result();
                                     if($result_friend_mutual->num_rows === 1){
-                                        
+
                                     }else{
-                                        $row_friends_mutual = resultToArray($result_friend_mutual);  
-                                        
-                                        foreach ($row_friends_mutual as $friend) :          
+                                        $row_friends_mutual = resultToArray($result_friend_mutual);
+
+                                        foreach ($row_friends_mutual as $friend) :
                                             if(!in_array($friend['id_user1'],$friends)){
                                                 if($friend['id_user1'] != $user)
-                                                    array_push($friends, $friend['id_user1']);        
-                                            }   
+                                                    array_push($friends, $friend['id_user1']);
+                                            }
                                         endforeach;
 
                                         echo '<div class="friend_widget_container -notEmpty">';
-                                        foreach ($friends as $friend) :           
+                                        foreach ($friends as $friend) :
                                             $query_friend_info = $link->prepare("SELECT * FROM user WHERE ID = ?");
                                             $query_friend_info->bind_param("i", $friend);
                                             $query_friend_info->execute();
@@ -397,10 +367,10 @@
                                                 //impossible
                                             }
                                             $row_friend_info = $result_friend_info->fetch_assoc();
-                                            
+
 
                                             echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';?>
-                                            
+
                                             <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
                                             <?php
                                             echo '<p class="friend__username">'.$row_friend_info['USERNAME'].'</p>';
@@ -412,7 +382,7 @@
                                             <a href="<?php echo "friends.php?ID=".$user ?>"><button class="button -color -blue">Plus d'amis</button></a>
                                         </div>
                                         <?php
-                                    } 
+                                    }
                                 }
                             }
                             ?>
@@ -436,11 +406,11 @@
 
                                     $town_check_query->bind_param("i", $row['TOWN_ID'] );
                                     $town_check_query->execute();
-                                
-                                    $result_town = $town_check_query->get_result(); 
+
+                                    $result_town = $town_check_query->get_result();
                                     $row_city = $result_town->fetch_assoc();
 
-                                    $townToInsert = $row_city['NAME']; 
+                                    $townToInsert = $row_city['NAME'];
 
                                     echo" <div class='information_group'><i class='icon information__city icon-home-52'></i><span class='information_space'>".$townToInsert."</span></div>";
 
@@ -461,7 +431,7 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="information h3">Mes reviews</h3>
-                            REVIEW FUNCTION   
+                            REVIEW FUNCTION
                         </div>
                     </div>
                 </div>
@@ -471,7 +441,7 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="information h3">Mes derniers événements</h3>
-                            LAST_EVENT FUNCTION   
+                            LAST_EVENT FUNCTION
                         </div>
                     </div>
                 </div>
@@ -482,7 +452,7 @@
         }
     ?>
     </body>
-    <?php 
+    <?php
         include('src/php/footer.php');
     ?>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>

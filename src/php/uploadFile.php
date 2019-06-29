@@ -33,9 +33,9 @@ if($page == "dog"){
         }
 
         if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/dogs/'.$name.'/'. $_FILES['upload_file']['name'])){
-        
+
         } else {
-    
+
         }
         exit;
     } else {
@@ -46,9 +46,9 @@ if($page == "dog"){
     echo $_FILES['upload_file']['tmp_name'];
     if (isset($_FILES['upload_file'])) {
         if(move_uploaded_file($_FILES['upload_file']['tmp_name'], "../../users/".$_SESSION['ID']."_".$owner_name.'/avatar/'. $_FILES['upload_file']['name'])){
-            
+
         } else {
-    
+
         }
         exit;
     } else {

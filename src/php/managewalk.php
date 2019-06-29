@@ -21,7 +21,7 @@
             $dist = rad2deg($dist);
             $miles = $dist * 60 * 1.1515;
             $unit = strtoupper($unit);
-        
+
             if ($unit == "K") {
             return ($miles * 1.609344);
             } else if ($unit == "N") {
@@ -40,7 +40,7 @@
     if (isset($_GET['date']))
         if ($_GET['date'] !== 'undefined')
             $date = $_GET['date'];
-        
+
     if (isset($walk)){
         $query = $link->prepare("SELECT * FROM event WHERE WALK = ? AND DATE_START > ? ORDER BY NAME");
         $query->bind_param("ss", $walk, $date);
@@ -52,7 +52,7 @@
 
     $result = $query->get_result();
     if($result->num_rows === 0){
-        
+
     }
     $rows = array();
 
@@ -121,7 +121,7 @@
         }else
             $newArray[$user['km']] = $user;
     }
-    
+
     ksort($newArray);
 
     $newNewArray = [];

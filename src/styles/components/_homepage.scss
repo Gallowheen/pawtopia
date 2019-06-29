@@ -7,7 +7,7 @@
 
 // INDEX
 
-.video-responsive 
+.video-responsive
 {
   position: fixed;
   width: 400vw;
@@ -69,7 +69,7 @@
     color: #C72C1C;
   }
 
-  .login__name, .login__pwd, .register__name, 
+  .login__name, .login__pwd, .register__name,
   .register__mail, .register__town, .register__password1,
   .register__password2{
     color: white;
@@ -111,7 +111,7 @@
     color: #0067B0;
     margin-right: 16px;
   }
-  
+
   &.-center{
     text-align : center;
   }
@@ -179,7 +179,7 @@
   .wip{
     display: none;
   }
-}   
+}
 
 @media only screen and (min-aspect-ratio: 13/9){
   .mobile{
@@ -393,7 +393,7 @@
   left: 80px;
 
   &.-member{
-    position : relative; 
+    position : relative;
     display : block;
     transform: translateY(0%);
     left: 0px;
@@ -401,7 +401,7 @@
   }
 
   &.-km{
-    position : relative; 
+    position : relative;
     display : block;
     transform: translateY(-40%);
     left: 0px;
@@ -416,7 +416,7 @@
   white-space: nowrap;
   overflow: hidden;
 
-  position : relative; 
+  position : relative;
   display : block;
   transform: translateY(-20%);
   left: 0px;
@@ -659,7 +659,7 @@
   max-width: 100px;
 
   &.-nolimit{
-    max-width: auto; 
+    max-width: auto;
   }
 
   &.-walk{
@@ -870,7 +870,7 @@
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  
+
   button{
     font-size: 12px !important;
 
@@ -1047,7 +1047,7 @@
 }
 
 .button_choice{
-  display: flex; 
+  display: flex;
   justify-content: space-around;
   margin: 0px;
 }
@@ -1164,7 +1164,7 @@
     border-radius: 8px;
     border: 2px solid white;
     background-color: rgba(73,129,189, .5);
-  } 
+  }
 
   &::-webkit-scrollbar {
     -webkit-appearance: none;

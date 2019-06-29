@@ -38,7 +38,7 @@
             if (count($user) > 0){
                 $error = false;
                 $userToAdd;
-                for ($k = 0; $k < count($user); $k++){            
+                for ($k = 0; $k < count($user); $k++){
                     if ($row[$i]['ID_USER1'] == $userID){
                         if($row[$i]['ID_USER2'] == $user[$k]){
                             $error = true;
@@ -61,59 +61,59 @@
                     }
                 }
             }else{
-                if ($row[$i]['ID_USER1'] != $userID) 
+                if ($row[$i]['ID_USER1'] != $userID)
                     array_push($user,$row[$i]['ID_USER1']);
                 else
                     array_push($user,$row[$i]['ID_USER2']);
             }
         }
-    
+
         foreach ($user as $entry){
-    
+
             $query__user = $link->prepare("SELECT * FROM user WHERE ID = ?");
             $query__user->bind_param("i", $entry);
             $query__user->execute();
-    
+
             $result__query = $query__user->get_result();
-            $row__query = resultToArray($result__query); 
-    
+            $row__query = resultToArray($result__query);
+
             //var_dump($row__query);
-    
+
             foreach ($row__query as $test){
                 $USER_AVATAR;
                 $USER_NAME;
                 $USER_ID;
-    
+
                 // echo $entry.'--';
                 // echo $test['ID'];
-       
+
                 $USER_AVATAR = $test['AVATAR'];
                 $USER_NAME = $test['USERNAME'];
                 $USER_PID = $test['ID'];
             }
-    
+
             //var_dump($row);
-    
+
             foreach ($row as $cle => $user){
                 //echo $row[$cle]['ID_USER2'];
                 // echo($row[$cle]['ID']."------");
                 // echo $USER_ID."||";
                 if ($row[$cle]['ID_USER1'] != $USER_PID ){
-                    
+
                 }else{
                     $row[$cle]['USERNAME'] = $USER_NAME;
                     $row[$cle]['AVATAR'] = $USER_AVATAR;
                 }
-    
+
                 if ($row[$cle]['ID_USER2'] != $USER_PID ){
-                    
+
                 }else{
                     $row[$cle]['USERNAME'] = $USER_NAME;
                     $row[$cle]['AVATAR'] = $USER_AVATAR;
                 }
-            }   
+            }
         }
-    
+
         echo json_encode($row);
         //echo json_encode($row)
     }

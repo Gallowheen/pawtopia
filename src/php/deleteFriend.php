@@ -15,5 +15,5 @@
 
     $query2 = $link->prepare("DELETE FROM `friends` WHERE ID_USER1 = ? AND ID_USER2 = ?");
     $query2->bind_param("ii", $_SESSION['ID'], $friend_id);
-    $query2->execute();   
+    $query2->execute();
 ?>

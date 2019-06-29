@@ -38,8 +38,8 @@
 
   }
 
-  &:disabled { 
-    background: #ccc !important; 
+  &:disabled {
+    background: #ccc !important;
   }
 
 
@@ -132,7 +132,7 @@
     &.-round{
       border-radius: 25px;
     }
-        
+
     &.-right{
       margin-right : 16px;
     }
@@ -142,7 +142,7 @@
                                         */
   @include respond-below(sm) {
     & {
-      
+
     }
   }
 }

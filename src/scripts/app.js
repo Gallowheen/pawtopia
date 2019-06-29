@@ -1,4 +1,4 @@
-$(document).ready(function(){ 
+$(document).ready(function(){
 
     if($('body').is('.home')){
         $('.nav_button_group').each(function(){
@@ -53,13 +53,13 @@ $(document).ready(function(){
         e.preventDefault();
         e.stopPropagation();
         var user = $(this).data("user");
-    
+
         $.ajax({
             method: "GET",
             data:{ID:user},
             url:"src/php/accept_friend.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             document.location.reload(true);
         });
     });
@@ -68,13 +68,13 @@ $(document).ready(function(){
         e.preventDefault();
         e.stopPropagation();
         var user = $(this).data("user");
-    
+
         $.ajax({
             method: "GET",
             data:{ID:user},
             url:"src/php/refuse_friend.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             document.location.reload(true);
         });
     });
@@ -97,7 +97,7 @@ $(document).ready(function(){
         .done(function(result) {
             $(".information_editable").html(result);
 
-            $('#uploadfiles').on("change", function(){ 
+            $('#uploadfiles').on("change", function(){
                 $("#update").prop('disabled', true);
                 // var uploadfiles = $('#uploadfiles');
                 // var files = uploadfiles.files;
@@ -154,7 +154,7 @@ $(document).ready(function(){
                         image:image
                     },
                 })
-                .done(function(result){ 
+                .done(function(result){
 
                     //console.log(result);
 
@@ -179,7 +179,7 @@ $(document).ready(function(){
 
         if($('body').is('.members'))
             $(".my_pet__container .container--full .row .col").append('<div class="dog_card_bubble_container"></div>');
-        else    
+        else
             $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
 
         $(".dog_card_container").children().each(function(){
@@ -225,7 +225,7 @@ $(document).ready(function(){
             method: "GET",
             url:"src/php/showcase_member.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             //console.log(result);
             let data = JSON.parse(result);
             let member;
@@ -236,7 +236,7 @@ $(document).ready(function(){
                 var x = 0;
 
                 for( let i = 0; i < data.length && x <= 5; i++){
-                    //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>'; 
+                    //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>';
                     member = '<button class="button view" data-id="'+data[i].ID+'"><div class="friend_widget -small"><img class="avatar -topFriend" src="'+data[i].AVATAR+'"/><p class="friend__username">'+data[i].USERNAME+'</p></div>';
                     $(".member__filtred .container .row .col .showcase__member").append(member);
                     x++;
@@ -245,9 +245,9 @@ $(document).ready(function(){
                 $(".view").click(function(e){
                     e.preventDefault();
                     e.stopPropagation();
-            
+
                     var user = $(this).data("id");
-            
+
                     window.location = "profile.php?ID=" + user;
                 });
             }
@@ -270,8 +270,8 @@ $(document).ready(function(){
             },
             url:"src/php/managefriend.php",
         })
-        .done(function(result){ 
-        
+        .done(function(result){
+
             let data = JSON.parse(result);
             let member;
 
@@ -291,17 +291,17 @@ $(document).ready(function(){
                 $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
 
                 $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
-                
+
                 for( let i = 0; i < data.length; i++){
-                    member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+data[i].AVATAR+'"><div class="container__info"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div></div></div>'; 
+                    member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+data[i].AVATAR+'"><div class="container__info"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div></div></div>';
                     $(".member__filtred .container .row .col .member_widget_container").append(member);
                 }
- 
+
 
                 $(".test").click(function(e){
                     e.preventDefault();
                     e.stopPropagation();
-            
+
                     var user = $(this).data("id");
                     var container = $(this);
 
@@ -309,10 +309,10 @@ $(document).ready(function(){
                         method: "GET",
                         url:"src/php/simple_profile.php?ID="+user,
                     })
-                    .done(function(result){ 
+                    .done(function(result){
 
                         if ( container.hasClass('expanded')){
-                            
+
                         }else{
                             container.append(result);
                             container.addClass('expanded');
@@ -329,20 +329,20 @@ $(document).ready(function(){
                             $(".view").click(function(e){
                                 e.preventDefault();
                                 e.stopPropagation();
-                        
+
                                 var user = $(this).data("id");
-                        
+
                                 window.location = "profile.php?ID=" + user;
                             });
-                        }   
-                        
-                        $('.tapToClose').click(function(e){  
+                        }
+
+                        $('.tapToClose').click(function(e){
                             e.stopPropagation();
 
                             var container = $(this).parent().parent();
                             var child = $(this).parent().parent().eq(0).children().eq(1);
                             $(this).parent().parent().removeClass('expanded');
-                            $(this).parent().parent().children().eq(0).css("display","block"); 
+                            $(this).parent().parent().children().eq(0).css("display","block");
                             $(this).parent().parent().css("height", "75px");
                             $([document.documentElement, document.body]).animate({
                                 scrollTop: container.offset().top - 100
@@ -350,19 +350,19 @@ $(document).ready(function(){
                             child.animate({opacity : 0},"slow");
 
                             setTimeout(function(){
-                                child.remove();     
-                            },250);   
+                                child.remove();
+                            },250);
                         });
 
                         $('.add__friend').click(function(){
-                    
+
                             let user = $(this).data("id");
                             $.ajax({
                                 method: "GET",
                                 data:{ID:user},
                                 url:"src/php/add_friend.php",
                             })
-                            .done(function(result){ 
+                            .done(function(result){
                                 $('.avatar__container #add_friend').remove();
                                 $('.avatar__container .container--full .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
                             });
@@ -371,14 +371,14 @@ $(document).ready(function(){
                 });
             }
 
-            $(".members__handler__container").css('background','transparent'); 
+            $(".members__handler__container").css('background','transparent');
 
             setTimeout(function(){
-                $(".members__handler__container").css('transform','translateY(100%)'); 
+                $(".members__handler__container").css('transform','translateY(100%)');
             }, 750);
 
             setTimeout(function(){
-                $(".members__handler__container").css('display','none'); 
+                $(".members__handler__container").css('display','none');
                 $("body").css('overflow','auto');
                 $(".showcase__member").css("height","0px");
             }, 1250);
@@ -397,11 +397,11 @@ $(document).ready(function(){
             var hour = today.getHours();
             if(dd<10){
                     dd='0'+dd
-                } 
+                }
                 if(mm<10){
                     mm='0'+mm
-                } 
-    
+                }
+
             today = yyyy+'-'+mm+'-'+dd;
             document.getElementById("date").setAttribute("min", today);
             document.getElementById("date").setAttribute("value", today);
@@ -418,11 +418,11 @@ $(document).ready(function(){
             $(".walk__handler__container").css('display','block');
 
             setTimeout(function(){
-                $(".walk__handler__container").css('transform','translateY(0%)'); 
+                $(".walk__handler__container").css('transform','translateY(0%)');
             }, 500);
 
             setTimeout(function(){
-                $(".walk__handler__container").css('background','#00000024'); 
+                $(".walk__handler__container").css('background','#00000024');
             }, 1500);
         }else{
             $(".members__handler").find("input:radio").prop("checked", false);
@@ -435,11 +435,11 @@ $(document).ready(function(){
             $(".members__handler__container").css('display','block');
 
             setTimeout(function(){
-                $(".members__handler__container").css('transform','translateY(0%)'); 
+                $(".members__handler__container").css('transform','translateY(0%)');
             }, 500);
 
             setTimeout(function(){
-                $(".members__handler__container").css('background','#00000024'); 
+                $(".members__handler__container").css('background','#00000024');
             }, 1500);
         }
     });
@@ -479,7 +479,7 @@ $(document).ready(function(){
 				data:{dog:dog},
 				url:"src/php/deleteDog.php",
 			})
-			.done(function(result){ 
+			.done(function(result){
                 let divToDelete;
                 $('.dog_card').each(function(){
                     if($(this).children().eq(1).children().eq(0).data('dog') == dog){
@@ -492,7 +492,7 @@ $(document).ready(function(){
                     $('#dog_accepted').parent().parent().parent().parent().parent().parent().remove();
                 },1000)
                 $(document.body).css('overflow','scroll');
-    
+
                 divToDelete.remove();
                 initSwipe();
 
@@ -543,7 +543,7 @@ $(document).ready(function(){
 				data:{friend:friend},
 				url:"src/php/deleteFriend.php",
 			})
-			.done(function(result){ 
+			.done(function(result){
                 let divToDelete;
                 $('.friend_widget').each(function(){
                     if($(this).children().eq(2).data('friend') === friend){
@@ -556,7 +556,7 @@ $(document).ready(function(){
                     $('#friend_deleted').parent().parent().parent().parent().parent().parent().remove();
                 },1000)
                 $(document.body).css('overflow','scroll');
-    
+
                 divToDelete.remove();
 
                 //update friend number
@@ -582,7 +582,7 @@ $(document).ready(function(){
             method: "GET",
             url:"src/php/addDog.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             $(document.body).css('overflow','hidden');
             $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -noBg"><div class="container"><div class="row"><div class="col"></div></div></div></div></div>');
             $('.dog_handler').css('top',position);
@@ -625,10 +625,10 @@ $(document).ready(function(){
                             image:image
                         },
                     })
-                    .done(function(result){ 
-                    
+                    .done(function(result){
+
                         setTimeout(function(){
-                            $('.dog_handler').animate({"opacity": 0}, "normal"); 
+                            $('.dog_handler').animate({"opacity": 0}, "normal");
                         }, 750);
 
                         setTimeout(function(){
@@ -643,7 +643,7 @@ $(document).ready(function(){
                 }
             });
 
-            $('#uploadfiles').on("change", function(){ 
+            $('#uploadfiles').on("change", function(){
 
                 // var uploadfiles = $('#uploadfiles');
                 // var files = uploadfiles.files;
@@ -662,7 +662,7 @@ $(document).ready(function(){
                         var files = uploadfiles.files;
                         var page = "dog";
                         var name = $('.dog_name').last().text();
-                        for(var i=0; i<files.length; i++){            
+                        for(var i=0; i<files.length; i++){
                             uploadFile(uploadfiles.files[i],name,page);
                         }
                     }
@@ -699,7 +699,7 @@ $(document).ready(function(){
             data:{ID:user},
             url:"src/php/add_friend.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             $('.avatar__container #friend__button').remove();
             let button = '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
             $(button).insertBefore($('.avatar__container .container .row .col .avatars'));
@@ -712,12 +712,12 @@ $(document).ready(function(){
             method: "GET",
             url:"src/php/add_event.php",
         })
-        .done(function(result){ 
+        .done(function(result){
 
         });
     });
 
-    //WALK 
+    //WALK
     if($('body').is('.new_walk')){
         var today = new Date();
         var dd = today.getDate();
@@ -726,10 +726,10 @@ $(document).ready(function(){
         var hour = today.getHours();
         if(dd<10){
                 dd='0'+dd
-            } 
+            }
             if(mm<10){
                 mm='0'+mm
-            } 
+            }
 
         today = yyyy+'-'+mm+'-'+dd;
         document.getElementById("date").setAttribute("min", today);
@@ -742,7 +742,7 @@ $(document).ready(function(){
     });
 
     $("#next").click(function(e){
-        
+
         error = [];
         e.preventDefault();
 
@@ -794,9 +794,9 @@ $(document).ready(function(){
                     }else{
                         $(this).removeClass('-active');
                     }
-    
+
                     var selected = false;
-    
+
                     for(i = 0; i < $('.dog_card').length && !selected; i++){
                         if ($('.dog_card').eq(i).hasClass('-active')){
                             selected = true;
@@ -809,7 +809,7 @@ $(document).ready(function(){
                         $("#validate__sign").prop('disabled', false);
                 })
             }
-    
+
             if($('body').is('.walk_detail')){
                 //console.log('lol');
                 $("#validate__sign").prop('disabled', true);
@@ -848,7 +848,7 @@ $(document).ready(function(){
 
             function(data){
                 if(data === 'success'){
-                    window.location = "walk.php"; 
+                    window.location = "walk.php";
                 }
             },
             'text'
@@ -867,7 +867,7 @@ $(document).ready(function(){
             },
             url:"src/php/managewalk.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             data = JSON.parse(result);
             //console.log(result);
 
@@ -904,7 +904,7 @@ $(document).ready(function(){
 
             if($('.walk__noresult'))
                 $('.walk__noresult').remove();
-            
+
             if (data.length >= 1){
 
                 if ($('form input[type=radio]:checked').val() != undefined)
@@ -913,7 +913,7 @@ $(document).ready(function(){
                 $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
 
                 $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
-            
+
                 for( let i = 0; i < data.length; i++){
                     let date = new Date(data[i]['DATE_START']);
                     let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
@@ -929,14 +929,14 @@ $(document).ready(function(){
                 $('.content_container .container .row .col').append('<div class="walk__noresult">Aucun resultat pour la recherche</div>');
             }
 
-            $(".walk__handler__container").css('background','transparent'); 
+            $(".walk__handler__container").css('background','transparent');
 
             setTimeout(function(){
-                $(".walk__handler__container").css('transform','translateY(100%)'); 
+                $(".walk__handler__container").css('transform','translateY(100%)');
             }, 750);
 
             setTimeout(function(){
-                $(".walk__handler__container").css('display','none'); 
+                $(".walk__handler__container").css('display','none');
                 $("body").css('overflow','auto');
 
                 $([document.documentElement, document.body]).animate({
@@ -953,7 +953,7 @@ $(document).ready(function(){
     $('#validate__sign').click(function(e){
 
         let dogSelected = [];
-        let id_event = $('#validate__sign').data('id'); 
+        let id_event = $('#validate__sign').data('id');
         let x = 0;
 
         $('.dog_card').each(function(){
@@ -971,8 +971,8 @@ $(document).ready(function(){
                 },
                 url:"src/php/joinwalk.php",
             })
-            .done(function(result){ 
-                if (result == "success")  
+            .done(function(result){
+                if (result == "success")
                     document.location.reload(true);
             });
         }
@@ -983,7 +983,7 @@ $(document).ready(function(){
             method: "GET",
             url:"src/php/get_user_walk.php",
         })
-        .done(function(result){ 
+        .done(function(result){
 
             if(result){
                 data = JSON.parse(result);
@@ -1012,11 +1012,11 @@ $(document).ready(function(){
                 mois[9] = "Octobre";
                 mois[10] = "Novembre";
                 mois[11] = "Décembre";
-                
-                if (data.length > 0){  
+
+                if (data.length > 0){
 
                     $('.content_container .container .row .col .user_walk').append('<div class="walk__container"></div>');
-                
+
                     for( let i = 0; i < data.length; i++){
                         let date = new Date(data[i]['DATE_START']);
                         let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
@@ -1061,7 +1061,7 @@ $(document).ready(function(){
             method: "GET",
             url:"src/php/showcase_message.php",
         })
-        .done(function(result){ 
+        .done(function(result){
             if(result != "noMsg")
                 data = JSON.parse(result);
             let userID = $('body').data('id');
@@ -1075,7 +1075,7 @@ $(document).ready(function(){
                     if (user.length > 0){
                         let error = false;
                         let userToAdd;
-                        for (k = 0; k < user.length; k++){            
+                        for (k = 0; k < user.length; k++){
                             if (data[i].ID_USER1 == userID){
                                 if(data[i].ID_USER2 == user[k]){
                                     error = true;
@@ -1098,16 +1098,16 @@ $(document).ready(function(){
                             }
                         }
                     }else{
-                        if (data[i].ID_USER1 != userID) 
+                        if (data[i].ID_USER1 != userID)
                             user.push(data[i].ID_USER1);
                         else
                             user.push(data[i].ID_USER2);
                     }
                 }
 
-                for (i = 0; i < data.length; i++){   
-                    for(k = 0; k < user.length; k++){ 
-                        found = false;             
+                for (i = 0; i < data.length; i++){
+                    for(k = 0; k < user.length; k++){
+                        found = false;
                         if (banlist.length > 0){
                             if (!banlist.includes(user[k])){
                                 if (data[i].ID_USER1 == user[k] ){
@@ -1118,16 +1118,16 @@ $(document).ready(function(){
                                     userList.push(data[i]);
                                     found = true;
                                 }
-                            }   
+                            }
                         }else{
                             if (data[i].ID_USER1 == user[k])
-                                userList.push(data[i]);   
+                                userList.push(data[i]);
                             if (data[i].ID_USER2 == user[k])
                                 userList.push(data[i]);
                             banlist.push(user[k]);
                         }
                         if (found)
-                            banlist.push(user[k]); 
+                            banlist.push(user[k]);
                     }
                 }
 
@@ -1143,16 +1143,16 @@ $(document).ready(function(){
                         ID = element.ID_USER2;
                     }
                     if(element.STATUT == "Unread" && element.ID_USER1 != $('body').data('id'))
-                        member = '<div data-id="'+ID+'" class="toMessage statut-0 friend_widget -message -hidden -unread"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>'; 
+                        member = '<div data-id="'+ID+'" class="toMessage statut-0 friend_widget -message -hidden -unread"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>';
                     else
-                        member = '<div data-id="'+ID+'" class="toMessage statut-1 friend_widget -message -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>'; 
+                        member = '<div data-id="'+ID+'" class="toMessage statut-1 friend_widget -message -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>';
                     $(".content_container .container .row .col .message__container").append(member);
                 });
 
                 var divElement = $('.content_container .container .row .col .message__container').find('.toMessage');
                 divElement.sort(sortMe);
 
-                function sortMe(a, b) { 
+                function sortMe(a, b) {
                     return a.className.match(/statut-(\d)/)[1] - b.className.match(/statut-(\d)/)[1];
                 }
 
@@ -1167,19 +1167,19 @@ $(document).ready(function(){
                         data: {ID:IDuser},
                         url:"src/php/updateMessageStatus.php",
                     })
-                    .done(function(result){ 
+                    .done(function(result){
                     })
 
                     setTimeout(function(){
-                        window.location = "getMessage.php?ID=" + IDuser; 
-                    },50);           
+                        window.location = "getMessage.php?ID=" + IDuser;
+                    },50);
                 });
             }else{
                 $(".content_container .container .row .col .message__container").append('<h3 class="h3 -title">Aucun message pour le moment</h3>');
             }
         })
     }
-        
+
     if($('body').is('.getMessage')){
 
         $('#message').keypress(function (e) {
@@ -1193,19 +1193,19 @@ $(document).ready(function(){
                         data: {ID:user2,MESSAGE:$('#message').val()},
                         url:"src/php/insertMessage.php",
                     })
-                    .done(function(result){ 
-                
+                    .done(function(result){
+
                         $.ajax({
                             method: "GET",
                             data: {ID:user2},
                             url:"src/php/getLastMessage.php",
                         })
-                        .done(function(result){ 
-                   
+                        .done(function(result){
+
                             setTimeout(function(){
                                 $('.messages').append(result);
                             },500);
-                            
+
                             $('.messages').animate({
                                 scrollTop: realHeight
                             }, 500);
@@ -1234,14 +1234,14 @@ $(document).ready(function(){
 
 		pubnub.addListener({
 		    message: function(message) {
-     
-                
-                $('.messages').append(message.message);  
+
+
+                $('.messages').append(message.message);
                 $('.messages').children().last().css('opacity','0');
 
                 setTimeout(function(){
                     if ($('.messages').children().last().data('id') == $('body').data('me')){
-                    
+
                         $('.messages').children().last().remove();
                         $('.messages').children().last().css('opacity','1');
                     }else{
@@ -1251,7 +1251,7 @@ $(document).ready(function(){
 
                 //$('.messages').children().last().css('opacity','1');
 
-                
+
                 let realHeight  = $('.messages').scrollTop() + ($('.message__body').height() * 2);
 
                 setTimeout(function(){
@@ -1259,7 +1259,7 @@ $(document).ready(function(){
                         scrollTop: realHeight
                     }, 500);
                 },100);
-            
+
 			}
 		});
 
@@ -1280,26 +1280,26 @@ $(document).ready(function(){
         $('.sendMessage').click(function(){
 
             let user2 = $('body').data('id');
-          
+
             if($('#message').val() != ""){
                 $.ajax({
                     method: "GET",
                     data: {ID:user2,MESSAGE:$('#message').val()},
                     url:"src/php/insertMessage.php",
                 })
-                .done(function(result){ 
-                  
+                .done(function(result){
+
                     $.ajax({
                         method: "GET",
                         data: {ID:user2},
                         url:"src/php/getLastMessage.php",
                     })
-                    .done(function(result){ 
-                
+                    .done(function(result){
+
                         setTimeout(function(){
                             $('.messages').append(result);
                         },500);
-                        
+
                         $('.messages').animate({
                             scrollTop: realHeight
                         }, 500);
@@ -1319,13 +1319,13 @@ $(document).ready(function(){
 });
 
 $('body').on('click', '[data-editable]', function(){
-  
+
     var $el = $(this);
     let value = $(this).html();
-                
+
     var $input = $('<input />').val( $el.text() );
     $el.replaceWith( $input );
-    
+
     var save = function(){
         let value = $p
         var $p = $('<p data-editable class="dog_name -nolimit"'+ value +'><i class="icon edit icon-ic_edit_48px"></i></p>').text( $input.val() );
@@ -1335,7 +1335,7 @@ $('body').on('click', '[data-editable]', function(){
     };
 
     $input.one('blur', save).focus();
-    
+
 });
 
 function previewImage(file) {
@@ -1366,13 +1366,13 @@ function previewImage(file) {
     button.setAttribute('type', 'button');
     button.classList.add('icon');
     button.classList.add('close-icon');
-    if($('.edit__profile').length != 0){ 
+    if($('.edit__profile').length != 0){
         button.classList.add('-imgAdd');
     }
     else{
         button.classList.add('-dogAdd');
     }
-    
+
     galleryButton.appendChild(button);
 
     var deleteImg = document.getElementById("deleteImage");
@@ -1410,7 +1410,7 @@ function uploadFile(file, name, page){
             //console.log(xhr.responseText);
             if (name != "")
                 $("#addDog").prop('disabled', false);
-            else 
+            else
                 $("#update").prop('disabled', false);
         }
     };
