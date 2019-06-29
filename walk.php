@@ -56,10 +56,10 @@
     <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
     <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
     </head>
-    <?php 
-        include ('src/php/header.php');
-    ?>
     <body class="walk">
+        <?php
+            include ('src/php/header.php');
+        ?>
         <div class="content_container">
             <div class="container">
                 <div class="row">

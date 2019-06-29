@@ -83,10 +83,10 @@
     <meta name="twitter:url" content="https://dylanernoud.be/projets/tfe/beta/" />
     <meta name="twitter:image" content="https://dylanernoud.be/projets/tfe/beta/favicon.ico" />
     </head>
-    <?php 
-        include ('src/php/header.php');
-    ?>
     <body class="profile">
+        <?php
+            include ('src/php/header.php');
+        ?>
         <?php
         if ($error){ ?>
         <div class="error__container">
