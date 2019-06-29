@@ -10,14 +10,7 @@
         <div class="row">
             <div class="col">
                 <div class="title">
-
-                <?php if (!strpos($_SERVER['REQUEST_URI'], 'home.php') !== false) {?>
-                    <button class="button" onclick="history.go(-1);"><i class="left"></i></button>
                     <h1 class="h1 header__title">
-                <?php }else{ ?>
-                    <i class="icon home icon-ic_home_48px"></i>
-                    <h1 class="h1 header__title -left">
-                <?php } ?>
                     <?php
                         $user;
                         if (empty($_GET['ID']))

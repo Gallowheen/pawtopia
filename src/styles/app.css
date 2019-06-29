@@ -602,10 +602,8 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .logo.-small {
   width: 60px;
-  right: 50%;
-  top: 15%;
-  transform: translateX(50%);
-  left: auto;
+  top: 18%;
+  left: 5%;
 }
 
 .container__introduction {
@@ -2996,16 +2994,12 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .header__title {
-  font-size: 18px;
+  font-size: 20px;
   display: inline-block;
-  margin-left: 16px;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .header__title.-left {
   margin-left: 40px;
