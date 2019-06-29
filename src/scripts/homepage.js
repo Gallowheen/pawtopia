@@ -20,7 +20,7 @@ $(document).ready(function(){
                 if(data == 'Success'){
                     return window.location.href = "home.php";
                 }else{
-                    $("#log_error").html("<p>La connexion a echouée</p>"); 
+                    $("#log_error").html("<p>La connexion a echouée</p>");
                 }
             },
             'text'
@@ -40,19 +40,19 @@ $(document).ready(function(){
                     $('.logo').css('display','none');
 
                 if ($('.container__action').css('position') == 'absolute'){
-                    $('.container__action').css('position','relative'); 
+                    $('.container__action').css('position','relative');
                     $('.container__action').css('padding-top','20px');
-                    $('body').css('overflow','auto');  
+                    $('body').css('overflow','auto');
                 } else {
-                    $('.container__action').css('position','absolute'); 
-                    $('body').css('overflow','hidden');    
-                } 
+                    $('.container__action').css('position','absolute');
+                    $('body').css('overflow','hidden');
+                }
                 resized = true;
             }else{
                 resized = false;
                 $('.logo').css('display','block');
-                $('.container__action').css('position','absolute'); 
-                $('body').css('overflow','hidden'); 
+                $('.container__action').css('position','absolute');
+                $('body').css('overflow','hidden');
             }
         }
     });
@@ -173,7 +173,7 @@ $(document).ready(function(){
                         if ($('.register__password2').hasClass('-error'))
                             $(".register__password2").removeClass("-error");
                     }
-                 
+
                     if(data.indexOf('town_needed') > -1){
                         // $("#resultat").append("<p>Entrez votre ville svp</p>");
                         // $("#town_error").append("<p>Veuillez entrer votre ville</p>");
@@ -181,7 +181,7 @@ $(document).ready(function(){
                     }else{
                         if ($('.register__town').hasClass('-error'))
                             $(".register__town").removeClass("-error");
-                    } 
+                    }
 
                     if(data.indexOf('password_no_match') > -1){
                         $(".register__password1").addClass("-error");
@@ -192,16 +192,16 @@ $(document).ready(function(){
                     if(data.indexOf('user_taken') > -1){
                         $("#resultat").append("<p>Le pseudonyme est déjà utilisé</p>");
                         $(".register__name").addClass("-error");
-                    } 
+                    }
                     if(data.indexOf('mail_taken') > -1){
                         $("#resultat").append("<p>L'adresse mail est déjà utilisée</p>");
                         $(".register__mail").addClass("-error");
-                    } 
+                    }
                     if(data.indexOf('town_unknown') > -1){
                         $("#town_error").append("<p>Vérifiez votre ville</p>");
                         $(".register__town").addClass("-error");
-                    }      
-                }   
+                    }
+                }
             },
             'text'
         );

@@ -1,4 +1,4 @@
-<?php 
+<?php
   require_once("src/php/bdd.php");
   session_start();
 
@@ -15,8 +15,8 @@
   <?php
       include ('src/php/head.php');
   ?>
-  <body data-id='<?php echo $_SESSION['ID'] ?>' class="message"> 
-    <?php 
+  <body data-id='<?php echo $_SESSION['ID'] ?>' class="message">
+    <?php
       include ('src/php/header.php');
     ?>
     <div class=content_container>
@@ -24,13 +24,13 @@
         <div class="row">
           <div class="col">
             <div class="message__container">
-              
+
             </div>
           </div>
         </div>
       </div>
     </div>
-    <?php 
+    <?php
     include ('src/php/footer.php');
     ?>
   </body>

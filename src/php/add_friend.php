@@ -13,7 +13,7 @@
     $username2 = $_SESSION['ID'];
     $mutual = 1;
     $unmutual = 0;
-    $errors = array(); 
+    $errors = array();
     $information = array();
 
     // chefk if user2 already invited user1
@@ -33,7 +33,7 @@
         }
         // if user2 already invited user1
         else{
-            // user 1 accept 
+            // user 1 accept
             // ex : 44 45 1
             $query_user1_accept = $link->prepare("INSERT INTO `friends`(`ID_USER1`, `ID_USER2`, `MUTUAL`) VALUES (?,?,?)");
             $query_user1_accept->bind_param("iii", $username2,$username1,$mutual);

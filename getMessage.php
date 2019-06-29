@@ -1,4 +1,4 @@
-<?php 
+<?php
     header('Content-Type: text/html; charset=utf-8');
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -36,7 +36,7 @@
         include ('src/php/head.php');
     ?>
     <body data-me="<?php echo $_SESSION['ID'] ?>" data-id="<?php echo $user ?>"class="getMessage">
-        <?php 
+        <?php
             include ('src/php/header.php');
         ?>
         <div class="content_container -message">
@@ -45,14 +45,14 @@
                     <div class="col">
                         <div class="message__viewer__container">
                             <div class="messages">
-                                <?php 
+                                <?php
                                     $user = array();
                                     $userID = $_SESSION['ID'];
 
                                     $query = $link->prepare("SELECT * FROM message WHERE (ID_USER2 = ? AND ID_USER1 = ?) OR (ID_USER1 = ? AND ID_USER2 = ?)ORDER BY DATE DESC");
                                     $query->bind_param("iiii", $_SESSION['ID'], $_GET['ID'], $_SESSION['ID'], $_GET['ID']);
                                     $query->execute();
-                                
+
                                     $result = $query->get_result();
                                     $row = resultToArray($result);
 
@@ -60,7 +60,7 @@
                                         if (count($user) > 0){
                                             $error = false;
                                             $userToAdd;
-                                            for ($k = 0; $k < count($user); $k++){            
+                                            for ($k = 0; $k < count($user); $k++){
                                                 if ($row[$i]['ID_USER1'] == $userID){
                                                     if($row[$i]['ID_USER2'] == $user[$k]){
                                                         $error = true;
@@ -83,57 +83,57 @@
                                                 }
                                             }
                                         }else{
-                                            if ($row[$i]['ID_USER1'] != $userID) 
+                                            if ($row[$i]['ID_USER1'] != $userID)
                                                 array_push($user,$row[$i]['ID_USER1']);
                                             else
                                                 array_push($user,$row[$i]['ID_USER2']);
                                         }
                                     }
-                                
+
                                     foreach ($user as $entry){
-                                
+
                                         $query__user = $link->prepare("SELECT * FROM user WHERE ID = ?");
                                         $query__user->bind_param("i", $entry);
                                         $query__user->execute();
-                                
+
                                         $result__query = $query__user->get_result();
-                                        $row__query = resultToArray($result__query); 
-                                
+                                        $row__query = resultToArray($result__query);
+
                                         //var_dump($row__query);
-                                
+
                                         foreach ($row__query as $test){
                                             $USER_AVATAR;
                                             $USER_NAME;
                                             $USER_ID;
-                                
+
                                             // echo $entry.'--';
                                             // echo $test['ID'];
-                                   
+
                                             $USER_AVATAR = $test['AVATAR'];
                                             $USER_NAME = $test['USERNAME'];
                                             $USER_PID = $test['ID'];
                                         }
-                                
+
                                         //var_dump($row);
-                                
+
                                         foreach ($row as $cle => $user){
                                             //echo $row[$cle]['ID_USER2'];
                                             // echo($row[$cle]['ID']."------");
                                             // echo $USER_ID."||";
                                             if ($row[$cle]['ID_USER1'] != $USER_PID ){
-                                                
+
                                             }else{
                                                 $row[$cle]['USERNAME'] = $USER_NAME;
                                                 $row[$cle]['AVATAR'] = $USER_AVATAR;
                                             }
-                                
+
                                             if ($row[$cle]['ID_USER2'] != $USER_PID ){
-                                                
+
                                             }else{
                                                 $row[$cle]['USERNAME'] = $USER_NAME;
                                                 $row[$cle]['AVATAR'] = $USER_AVATAR;
                                             }
-                                        }   
+                                        }
                                     }
 
                                     krsort($row);
@@ -142,14 +142,14 @@
                                     foreach ($row as $message) :
                                         $now = new DateTime();
                                         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                                        $dStart = $now->format('Y-m-d H:i:s'); 
-                                        $dStart = new DateTime($message['DATE']);  
+                                        $dStart = $now->format('Y-m-d H:i:s');
+                                        $dStart = new DateTime($message['DATE']);
 
                                         $now = new DateTime();
                                         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                                        $dEnd = $now->format('Y-m-d H:i:s'); 
-                                        $dEnd = new DateTime($dEnd); 
-                                        
+                                        $dEnd = $now->format('Y-m-d H:i:s');
+                                        $dEnd = new DateTime($dEnd);
+
                                         $dDiff = $dEnd->diff($dStart);
                                         $time;
                                         //var_dump($dDiff);
@@ -165,8 +165,8 @@
                                                     $time = $dDiff->format('%d d');
                                                 }else{
                                                     if (($dDiff->format('%h')) > 0){
-                                                        $time = $dDiff->format('%h h');                                                                              
-                                                    }else{        
+                                                        $time = $dDiff->format('%h h');
+                                                    }else{
                                                         $time = ('< 1h');
                                                     }
                                                 }
@@ -181,7 +181,7 @@
                                             echo '<div class="message__info"><img class="avatar -message" src="'.$message['AVATAR'].'"/><div class="message__name">'.$message['USERNAME'].'</div></div>';
                                             echo '<div class="message__content">'.$message['CONTENT'].'</div>';
                                             echo '<div class="message__date">'.$time.'</div>';
- 
+
                                             echo '</div>';
                                         }else{
                                             echo '<div data-id="'.$message['ID_USER1'].'" class="message__body -other">';
@@ -192,14 +192,14 @@
                                     endforeach;
                                 ?>
                             </div>
-                        </div>  
+                        </div>
                         <input class="input -walk -message" placeholder="Envoyer votre message ..." type="text" id="message" name="message" required maxlength="256">
-                        <i class="icon icon__up -right sendMessage"></i>     
+                        <i class="icon icon__up -right sendMessage"></i>
                     </div>
                 </div>
             </div>
         </div>
-        <?php 
+        <?php
             include('src/php/footer.php');
         ?>
     </body>

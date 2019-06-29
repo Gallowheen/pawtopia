@@ -20,15 +20,15 @@
     $town = $row['TOWN_ID'];
     $avatar = $row['AVATAR'];
     $name = $row['USERNAME'];
- 
+
     if( isset($_POST['username']) && isset($_POST['password']) ){
- 
+
         if($_POST['username'] == $username && md5($_POST['password']) == $password){
             session_start();
             $_SESSION['user'] = $username;
             $_SESSION['ID'] = $id;
             $_SESSION['TOWN_ID'] = $town;
-            echo "Success";    
+            echo "Success";
         }
         else{
             echo "Failed";

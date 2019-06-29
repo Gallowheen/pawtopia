@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -14,7 +14,7 @@
     }
 
     $pagename = 'Membres';
-    
+
     $error = false;
 
     if(!isset($_SESSION['ID'])){
@@ -42,10 +42,10 @@
                             <div class="find__more">
                                 <button class="button -color" id="filter">Découvrez nos membres</button>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
         <div class="members__handler__container">
             <div class="members__handler">
@@ -71,13 +71,13 @@
                                         <input class="hidden" type="radio" name="walk" id="Découverte" value="Découverte">
                                         <i class="icon icon-ic_map_48px icon_walk"></i>
                                         <span class="walk__type">Découverte</span>
-                                    </div></label>                
+                                    </div></label>
                                     <label class="label" for="Récréative"><div class="button_container">
                                         <input class="hidden" type="radio" name="walk" id="Récréative" value="Récréative">
                                         <i class="icon icon-ic_pets_48px icon_walk"></i>
                                         <span class="walk__type">Récréative</span>
                                     </div></label>
-                                </div>     
+                                </div>
                                 <div class="submit__button">
                                     <button class="button -color -blue -nomargin" id="submit__members" type="submit">C'est parti !</button>
                                 </div>
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <?php 
+        <?php
             include('src/php/footer.php');
         ?>
     </body>

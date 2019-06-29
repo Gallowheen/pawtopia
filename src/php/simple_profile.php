@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -31,15 +31,15 @@
             //redirect ?
         }
         $row = $result->fetch_assoc();
-    }  
+    }
 
 
-    if (empty($_GET)) 
+    if (empty($_GET))
         $pagename = 'Mon Profil';
     else{
         $pagename = 'Profil de '. $row['USERNAME'];
     }
-    
+
     $error = false;
 ?>
         <?php
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <?php    
+        <?php
         }else{
 
             ?>
@@ -60,11 +60,11 @@
                 <div class="container--full">
                     <div class="row">
                         <div class="col">
-                            <?php 
+                            <?php
                                 if ($row['PRIVATE'] == 1 )
                                     echo "<p class='private'>Ce profil est privé</p>";
                             ?>
-                            <?php 
+                            <?php
 
                                 if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
 
@@ -93,13 +93,13 @@
                                 }
 
                                 // SELECT AVATAR
-                            
+
                                 $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1 LIMIT 1");
                                 if (empty($_GET)){
                                     $query->bind_param("i", $_SESSION['ID']);
                                 }else{
-                                    $query->bind_param("i", $_GET['ID']); 
-                                }  
+                                    $query->bind_param("i", $_GET['ID']);
+                                }
                                 $query->execute();
 
                                 $result = $query->get_result();
@@ -117,7 +117,7 @@
                                     <img class="avatar avatar -dog" src="<?php echo $avatar_dog ?>"/>
                                     <img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>
                                 </div>
-                                   
+
                                 <?php
                                 }
                                 ?>
@@ -149,11 +149,11 @@
 
                                     $town_check_query->bind_param("i", $row['TOWN_ID'] );
                                     $town_check_query->execute();
-                                
-                                    $result_town = $town_check_query->get_result(); 
+
+                                    $result_town = $town_check_query->get_result();
                                     $row_city = $result_town->fetch_assoc();
 
-                                    $townToInsert = $row_city['NAME']; 
+                                    $townToInsert = $row_city['NAME'];
 
                                     echo" <div class='information__flex'><div class='information_group -nopadding'><i class='icon information__city icon-home-52'></i><span class='information_space'>".$townToInsert."</span></div>";
 
@@ -161,7 +161,7 @@
                                     $query->bind_param("i", $row['ID']);
                                     $query->execute();
                                     $result = $query->get_result();
-                                    $rows = resultToArray($result);   
+                                    $rows = resultToArray($result);
 
                                     echo" <div class='information_group -nopadding'><i class='icon information__city icon-ic_pets_48px'></i><span class='information_space'>".count($rows)."</span></div>";
 
@@ -170,15 +170,15 @@
                                     $query_friend_mutual = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 1 AND (ID_USER2 = ? OR ID_USER1 = ?) LIMIT 6");
                                     $query_friend_mutual->bind_param("ii", $user, $user);
                                     $query_friend_mutual->execute();
-            
+
                                     $result_friend_mutual = $query_friend_mutual->get_result();
-                                    $row_friends_mutual = resultToArray($result_friend_mutual);  
-                                                
-                                    foreach ($row_friends_mutual as $friend) :          
+                                    $row_friends_mutual = resultToArray($result_friend_mutual);
+
+                                    foreach ($row_friends_mutual as $friend) :
                                         if(!in_array($friend['id_user1'],$friends)){
                                             if($friend['id_user1'] != $user)
-                                                array_push($friends, $friend['id_user1']);        
-                                        }   
+                                                array_push($friends, $friend['id_user1']);
+                                        }
                                     endforeach;
 
                                     if ((count($row_friends_mutual)-1) <= 0)

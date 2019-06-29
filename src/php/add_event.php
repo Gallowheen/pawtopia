@@ -54,7 +54,7 @@
     $query_add_event_attendee->bind_param("ii", $last_ID, $id_owner);
     $query_add_event_attendee->execute();
 
-    //ADD THE DOG(S) OF THE CREATOR 
+    //ADD THE DOG(S) OF THE CREATOR
     foreach ($dogs as $dog){
         $query_add_event_dog = $link->prepare("INSERT INTO event_dog (`ID_EVENT`, `ID_DOG`) VALUES (?,?)");
         $query_add_event_dog->bind_param("ii", $last_ID, $dog);

@@ -12,7 +12,7 @@
     $username1 = $_GET['ID'];
     $username2 = $_SESSION['ID'];
     $mutual = 1;
-    $errors = array(); 
+    $errors = array();
     $information = array();
 
     //User2 devient ami avec User1
@@ -43,14 +43,14 @@
 
     if (count($errors) == 0) {
         array_push($information, "success");
-        
+
         $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
         $query->bind_param("i", $username1);
         $query->execute();
 
         $result = $query->get_result();
         if($result->num_rows === 0){
-            
+
         }
         $rows = array();
 

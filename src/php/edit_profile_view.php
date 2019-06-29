@@ -27,7 +27,7 @@
         echo '<div id="gallery__button"></div></div>';
         echo'<label for="uploadfiles" class="label-file">Choisir une image</label><input class="input-file" type="file" id="uploadfiles" accept="image/*"></input>';
         echo'<div class="dog_button -add">';
-        
+
         ?>
     </div>
     <div class="input__container -flex">

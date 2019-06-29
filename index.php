@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
     $pagename = "Let's walk together";
@@ -51,7 +51,7 @@
                                     <?php
                                         $link = mysqli_connect(HOST, USER, PWD, BASE);
                                         mysqli_query($link, "SET NAMES UTF8");
-                                        
+
                                         $sql = "SELECT * FROM towns";
                                         $query = mysqli_query($link,$sql);
                                         while ( $results[] = mysqli_fetch_object ( $query ) );
@@ -81,8 +81,8 @@
                                 <span class="choice">Se connecter</span>
                             </div>
                         </div>
-                    </div>       
-                </div>      
+                    </div>
+                </div>
             </div>
             <div class="container__introduction">
                 <div class="container">
@@ -92,8 +92,8 @@
                             <!-- <button class="button -transparent together">LET'S WALK TOGETHER</button> -->
                         </div>
                     </div>
-                </div>       
-            </div>      
+                </div>
+            </div>
         </div>
         <div class="desktop">
             <h1 class="wip">Ceci n'est pas une landing page</h1>

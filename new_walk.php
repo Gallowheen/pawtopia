@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -34,7 +34,7 @@
             //redirect ?
         }
         $row = $result->fetch_assoc();
-    }  
+    }
 
     $pagename = 'Nouvelle balade';
 ?>
@@ -70,7 +70,7 @@
                             <?php
                                 $link = mysqli_connect(HOST, USER, PWD, BASE);
                                 mysqli_query($link, "SET NAMES UTF8");
-                                
+
                                 $sql = "SELECT * FROM towns";
                                 $query = mysqli_query($link,$sql);
                                 while ( $results[] = mysqli_fetch_object ( $query ) );
@@ -107,14 +107,14 @@
                                     <option value="1">7 heures</option>
                                     <option value="1">8 heures</option>
                                     <option value="1">9 heures</option>
-                                    <option value="1">10 heures</option>      
+                                    <option value="1">10 heures</option>
                                 </select>
                             </div>
                             <div class="input__container -center">
                                 <button class="input button -color -blue -nomargin" id="next">Suivant</button>
                             </div>
                         </form>
-                        <?php 
+                        <?php
 
                         // On récupère les chiens
                         $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1");
@@ -122,7 +122,7 @@
                         $query->execute();
 
                         $result = $query->get_result();
-                        $rows = resultToArray($result);  
+                        $rows = resultToArray($result);
                         ?>
                         <div class="walk__dog">
                             <h3 class="h3 information">Votre partenaire de balade</h3>
@@ -136,22 +136,22 @@
                                     <div class="dog_button -walk">
                                     <?php
                                     echo '<img class="dog_img avatar -small -noMargin" src="'.$dog['PICTURE'].'">';?>
-                                    
-                                    </div> 
-                                </div> 
-                                <?php    
+
+                                    </div>
+                                </div>
+                                <?php
                                 endforeach;
-                                ?>      
+                                ?>
                             </div>
                             <div class="input__container -center">
                                 <button class="input button -color -blue -nomargin" id="validate">Créer</button>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>      
+    </body>
     <?php
         include ('src/php/footer.php');
     ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
     header('Content-Type: text/html; charset=utf-8');
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -29,16 +29,16 @@
     foreach ($row as $message) :
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $dStart = $now->format('Y-m-d H:i:s'); 
-        $dStart = new DateTime($message['DATE']);   
+        $dStart = $now->format('Y-m-d H:i:s');
+        $dStart = new DateTime($message['DATE']);
 
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $dEnd = $now->format('Y-m-d H:i:s'); 
-        $dEnd = new DateTime($dEnd); 
+        $dEnd = $now->format('Y-m-d H:i:s');
+        $dEnd = new DateTime($dEnd);
 
         //var_dump($dEnd);
-        
+
         $dDiff = $dEnd->diff($dStart);
         $time;
         //var_dump($dDiff);
@@ -54,8 +54,8 @@
                     $time = $dDiff->format('%d d');
                 }else{
                     if (($dDiff->format('%h')) > 0){
-                        $time = $dDiff->format('%h h');                                                                              
-                    }else{        
+                        $time = $dDiff->format('%h h');
+                    }else{
                         $time = ('Now');
                     }
                 }
@@ -80,4 +80,3 @@
         }
     endforeach;
 ?>
-                                    

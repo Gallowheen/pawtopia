@@ -7,7 +7,7 @@
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
 
-   
+
     $unit = "K";
 
     function distance($lat1, $lon1, $lat2, $lon2, $unit) {
@@ -21,7 +21,7 @@
             $dist = rad2deg($dist);
             $miles = $dist * 60 * 1.1515;
             $unit = strtoupper($unit);
-        
+
             if ($unit == "K") {
             return ($miles * 1.609344);
             } else if ($unit == "N") {
@@ -39,7 +39,7 @@
 
     $result = $query->get_result();
     if($result->num_rows === 0){
-        
+
     }
     $rows = array();
 
@@ -98,7 +98,7 @@
         }else
             $newArray[$user['km']] = $user;
     }
-    
+
     ksort($newArray);
 
     $newNewArray = [];

@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("src/php/bdd.php");
     session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -39,7 +39,7 @@
                         </div>
                         <h3 class="h3 -title">Vos balades à venir</h3>
                         <div class="user_walk">
-                            
+
                         </div>
                         <h3 class="h3 -title">Trouvez votre balade idéale</h3>
                         <div class="find__more">
@@ -73,7 +73,7 @@
                                         <input class="hidden" type="radio" name="walk" id="Découverte" value="Découverte">
                                         <i class="icon icon-ic_map_48px icon_walk"></i>
                                         <span class="walk__type">Découverte</span>
-                                    </div></label>                
+                                    </div></label>
                                     <label class="label" for="Récréative"><div class="button_container">
                                         <input class="hidden" type="radio" name="walk" id="Récréative" value="Récréative">
                                         <i class="icon icon-ic_pets_48px icon_walk"></i>
@@ -94,7 +94,7 @@
             </div>
         </div>
     </body>
-    <?php 
+    <?php
         include('src/php/footer.php');
     ?>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
