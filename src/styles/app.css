@@ -1435,6 +1435,7 @@ input[type=range]::-webkit-slider-runnable-track {
   transition: all 1s;
   display: none;
   transform: translateY(100%);
+  z-index: 6000;
 }
 
 .members__handler, .walk__handler {
@@ -1772,6 +1773,11 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .map {
   height: 250px;
+  display: none;
+}
+
+.leaflet-control-attribution {
+  display: none;
 }
 
 body {
@@ -3004,6 +3010,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .header, .footer {
   height: 60px;
   width: 100%;
+  z-index: 6000;
 }
 
 .header__title {

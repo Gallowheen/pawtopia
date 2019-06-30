@@ -21,7 +21,7 @@
     //$name = 'Balade de Gallow';
 
     //TOWN
-    $town_id = $_GET['TOWN_ID'];
+    //$town_id = $_GET['TOWN_ID'];
     //$town_id = 136;
 
     //LOCATION
@@ -44,8 +44,8 @@
     $dogs = $_GET['DOG'];
 
     //INSERT INTO EVENT
-    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `TOWN_ID`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`) VALUES (?,?,?,?,?,?,?)");
-    $query_add_event->bind_param("isissss", $id_owner, $name, $town_id, $location, $type, $date, $length);
+    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`) VALUES (?,?,?,?,?,?)");
+    $query_add_event->bind_param("isssss", $id_owner, $name, $location, $type, $date, $length);
     $query_add_event->execute();
     $last_ID = $query_add_event->insert_id;
 

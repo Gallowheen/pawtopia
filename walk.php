@@ -42,7 +42,7 @@
 
                         </div>
                         <h3 class="h3 -title">Trouvez votre balade idéale</h3>
-                        <div class="map" id="mapid"></div>
+                        <div class="map" class="map" id="mapid"></div>
                         <div class="find__more">
                             <button class="button -color" id="filter">Trouver votre balade</button>
                         </div>
@@ -56,13 +56,13 @@
                     <div class="row">
                         <div class="col">
                             <form>
-                                <h3 class="h4 filter__title">Proximité</h3>
+                                <!-- <h3 class="h4 filter__title">Proximité</h3>
                                 <div class="slider__value" id="slider_value">125 km</div>
                                 <div class="slider__range">
                                     <span class="range__number">0</span>
                                     <input class="slider" type="range" id="slider" name="km" min="0" max="250">
                                     <span class="range__number">250</span>
-                                </div>
+                                </div> -->
                                 <h3 class="h4 filter__title">Type de balade préféré</h3>
                                 <div class="button_choice">
                                     <label class="label selected" for="Sportive"><div class="button_container">

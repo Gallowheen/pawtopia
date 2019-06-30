@@ -76,7 +76,7 @@
                                 while ( $results[] = mysqli_fetch_object ( $query ) );
                                 array_pop ( $results );
                             ?>
-                            <div class="input__container">
+                            <!-- <div class="input__container">
                                 <span class="input__name">Localité</span>
                                 <select required placeholder="Votre ville" class="select -walk" name="town" id="town">
                                     <option value="" disabled selected hidden>Choisissez votre ville</option>
@@ -84,7 +84,7 @@
                                         <option value="<?php echo $option->ID; ?>"><?php echo $option->NAME; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="input__container">
                                 <span class="input__name">Lieu de la balade</span>
                                 <input placeholder="Lieu de la balade" class="input input -walk" type="text" name="info" id="info">
