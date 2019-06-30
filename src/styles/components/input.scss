@@ -112,6 +112,10 @@
   &.-error{
     animation: bounce 1s forwards;
   }
+
+  &.-succeed{
+    border-bottom-color : green;
+  }
 }
 
 input[type="submit"]{

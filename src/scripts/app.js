@@ -41,6 +41,116 @@ $(document).ready(function(){
         });
     }
 
+    $("#info").on('blur', function(){
+        console.log('//nominatim.openstreetmap.org/search?format=json&q='+$(this).val());
+        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$(this).val(), 		function(data){
+
+            for (i = 2; i < $("#info").parent().children().length; i++){
+                $("#info").parent().children().eq(i).remove();
+            }
+
+            if(data.length) { 
+                console.log(data);    
+
+                for ( i = 0; i < data.length; i++){
+                    $("#info").parent().append("<div class='pickadress__container'><div class='pickaddress' style='width: 90%;margin-left: 24px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding: 8px;border: 1px solid #8080804a;background:white;'>"+data[i].display_name+"</div></div>")
+                }
+
+                $(".pickaddress").click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    //console.log(e);
+                    
+                    console.log($(this).text());
+                    var ville = $(this).text();
+
+
+                    $('.pickadress__container').remove();
+                    $("#info").val(ville);
+                });
+            }
+            else {
+                $("#info").addClass('-error');
+            }
+        });
+    });
+
+    if($('body').is('.walk')){
+        var pawtopia = L.icon({
+            iconUrl: 'https://i.imgur.com/2Jfr9dD.png',
+            shadowUrl: 'https://i.imgur.com/5uFkzrG.png',
+        
+            iconSize:     [30, 50], // size of the icon
+            shadowSize:   [30, 25], // size of the shadow
+            iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+            shadowAnchor: [5, 27],  // the same for the shadow
+            popupAnchor:  [-8, -88] // point from which the popup should open relative to the iconAnchor
+        });
+        
+        navigator.geolocation.getCurrentPosition(function(location) {
+            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+            var mymap = L.map('mapid').setView(latlng, 6);
+            
+            // var marker = L.marker([location.coords.latitude+0.01, location.coords.longitude], {icon: pawtopia}).addTo(mymap);
+            // marker.bindPopup("<b>Balade du chinois parlant.</b>");
+            // var marker2 = L.marker([location.coords.latitude-0.01, location.coords.longitude+0.02], {icon: pawtopia}).addTo(mymap);
+            // marker2.bindPopup("<b>Balade à 250km.</b>");
+            
+            //L.marker([50.1324189, 5.339828799999999], {icon: pawtopia}).addTo(mymap);
+            
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiZGlzZ2FsbGlvbiIsImEiOiJjandrYm9peHkwcjc5NDlxazJwandjc3N2In0.3maC7p-woDBwkV5czUaIMw'
+            }).addTo(mymap);
+
+            // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            //     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+            // }).addTo(mymap);
+
+            var searchControl = L.esri.Geocoding.geosearch().addTo(mymap);
+
+            var results = L.layerGroup().addTo(mymap);
+            //var results = $('#text_input');
+
+            searchControl.on('results', function(data){
+                results.clearLayers();
+                for (var i = data.results.length - 1; i >= 0; i--) {
+                    console.log(data.results);
+                    //L.marker(data.results[i].latlng), {icon: pawtopia}.addTo(mymap);
+                    L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
+                }
+            });
+        });
+
+
+        // CHECK IF ADDRESS EXIST
+
+        // var ville = "DOLEEELELELE";
+        // var address = "37 rue Marius Pieyre";
+        // $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+ville+', '+address, 		function(data){
+        //     if(data.length) { console.log("WOW L'ADRESSE EXISTE, AMAZING"); }
+        //     else { console.log("TRY AGAIN YOU SCRUB"); }
+        // });
+
+        
+
+
+        // GET LOCATION FROM ADRESS 
+
+        // L.esri.Geocoding.geocode().text('15 rue de Marche Nassogne').run(function(err, results, response){
+        //     console.log(results);
+        // });
+
+        //var map = L.map('map').setView([40.91, -96.63], 4);
+
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        // }).addTo(map);
+     
+    }
+
     var ready = false;
 
     var pubnub = new PubNub({

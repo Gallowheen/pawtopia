@@ -439,6 +439,9 @@ Generated using nucleoapp.com
 .input.-error {
   animation: bounce 1s forwards;
 }
+.input.-succeed {
+  border-bottom-color: green;
+}
 
 input[type=submit] {
   display: block;
@@ -1767,6 +1770,10 @@ input[type=range]::-webkit-slider-runnable-track {
   display: block;
 }
 
+.map {
+  height: 250px;
+}
+
 body {
   font-family: "Cabin", sans-serif !important;
   font-size: 18px;
@@ -2207,6 +2214,9 @@ Generated using nucleoapp.com
 }
 .input.-error {
   animation: bounce 1s forwards;
+}
+.input.-succeed {
+  border-bottom-color: green;
 }
 
 input[type=submit] {
@@ -2838,6 +2848,9 @@ Generated using nucleoapp.com
 }
 .input.-error {
   animation: bounce 1s forwards;
+}
+.input.-succeed {
+  border-bottom-color: green;
 }
 
 input[type=submit] {
