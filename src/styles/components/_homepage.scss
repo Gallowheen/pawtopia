@@ -201,7 +201,7 @@
 }
 .statuts{
   text-align: right;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 
   a{
     color : #0067B0;
@@ -1112,6 +1112,12 @@
 }
 
 .town__container{
+
+  max-height: 35px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
   .icon{
     color: #0077c0;
     font-size: 28px;
@@ -1126,6 +1132,11 @@
   // justify-content: space-around;
   font-weight: bold;
   flex-wrap: wrap;
+
+  &.-flex{
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 .button__container{
@@ -1313,4 +1324,8 @@
 
 .leaflet-control-attribution{
   display: none;
+}
+
+.leaflet-popup-content{
+  text-align: center !important;
 }

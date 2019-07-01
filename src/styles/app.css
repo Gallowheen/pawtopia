@@ -146,6 +146,9 @@ body {
 .button.-right {
   margin-right: 16px;
 }
+.button.-top {
+  margin-top: 16px;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -766,7 +769,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .statuts {
   text-align: right;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 .statuts a {
   color: #0067B0;
@@ -1611,6 +1614,12 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 16px;
 }
 
+.town__container {
+  max-height: 35px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .town__container .icon {
   color: #0077c0;
   font-size: 28px;
@@ -1622,6 +1631,10 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 16px;
   font-weight: bold;
   flex-wrap: wrap;
+}
+.date__container.-flex {
+  display: flex;
+  justify-content: space-around;
 }
 
 .button__container {
@@ -1795,6 +1808,10 @@ input[type=range]::-webkit-slider-runnable-track {
   display: none;
 }
 
+.leaflet-popup-content {
+  text-align: center !important;
+}
+
 body {
   font-family: "Cabin", sans-serif !important;
   font-size: 18px;
@@ -1942,6 +1959,9 @@ body {
 }
 .button.-right {
   margin-right: 16px;
+}
+.button.-top {
+  margin-top: 16px;
 }
 /* --------------------------------
 
@@ -2580,6 +2600,9 @@ body {
 }
 .button.-right {
   margin-right: 16px;
+}
+.button.-top {
+  margin-top: 16px;
 }
 /* --------------------------------
 

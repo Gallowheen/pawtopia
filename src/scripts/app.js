@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+    let lat;
+    let lon;
+
     if($('body').is('.home')){
         $('.nav_button_group').each(function(){
             if($(this).hasClass('home')){
@@ -49,9 +52,9 @@ $(document).ready(function(){
                 $("#info").parent().children().eq(i).remove();
             }
 
-            if(data.length) { 
+            if(data.length) {
                 console.log(data);
-                
+
                 if($("#info").hasClass('-error'))
                     $("#info").removeClass('-error');
 
@@ -63,7 +66,7 @@ $(document).ready(function(){
                     e.preventDefault();
                     e.stopPropagation();
                     //console.log(e);
-                    
+
                     console.log($(this).text());
                     var ville = $(this).text();
 
@@ -872,187 +875,272 @@ $(document).ready(function(){
             }
         });
 
-        $.get(
-            'src/php/add_event.php',
-            {
-                ID_OWNER : $("form").data('id'),
-                NAME : $("#walk_name").val(),
-                LOCATION : $("#info").val(),
-                TYPE : $("#walk_type").val(),
-                DATE : date,
-                LENGTH : $("#length").val(),
-                DOG : dogSelected
-            },
+        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$('#info').val(), 		function(data){
+            console.log(data[0].lat);
+            lat = data[0].lat;
+            lon = data[0].lon;
+        });
 
-            function(data){
-                console.log(data);
-                if(data === 'success'){
-                    window.location = "walk.php";
-                }
-            },
-            'text'
-        );
+        setTimeout(function(){
+            console.log(lat);
+            console.log(lon);
+            
+            $.get(
+                'src/php/add_event.php',
+                {
+                    ID_OWNER : $("form").data('id'),
+                    NAME : $("#walk_name").val(),
+                    LOCATION : $("#info").val(),
+                    TYPE : $("#walk_type").val(),
+                    DATE : date,
+                    LENGTH : $("#length").val(),
+                    DOG : dogSelected,
+                    LAT : lat,
+                    LON : lon
+                },
+
+                function(data){
+                    console.log(data);
+                    if(data === 'success'){
+                        window.location = "walk.php";
+                    }
+                },
+                'text'
+            );
+        },250);
+
     });
 
     $('#submit__walks').click(function(e){
+
         e.preventDefault();
 
-        $.ajax({
-            method: "GET",
-            data:{
-                walk:$('form input[type=radio]:checked').val(),
-                //km : $('#slider').val(),
-                date : $('#date').val()
-            },
-            url:"src/php/managewalk.php",
-        })
-        .done(function(result){
+        //GET GEOLOC
+        let latUser;
+        let lonUser;
 
-            console.log(result);
-            data = JSON.parse(result);
-            //console.log(result);
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+          
+        function success(pos) {
+            var crd = pos.coords;
+          
+            latUser = crd.latitude;
+            lonUser = crd.longitude;
+        }
+          
+        function error(err) {
+            console.warn(`ERREUR (${err.code}): ${err.message}`);
+        }
 
-            //savoir le jour
-            var jour = new Array(7);
-            jour[0] = "Lundi";
-            jour[1] = "Mardi";
-            jour[2] = "Mercredi";
-            jour[3] = "Jeudi";
-            jour[4] = "Vendredi";
-            jour[5] = "Samedi";
-            jour[6] = "Dimanche";
+        navigator.geolocation.getCurrentPosition(success, error, options);
 
-            //savoir le mois
-            var mois = new Array(12);
-            mois[0] = "Janvier";
-            mois[1] = "Février";
-            mois[2] = "Mars";
-            mois[3] = "Avril";
-            mois[4] = "Mai";
-            mois[5] = "Juin";
-            mois[6] = "Juillet";
-            mois[7] = "Août";
-            mois[8] = "Septembre";
-            mois[9] = "Octobre";
-            mois[10] = "Novembre";
-            mois[11] = "Décembre";
+        setTimeout(function(){
 
-            if($('.walk__container__result'))
-                $('.walk__container__result').remove();
+            console.log(latUser);
+            console.log(lonUser);
 
-            if($('.tag_container'))
-                $('.tag_container').remove();
+            $.ajax({
+                method: "GET",
+                data:{
+                    walk:$('form input[type=radio]:checked').val(),
+                    //km : $('#slider').val(),
+                    date : $('#date').val(),
+                    LAT : latUser,
+                    LON : lonUser
+                },
+                url:"src/php/managewalk.php",
+            })
+            .done(function(result){
 
-            if($('.walk__noresult'))
-                $('.walk__noresult').remove();
+                console.log(result);
+                data = JSON.parse(result);
+                //console.log(result);
 
-            if (data.length >= 1){
+                //savoir le jour
+                var jour = new Array(7);
+                jour[0] = "Lundi";
+                jour[1] = "Mardi";
+                jour[2] = "Mercredi";
+                jour[3] = "Jeudi";
+                jour[4] = "Vendredi";
+                jour[5] = "Samedi";
+                jour[6] = "Dimanche";
 
-                var mymap;
+                //savoir le mois
+                var mois = new Array(12);
+                mois[0] = "Janvier";
+                mois[1] = "Février";
+                mois[2] = "Mars";
+                mois[3] = "Avril";
+                mois[4] = "Mai";
+                mois[5] = "Juin";
+                mois[6] = "Juillet";
+                mois[7] = "Août";
+                mois[8] = "Septembre";
+                mois[9] = "Octobre";
+                mois[10] = "Novembre";
+                mois[11] = "Décembre";
 
-                var pawtopia = L.icon({
-                    iconUrl: 'https://i.imgur.com/2Jfr9dD.png',
-                    shadowUrl: 'https://i.imgur.com/5uFkzrG.png',
-                
-                    iconSize:     [30, 50], // size of the icon
-                    shadowSize:   [30, 25], // size of the shadow
-                    iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                    shadowAnchor: [5, 27],  // the same for the shadow
-                    popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                });
+                if($('.walk__container__result'))
+                    $('.walk__container__result').remove();
 
-                navigator.geolocation.getCurrentPosition(function(location) {
-                    var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                    mymap = L.map('mapid').setView(latlng, 10);
-                    
-                    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                        maxZoom: 18,
-                        id: 'mapbox.streets',
-                        accessToken: 'pk.eyJ1IjoiZGlzZ2FsbGlvbiIsImEiOiJjandrYm9peHkwcjc5NDlxazJwandjc3N2In0.3maC7p-woDBwkV5czUaIMw'
-                    }).addTo(mymap);
+                if($('.tag_container'))
+                    $('.tag_container').remove();
 
-                    // var searchControl = L.esri.Geocoding.geosearch().addTo(mymap);
-        
-                    // var results = L.layerGroup().addTo(mymap);
-                    // //var results = $('#text_input');
-        
-                    // searchControl.on('results', function(data){
-                    //     results.clearLayers();
-                    //     for (var i = data.results.length - 1; i >= 0; i--) {
-                    //         console.log(data.results);
-                    //         //L.marker(data.results[i].latlng), {icon: pawtopia}.addTo(mymap);
-                    //         L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
-                    //     }
-                    // });
-                });
+                if($('.walk__noresult'))
+                    $('.walk__noresult').remove();
 
-                // if ($('form input[type=radio]:checked').val() != undefined)
-                //     $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
-                // else
-                // $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+                if (data.length >= 1){
 
-                $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
+                    var mymap;
 
-                $('.walk__container__result').append('<p class="search__result"><b>'+data.length+'</b> résultats correspondant à votre recherche</p>');
+                    var bluetopia = L.icon({
+                        iconUrl: 'src/assets/img/ressources/bluetopia.png',
+                        shadowUrl: 'src/assets/img/ressources/shadow.png',
 
-                for( let i = 0; i < data.length; i++){
-
-                    let adress = data[i]['LOCATION'];
-
-                    L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
-                        console.log(results);
-                        
-                        var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: pawtopia}).addTo(mymap).on('click', function(){
-
-                            setTimeout(function(){
-                                $('.get_to_walk').click(function(){
-                                    window.location = "walk_detail?ID="+$(this).data('id');
-                                    console.log($('.get_to_walk'));
-                                });
-                            },100);
-                         
-                            //console.log('lol');
-                        });
-                        marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                        iconSize:     [30, 50], // size of the icon
+                        shadowSize:   [30, 25], // size of the shadow
+                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [5, 27],  // the same for the shadow
+                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
                     });
 
-                    // L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
+                    var redtopia = L.icon({
+                        iconUrl: 'src/assets/img/ressources/redtopia.png',
+                        shadowUrl: 'src/assets/img/ressources/shadow.png',
 
-                    let date = new Date(data[i]['DATE_START']);
-                    let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
-                    let hour = hourSplit[0] + ":" + hourSplit[1];
-                    let day = jour[date.getDay()];
-                    let month = mois[date.getMonth()];
-                    let dayNumber = date.getDate();
+                        iconSize:     [30, 50], // size of the icon
+                        shadowSize:   [30, 25], // size of the shadow
+                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [5, 27],  // the same for the shadow
+                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+                    });
 
-                    let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
-                    $('.walk__container__result').append('<div class="walk__card test">'+walk+'</div>');
+                    var greentopia = L.icon({
+                        iconUrl: 'src/assets/img/ressources/greentopia.png',
+                        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+                        iconSize:     [30, 50], // size of the icon
+                        shadowSize:   [30, 25], // size of the shadow
+                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [5, 27],  // the same for the shadow
+                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+                    });
+
+                    navigator.geolocation.getCurrentPosition(function(location) {
+                        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                        mymap = L.map('mapid').setView(latlng, 10);
+
+                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox.streets',
+                            accessToken: 'pk.eyJ1IjoiZGlzZ2FsbGlvbiIsImEiOiJjandrYm9peHkwcjc5NDlxazJwandjc3N2In0.3maC7p-woDBwkV5czUaIMw'
+                        }).addTo(mymap);
+                    });
+
+                    // if ($('form input[type=radio]:checked').val() != undefined)
+                    //     $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+                    // else
+                    // $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+
+                    $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
+
+                    $('.walk__container__result').append('<p class="search__result"><b>'+data.length+'</b> résultats correspondant à votre recherche</p>');
+
+                    for( let i = 0; i < data.length; i++){
+
+                        let adress = data[i]['LOCATION'];
+
+                        L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
+                            console.log(results);
+
+                            if (data[i]['WALK'] == "Récréative"){
+                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: bluetopia}).addTo(mymap).on('click', function(){
+
+                                    setTimeout(function(){
+                                        $('.get_to_walk').click(function(){
+                                            window.location = "walk_detail?ID="+$(this).data('id');
+                                            console.log($('.get_to_walk'));
+                                        });
+                                    },100);
+
+                                    //console.log('lol');
+                                });
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            }
+                            if (data[i]['WALK'] == "Sportive"){
+                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(mymap).on('click', function(){
+
+                                    setTimeout(function(){
+                                        $('.get_to_walk').click(function(){
+                                            window.location = "walk_detail?ID="+$(this).data('id');
+                                            console.log($('.get_to_walk'));
+                                        });
+                                    },100);
+
+                                    //console.log('lol');
+                                });
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            }
+                            if (data[i]['WALK'] == "Découverte"){
+                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(mymap).on('click', function(){
+
+                                    setTimeout(function(){
+                                        $('.get_to_walk').click(function(){
+                                            window.location = "walk_detail?ID="+$(this).data('id');
+                                            console.log($('.get_to_walk'));
+                                        });
+                                    },100);
+
+                                    //console.log('lol');
+                                });
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            }
+                        });
+
+                        // L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
+
+                        let date = new Date(data[i]['DATE_START']);
+                        let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
+                        let hour = hourSplit[0] + ":" + hourSplit[1];
+                        let day = jour[date.getDay()];
+                        let month = mois[date.getMonth()];
+                        let dayNumber = date.getDate();
+
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                        $('.walk__container__result').append('<div class="walk__card test">'+walk+'</div>');
+                    }
+                }else{
+                    $('.content_container .container .row .col').append('<div class="walk__noresult">Aucun resultat pour la recherche</div>');
                 }
-            }else{
-                $('.content_container .container .row .col').append('<div class="walk__noresult">Aucun resultat pour la recherche</div>');
-            }
 
-            $(".walk__handler__container").css('background','transparent');
+                $(".walk__handler__container").css('background','transparent');
 
-            setTimeout(function(){
-                $(".walk__handler__container").css('transform','translateY(100%)');
-            }, 750);
+                setTimeout(function(){
+                    $(".walk__handler__container").css('transform','translateY(100%)');
+                }, 750);
 
-            setTimeout(function(){
-                $(".walk__handler__container").css('display','none');
-                $("body").css('overflow','auto');
+                setTimeout(function(){
+                    $(".walk__handler__container").css('display','none');
+                    $("body").css('overflow','auto');
 
-                $([document.documentElement, document.body]).animate({
-                    scrollTop: $("#mapid").offset().top - 150
-                }, 500);
-            }, 1250);
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#mapid").offset().top - 150
+                    }, 500);
+                }, 1250);
 
-            $("#mapid").show();
-            $('.get_to_walk').click(function(){
-                window.location = "walk_detail?ID="+$(this).data('id');
+                $("#mapid").show();
+                $('.get_to_walk').click(function(){
+                    window.location = "walk_detail?ID="+$(this).data('id');
+                });
             });
-        });
+
+        },250);
     });
 
     $('#validate__sign').click(function(e){
@@ -1089,7 +1177,7 @@ $(document).ready(function(){
             url:"src/php/get_user_walk.php",
         })
         .done(function(result){
-            
+
             console.log(result);
 
             if(result){

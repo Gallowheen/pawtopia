@@ -42,10 +42,13 @@
 
     //Les chiens
     $dogs = $_GET['DOG'];
+    
+    $lat = $_GET['LAT'];
+    $lon = $_GET['LON'];
 
     //INSERT INTO EVENT
-    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`) VALUES (?,?,?,?,?,?)");
-    $query_add_event->bind_param("isssss", $id_owner, $name, $location, $type, $date, $length);
+    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`, `LAT`, `LON`) VALUES (?,?,?,?,?,?,?,?)");
+    $query_add_event->bind_param("isssssdd", $id_owner, $name, $location, $type, $date, $length, $lat, $lon);
     $query_add_event->execute();
     $last_ID = $query_add_event->insert_id;
 
