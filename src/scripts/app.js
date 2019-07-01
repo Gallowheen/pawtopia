@@ -193,8 +193,7 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+$(this).data('id');
-                                            console.log($('.get_to_walk'));
+                                            window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
 
@@ -207,8 +206,7 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+$(this).data('id');
-                                            console.log($('.get_to_walk'));
+                                            window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
 
@@ -221,8 +219,7 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+$(this).data('id');
-                                            console.log($('.get_to_walk'));
+                                            window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
 
@@ -1234,8 +1231,7 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+$(this).data('id');
-                                            console.log($('.get_to_walk'));
+                                            window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
 
@@ -1248,8 +1244,7 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+$(this).data('id');
-                                            console.log($('.get_to_walk'));
+                                            window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
 
@@ -1262,8 +1257,7 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+$(this).data('id');
-                                            console.log($('.get_to_walk'));
+                                            window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
 
