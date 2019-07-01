@@ -1792,7 +1792,6 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .map {
   height: 250px;
-  display: none;
   margin-bottom: 24px;
 }
 
@@ -1810,6 +1809,31 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .leaflet-popup-content {
   text-align: center !important;
+}
+
+.map__legend__title {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.map__legend__img {
+  height: 35px;
+}
+
+.map__legend__element {
+  text-align: center;
+}
+
+.map__legend {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.map__container {
+  display: none;
 }
 
 body {

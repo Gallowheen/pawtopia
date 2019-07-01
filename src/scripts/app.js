@@ -1,5 +1,28 @@
 $(document).ready(function(){
 
+    //GET GEOLOC
+    let latUser;
+    let lonUser;
+
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+      
+    function success(pos) {
+        var crd = pos.coords;
+      
+        latUser = crd.latitude;
+        lonUser = crd.longitude;
+    }
+      
+    function error(err) {
+        console.warn(`ERREUR (${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
     let lat;
     let lon;
 
@@ -43,6 +66,179 @@ $(document).ready(function(){
             }
         });
     }
+
+    if($('body').is('.walk')){
+
+        setTimeout(function(){
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+
+            $.ajax({
+                method: "GET",
+                data:{
+                    date : today,
+                    LAT : latUser,
+                    LON : lonUser
+                },
+                url:"src/php/managewalk.php",
+            })
+            .done(function(result){
+
+                console.log(result);
+                data = JSON.parse(result);
+                //console.log(result);
+
+                //savoir le jour
+                var jour = new Array(7);
+                jour[0] = "Lundi";
+                jour[1] = "Mardi";
+                jour[2] = "Mercredi";
+                jour[3] = "Jeudi";
+                jour[4] = "Vendredi";
+                jour[5] = "Samedi";
+                jour[6] = "Dimanche";
+
+                //savoir le mois
+                var mois = new Array(12);
+                mois[0] = "Janvier";
+                mois[1] = "Février";
+                mois[2] = "Mars";
+                mois[3] = "Avril";
+                mois[4] = "Mai";
+                mois[5] = "Juin";
+                mois[6] = "Juillet";
+                mois[7] = "Août";
+                mois[8] = "Septembre";
+                mois[9] = "Octobre";
+                mois[10] = "Novembre";
+                mois[11] = "Décembre";
+
+                if($('.walk__container__result'))
+                    $('.walk__container__result').remove();
+
+                if($('.tag_container'))
+                    $('.tag_container').remove();
+
+                if($('.walk__noresult'))
+                    $('.walk__noresult').remove();
+
+                if (data.length >= 1){
+
+                    var map;
+
+                    var bluetopia = L.icon({
+                        iconUrl: 'src/assets/img/ressources/bluetopia.png',
+                        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+                        iconSize:     [30, 50], // size of the icon
+                        shadowSize:   [30, 25], // size of the shadow
+                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [5, 27],  // the same for the shadow
+                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+                    });
+
+                    var redtopia = L.icon({
+                        iconUrl: 'src/assets/img/ressources/redtopia.png',
+                        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+                        iconSize:     [30, 50], // size of the icon
+                        shadowSize:   [30, 25], // size of the shadow
+                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [5, 27],  // the same for the shadow
+                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+                    });
+
+                    var greentopia = L.icon({
+                        iconUrl: 'src/assets/img/ressources/greentopia.png',
+                        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+                        iconSize:     [30, 50], // size of the icon
+                        shadowSize:   [30, 25], // size of the shadow
+                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+                        shadowAnchor: [5, 27],  // the same for the shadow
+                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+                    });
+
+                    navigator.geolocation.getCurrentPosition(function(location) {
+                        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+                        map = L.map('map').setView(latlng, 10);
+
+                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                            maxZoom: 18,
+                            id: 'mapbox.streets',
+                            accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
+                        }).addTo(map);
+                    });
+
+                    // if ($('form input[type=radio]:checked').val() != undefined)
+                    //     $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+                    // else
+                    // $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+
+                    for( let i = 0; i < data.length; i++){
+
+                        let adress = data[i]['LOCATION'];
+
+                        L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
+                            console.log(results);
+
+                            if (data[i]['WALK'] == "Récréative"){
+                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: bluetopia}).addTo(map).on('click', function(){
+
+                                    setTimeout(function(){
+                                        $('.get_to_walk').click(function(){
+                                            window.location = "walk_detail?ID="+$(this).data('id');
+                                            console.log($('.get_to_walk'));
+                                        });
+                                    },100);
+
+                                    //console.log('lol');
+                                });
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            }
+                            if (data[i]['WALK'] == "Sportive"){
+                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(map).on('click', function(){
+
+                                    setTimeout(function(){
+                                        $('.get_to_walk').click(function(){
+                                            window.location = "walk_detail?ID="+$(this).data('id');
+                                            console.log($('.get_to_walk'));
+                                        });
+                                    },100);
+
+                                    //console.log('lol');
+                                });
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            }
+                            if (data[i]['WALK'] == "Découverte"){
+                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(map).on('click', function(){
+
+                                    setTimeout(function(){
+                                        $('.get_to_walk').click(function(){
+                                            window.location = "walk_detail?ID="+$(this).data('id');
+                                            console.log($('.get_to_walk'));
+                                        });
+                                    },100);
+
+                                    //console.log('lol');
+                                });
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            }
+                        });
+                    }
+                }
+            });
+        },250);
+
+        $('.map__container').eq(0).show();
+    }
+
 
     $("#info").on('keyup', function(){
         console.log('//nominatim.openstreetmap.org/search?format=json&q='+$(this).val());
@@ -915,33 +1111,7 @@ $(document).ready(function(){
 
         e.preventDefault();
 
-        //GET GEOLOC
-        let latUser;
-        let lonUser;
-
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0
-        };
-          
-        function success(pos) {
-            var crd = pos.coords;
-          
-            latUser = crd.latitude;
-            lonUser = crd.longitude;
-        }
-          
-        function error(err) {
-            console.warn(`ERREUR (${err.code}): ${err.message}`);
-        }
-
-        navigator.geolocation.getCurrentPosition(success, error, options);
-
         setTimeout(function(){
-
-            console.log(latUser);
-            console.log(lonUser);
 
             $.ajax({
                 method: "GET",
@@ -1039,7 +1209,7 @@ $(document).ready(function(){
                             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                             maxZoom: 18,
                             id: 'mapbox.streets',
-                            accessToken: 'pk.eyJ1IjoiZGlzZ2FsbGlvbiIsImEiOiJjandrYm9peHkwcjc5NDlxazJwandjc3N2In0.3maC7p-woDBwkV5czUaIMw'
+                            accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
                         }).addTo(mymap);
                     });
 
@@ -1134,7 +1304,10 @@ $(document).ready(function(){
                     }, 500);
                 }, 1250);
 
-                $("#mapid").show();
+                //$(".map__container").show();
+
+                $('.map__container').eq(0).hide();
+                $(".map__container").eq(1).show();
                 $('.get_to_walk').click(function(){
                     window.location = "walk_detail?ID="+$(this).data('id');
                 });

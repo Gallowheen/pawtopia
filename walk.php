@@ -42,10 +42,43 @@
 
                         </div>
                         <h3 class="h3 -title">Trouvez votre balade idéale</h3>
-                        <div class="find__more">
-                            <button class="button -color" id="filter">Trouver votre balade</button>
+                        <div class="map__container">
+                            <div class="map__legend">
+                                <div class="map__legend__element">
+                                    <img class="map__legend__img" src="src/assets/img/ressources/bluetopia.png"/>
+                                    <span class="map__legend__title">Récréative</span>
+                                </div>
+                                <div class="map__legend__element">
+                                    <img class="map__legend__img" src="src/assets/img/ressources/redtopia.png"/>
+                                    <span class="map__legend__title">Sportive</span>
+                                </div>
+                                <div class="map__legend__element">
+                                    <img class="map__legend__img" src="src/assets/img/ressources/greentopia.png"/>
+                                    <span class="map__legend__title">Découverte</span>
+                                </div>
+                            </div>
+                            <div class="map" class="map" id="map"></div>
                         </div>
-                        <div class="map" class="map" id="mapid"></div>
+                        <div class="find__more">
+                            <button class="button -color" id="filter">Filtrer les balades</button>
+                        </div>
+                        <div class="map__container">
+                            <div class="map__legend">
+                                <div class="map__legend__element">
+                                    <img class="map__legend__img" src="src/assets/img/ressources/bluetopia.png"/>
+                                    <span class="map__legend__title">Récréative</span>
+                                </div>
+                                <div class="map__legend__element">
+                                    <img class="map__legend__img" src="src/assets/img/ressources/redtopia.png"/>
+                                    <span class="map__legend__title">Sportive</span>
+                                </div>
+                                <div class="map__legend__element">
+                                    <img class="map__legend__img" src="src/assets/img/ressources/greentopia.png"/>
+                                    <span class="map__legend__title">Découverte</span>
+                                </div>
+                            </div>
+                            <div class="map" class="map" id="mapid"></div>
+                        </div>
                     </div>
                 </div>
             </div>
