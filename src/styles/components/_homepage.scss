@@ -1122,8 +1122,8 @@
 
 .date__container{
   font-size: 16px;
-  display: flex;
-  justify-content: space-around;
+  // display: flex;
+  // justify-content: space-around;
   font-weight: bold;
   flex-wrap: wrap;
 }
@@ -1135,6 +1135,10 @@
 
 .date__container, .town__container, .location__container{
   margin : 8px 0px;
+}
+
+.date__container{
+  margin : 8px 16px;
 }
 
 .name__container, .date__container{
@@ -1296,6 +1300,15 @@
 .map{
   height: 250px;
   display: none;
+  margin-bottom: 24px;
+}
+
+.search__result{
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 16px;
+  text-align: right;
 }
 
 .leaflet-control-attribution{

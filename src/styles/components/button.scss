@@ -88,6 +88,11 @@
         background-color: #003780;
         border : none;
         color : white;
+
+        &.-inverted{
+          color : #003780;
+          background : white;
+        }
       }
 
       &.-add{

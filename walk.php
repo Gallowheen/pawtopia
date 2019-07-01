@@ -42,10 +42,10 @@
 
                         </div>
                         <h3 class="h3 -title">Trouvez votre balade idéale</h3>
-                        <div class="map" class="map" id="mapid"></div>
                         <div class="find__more">
                             <button class="button -color" id="filter">Trouver votre balade</button>
                         </div>
+                        <div class="map" class="map" id="mapid"></div>
                     </div>
                 </div>
             </div>

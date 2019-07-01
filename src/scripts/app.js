@@ -24,7 +24,7 @@ $(document).ready(function(){
             }
         });
     }
-    if($('body').is('.walk')){
+    if($('body').is('.walk') || $('body').is('.new_walk')){
         $('.nav_button_group').each(function(){
             if($(this).hasClass('walk')){
                 $(this).children().eq(0).addClass('-active');
@@ -77,84 +77,6 @@ $(document).ready(function(){
             }
         });
     });
-
-    if($('body').is('.walk')){
-        // var pawtopia = L.icon({
-        //     iconUrl: 'https://i.imgur.com/2Jfr9dD.png',
-        //     shadowUrl: 'https://i.imgur.com/5uFkzrG.png',
-        
-        //     iconSize:     [30, 50], // size of the icon
-        //     shadowSize:   [30, 25], // size of the shadow
-        //     iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-        //     shadowAnchor: [5, 27],  // the same for the shadow
-        //     popupAnchor:  [-8, -88] // point from which the popup should open relative to the iconAnchor
-        // });
-        
-        // navigator.geolocation.getCurrentPosition(function(location) {
-        //     var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-        //     var mymap = L.map('mapid').setView(latlng, 6);
-            
-        //     // var marker = L.marker([location.coords.latitude+0.01, location.coords.longitude], {icon: pawtopia}).addTo(mymap);
-        //     // marker.bindPopup("<b>Balade du chinois parlant.</b>");
-        //     // var marker2 = L.marker([location.coords.latitude-0.01, location.coords.longitude+0.02], {icon: pawtopia}).addTo(mymap);
-        //     // marker2.bindPopup("<b>Balade à 250km.</b>");
-            
-        //     //L.marker([50.1324189, 5.339828799999999], {icon: pawtopia}).addTo(mymap);
-            
-        //     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        //         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        //         maxZoom: 18,
-        //         id: 'mapbox.streets',
-        //         accessToken: 'pk.eyJ1IjoiZGlzZ2FsbGlvbiIsImEiOiJjandrYm9peHkwcjc5NDlxazJwandjc3N2In0.3maC7p-woDBwkV5czUaIMw'
-        //     }).addTo(mymap);
-
-        //     // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     //     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-        //     // }).addTo(mymap);
-
-        //     var searchControl = L.esri.Geocoding.geosearch().addTo(mymap);
-
-        //     var results = L.layerGroup().addTo(mymap);
-        //     //var results = $('#text_input');
-
-        //     searchControl.on('results', function(data){
-        //         results.clearLayers();
-        //         for (var i = data.results.length - 1; i >= 0; i--) {
-        //             console.log(data.results);
-        //             //L.marker(data.results[i].latlng), {icon: pawtopia}.addTo(mymap);
-        //             L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
-        //         }
-        //     });
-        // });
-
-
-        // CHECK IF ADDRESS EXIST
-
-        // var ville = "DOLEEELELELE";
-        // var address = "37 rue Marius Pieyre";
-        // $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+ville+', '+address, 		function(data){
-        //     if(data.length) { console.log("WOW L'ADRESSE EXISTE, AMAZING"); }
-        //     else { console.log("TRY AGAIN YOU SCRUB"); }
-        // });
-
-        
-
-
-        // GET LOCATION FROM ADRESS 
-
-        // L.esri.Geocoding.geocode().text('15 rue de Marche Nassogne').run(function(err, results, response){
-        //     console.log(results);
-        // });
-
-        //var map = L.map('map').setView([40.91, -96.63], 4);
-
-        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
-        // }).addTo(map);
-     
-    }
-
-    var ready = false;
 
     var pubnub = new PubNub({
 	    subscribeKey: 'sub-c-1ef083d0-dc62-11e8-911d-e217929ad048', // always required
@@ -290,16 +212,18 @@ $(document).ready(function(){
             $(".dog_card_bubble_container").remove();
         }
 
-        if($('body').is('.members'))
-            $(".my_pet__container .container--full .row .col").append('<div class="dog_card_bubble_container"></div>');
-        else
-            $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
+        if ($(".dog_card_container").children().length > 1){
+            if($('body').is('.members'))
+                $(".my_pet__container .container--full .row .col").append('<div class="dog_card_bubble_container"></div>');
+            else
+                $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
 
-        $(".dog_card_container").children().each(function(){
-            $('.dog_card_bubble_container').append('<div class="bubble"></div>');
-        });
+            $(".dog_card_container").children().each(function(){
+                $('.dog_card_bubble_container').append('<div class="bubble"></div>');
+            });
 
-        $(".bubble").first().addClass('-active');
+            $(".bubble").first().addClass('-active');
+        }
 
 
         $(".dog_card_container").swipe({
@@ -1039,7 +963,7 @@ $(document).ready(function(){
 
                 navigator.geolocation.getCurrentPosition(function(location) {
                     var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                    mymap = L.map('mapid').setView(latlng, 8);
+                    mymap = L.map('mapid').setView(latlng, 10);
                     
                     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -1070,6 +994,8 @@ $(document).ready(function(){
 
                 $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
 
+                $('.walk__container__result').append('<p class="search__result"><b>'+data.length+'</b> résultats correspondant à votre recherche</p>');
+
                 for( let i = 0; i < data.length; i++){
 
                     let adress = data[i]['LOCATION'];
@@ -1077,8 +1003,18 @@ $(document).ready(function(){
                     L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
                         console.log(results);
                         
-                        var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: pawtopia}).addTo(mymap);
-                        marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b>");
+                        var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: pawtopia}).addTo(mymap).on('click', function(){
+
+                            setTimeout(function(){
+                                $('.get_to_walk').click(function(){
+                                    window.location = "walk_detail?ID="+$(this).data('id');
+                                    console.log($('.get_to_walk'));
+                                });
+                            },100);
+                         
+                            //console.log('lol');
+                        });
+                        marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -walk get_to_walk' data-id='10'>En savoir plus</button>");
                     });
 
                     // L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
@@ -1113,7 +1049,6 @@ $(document).ready(function(){
             }, 1250);
 
             $("#mapid").show();
-
             $('.get_to_walk').click(function(){
                 window.location = "walk_detail?ID="+$(this).data('id');
             });
@@ -1199,7 +1134,9 @@ $(document).ready(function(){
                         let dayNumber = date.getDate();
                         let year = date.getFullYear();
 
-                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+'</span></div><div class="align-right"><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div></div>';
+                        // A rajouter à la ligne du dessus pour repasser à l'ancienne version
+                        //+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+'</span></div><div class="align-right"><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div></div>'
                         $('.walk__container').append('<div class="walk__card test">'+walk+'</div>');
                     }
 
@@ -1209,7 +1146,7 @@ $(document).ready(function(){
 
                     if (data.length > 1 && $('body').is('.walk') || $('body').is('.home')){
                         $('.content_container .container .row .col .user_walk').css({
-                            "max-height": "240px",
+                            "max-height": "180px",
                             "overflow" : "scroll"
                         })
                     }
