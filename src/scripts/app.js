@@ -62,7 +62,7 @@ $(document).ready(function(){
             }
         });
     }
-    if($('body').is('.message')){
+    if($('body').is('.message')|| $('body').is('.getMessage')){
         $('.nav_button_group').each(function(){
             if($(this).hasClass('message')){
                 $(this).children().eq(0).addClass('-active');
@@ -1289,7 +1289,7 @@ $(document).ready(function(){
                         let month = mois[date.getMonth()];
                         let dayNumber = date.getDate();
 
-                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['ROAD']+" "+data[i]['CITY']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['ROAD']+" "+data[i]['CITY']+' <small class="friend_name -km -walk">('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
                         $('.walk__container__result').append('<div class="walk__card test">'+walk+'</div>');
                     }
                 }else{

@@ -950,6 +950,11 @@ input[type=range]::-webkit-slider-runnable-track {
   transform: translateY(-40%);
   left: 0px;
   font-size: 14px;
+  font-weight: bold;
+  color: #0067B0;
+}
+.friend_name.-walk {
+  margin-top: 8px;
 }
 
 .friend_message {
@@ -1617,9 +1622,6 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .town__container {
   max-height: 35px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .town__container .icon {
   color: #0077c0;

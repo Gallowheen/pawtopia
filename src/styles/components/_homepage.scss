@@ -404,6 +404,12 @@
     transform: translateY(-40%);
     left: 0px;
     font-size: 14px;
+    font-weight: bold;
+    color: #0067B0;
+  }
+
+  &.-walk{
+    margin-top: 8px;
   }
 }
 
@@ -1115,9 +1121,9 @@
 .town__container{
 
   max-height: 35px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
   
   .icon{
     color: #0077c0;
