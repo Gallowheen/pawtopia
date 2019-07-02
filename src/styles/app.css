@@ -3118,6 +3118,13 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-left: 40px;
 }
 
+.back {
+  position: absolute;
+  top: 30px;
+  left: 15px;
+  transform: translateY(-10px);
+}
+
 .title {
   height: 60px;
 }

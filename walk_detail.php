@@ -4,6 +4,8 @@
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
 
+    $retour = true;
+
     //Function to return table of result
     function resultToArray($result) {
         $rows = array();
@@ -162,7 +164,15 @@
                                                         echo "<h4 class='h4 dog_name'>".$master['USERNAME']."</h4>";
                                                         ?>
                                                         <?php
-                                                        echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="'.$master['AVATAR'].'">';?>
+
+                                                        $filename = $master['AVATAR'];
+                                                    
+                                                        if (file_exists($filename)){
+                                                            echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="'.$master['AVATAR'].'">';
+                                                        }else{
+                                                            echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="src/assets/img/avatar/default.jpg">';
+                                                            
+                                                        }?>
                                                     </div>
                                                 <?php
                                             endforeach;

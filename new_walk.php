@@ -4,6 +4,8 @@
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
 
+    $retour = true;
+
     //Function to return table of result
     function resultToArray($result) {
         $rows = array();
