@@ -1602,6 +1602,7 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: 1px 1px 9px #00000052;
   margin-bottom: 16px;
   border: 2px solid #0067b030;
+  position: relative;
 }
 .walk__card:last-child {
   margin-bottom: 0px;
@@ -1611,7 +1612,7 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 20px;
   font-weight: bold;
   color: #0067B0;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .town__container {
@@ -1641,13 +1642,32 @@ input[type=range]::-webkit-slider-runnable-track {
   text-align: center;
   margin: 16px 0 0px 0;
 }
+.button__container.-preview {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+}
+.button__container .icon {
+  height: 15px;
+  width: 16px;
+  transform: rotate(-45deg);
+  border-color: #003780;
+  right: 5px;
+  position: relative;
+  bottom: auto;
+  margin: 0;
+}
+
+.learn__more {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+}
 
 .date__container, .town__container, .location__container {
   margin: 8px 0px;
-}
-
-.date__container {
-  margin: 8px 16px;
 }
 
 .name__container, .date__container {
@@ -1682,6 +1702,9 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .user_walk::-webkit-scrollbar:horizontal {
   height: 11px;
+}
+.user_walk::-webkit-scrollbar-corner {
+  background: #f6f8fa;
 }
 .user_walk .walk__card {
   box-shadow: none;

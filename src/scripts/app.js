@@ -1389,7 +1389,7 @@ $(document).ready(function(){
                         let dayNumber = date.getDate();
                         let year = date.getFullYear();
 
-                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div></div>';
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span></div><div class="button__container -preview"><i class="icon icon__up -right get_to_walk" data-id='+data[i]['ID']+'></i><span class="learn__more">En savoir plus</span></div></div>';
                         // A rajouter à la ligne du dessus pour repasser à l'ancienne version
                         //+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+'</span></div><div class="align-right"><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div></div>'
                         $('.walk__container').append('<div class="walk__card test">'+walk+'</div>');
@@ -1401,7 +1401,7 @@ $(document).ready(function(){
 
                     if (data.length > 1 && $('body').is('.walk') || $('body').is('.home')){
                         $('.content_container .container .row .col .user_walk').css({
-                            "max-height": "180px",
+                            "max-height": "120px",
                             "overflow" : "scroll"
                         })
                     }

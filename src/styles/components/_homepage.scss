@@ -1098,6 +1098,7 @@
   box-shadow: 1px 1px 9px #00000052;
   margin-bottom: 16px;
   border : 2px solid #0067b030;
+  position: relative;
 
   &:last-child{
     margin-bottom: 0px;
@@ -1108,7 +1109,7 @@
   font-size: 20px;
   font-weight: bold;
   color : #0067B0;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .town__container{
@@ -1142,15 +1143,40 @@
 .button__container{
   text-align: center;
   margin: 16px 0 0px 0;
+
+  &.-preview{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+
+  .icon{
+    height: 15px;
+    width: 16px;
+    transform: rotate(-45deg);
+    border-color: #003780;
+    right: 5px;
+    position: relative;
+    bottom: auto;
+    margin: 0;
+  }
+}
+
+.learn__more{
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .date__container, .town__container, .location__container{
   margin : 8px 0px;
 }
 
-.date__container{
-  margin : 8px 16px;
-}
+// .date__container{
+//   margin : 8px 16px;
+// }
 
 .name__container, .date__container{
   position: relative;
@@ -1190,6 +1216,10 @@
 
   &::-webkit-scrollbar:horizontal {
     height: 11px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: #f6f8fa;
   }
 
   .walk__card {
