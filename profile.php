@@ -127,13 +127,30 @@
                                 $avatar_path = $row['AVATAR'];
 
                                 if($result->num_rows === 0){ ?>
-                                    <img class="avatar avatar" src="<?php echo $avatar_path ?>"/>
+                                    <?php
+                                    $filename = $avatar_path;
+                                                    
+                                    if (file_exists($filename)){
+                                        echo '<img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>';
+                                    }else{
+                                        echo '<img class="avatar avatar -small -master" src="src/assets/img/avatar/default.jpg"/>';
+                                        
+                                    }?>  
                                 <?php
                                 }else{ ?>
 
                                 <div class="avatars">
                                     <img class="avatar avatar -dog" src="<?php echo $avatar_dog ?>"/>
-                                    <img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>
+
+                                    <?php
+                                    $filename = $avatar_path;
+                                                    
+                                    if (file_exists($filename)){
+                                        echo '<img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>';
+                                    }else{
+                                        echo '<img class="avatar avatar -small -master" src="src/assets/img/avatar/default.jpg"/>';
+                                        
+                                    }?>    
                                 </div>
 
                                 <?php
