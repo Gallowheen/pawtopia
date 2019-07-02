@@ -4,6 +4,10 @@ $(document).ready(function(){
     let latUser;
     let lonUser;
 
+    let city;
+    let road;
+    let postcode;
+
     var options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -196,10 +200,8 @@ $(document).ready(function(){
                                             window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
-
-                                    //console.log('lol');
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Sportive"){
                                 var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(map).on('click', function(){
@@ -209,10 +211,8 @@ $(document).ready(function(){
                                             window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
-
-                                    //console.log('lol');
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Découverte"){
                                 var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(map).on('click', function(){
@@ -222,10 +222,8 @@ $(document).ready(function(){
                                             window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
-
-                                    //console.log('lol');
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                         });
                     }
@@ -1068,15 +1066,27 @@ $(document).ready(function(){
             }
         });
 
-        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$('#info').val(), 		function(data){
-            console.log(data[0].lat);
+        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$('#info').val()+'&addressdetails=1', 		function(data){
+            console.log(data[0]);
             lat = data[0].lat;
             lon = data[0].lon;
+
+            if (data[0].address.city != undefined){
+                city = data[0].address.city;
+            }else{
+                city = data[0].address.village;
+            }
+            road = data[0].address.road;
+            postcode = data[0].address.postcode;
         });
 
         setTimeout(function(){
             console.log(lat);
             console.log(lon);
+            console.log(city);
+            console.log(road);
+            console.log(postcode);
+
             
             $.get(
                 'src/php/add_event.php',
@@ -1089,7 +1099,10 @@ $(document).ready(function(){
                     LENGTH : $("#length").val(),
                     DOG : dogSelected,
                     LAT : lat,
-                    LON : lon
+                    LON : lon,
+                    CITY : city, 
+                    ROAD : road,
+                    POSTCODE : postcode
                 },
 
                 function(data){
@@ -1237,7 +1250,7 @@ $(document).ready(function(){
 
                                     //console.log('lol');
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Sportive"){
                                 var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(mymap).on('click', function(){
@@ -1250,7 +1263,7 @@ $(document).ready(function(){
 
                                     //console.log('lol');
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Découverte"){
                                 var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(mymap).on('click', function(){
@@ -1263,7 +1276,7 @@ $(document).ready(function(){
 
                                     //console.log('lol');
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['LOCATION']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                         });
 
@@ -1276,7 +1289,7 @@ $(document).ready(function(){
                         let month = mois[date.getMonth()];
                         let dayNumber = date.getDate();
 
-                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['ROAD']+" "+data[i]['CITY']+' <small>('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
                         $('.walk__container__result').append('<div class="walk__card test">'+walk+'</div>');
                     }
                 }else{

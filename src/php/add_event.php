@@ -46,9 +46,13 @@
     $lat = $_GET['LAT'];
     $lon = $_GET['LON'];
 
+    $road = $_GET['ROAD'];
+    $city = $_GET['CITY'];
+    $zip = $_GET['POSTCODE'];
+
     //INSERT INTO EVENT
-    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`, `LAT`, `LON`) VALUES (?,?,?,?,?,?,?,?)");
-    $query_add_event->bind_param("isssssdd", $id_owner, $name, $location, $type, $date, $length, $lat, $lon);
+    $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`, `LAT`, `LON`, `ROAD`, `CITY`, `ZIP`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+    $query_add_event->bind_param("isssssddsss", $id_owner, $name, $location, $type, $date, $length, $lat, $lon, $road, $city, $zip);
     $query_add_event->execute();
     $last_ID = $query_add_event->insert_id;
 

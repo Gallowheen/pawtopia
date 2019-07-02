@@ -127,7 +127,15 @@
                                 $avatar_path = $row['AVATAR'];
 
                                 if($result->num_rows === 0){ ?>
-                                    <img class="avatar avatar" src="<?php echo $avatar_path ?>"/>
+                                     <?php
+                                    $filename = $avatar_path;
+                                                    
+                                    if (file_exists($filename)){ ?>
+                                        <img class="avatar" src="<?php echo $avatar_path ?>"/>
+                                    <?php }else{ ?>
+                                        <img class="avatar" src="src/assets/img/avatar/default.jpg"/>
+                                    <?php 
+                                    }?>    
                                 <?php
                                 }else{ ?>
 
@@ -137,11 +145,11 @@
                                     <?php
                                     $filename = $avatar_path;
                                                     
-                                    if (file_exists($filename)){
-                                        echo '<img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>';
-                                    }else{
-                                        echo '<img class="avatar avatar -small -master" src="src/assets/img/avatar/default.jpg"/>';
-                                        
+                                    if (file_exists($filename)){ ?>
+                                        <img class="avatar -small -master" src="<?php echo $avatar_path ?>"/>
+                                    <?php }else{ ?>
+                                        <img class="avatar -small -master" src="src/assets/img/avatar/default.jpg"/>
+                                    <?php 
                                     }?>    
                                 </div>
 
@@ -338,9 +346,9 @@
                                             $filename = $row_friend_info['AVATAR'];
                                                     
                                             if (file_exists($filename)){ ?>
-                                                <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                                <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
                                             <?php }else{ ?>
-                                                <img class="avatar avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>                              
+                                                <img class="avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>                              
                                             <?php
                                             }?>   
 
@@ -394,9 +402,9 @@
                                             $filename = $row_friend_info['AVATAR'];
                                                     
                                             if (file_exists($filename)){ ?>
-                                                <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                                <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
                                             <?php }else{ ?>
-                                                <img class="avatar avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>                              
+                                                <img class="avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>                              
                                             <?php
                                             }?>   
                                             
