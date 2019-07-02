@@ -127,15 +127,7 @@
                                 $avatar_path = $row['AVATAR'];
 
                                 if($result->num_rows === 0){ ?>
-                                    <?php
-                                    $filename = $avatar_path;
-                                                    
-                                    if (file_exists($filename)){
-                                        echo '<img class="avatar avatar -small -master" src="<?php echo $avatar_path ?>"/>';
-                                    }else{
-                                        echo '<img class="avatar avatar -small -master" src="src/assets/img/avatar/default.jpg"/>';
-                                        
-                                    }?>  
+                                    <img class="avatar avatar" src="<?php echo $avatar_path ?>"/>
                                 <?php
                                 }else{ ?>
 
@@ -341,7 +333,17 @@
 
 
                                             echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';?>
-                                            <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+
+                                            <?php 
+                                            $filename = $row_friend_info['AVATAR'];
+                                                    
+                                            if (file_exists($filename)){ ?>
+                                                <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                            <?php }else{ ?>
+                                                <img class="avatar avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>                              
+                                            <?php
+                                            }?>   
+
                                             <?php
                                             echo '<p class="friend__username">'.$row_friend_info['USERNAME'].'</p>';
                                             echo '</div>';
@@ -388,7 +390,16 @@
 
                                             echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';?>
 
-                                            <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+<?php 
+                                            $filename = $row_friend_info['AVATAR'];
+                                                    
+                                            if (file_exists($filename)){ ?>
+                                                <img class="avatar avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                            <?php }else{ ?>
+                                                <img class="avatar avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>                              
+                                            <?php
+                                            }?>   
+                                            
                                             <?php
                                             echo '<p class="friend__username">'.$row_friend_info['USERNAME'].'</p>';
                                             echo '</div>';
