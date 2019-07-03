@@ -212,7 +212,7 @@ $(document).ready(function(){
                                         });
                                     },100);
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Découverte"){
                                 var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(map).on('click', function(){
@@ -223,7 +223,7 @@ $(document).ready(function(){
                                         });
                                     },100);
                                 });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                         });
                     }
@@ -1289,7 +1289,7 @@ $(document).ready(function(){
                         let month = mois[date.getMonth()];
                         let dayNumber = date.getDate();
 
-                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['ROAD']+" "+data[i]['CITY']+' <small class="friend_name -km -walk">('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -inverted -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
+                        let walk = '<div class="name__container"><span class="">'+data[i]['NAME']+'</span></div><div class="date__container -flex"><span class="">'+ day +" "+dayNumber +" "+ month+" "+ hour+'</span>'+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['ROAD']+" "+data[i]['CITY']+' <small class="friend_name -km -walk">('+data[i]['km']+' km de vous)</small></span></div><div class="button__container"><button class="button -color -blue -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div>';
                         $('.walk__container__result').append('<div class="walk__card test">'+walk+'</div>');
                     }
                 }else{

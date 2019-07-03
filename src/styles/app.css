@@ -955,6 +955,15 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .friend_name.-walk {
   margin-top: 8px;
+  position: absolute;
+  top: 6px;
+  left: auto;
+  right: -2px;
+  color: white;
+  background: #0067B0;
+  padding: 10px;
+  border-radius: 0px 0px 0px 15px;
+  font-size: 12px;
 }
 
 .friend_message {
@@ -1604,7 +1613,6 @@ input[type=range]::-webkit-slider-runnable-track {
 .walk__card {
   padding: 16px;
   background: white;
-  box-shadow: 1px 1px 9px #00000052;
   margin-bottom: 16px;
   border: 2px solid #0067b030;
   position: relative;

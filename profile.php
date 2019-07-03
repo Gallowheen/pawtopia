@@ -455,7 +455,7 @@
                                     else
                                         echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>L'utilisateur n'a pas encore de biographie</p></div>";
                                     if ( $row['WALK'])
-                                        echo"<div class='information_group'><p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p></div>";
+                                        echo"<div class='information_group'><p class='information_title'>Type de balade préférée</p><p class='information_space'>".$row['WALK']."</p></div>";
                                 ?>
                             </div>
                         </div>
