@@ -47,6 +47,8 @@ $(document).ready(function(){
                 accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
             }).addTo(map);
 
+            //layerGroup = L.layerGroup().addTo(map);
+
             mymap = L.map('mapid').setView(latlng, 10);
         
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -59,6 +61,8 @@ $(document).ready(function(){
             layerGroup = L.layerGroup().addTo(mymap);
         });
 
+
+        //if geoloc failed
         setTimeout(function(){
             if (map == undefined || mymap == undefined){
                 var longitude;
@@ -85,7 +89,7 @@ $(document).ready(function(){
                         accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
                     }).addTo(map);
                 
-                
+                    //layerGroup = L.layerGroup().addTo(map);
                     //create mymap
             
                     var latlng = new L.LatLng(latitude, longitude);
@@ -97,6 +101,8 @@ $(document).ready(function(){
                         id: 'mapbox.streets',
                         accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
                     }).addTo(mymap);
+
+                    layerGroup = L.layerGroup().addTo(mymap);
                 });
             }
         },500);
@@ -1254,6 +1260,11 @@ $(document).ready(function(){
                     $('.walk__noresult').remove();
 
                 if (data.length >= 1){
+
+                    setTimeout(() => {
+                        mymap.invalidateSize();
+                    }, 0);
+                    layerGroup.clearLayers();
 
                     $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
 
