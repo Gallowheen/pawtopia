@@ -11,12 +11,22 @@
     width: 20%;
     text-align: center;
     padding: 6px;
+
+    &:first-child{
+        i{
+            font-size: 32px;
+        }
+
+        span{
+            margin-top: 0px;
+        }
+    }
 }
 
 .link_footer{
     color: white;
     -webkit-text-stroke: 2px;
-    -webkit-text-stroke-color: #36a54e;
+    -webkit-text-stroke-color: #3c6382;
     display: block;
     font-size: 0;
 
@@ -35,10 +45,11 @@
     font-size: 14px;
     display: block;
     margin-top : 4px;
-    color : #36a54e;
+    color: #3c6382;
 
     &.-active{
         font-weight: bold;
+        color : #36a54e;
     }
 }
 

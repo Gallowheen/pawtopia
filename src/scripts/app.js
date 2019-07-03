@@ -73,6 +73,22 @@ $(document).ready(function(){
 
     if($('body').is('.walk')){
 
+        //Si la géoloc ne fonctionne pas ou n'est pas activ
+        if (latUser == undefined || lonUser == undefined){
+            $.ajax({
+                method: "GET",     
+                url:"src/php/get_lat_long_city.php",
+            })
+            .done(function(result){
+
+                data = JSON.parse(result);
+
+                latUser  = data.LAT;
+                console.log(data.LAT);
+                lonUser  = data.LON;
+            });
+        }
+
         setTimeout(function(){
 
             var today = new Date();
@@ -229,7 +245,7 @@ $(document).ready(function(){
                     }
                 }
             });
-        },250);
+        },500);
 
         $('.map__container').eq(0).show();
     }
@@ -1113,13 +1129,28 @@ $(document).ready(function(){
                 },
                 'text'
             );
-        },250);
+        },500);
 
     });
 
     $('#submit__walks').click(function(e){
 
         e.preventDefault();
+
+        //Si la géoloc ne fonctionne pas ou n'est pas activ
+        if (latUser == undefined || lonUser == undefined){
+            $.ajax({
+                method: "GET",     
+                url:"src/php/get_lat_long_city.php",
+            })
+            .done(function(result){
+
+                data = JSON.parse(result);
+
+                latUser  = data.LAT;
+                lonUser  = data.LON;
+            });
+        }
 
         setTimeout(function(){
 
@@ -1320,7 +1351,7 @@ $(document).ready(function(){
                 });
             });
 
-        },250);
+        },500);
     });
 
     $('#validate__sign').click(function(e){
