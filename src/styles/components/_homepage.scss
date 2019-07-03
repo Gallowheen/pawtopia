@@ -1118,6 +1118,10 @@
   &:last-child{
     margin-bottom: 0px;
   }
+
+  &.-home{
+    padding: 8px;
+  }
 }
 
 .name__container{
@@ -1125,6 +1129,11 @@
   font-weight: bold;
   color : #0067B0;
   margin-bottom: 8px;
+  
+  &.-home{
+    font-size: 18px;
+    margin-bottom : 4px;
+  }
 }
 
 .town__container{
@@ -1153,6 +1162,18 @@
     display: flex;
     justify-content: space-around;
   }
+
+  &.-home{
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+  }
+}
+
+.address__container{
+  font-size: 16px;
+  margin-bottom: 4px;
+  font-weight: bold;
 }
 
 .button__container{
@@ -1393,6 +1414,11 @@
   justify-content: space-around;
   margin-bottom: 8px;
   margin-top: 16px;
+}
+
+.map__img{
+  width: 75%;
+  margin-left: 12.5%;
 }
 
 .map__container{

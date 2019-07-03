@@ -37,10 +37,10 @@
                         <div class="input__container -first -right">
                             <button class="button -color -blue -add" id="new_walk">Créer une balade</button>
                         </div>
-                        <h3 class="h3 -title">Vos balades à venir</h3>
+                        <!-- <h3 class="h3 -title">Vos balades à venir</h3>
                         <div class="user_walk">
 
-                        </div>
+                        </div> -->
                         <h3 class="h3 -title">Trouvez votre balade idéale</h3>
                         <div class="map__container">
                             <div class="map__legend">

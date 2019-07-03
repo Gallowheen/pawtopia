@@ -127,7 +127,7 @@
                                 $avatar_path = $row['AVATAR'];
 
                                 if($result->num_rows === 0){ ?>
-                                     <?php
+                                    <?php
                                     $filename = $avatar_path;
                                                     
                                     if (file_exists($filename)){ ?>

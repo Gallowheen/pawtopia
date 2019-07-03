@@ -1620,12 +1620,19 @@ input[type=range]::-webkit-slider-runnable-track {
 .walk__card:last-child {
   margin-bottom: 0px;
 }
+.walk__card.-home {
+  padding: 8px;
+}
 
 .name__container {
   font-size: 20px;
   font-weight: bold;
   color: #0067B0;
   margin-bottom: 8px;
+}
+.name__container.-home {
+  font-size: 18px;
+  margin-bottom: 4px;
 }
 
 .town__container {
@@ -1646,6 +1653,17 @@ input[type=range]::-webkit-slider-runnable-track {
 .date__container.-flex {
   display: flex;
   justify-content: space-around;
+}
+.date__container.-home {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.address__container {
+  font-size: 16px;
+  margin-bottom: 4px;
+  font-weight: bold;
 }
 
 .button__container {
@@ -1863,6 +1881,11 @@ input[type=range]::-webkit-slider-runnable-track {
   justify-content: space-around;
   margin-bottom: 8px;
   margin-top: 16px;
+}
+
+.map__img {
+  width: 75%;
+  margin-left: 12.5%;
 }
 
 .map__container {
