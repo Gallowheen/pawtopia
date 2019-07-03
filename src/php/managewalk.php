@@ -41,6 +41,8 @@
         if ($_GET['date'] !== 'undefined')
             $date = $_GET['date'];
 
+    // echo $date;
+
     if (isset($walk)){
         $query = $link->prepare("SELECT * FROM event WHERE WALK = ? AND DATE_START > ? ORDER BY NAME");
         $query->bind_param("ss", $walk, $date);
