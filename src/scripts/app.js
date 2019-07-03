@@ -13,14 +13,14 @@ $(document).ready(function(){
         timeout: 5000,
         maximumAge: 0
     };
-      
+
     function success(pos) {
         var crd = pos.coords;
-      
+
         latUser = crd.latitude;
         lonUser = crd.longitude;
     }
-      
+
     function error(err) {
         console.warn(`ERREUR (${err.code}): ${err.message}`);
     }
@@ -29,6 +29,72 @@ $(document).ready(function(){
 
     let lat;
     let lon;
+
+    //create map
+    var map;
+
+    navigator.geolocation.getCurrentPosition(function(location) {
+        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+        map = L.map('map').setView(latlng, 10);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
+        }).addTo(map);
+    });
+
+    //create mymap
+    var mymap;
+
+    navigator.geolocation.getCurrentPosition(function(location) {
+        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+        mymap = L.map('mapid').setView(latlng, 10);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
+        }).addTo(mymap);
+    });
+
+
+    //icon map
+    var bluetopia = L.icon({
+        iconUrl: 'src/assets/img/ressources/bluetopia.png',
+        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+        iconSize:     [30, 50], // size of the icon
+        shadowSize:   [30, 25], // size of the shadow
+        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [5, 27],  // the same for the shadow
+        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var redtopia = L.icon({
+        iconUrl: 'src/assets/img/ressources/redtopia.png',
+        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+        iconSize:     [30, 50], // size of the icon
+        shadowSize:   [30, 25], // size of the shadow
+        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [5, 27],  // the same for the shadow
+        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+    });
+
+    var greentopia = L.icon({
+        iconUrl: 'src/assets/img/ressources/greentopia.png',
+        shadowUrl: 'src/assets/img/ressources/shadow.png',
+
+        iconSize:     [30, 50], // size of the icon
+        shadowSize:   [30, 25], // size of the shadow
+        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
+        shadowAnchor: [5, 27],  // the same for the shadow
+        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
+    });
+
 
     if($('body').is('.home')){
         $('.nav_button_group').each(function(){
@@ -76,7 +142,7 @@ $(document).ready(function(){
         //Si la géoloc ne fonctionne pas ou n'est pas activ
         if (latUser == undefined || lonUser == undefined){
             $.ajax({
-                method: "GET",     
+                method: "GET",
                 url:"src/php/get_lat_long_city.php",
             })
             .done(function(result){
@@ -84,7 +150,6 @@ $(document).ready(function(){
                 data = JSON.parse(result);
 
                 latUser  = data.LAT;
-                console.log(data.LAT);
                 lonUser  = data.LON;
             });
         }
@@ -149,67 +214,15 @@ $(document).ready(function(){
 
                 if (data.length >= 1){
 
-                    var map;
-
-                    var bluetopia = L.icon({
-                        iconUrl: 'src/assets/img/ressources/bluetopia.png',
-                        shadowUrl: 'src/assets/img/ressources/shadow.png',
-
-                        iconSize:     [30, 50], // size of the icon
-                        shadowSize:   [30, 25], // size of the shadow
-                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [5, 27],  // the same for the shadow
-                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                    });
-
-                    var redtopia = L.icon({
-                        iconUrl: 'src/assets/img/ressources/redtopia.png',
-                        shadowUrl: 'src/assets/img/ressources/shadow.png',
-
-                        iconSize:     [30, 50], // size of the icon
-                        shadowSize:   [30, 25], // size of the shadow
-                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [5, 27],  // the same for the shadow
-                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                    });
-
-                    var greentopia = L.icon({
-                        iconUrl: 'src/assets/img/ressources/greentopia.png',
-                        shadowUrl: 'src/assets/img/ressources/shadow.png',
-
-                        iconSize:     [30, 50], // size of the icon
-                        shadowSize:   [30, 25], // size of the shadow
-                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [5, 27],  // the same for the shadow
-                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                    });
-
-                    navigator.geolocation.getCurrentPosition(function(location) {
-                        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                        map = L.map('map').setView(latlng, 10);
-
-                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                            maxZoom: 18,
-                            id: 'mapbox.streets',
-                            accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
-                        }).addTo(map);
-                    });
-
-                    // if ($('form input[type=radio]:checked').val() != undefined)
-                    //     $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
-                    // else
-                    // $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
-
                     for( let i = 0; i < data.length; i++){
 
                         let adress = data[i]['LOCATION'];
 
-                        L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
-                            console.log(results);
+                        setTimeout(function(){
+
 
                             if (data[i]['WALK'] == "Récréative"){
-                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: bluetopia}).addTo(map).on('click', function(){
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: bluetopia}).addTo(map).on('click', function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
@@ -220,7 +233,7 @@ $(document).ready(function(){
                                 marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Sportive"){
-                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(map).on('click', function(){
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: redtopia}).addTo(map).on('click', function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
@@ -231,7 +244,7 @@ $(document).ready(function(){
                                 marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Découverte"){
-                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(map).on('click', function(){
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: greentopia}).addTo(map).on('click', function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
@@ -241,7 +254,44 @@ $(document).ready(function(){
                                 });
                                 marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
-                        });
+                            // L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
+                            //     console.log(results);
+
+                            //     if (data[i]['WALK'] == "Récréative"){
+                            //         var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: bluetopia}).addTo(map).on('click', function(){
+
+                            //             setTimeout(function(){
+                            //                 $('.get_to_walk').click(function(){
+                            //                     window.location = "walk_detail?ID="+data[i]['ID'];
+                            //                 });
+                            //             },100);
+                            //         });
+                            //         marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            //     }
+                            //     if (data[i]['WALK'] == "Sportive"){
+                            //         var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(map).on('click', function(){
+
+                            //             setTimeout(function(){
+                            //                 $('.get_to_walk').click(function(){
+                            //                     window.location = "walk_detail?ID="+data[i]['ID'];
+                            //                 });
+                            //             },100);
+                            //         });
+                            //         marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            //     }
+                            //     if (data[i]['WALK'] == "Découverte"){
+                            //         var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(map).on('click', function(){
+
+                            //             setTimeout(function(){
+                            //                 $('.get_to_walk').click(function(){
+                            //                     window.location = "walk_detail?ID="+data[i]['ID'];
+                            //                 });
+                            //             },100);
+                            //         });
+                            //         marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                            //     }
+                            // });
+                        },250);
                     }
                 }
             });
@@ -1103,7 +1153,7 @@ $(document).ready(function(){
             console.log(road);
             console.log(postcode);
 
-            
+
             $.get(
                 'src/php/add_event.php',
                 {
@@ -1116,7 +1166,7 @@ $(document).ready(function(){
                     DOG : dogSelected,
                     LAT : lat,
                     LON : lon,
-                    CITY : city, 
+                    CITY : city,
                     ROAD : road,
                     POSTCODE : postcode
                 },
@@ -1140,7 +1190,7 @@ $(document).ready(function(){
         //Si la géoloc ne fonctionne pas ou n'est pas activ
         if (latUser == undefined || lonUser == undefined){
             $.ajax({
-                method: "GET",     
+                method: "GET",
                 url:"src/php/get_lat_long_city.php",
             })
             .done(function(result){
@@ -1207,111 +1257,51 @@ $(document).ready(function(){
 
                 if (data.length >= 1){
 
-                    var mymap;
-
-                    var bluetopia = L.icon({
-                        iconUrl: 'src/assets/img/ressources/bluetopia.png',
-                        shadowUrl: 'src/assets/img/ressources/shadow.png',
-
-                        iconSize:     [30, 50], // size of the icon
-                        shadowSize:   [30, 25], // size of the shadow
-                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [5, 27],  // the same for the shadow
-                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                    });
-
-                    var redtopia = L.icon({
-                        iconUrl: 'src/assets/img/ressources/redtopia.png',
-                        shadowUrl: 'src/assets/img/ressources/shadow.png',
-
-                        iconSize:     [30, 50], // size of the icon
-                        shadowSize:   [30, 25], // size of the shadow
-                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [5, 27],  // the same for the shadow
-                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                    });
-
-                    var greentopia = L.icon({
-                        iconUrl: 'src/assets/img/ressources/greentopia.png',
-                        shadowUrl: 'src/assets/img/ressources/shadow.png',
-
-                        iconSize:     [30, 50], // size of the icon
-                        shadowSize:   [30, 25], // size of the shadow
-                        iconAnchor:   [15, 50], // point of the icon which will correspond to marker's location
-                        shadowAnchor: [5, 27],  // the same for the shadow
-                        popupAnchor:  [0, -48] // point from which the popup should open relative to the iconAnchor
-                    });
-
-                    navigator.geolocation.getCurrentPosition(function(location) {
-                        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-                        mymap = L.map('mapid').setView(latlng, 10);
-
-                        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                            maxZoom: 18,
-                            id: 'mapbox.streets',
-                            accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
-                        }).addTo(mymap);
-                    });
-
-                    // if ($('form input[type=radio]:checked').val() != undefined)
-                    //     $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
-                    // else
-                    // $('.content_container .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
-
                     $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
 
                     $('.walk__container__result').append('<p class="search__result"><b>'+data.length+'</b> résultats correspondant à votre recherche</p>');
+
+                    mymap.invalidateSize();
 
                     for( let i = 0; i < data.length; i++){
 
                         let adress = data[i]['LOCATION'];
 
-                        L.esri.Geocoding.geocode().text(adress).run(function(err, results, response){
-                            console.log(results);
-
+                        setTimeout(function(){
                             if (data[i]['WALK'] == "Récréative"){
-                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: bluetopia}).addTo(mymap).on('click', function(){
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: bluetopia}).addTo(mymap).on('click', function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
                                             window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
-
-                                    //console.log('lol');
                                 });
                                 marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Sportive"){
-                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: redtopia}).addTo(mymap).on('click', function(){
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: redtopia}).addTo(mymap).on('click', function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
                                             window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
-
-                                    //console.log('lol');
                                 });
                                 marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
                             if (data[i]['WALK'] == "Découverte"){
-                                var marker = L.marker([results.results[0].latlng['lat'], results.results[0].latlng['lng']],{icon: greentopia}).addTo(mymap).on('click', function(){
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: greentopia}).addTo(mymap).on('click', function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
                                             window.location = "walk_detail?ID="+data[i]['ID'];
                                         });
                                     },100);
-
-                                    //console.log('lol');
                                 });
                                 marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
                             }
-                        });
-
-                        // L.marker([data.results[i].latlng['lat'], data.results[i].latlng['lng']],{icon: pawtopia}).addTo(mymap);
+                        },250);
 
                         let date = new Date(data[i]['DATE_START']);
                         let hourSplit = data[i]['DATE_START'].split(' ')[1].split(':');
