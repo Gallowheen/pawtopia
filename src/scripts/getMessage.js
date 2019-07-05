@@ -4,7 +4,6 @@ $(document).ready(function() {
         var key = e.which;
         if(key == 13)  // the enter key code
         {
-            let user2 = $('body').data('id');
             if($('#message').val() != ""){
                 $.ajax({
                     method: "GET",
@@ -96,8 +95,6 @@ $(document).ready(function() {
     },500);
 
     $('.sendMessage').click(function(){
-
-        let user2 = $('body').data('id');
 
         if($('#message').val() != ""){
             $.ajax({

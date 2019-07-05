@@ -18,7 +18,7 @@
     }
 
 
-    $user = $_GET['ID'];
+    $user2 = $_GET['ID'];
 
     $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
     $query->bind_param("i", $_GET['ID']);
@@ -188,4 +188,7 @@
                     </div>
                 </div>
             </div>
+            <script>
+                var user2 = <?= $user2; ?>;
+            </script>
             <script src="src/scripts/getMessage.js"></script>
