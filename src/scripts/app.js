@@ -1,5 +1,7 @@
-$(document).ready(function(){
+var container;
 
+$(document).ready(function(){
+    container = $(".content_container");
     let city;
     let road;
     let postcode;
@@ -142,44 +144,16 @@ $(document).ready(function(){
         });
     }
 
-    if($('body').is('.home')){
-        $('.nav_button_group').each(function(){
-            if($(this).hasClass('home')){
-                $(this).children().eq(0).addClass('-active');
-                $(this).children().eq(1).addClass('-active');
-            }
-        });
-    }
-    if($('body').is('.profile')){
-        $('.nav_button_group').each(function(){
-            if($(this).hasClass('profile')){
-                $(this).children().eq(0).addClass('-active');
-                $(this).children().eq(1).addClass('-active');
-            }
-        });
-    }
-    if($('body').is('.members')){
-        $('.nav_button_group').each(function(){
-            if($(this).hasClass('members')){
-                $(this).children().eq(0).addClass('-active');
-                $(this).children().eq(1).addClass('-active');
-            }
-        });
-    }
-    if($('body').is('.walk') || $('body').is('.new_walk')){
-        $('.nav_button_group').each(function(){
-            if($(this).hasClass('walk')){
-                $(this).children().eq(0).addClass('-active');
-                $(this).children().eq(1).addClass('-active');
-            }
-        });
-    }
-    if($('body').is('.message')|| $('body').is('.getMessage')){
-        $('.nav_button_group').each(function(){
-            if($(this).hasClass('message')){
-                $(this).children().eq(0).addClass('-active');
-                $(this).children().eq(1).addClass('-active');
-            }
+    $(".nav_button_group").click(function(e) {
+        $(".-active").removeClass('-active');
+        $(this).children().eq(0).addClass('-active');
+        $(this).children().eq(1).addClass('-active');
+        $.ajax({
+            method: "GET",
+            url:$(this).data('url')+".php",
+        })
+        .done(function(result){
+            container.html(result);
         });
     }
 
