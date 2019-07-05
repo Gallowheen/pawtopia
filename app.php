@@ -29,7 +29,6 @@
     include ('src/php/footer.php');
     ?>
   </body>
-  <script src="src/scripts/lib/jquery-3.4.0.min.js"></script>
   <script src="src/scripts/lib/bootstrap.min.js"></script>
   <script src="src/scripts/lib/jquery.touchSwipe.min.js"></script>
   <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
