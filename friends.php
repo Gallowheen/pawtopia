@@ -50,31 +50,8 @@
     $friends = [];
     $friends_pending = [];
     $friends_invite= [];
-
-    $error = false;
 ?>
 
-<!DOCTYPE html>
-<html>
-    <?php
-        include ('src/php/head.php');
-    ?>
-    <body class="friends">
-        <?php
-            include ('src/php/header.php');
-        ?>
-        <?php
-        if ($error){ ?>
-        <div class="error__container">
-            <div class="container">
-                <div class="row">
-                    <h2>Impossible de trouver cet utilisateur</h2>
-                </div>
-            </div>
-        </div>
-        <?php
-        }else{?>
-        <div class="content_container">
             <div class="friend_pending">
                 <div class="container">
                     <div class="row">
@@ -264,14 +241,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-    <?php
-        include ('src/php/footer.php');
-    ?>
-    <script src="src/scripts/jquery-3.4.0.min.js"></script>
-    <script src="src/scripts/bootstrap.min.js"></script>
-    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
-    <script src="src/scripts/app.js"></script>
-</html>
+            <script src="src/scripts/friends.js"></script>
