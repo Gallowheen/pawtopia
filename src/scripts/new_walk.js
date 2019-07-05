@@ -136,15 +136,6 @@ $(document).ready(function() {
             }
             road = data[0].address.road;
             postcode = data[0].address.postcode;
-        });
-
-        setTimeout(function(){
-            console.log(lat);
-            console.log(lon);
-            console.log(city);
-            console.log(road);
-            console.log(postcode);
-
 
             $.get(
                 'src/php/add_event.php',
@@ -165,14 +156,14 @@ $(document).ready(function() {
 
                 function(data){
                     console.log(data);
-                    if(data === 'success'){
-                        window.location = "walk.php";
+                    if(data != 'failed'){
+                    	container.html(data);
+                    	// Afficher ici message "Votre balade a bien été créée"
                     }
                 },
                 'text'
             );
-        },500);
-
+        });
     });
 
 });
