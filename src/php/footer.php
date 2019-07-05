@@ -9,24 +9,24 @@
     <div class="container">
         <div class="row">
             <div class="nav_container">
-                <div class="nav_button_group home">
-                    <a class="link_footer" href="home.php"><i class="icon icon__footer icon-ic_home_48px"></i></a>
-                    <span class="icon__name">Accueil</span>
+                <div class="nav_button_group home" data-url='home'>
+                    <span class="link_footer -active"><i class="icon icon__footer icon-ic_home_48px"></i></span>
+                    <span class="icon__name -active">Accueil</span>
                 </div>
-                <div class="nav_button_group profile">
-                    <a class="link_footer" href="profile.php"><i class="icon icon__footer icon-single-01"></i></a>
+                <div class="nav_button_group profile" data-url='profile'>
+                    <span class="link_footer"><i class="icon icon__footer icon-single-01"></i></span>
                     <span class="icon__name">Profil</span>
                 </div>
-                <div class="nav_button_group members">
-                    <a class="link_footer" href="members.php"><i class="icon icon__footer icon-multiple-11"></i></a>
+                <div class="nav_button_group members" data-url='members'>
+                    <span class="link_footer"><i class="icon icon__footer icon-multiple-11"></i></span>
                     <span class="icon__name">Membres</span>
                 </div>
-                <div class="nav_button_group walk">
-                    <a class="link_footer" href="walk.php"><i class="icon icon__footer icon-calendar-60"></i></a>
+                <div class="nav_button_group walk" data-url='walk'>
+                    <span class="link_footer"><i class="icon icon__footer icon-calendar-60"></i></span>
                     <span class="icon__name">Balades</span>
                 </div>
-                <div class="nav_button_group message">
-                    <a class="link_footer" href="message.php"><i class="icon icon__footer icon__friend icon-ic_sms_48px"></i></a>
+                <div class="nav_button_group message" data-url='message'>
+                    <span class="link_footer"><i class="icon icon__footer icon__friend icon-ic_sms_48px"></i></span>
                     <span class="icon__name">Messages</span>
                 </div>
             </div>
