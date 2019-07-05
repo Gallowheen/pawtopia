@@ -240,5 +240,16 @@ $(document).ready(function(){
                 }
             });
         },500);
+
+        $('#new_walk').click(function(e){
+            $.ajax({
+                method: "GET",
+                url:"new_walk.php",
+            })
+            .done(function(result){
+                container.html(result);
+            });
+        });
+
         $('.map__container').eq(0).show();
 });
