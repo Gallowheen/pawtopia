@@ -348,3 +348,57 @@ function uploadFile(file, name, page){
     fd.append("upload_file", file);
     xhr.send(fd);
 }
+
+function initSwipe(){
+    //var x = nombre de swipe
+    var x = 0;
+    //var maxX = max swap
+    var maxX = $(".dog_card_container").children().length;
+
+    //remove bubble if exist as we can call back the function
+    if ($('.bubble').length){
+        $(".dog_card_bubble_container").remove();
+    }
+
+    if ($(".dog_card_container").children().length > 1){
+        if($('body').is('.members'))
+            $(".my_pet__container .container--full .row .col").append('<div class="dog_card_bubble_container"></div>');
+        else
+            $(".my_pet__container .container .row .col").append('<div class="dog_card_bubble_container"></div>');
+
+        $(".dog_card_container").children().each(function(){
+            $('.dog_card_bubble_container').append('<div class="bubble"></div>');
+        });
+
+        $(".bubble").first().addClass('-active');
+    }
+
+
+    $(".dog_card_container").swipe({
+        swipe:function(event, direction, distance, duration, allowPageScroll){
+
+            $(".bubble").each(function(){
+            if($(this).hasClass('-active')){
+                $(this).removeClass('-active');
+            }
+            });
+
+            if (direction == "left" && x < maxX - 1){
+                x += 1;
+            }
+            if (direction == "right"  && x > 0){
+                x -= 1;
+            }
+            if (direction == "up" || direction == "down"){
+                $(this).swipe({allowPageScroll:"auto"});
+            }
+
+            $(this).children().each(function(){
+                $(this).animate({"right": ($('.dog_card_container').width() * x) + (16*x) +'px'}, "normal");
+            });
+
+            $(".bubble:eq("+x+")").addClass('-active');
+        },
+        threshold:100
+    });
+}
