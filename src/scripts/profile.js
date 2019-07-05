@@ -95,6 +95,21 @@ $(document).ready(function() {
         });
     });
 
+    $('#add_friend').click(function(){
+        let user = $(this).data("id");
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/add_friend.php",
+        })
+        .done(function(result){
+            $('.avatar__container #friend__button').remove();
+            let button = '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+            $(button).insertBefore($('.avatar__container .container .row .col .avatars'));
+            //$('.avatar__container .container .row .col').append('<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
+        });
+    });
+
     $('#add_dog').click(function(){
         let position = $(window).scrollTop();
         let size = $(window).height();
