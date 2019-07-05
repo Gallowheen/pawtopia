@@ -1,6 +1,6 @@
 <?php
+    @session_start();
     require_once("src/php/bdd.php");
-    session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
 
@@ -166,12 +166,12 @@
                                                         <?php
 
                                                         $filename = $master['AVATAR'];
-                                                    
+
                                                         if (file_exists($filename)){
                                                             echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="'.$master['AVATAR'].'">';
                                                         }else{
                                                             echo '<img data-id="'.$master["ID"].'"class="dog_img view avatar -small -noMargin" src="src/assets/img/avatar/default.jpg">';
-                                                            
+
                                                         }?>
                                                     </div>
                                                 <?php

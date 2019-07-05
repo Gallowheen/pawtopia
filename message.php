@@ -1,6 +1,6 @@
 <?php
+  @session_start();
   require_once("src/php/bdd.php");
-  session_start();
 
   $pagename = 'Messages';
 
