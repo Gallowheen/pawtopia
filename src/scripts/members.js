@@ -1,4 +1,71 @@
 $(document).ready(function() {
+
+    $('#filter').click(function(){
+        $(".members__handler").find("input:radio").prop("checked", false);
+        $(".label").each(function(){
+            if($(this).hasClass('selected'))
+                $(this).removeClass('selected')
+        });
+
+        $("body").css('overflow','hidden');
+        $(".members__handler__container").css('display','block');
+
+        setTimeout(function(){
+            $(".members__handler__container").css('transform','translateY(0%)');
+        }, 500);
+
+        setTimeout(function(){
+            $(".members__handler__container").css('background','#00000024');
+        }, 1500);
+    });
+
+    $('#add_friend').click(function(){
+        let user = $(this).data("id");
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/add_friend.php",
+        })
+        .done(function(result){
+            $('.avatar__container #friend__button').remove();
+            let button = '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+            $(button).insertBefore($('.avatar__container .container .row .col .avatars'));
+            //$('.avatar__container .container .row .col').append('<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
+        });
+    });
+
+    $.ajax({
+        method: "GET",
+        url:"src/php/showcase_member.php",
+    })
+    .done(function(result){
+        //console.log(result);
+        let data = JSON.parse(result);
+        let member;
+
+        if(data.length == 0){
+
+        }else{
+            var x = 0;
+
+            for( let i = 0; i < data.length && x <= 5; i++){
+                //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>';
+                member = '<button class="button view" data-id="'+data[i].ID+'"><div class="friend_widget -small"><img class="avatar -topFriend" src="'+data[i].AVATAR+'"/><p class="friend__username">'+data[i].USERNAME+'</p></div>';
+                $(".member__filtred .container .row .col .showcase__member").append(member);
+                x++;
+            }
+
+            $(".view").click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                var user = $(this).data("id");
+
+                window.location = "profile.php?ID=" + user;
+            });
+        }
+    });
+
     $('#submit__members').click(function(e){
 
         e.preventDefault();
