@@ -44,43 +44,6 @@ $(document).ready(function(){
         });
     });
 
-    $("#info").on('keyup', function(){
-        console.log('//nominatim.openstreetmap.org/search?format=json&q='+$(this).val());
-        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$(this).val(), 		function(data){
-
-            for (i = 2; i < $("#info").parent().children().length; i++){
-                $("#info").parent().children().eq(i).remove();
-            }
-
-            if(data.length) {
-                console.log(data);
-
-                if($("#info").hasClass('-error'))
-                    $("#info").removeClass('-error');
-
-                for ( i = 0; i < data.length; i++){
-                    $("#info").parent().append("<div class='pickadress__container'><div class='pickaddress' style='width: 90%;margin-left: 24px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding: 8px;border: 1px solid #8080804a;background:white;'>"+data[i].display_name+"</div></div>")
-                }
-
-                $(".pickaddress").click(function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
-                    //console.log(e);
-
-                    console.log($(this).text());
-                    var ville = $(this).text();
-
-
-                    $('.pickadress__container').remove();
-                    $("#info").val(ville);
-                });
-            }
-            else {
-                $("#info").addClass('-error');
-            }
-        });
-    });
-
     var pubnub = new PubNub({
 	    subscribeKey: 'sub-c-1ef083d0-dc62-11e8-911d-e217929ad048', // always required
 	    publishKey: 'pub-c-07c00e21-e522-43ef-965d-f81e60f7a47f' // only required if publishing
