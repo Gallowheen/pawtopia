@@ -18,7 +18,7 @@ $(document).ready(function(){
             function(data){
 
                 if(data == 'Success'){
-                    return window.location.href = "home.php";
+                    return window.location.href = "app.php";
                 }else{
                     $("#log_error").html("<p>La connexion a echouée</p>");
                 }
