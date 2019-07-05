@@ -112,9 +112,15 @@ $(document).ready(function() {
                 .done(function(result){
                 })
 
-                setTimeout(function(){
-                    window.location = "getMessage.php?ID=" + IDuser;
-                },50);
+                $.ajax({
+                    method: "GET",
+                    data: {ID:IDuser},
+                    url:"getMessage.php",
+                })
+                .done(function(result){
+                    container.html(result);
+                });
+
             });
         }else{
             $(".content_container .container .row .col .message__container").append('<h3 class="h3 -title">Aucun message pour le moment</h3>');
