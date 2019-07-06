@@ -1129,7 +1129,7 @@
   font-weight: bold;
   color : #0067B0;
   margin-bottom: 8px;
-  
+
   &.-home{
     font-size: 18px;
     margin-bottom : 4px;
@@ -1142,7 +1142,7 @@
   // white-space: nowrap;
   // overflow: hidden;
   // text-overflow: ellipsis;
-  
+
   .icon{
     color: #0077c0;
     font-size: 28px;
@@ -1260,6 +1260,11 @@
 
   .walk__card {
     box-shadow: none;
+  }
+
+  &.-home {
+    max-height: 120px;
+    overflow: scroll;
   }
 }
 

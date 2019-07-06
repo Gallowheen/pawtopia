@@ -1737,6 +1737,10 @@ input[type=range]::-webkit-slider-runnable-track {
 .user_walk .walk__card {
   box-shadow: none;
 }
+.user_walk.-home {
+  max-height: 120px;
+  overflow: scroll;
+}
 
 .message__viewer {
   width: 100vw;
