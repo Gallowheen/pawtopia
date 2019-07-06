@@ -160,7 +160,7 @@
       <?php } ?>
       <h3 class="h3 -title -space">Vos balades à venir</h3>
       <div class="user_walk">
-          <?php include("./src/php/get_user_walk.php?page=home"); ?>
+          <?php include("./src/php/get_user_walk.php"); ?>
       </div>
     </div>
   </div>

@@ -5,7 +5,6 @@
     @session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
-    $page = (isset($_GET['page']) ? $_GET['page'] : "home");
 
     //$town1 = $_SESSION['TOWN_ID'];
 
@@ -26,7 +25,7 @@
     $result = $query->get_result();
     $html = "";
     if($result->num_rows === 0){
-        if($page == "home") {
+        if($pagename == "Accueil") {
             $html .= "<p class='information'>Vous n'êtes inscrit à aucune balades pour le moment !</p><div class='center'><a href='walk.php'><button class='button -color'>Découvrez les balades</button></a></div>";
         }
         else {
