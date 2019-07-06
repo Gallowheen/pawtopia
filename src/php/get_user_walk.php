@@ -84,50 +84,40 @@
         $data = $valid_event;
 
         //savoir le jour
-        $jour = [
-            0 => "Lundi",
-            1 => "Mardi",
-            2 => "Mercredi",
-            3 => "Jeudi",
-            4 => "Vendredi",
-            5 => "Samedi",
-            6 => "Dimanche",
+        $jourLibelles = [
+            1 => "Lundi",
+            2 => "Mardi",
+            3 => "Mercredi",
+            4 => "Jeudi",
+            5 => "Vendredi",
+            6 => "Samedi",
+            0 => "Dimanche",
         ];
 
         //savoir le mois
-        $mois = [
-            0 => "Janvier",
-            1 => "Février",
-            2 => "Mars",
-            3 => "Avril",
-            4 => "Mai",
-            5 => "Juin",
-            6 => "Juillet",
-            7 => "Août",
-            8 => "Septembre",
-            9 => "Octobre",
-            10 => "Novembre",
-            11 => "Décembre",
+        $moisLibelles = [
+            1 => "Janvier",
+            2 => "Février",
+            3 => "Mars",
+            4 => "Avril",
+            5 => "Mai",
+            6 => "Juin",
+            7 => "Juillet",
+            8 => "Août",
+            9 => "Septembre",
+            10 => "Octobre",
+            11 => "Novembre",
+            12 => "Décembre",
         ];
 
         if (count($data)){
 
             $html .= '<div class="walk__container">';
-
             for($i = 0; $i < count($data); $i++){
-                // Ceci ne marchera pas en php, les dates sont gérées autrement, fix dans le prochain commit
-
-                /*$date = new Date($data[$i]['DATE_START']);
-                $hourSplit = explode(':', explode(' ', $data[$i]['DATE_START'][1]));
-                $hour = $hourSplit[0] . ":" . $hourSplit[1];
-                $day = $jour[$date.getDay()];
-                $monthNumber = $date.getMonth()+1;
-                $month = $mois[$date.getMonth()];
-                $dayNumber = $date.getDate();
-                $year = $date.getFullYear();
-                //$day . " " . $dayNumber . " " . $month . " " . $hour
-                */
-                $date = '';
+                $date = date(strtotime($data[$i]['DATE_START']));
+                $mois = $moisLibelles[date("n", $date)];
+                $jour = $jourLibelles[date("w", $date)];
+                $date = $jour . " ". date('j', $date) . " " . $mois . " " . date('H:i', $date);
 
                 $walk = '<div class="name__container">
                             <span>' . $data[$i]['NAME'] . '</span>
