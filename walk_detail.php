@@ -37,16 +37,6 @@
     $pagename = $row['NAME'];
 ?>
 
-<!DOCTYPE html>
-<html>
-    <?php
-        include ('src/php/head.php');
-    ?>
-    <body class="walk_detail">
-        <?php
-            include ('src/php/header.php');
-        ?>
-        <div class="content_container">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -279,14 +269,4 @@
                 </div>
             </div>
         </div>
-    </body>
-    <?php
-        include('src/php/footer.php');
-    ?>
-    <script src="src/scripts/jquery-3.4.0.min.js"></script>
-    <script src="src/scripts/bootstrap.min.js"></script>
-    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
-    <script src="src/scripts/app.js"></script>
-
 </html>
