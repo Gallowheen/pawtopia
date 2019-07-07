@@ -51,6 +51,7 @@ $(document).ready(function(){
             });
             container.html(result);
             $('.h1').text(title);
+            $(window).scrollTop(0);
         });
     });
 
@@ -251,6 +252,8 @@ function attachListenersFriendMessage()
     $(".friend__link").click(function(e){
         var user = $(this).data("id");
 
+        var name = $('.username').text();
+
         $.ajax({
             method: "GET",
             url:"getMessage.php",
@@ -258,6 +261,7 @@ function attachListenersFriendMessage()
         })
         .done(function(result) {
             container.html(result);
+            $('.h1').text(name);
         });
     });
 }

@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $('.get_to_walk').click(function(){
+        console.log( $(this).parent().parent().children().eq(0));
+        var name = $(this).parent().parent().children().eq(0).children().eq(0).text();
         $.ajax({
             method: "GET",
             url:"walk_detail.php",
@@ -7,7 +9,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
-            $('.h1').text('Balades');
+            $('.h1').text(name);
         });
     });
 

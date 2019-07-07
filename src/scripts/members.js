@@ -48,6 +48,8 @@ $(document).ready(function() {
         })
         .done(function(result) {
             container.html(result);
+            var name = $('.username').text();
+            $('.h1').text('Profil de ' + name);
         });
     });
 
@@ -133,7 +135,9 @@ $(document).ready(function() {
                                     data: {ID:user}
                                 })
                                 .done(function(result) {
-                                    container.html(result);
+                                    container.html(result);  
+                                    var name = $('.username').text();
+                                    $('.h1').text('Profil de ' + name);      
                                 });
                             });
                         }

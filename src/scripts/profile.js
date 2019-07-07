@@ -84,6 +84,7 @@ $(document).ready(function() {
         e.stopPropagation();
 
         var user = $(this).data("id");
+        var name = $(this).children().eq(0).children().eq(1).text();
 
         $.ajax({
             method: "GET",
@@ -92,6 +93,8 @@ $(document).ready(function() {
         })
         .done(function(result) {
             container.html(result);
+            $(window).scrollTop(0);
+            $('.h1').text('Profil  de '+name);
         });
     });
 

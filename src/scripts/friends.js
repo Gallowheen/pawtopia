@@ -5,6 +5,8 @@ $(document).ready(function() {
 
         //console.log($(this).data('id'));
 
+        var name = $(this).parent().children().eq(2).text();
+
         $.ajax({
             method: "GET",
             url:"getMessage.php?ID=" + $(this).data('id'),
@@ -12,6 +14,7 @@ $(document).ready(function() {
         .done(function(result){
             console.log(result);
             container.html(result);
+            $('.h1').text(name);
         });
 
     });
@@ -81,6 +84,25 @@ $(document).ready(function() {
         })
         .done(function(result){
             document.location.reload(true);
+        });
+    });
+
+    $(".view").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        var user = $(this).data("id");
+
+        $.ajax({
+            method: "GET",
+            url:"profile.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            container.html(result);
+            var name = $('.username').text();
+            $('.h1').text('Profil de ' + name);
+            $(window).scrollTop(0);
         });
     });
 
