@@ -41,6 +41,7 @@ $(document).ready(function(){
             url:$(this).data('url')+".php",
         })
         .done(function(result){
+            $("body").css('overflow', 'initial');
             container.html(result);
         });
     });
