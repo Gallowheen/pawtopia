@@ -1,10 +1,12 @@
 var latUser;
 var lonUser;
 var container;
+var logo;
 
 $(document).ready(function(){
 
     container = $(".content_container");
+    logo = $(".header__nav").html();
     let city;
     let road;
     let postcode;
@@ -42,7 +44,7 @@ $(document).ready(function(){
         })
         .done(function(result){
             let title;
-        
+
             $("body").css('overflow', 'initial');
             var name = $('.nav_button_group .icon__name').each(function(){
                 if($(this).hasClass('-active')){
@@ -261,7 +263,34 @@ function attachListenersFriendMessage()
         })
         .done(function(result) {
             container.html(result);
-            $('.h1').text(name);
+            setReturnButton("profile", {ID:user}, $(".header__title").html());
         });
     });
+}
+
+function setReturnButton(target, params = {}, title = "")
+{
+
+    var button = $("<button class='button back'><i class='left'></i></button>");
+    $(".header__nav").html(button);
+    button.click(function() {
+        $.ajax({
+            method: "GET",
+            url:target+".php",
+            data: params
+        })
+        .done(function(result) {
+            $(".header__title").html(title)
+            container.html(result);
+            switch(target){
+                case("home"):
+                case("profile"):
+                case("members"):
+                case("walk"):
+                case("message"):
+                    $(".header__nav").html(logo);
+                    break;
+            }
+        });
+    })
 }
