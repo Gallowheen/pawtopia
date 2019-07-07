@@ -95,19 +95,6 @@ $(document).ready(function() {
         });
     });
 
-    $(".friend__link").click(function(e){
-        var user = $(this).data("id");
-
-        $.ajax({
-            method: "GET",
-            url:"getMessage.php",
-            data: {ID:user}
-        })
-        .done(function(result) {
-            container.html(result);
-        });
-    });
-
     $(".more__friend button").click(function(e){
 
         var user = $(this).data("id");
@@ -130,8 +117,9 @@ $(document).ready(function() {
         })
         .done(function(result){
             $('.avatar__container #friend__button').remove();
-            let button = '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+            let button = '<div id="friend__button"><span class="friend__link" data-id='+user+'><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></span><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
             $(button).insertBefore($('.avatar__container .container .row .col .avatars'));
+            attachListenersFriendMessage();
             //$('.avatar__container .container .row .col').append('<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
         });
     });
@@ -306,4 +294,23 @@ $(document).ready(function() {
         });
     });
 
+    attachListenersFriendMessage();
+
 });
+
+function attachListenersFriendMessage()
+{
+    $(".friend__link").off(); // On retire les précédents listeners
+    $(".friend__link").click(function(e){
+        var user = $(this).data("id");
+
+        $.ajax({
+            method: "GET",
+            url:"getMessage.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            container.html(result);
+        });
+    });
+}
