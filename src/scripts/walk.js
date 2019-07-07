@@ -124,6 +124,17 @@ $(document).ready(function(){
         }
 
         $('#filter').click(function() {
+
+            $('.label').click(function(){
+
+                $('.label').each(function(){
+                    $(this).removeClass('selected');
+                })
+        
+                if (!$(this).hasClass('selected'))
+                    $(this).addClass('selected');
+            });
+        
             $("html, body").animate({ scrollTop: 0 }, "slow");
             var today = new Date();
             var dd = today.getDate();
@@ -345,7 +356,7 @@ $(document).ready(function(){
                     }, 0);
                     layerGroup.clearLayers();
 
-                    $('.content_container .container .row .col').append('<div class="walk__container__result"></div>');
+                    $('.content_container .container .row .col').eq(0).append('<div class="walk__container__result"></div>');
 
                     $('.walk__container__result').append('<p class="search__result"><b>'+data.length+'</b> résultats correspondant à votre recherche</p>');
 
