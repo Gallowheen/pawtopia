@@ -95,6 +95,19 @@ $(document).ready(function() {
         });
     });
 
+    $(".friend__link").click(function(e){
+        var user = $(this).data("id");
+
+        $.ajax({
+            method: "GET",
+            url:"getMessage.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            container.html(result);
+        });
+    });
+
     $(".more__friend button").click(function(e){
 
         var user = $(this).data("id");

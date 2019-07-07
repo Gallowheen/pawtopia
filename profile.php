@@ -86,12 +86,12 @@
                             $row_friend_requested = $result_friend_requested->fetch_assoc();
 
                             if ($row_friend['MUTUAL']){
-                                echo '<div><a class="friend__link" href="getMessage.php?ID='.$_GET["ID"].'"><i class="icon friend__message icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Ami</button></div>';
+                                echo "<div><span class='friend__link' data-id=".$_GET['ID']." ><i class='icon friend__message icon__friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Ami</button></div>";
                             }else{
                                 if($row_friend_requested){
-                                    echo '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='.$_GET["ID"].'"><i class="icon icon__friend friend__message -friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
+                                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon icon__friend friend__message -friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Envoyé</button></div";
                                 }else{
-                                    echo '<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button id="add_friend" data-id="'.$_GET['ID'].'" class="friend__button button -friend"><i class="icon icon__friend icon icon-ic_person_add_48px"></i>Ajouter</button></div>';
+                                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon friend__message -friend icon__friend icon-ic_sms_48px'></i></span><button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button></div>";
                                 }
                             }
                         }
