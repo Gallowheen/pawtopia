@@ -17,7 +17,7 @@ $(document).ready(function() {
             $('.messages').children().last().css('opacity','0');
 
             setTimeout(function(){
-                if ($('.messages').children().last().data('id') == $('body').data('me')){
+                if ($('.messages').children().last().data('id') == userID){
 
                     $('.messages').children().last().remove();
                     $('.messages').children().last().css('opacity','1');
@@ -27,7 +27,6 @@ $(document).ready(function() {
             },10);
 
             //$('.messages').children().last().css('opacity','1');
-
 
             let realHeight  = $('.messages').scrollTop() + ($('.message__body').height() * 2);
 
@@ -87,6 +86,8 @@ function sendMessage()
                 setTimeout(function(){
                     $('.messages').append(result);
                 },500);
+
+                let realHeight  = $('.messages').scrollTop() + ($('.message__body').height() * 2);
 
                 $('.messages').animate({
                     scrollTop: realHeight

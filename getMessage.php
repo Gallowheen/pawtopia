@@ -190,5 +190,6 @@
             </div>
             <script>
                 var user2 = <?= $user2; ?>;
+                var userID = <?php echo $_SESSION['ID'] ?>;
             </script>
             <script src="src/scripts/getMessage.js"></script>

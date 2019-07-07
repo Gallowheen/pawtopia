@@ -18,5 +18,7 @@
     </div>
   </div>
 </div>
-
+<script>
+  userID = <?php echo $_SESSION['ID'] ?>;
+</script>
 <script src="src/scripts/message.js"></script>
