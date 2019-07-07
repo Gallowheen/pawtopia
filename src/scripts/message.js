@@ -4,13 +4,8 @@ $(document).ready(function() {
         url:"src/php/showcase_message.php",
     })
     .done(function(result){
-      
-        if(result != "noMsg"){
+        if(result != "noMsg")
             data = JSON.parse(result);
-            console.log(data);
-        }
-        //let userID = $('body').data('id');
-
         let user = [];
         let userList = [];
         let banlist = [];
@@ -106,8 +101,7 @@ $(document).ready(function() {
             $('.content_container .container .row .col .message__container').append(divElement);
 
             $('.toMessage').click(function(){
-
-                let IDuser = $(this).data('id');
+                let user2 = $(this).data('id');
                 $.ajax({
                     method: "GET",
                     data: {ID:user2},
@@ -122,7 +116,6 @@ $(document).ready(function() {
                     url:"getMessage.php",
                 })
                 .done(function(result){
-                    console.log(result);
                     container.html(result);
                 });
 
