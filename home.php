@@ -19,6 +19,7 @@
     header('index.php');
     exit;
   }
+  $user = $_SESSION['ID'];
 ?>
 
 <div class="container">
