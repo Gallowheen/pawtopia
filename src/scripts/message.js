@@ -4,9 +4,13 @@ $(document).ready(function() {
         url:"src/php/showcase_message.php",
     })
     .done(function(result){
-        if(result != "noMsg")
+      
+        if(result != "noMsg"){
             data = JSON.parse(result);
+            console.log(data);
+        }
         let userID = $('body').data('id');
+
         let user = [];
         let userList = [];
         let banlist = [];

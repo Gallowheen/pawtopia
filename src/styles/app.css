@@ -1432,11 +1432,6 @@ input[type=range]::-webkit-slider-runnable-track {
   border-right: 1px solid #0067B0;
 }
 
-.member__content {
-  margin-bottom: 60px;
-  padding-top: 80px;
-}
-
 .showcase__member {
   display: flex;
   flex-wrap: wrap;
@@ -1750,7 +1745,7 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: none;
 }
 .user_walk.-home {
-  max-height: 120px;
+  max-height: 140px;
   overflow: scroll;
 }
 

@@ -24,10 +24,6 @@ $(document).ready(function() {
             error.push("true");
             $("#walk_name").addClass('-error');
         }
-        // if( $("#town").val() == null){
-        //     error.push("true");
-        //     $("#town").addClass('-error');
-        // }
         if( $("#info").val() == ""){
             error.push("true");
             $("#info").addClass('-error');
