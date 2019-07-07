@@ -297,20 +297,3 @@ $(document).ready(function() {
     attachListenersFriendMessage();
 
 });
-
-function attachListenersFriendMessage()
-{
-    $(".friend__link").off(); // On retire les précédents listeners
-    $(".friend__link").click(function(e){
-        var user = $(this).data("id");
-
-        $.ajax({
-            method: "GET",
-            url:"getMessage.php",
-            data: {ID:user}
-        })
-        .done(function(result) {
-            container.html(result);
-        });
-    });
-}
