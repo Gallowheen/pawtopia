@@ -40,7 +40,7 @@
             echo '<span class="ping">'.$result_friend_invite->num_rows.'</span>';
           }
         ?>
-          <a href="friends.php"><i class="icon icon__friend icon-ic_people_48px"></i></a>
+          <div><i class="icon icon__friend icon-ic_people_48px"></i></div>
         </div>
         <div class="status__icon">
         <?php

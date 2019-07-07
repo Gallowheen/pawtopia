@@ -9,4 +9,13 @@ $(document).ready(function() {
             container.html(result);
         });
     });
+
+    $('.icon__friend').click(function(){
+        $.ajax({
+            url:"friends.php",
+        })
+        .done(function(result){
+            container.html(result);
+        });
+    });
 })
