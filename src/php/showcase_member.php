@@ -1,7 +1,7 @@
 <?php
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    session_start();
+    @session_start();
 
     require_once("bdd.php");
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -101,11 +101,18 @@
 
     ksort($newArray);
 
-    $newNewArray = [];
+    $data = [];
     foreach($newArray as $v)
     {
-    $newNewArray[] = $v;
+        $data[] = $v;
     }
 
-    echo json_encode($newNewArray);
+    $html = "";
+
+    for($i = 0; $i < count($data) && $i <= 4; $i++){
+        //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>';
+        $html .= '<button class="button view" data-id="'.$data[$i]['ID'].'"><div class="friend_widget -small"><img class="avatar -topFriend" src="'.$data[$i]['AVATAR'].'"/><p class="friend__username">'.$data[$i]['USERNAME'].'</p></div>';
+    }
+
+    echo $html;
 ?>

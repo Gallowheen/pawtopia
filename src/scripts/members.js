@@ -34,36 +34,20 @@ $(document).ready(function() {
         });
     });
 
-    $.ajax({
-        method: "GET",
-        url:"src/php/showcase_member.php",
-    })
-    .done(function(result){
-        //console.log(result);
-        let data = JSON.parse(result);
-        let member;
+    $(".view").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
 
-        if(data.length == 0){
+        var user = $(this).data("id");
 
-        }else{
-            var x = 0;
-
-            for( let i = 0; i < data.length && x <= 5; i++){
-                //member = '<div data-id="'+data[i].ID+'" class="view friend_widget"><img class="avatar avatar -friendlist" src="'+data[i].AVATAR+'"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div>';
-                member = '<button class="button view" data-id="'+data[i].ID+'"><div class="friend_widget -small"><img class="avatar -topFriend" src="'+data[i].AVATAR+'"/><p class="friend__username">'+data[i].USERNAME+'</p></div>';
-                $(".member__filtred .container .row .col .showcase__member").append(member);
-                x++;
-            }
-
-            $(".view").click(function(e){
-                e.preventDefault();
-                e.stopPropagation();
-
-                var user = $(this).data("id");
-
-                window.location = "profile.php?ID=" + user;
-            });
-        }
+        $.ajax({
+            method: "GET",
+            url:"profile.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            container.html(result);
+        });
     });
 
     $('#submit__members').click(function(e){
