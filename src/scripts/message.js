@@ -108,9 +108,10 @@ $(document).ready(function() {
             $('.toMessage').click(function(){
 
                 let IDuser = $(this).data('id');
+
                 $.ajax({
                     method: "GET",
-                    data: {ID:user2},
+                    data: {ID:IDuser},
                     url:"src/php/updateMessageStatus.php",
                 })
                 .done(function(result){
@@ -118,7 +119,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     method: "GET",
-                    data: {ID:user2},
+                    data: {ID:IDuser},
                     url:"getMessage.php",
                 })
                 .done(function(result){
