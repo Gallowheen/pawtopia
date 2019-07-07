@@ -1,6 +1,7 @@
 $(document).ready(function() {
     $('.get_to_walk').click(function(){
         var title = $(".header__title").html();
+        var newtitle = $(this).parent().parent().find('.name__container span').html();
         $.ajax({
             method: "GET",
             url:"walk_detail.php",
@@ -8,7 +9,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
-            $('.h1').text('Balades');
+            $('.h1').text(newtitle);
             setReturnButton("home", {}, title);
         });
     });
