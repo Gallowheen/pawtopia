@@ -113,7 +113,7 @@ $(document).ready(function() {
                     e.stopPropagation();
 
                     var user = $(this).data("id");
-                    var container = $(this);
+                    var containerFilter = $(this);
 
                     $.ajax({
                         method: "GET",
@@ -121,19 +121,19 @@ $(document).ready(function() {
                     })
                     .done(function(result){
 
-                        if ( container.hasClass('expanded')){
+                        if ( containerFilter.hasClass('expanded')){
 
                         }else{
-                            container.append(result);
-                            container.addClass('expanded');
-                            let tap = container.children().eq(1).children().eq(2);
+                            containerFilter.append(result);
+                            containerFilter.addClass('expanded');
+                            let tap = containerFilter.children().eq(1).children().eq(2);
 
-                            let height = container.children().eq(1).height();
-                            container.animate({ height: height + 75}, "fast");
+                            let height = containerFilter.children().eq(1).height();
+                            containerFilter.animate({ height: height + 75}, "fast");
                             setTimeout(function(){
                                 tap.animate({opacity : 1},"slow");
                             },250);
-                            container.children().eq(0).hide();
+                            containerFilter.children().eq(0).hide();
                             initSwipe();
 
                             $(".view").click(function(e){
@@ -149,13 +149,13 @@ $(document).ready(function() {
                         $('.tapToClose').click(function(e){
                             e.stopPropagation();
 
-                            var container = $(this).parent().parent();
+                            var containerFilter = $(this).parent().parent();
                             var child = $(this).parent().parent().eq(0).children().eq(1);
                             $(this).parent().parent().removeClass('expanded');
                             $(this).parent().parent().children().eq(0).css("display","block");
                             $(this).parent().parent().css("height", "75px");
                             $([document.documentElement, document.body]).animate({
-                                scrollTop: container.offset().top - 100
+                                scrollTop: containerFilter.offset().top - 100
                             }, 1000);
                             child.animate({opacity : 0},"slow");
 
