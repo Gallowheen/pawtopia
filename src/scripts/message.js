@@ -6,7 +6,6 @@ $(document).ready(function() {
     .done(function(result){
         if(result != "noMsg")
             data = JSON.parse(result);
-        let userID = $('body').data('id');
         let user = [];
         let userList = [];
         let banlist = [];
@@ -78,13 +77,13 @@ $(document).ready(function() {
 
                 let ID;
 
-                if(element.ID_USER1 != $('body').data('id')){
+                if(element.ID_USER1 != userID){
                     ID = element.ID_USER1;
                 }
                 else{
                     ID = element.ID_USER2;
                 }
-                if(element.STATUT == "Unread" && element.ID_USER1 != $('body').data('id'))
+                if(element.STATUT == "Unread" && element.ID_USER1 != userID)
                     member = '<div data-id="'+ID+'" class="toMessage statut-0 friend_widget -message -hidden -unread"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>';
                 else
                     member = '<div data-id="'+ID+'" class="toMessage statut-1 friend_widget -message -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+element.AVATAR+'"><div class="container__info"><span class="friend_name -member">'+element.USERNAME+'</span><span class="friend_message">'+element.CONTENT+'</span></div></div></div>';
@@ -102,11 +101,10 @@ $(document).ready(function() {
             $('.content_container .container .row .col .message__container').append(divElement);
 
             $('.toMessage').click(function(){
-
-                let IDuser = $(this).data('id');
+                let user2 = $(this).data('id');
                 $.ajax({
                     method: "GET",
-                    data: {ID:IDuser},
+                    data: {ID:user2},
                     url:"src/php/updateMessageStatus.php",
                 })
                 .done(function(result){
@@ -114,7 +112,7 @@ $(document).ready(function() {
 
                 $.ajax({
                     method: "GET",
-                    data: {ID:IDuser},
+                    data: {ID:user2},
                     url:"getMessage.php",
                 })
                 .done(function(result){
