@@ -101,13 +101,9 @@ $(document).ready(function() {
             $('.content_container .container .row .col .message__container').append(divElement);
 
             $('.toMessage').click(function(){
-<<<<<<< HEAD
 
                 let IDuser = $(this).data('id');
 
-=======
-                let user2 = $(this).data('id');
->>>>>>> 635926a43313a147f721abb05d662195bb600a94
                 $.ajax({
                     method: "GET",
                     data: {ID:IDuser},
