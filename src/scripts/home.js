@@ -7,6 +7,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
+            $('.h1').text('Balades');
         });
     });
 
@@ -16,6 +17,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
+            $('.h1').text('Amis');
         });
     });
 
@@ -25,6 +27,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
+            $('.h1').text('Messages');
         });
     });
 })

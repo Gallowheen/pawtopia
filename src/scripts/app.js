@@ -41,8 +41,16 @@ $(document).ready(function(){
             url:$(this).data('url')+".php",
         })
         .done(function(result){
+            let title;
+        
             $("body").css('overflow', 'initial');
+            var name = $('.nav_button_group .icon__name').each(function(){
+                if($(this).hasClass('-active')){
+                    title = $(this).text();
+                }
+            });
             container.html(result);
+            $('.h1').text(title);
         });
     });
 
