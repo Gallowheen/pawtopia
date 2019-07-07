@@ -185,7 +185,7 @@
                                 echo "<p class='information_space'>Cet utilisateur n'a aucun chien pour le moment.</p>";
                             else{
                                 echo "<p class='information_space -empty'>Vous n'avez aucun chien pour le moment.</p>";
-                                echo "<div class='dog_information_button'><button id='add_dog' class='button -color'>Ajouter un compagnon</button></div>";
+                                echo "<div class='dog_information_button'><button id='add_dog' class='button -color -blue'>Ajouter un compagnon</button></div>";
                             }
                         }else{
                             $rows = resultToArray($result);
@@ -199,7 +199,7 @@
                                 <?php
                                     if(empty($_GET)){
                                         ?>
-                                        <div class="dog_information_button"><button id="add_dog" class="button -color">Ajouter un compagnon</button></div>
+                                        <div class="dog_information_button"><button id="add_dog" class="button -color -blue">Ajouter un compagnon</button></div>
                                 <?php
                                     }
                                 ?>
@@ -308,7 +308,7 @@
                             if($result_friend_mutual->num_rows <= 1){
                                 ?>
                                 <div class="more__friend">
-                                    <span><button class="button -color">Plus d'amis</button></span>
+                                    <span><button class="button -color -blue">Plus d'amis</button></span>
                                 </div>
                             <?php
                             }else{
@@ -345,7 +345,7 @@
                                 echo '</div></button>';
                                 ?>
                                 <div class="more__friend">
-                                    <span><button class="button -color">Plus d'amis</button></span>
+                                    <span><button class="button -color -blue">Plus d'amis</button></span>
                                 </div>
                                 <?php
 

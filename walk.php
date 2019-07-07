@@ -49,7 +49,7 @@
                     <div class="map" class="map" id="map"></div>
                 </div>
                 <div class="find__more">
-                    <button class="button -color" id="filter">Filtrer les balades</button>
+                    <button class="button -color -blue" id="filter">Filtrer les balades</button>
                 </div>
                 <div class="map__container">
                     <div class="map__legend">
