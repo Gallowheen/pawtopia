@@ -10,7 +10,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.icon__friend').click(function(){
+    $('.statuts .icon__friend').click(function(){
         $.ajax({
             url:"friends.php",
         })
@@ -19,7 +19,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.icon__message').click(function(){
+    $('.statuts .icon__message').click(function(){
         $.ajax({
             url:"message.php",
         })
