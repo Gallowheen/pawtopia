@@ -34,10 +34,11 @@ $(document).ready(function(){
             console.log(height + 50);
 
             if ( $( window ).height() + 50 < height && resized == false ){
-                if ( $('.logo').css('display') == 'none')
-                    $('.logo').css('display','block');
-                else
+             
+                if ( $('.logo').css('display') == 'block')
                     $('.logo').css('display','none');
+                else
+                    $('.logo').css('display','block');
 
                 if ($('.container__action').css('position') == 'absolute'){
                     $('.container__action').css('position','relative');
@@ -49,6 +50,7 @@ $(document).ready(function(){
                 }
                 resized = true;
             }else{
+     
                 resized = false;
                 $('.logo').css('display','block');
                 $('.container__action').css('position','absolute');
