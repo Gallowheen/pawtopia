@@ -16,6 +16,9 @@
       include ('src/php/head.php');
   ?>
   <body class="home">
+    <script>
+        var userID = <?php echo $_SESSION['ID']; ?>;
+    </script>
     <?php
       include ('src/php/header.php');
     ?>
