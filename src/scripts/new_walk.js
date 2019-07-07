@@ -125,15 +125,20 @@ $(document).ready(function() {
         });
 
         $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$('#info').val()+'&addressdetails=1', function(data){
-            console.log(data[0]);
+
             lat = data[0].lat;
             lon = data[0].lon;
 
             if (data[0].address.city != undefined){
                 city = data[0].address.city;
-            }else{
+            }
+            if (data[0].address.village != undefined){
                 city = data[0].address.village;
             }
+            if (data[0].address.town != undefined){
+                city = data[0].address.town;
+            }
+
             road = data[0].address.road;
             postcode = data[0].address.postcode;
 

@@ -1633,6 +1633,10 @@ input[type=range]::-webkit-slider-runnable-track {
 .name__container.-home {
   font-size: 18px;
   margin-bottom: 4px;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .town__container {
@@ -1658,12 +1662,20 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 14px;
   font-weight: normal;
   margin: 0;
+  font-weight: bold;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .address__container {
   font-size: 16px;
   margin-bottom: 4px;
-  font-weight: bold;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .button__container {

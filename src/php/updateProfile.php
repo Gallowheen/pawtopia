@@ -44,4 +44,6 @@
         $query->execute();
     }
 
+    $_SESSION['TOWN_ID'] = $town;
+
 ?>
