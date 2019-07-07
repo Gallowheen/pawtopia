@@ -231,7 +231,20 @@ $(document).ready(function(){
                         var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: icon}).addTo(map).on('click', function(){
                             setTimeout(function(){
                                 $('.get_to_walk').click(function(){
-                                    window.location = "walk_detail?ID="+data[i]['ID'];
+                                    // window.location = "walk_detail?ID="+data[i]['ID'];
+
+                                    // var title = $(".header__title").html();
+                                    // var newtitle = $(this).parent().parent().find('.name__container span').html();
+                                    // $.ajax({
+                                    //     method: "GET",
+                                    //     url:"walk_detail.php",
+                                    //     data:{ID:data[i]['ID']}
+                                    // })
+                                    // .done(function(result){
+                                    //     container.html(result);
+                                    //     $('.h1').text(newtitle);
+                                    //     setReturnButton("walk", {}, title);
+                                    // });
                                 });
                             },100);
                         });
@@ -346,7 +359,20 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+data[i]['ID'];
+                                            // window.location = "walk_detail?ID="+data[i]['ID'];
+
+                                            // var title = $(".header__title").html();
+                                            // var newtitle = $(this).parent().parent().find('.name__container span').html();
+                                            // $.ajax({
+                                            //     method: "GET",
+                                            //     url:"walk_detail.php",
+                                            //     data:{ID:data[i]['ID']}
+                                            // })
+                                            // .done(function(result){
+                                            //     container.html(result);
+                                            //     $('.h1').text(newtitle);
+                                            //     setReturnButton("walk", {}, title);
+                                            // });
                                         });
                                     },100);
                                 });
@@ -358,7 +384,20 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+data[i]['ID'];
+                                            //window.location = "walk_detail?ID="+data[i]['ID'];
+                                            var title = $(".header__title").html();
+
+                                            // var newtitle = $(this).parent().parent().find('.name__container span').html();
+                                            // $.ajax({
+                                            //     method: "GET",
+                                            //     url:"walk_detail.php",
+                                            //     data:{ID:data[i]['ID']}
+                                            // })
+                                            // .done(function(result){
+                                            //     container.html(result);
+                                            //     $('.h1').text(newtitle);
+                                            //     setReturnButton("walk", {}, title);
+                                            // });
                                         });
                                     },100);
                                 });
@@ -371,7 +410,20 @@ $(document).ready(function(){
 
                                     setTimeout(function(){
                                         $('.get_to_walk').click(function(){
-                                            window.location = "walk_detail?ID="+data[i]['ID'];
+                                            //window.location = "walk_detail?ID="+data[i]['ID'];
+                                            var title = $(".header__title").html();
+
+                                            // var newtitle = $(this).parent().parent().find('.name__container span').html();
+                                            // $.ajax({
+                                            //     method: "GET",
+                                            //     url:"walk_detail.php",
+                                            //     data:{ID:data[i]['ID']}
+                                            // })
+                                            // .done(function(result){
+                                            //     container.html(result);
+                                            //     $('.h1').text(newtitle);
+                                            //     setReturnButton("walk", {}, title);
+                                            // });
                                         });
                                     },100);
                                 });
@@ -414,7 +466,19 @@ $(document).ready(function(){
                 $('.map__container').eq(0).hide();
                 $(".map__container").eq(1).show();
                 $('.get_to_walk').click(function(){
-                    window.location = "walk_detail?ID="+$(this).data('id');
+                    var title = $(".header__title").html();
+                    var newtitle = $(this).parent().parent().find('.name__container span').html();
+                    $.ajax({
+                        method: "GET",
+                        url:"walk_detail.php",
+                        data:{ID:$(this).data('id')}
+                    })
+                    .done(function(result){
+                        container.html(result);
+                        $('.h1').text(newtitle);
+                        setReturnButton("walk", {}, title);
+                    });
+                    //window.location = "walk_detail?ID="+$(this).data('id');
                 });
             });
 

@@ -102,7 +102,12 @@ $(document).ready(function() {
 
             $('.toMessage').click(function(){
 
+                console.log("test");
+
                 let IDuser = $(this).data('id');
+                var title = $(".header__title").html();
+                let name = $(this).children().eq(0).children().eq(1).children().eq(0).text();
+                console.log(name);
 
                 $.ajax({
                     method: "GET",
@@ -119,6 +124,8 @@ $(document).ready(function() {
                 })
                 .done(function(result){
                     container.html(result);
+                    $('.h1').text(name);
+                    setReturnButton("message", {}, title);
                 });
 
             });
