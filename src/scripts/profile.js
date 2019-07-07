@@ -95,6 +95,19 @@ $(document).ready(function() {
         });
     });
 
+    $(".more__friend button").click(function(e){
+
+        var user = $(this).data("id");
+        $.ajax({
+            method: "GET",
+            url:"friends.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            container.html(result);
+        });
+    });
+
     $('#add_friend').click(function(){
         let user = $(this).data("id");
         $.ajax({

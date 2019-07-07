@@ -308,7 +308,7 @@
                             if($result_friend_mutual->num_rows <= 1){
                                 ?>
                                 <div class="more__friend">
-                                    <a href="friends.php"><button class="button -color">Plus d'amis</button></a>
+                                    <span><button class="button -color">Plus d'amis</button></span>
                                 </div>
                             <?php
                             }else{
@@ -345,7 +345,7 @@
                                 echo '</div></button>';
                                 ?>
                                 <div class="more__friend">
-                                    <a href="friends.php"><button class="button -color">Plus d'amis</button></a>
+                                    <span><button class="button -color">Plus d'amis</button></span>
                                 </div>
                                 <?php
 
@@ -399,7 +399,7 @@
                                 echo '</div>';
                                 ?>
                                 <div class="more__friend">
-                                    <a href="<?php echo "friends.php?ID=".$user ?>"><button class="button -color -blue">Plus d'amis</button></a>
+                                    <span><button class="button -color -blue" data-id="<?= $user ?>">Plus d'amis</button></span>
                                 </div>
                                 <?php
                             }
