@@ -58,5 +58,37 @@ $(document).ready(function() {
 
             });
         });
-    })
+    });
+
+    // CREATE YES BUTTON
+    $("#accept").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var user = $(this).data("user");
+
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/accept_friend.php",
+        })
+        .done(function(result){
+            document.location.reload(true);
+        });
+    });
+
+    // CREAT NO BUTTON
+    $("#refuse").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var user = $(this).data("user");
+
+        $.ajax({
+            method: "GET",
+            data:{ID:user},
+            url:"src/php/refuse_friend.php",
+        })
+        .done(function(result){
+            document.location.reload(true);
+        });
+    });
 });

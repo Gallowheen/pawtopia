@@ -51,37 +51,6 @@ $(document).ready(function(){
 	    publishKey: 'pub-c-07c00e21-e522-43ef-965d-f81e60f7a47f' // only required if publishing
 	});
 
-    // CREATE YES BUTTON
-    $("#accept").click(function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        var user = $(this).data("user");
-
-        $.ajax({
-            method: "GET",
-            data:{ID:user},
-            url:"src/php/accept_friend.php",
-        })
-        .done(function(result){
-            document.location.reload(true);
-        });
-    });
-    // CREAT NO BUTTON
-    $("#refuse").click(function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        var user = $(this).data("user");
-
-        $.ajax({
-            method: "GET",
-            data:{ID:user},
-            url:"src/php/refuse_friend.php",
-        })
-        .done(function(result){
-            document.location.reload(true);
-        });
-    });
-
     $(document).on('input', '#slider', function() {
         $('#slider_value').html( $(this).val() + " km" );
     });
