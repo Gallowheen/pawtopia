@@ -124,10 +124,17 @@ $(document).ready(function() {
                             $(".view").click(function(e){
                                 e.preventDefault();
                                 e.stopPropagation();
-
+                        
                                 var user = $(this).data("id");
-
-                                window.location = "profile.php?ID=" + user;
+                        
+                                $.ajax({
+                                    method: "GET",
+                                    url:"profile.php",
+                                    data: {ID:user}
+                                })
+                                .done(function(result) {
+                                    container.html(result);
+                                });
                             });
                         }
 

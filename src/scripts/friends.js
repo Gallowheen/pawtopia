@@ -5,7 +5,15 @@ $(document).ready(function() {
 
         //console.log($(this).data('id'));
 
-        window.location = "getMessage.php?ID=" + $(this).data('id');
+        $.ajax({
+            method: "GET",
+            url:"getMessage.php?ID=" + $(this).data('id'),
+        })
+        .done(function(result){
+            console.log(result);
+            container.html(result);
+        });
+
     });
 
 	$('.friend_delete').click(function(e){
