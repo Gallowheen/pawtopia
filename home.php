@@ -138,7 +138,7 @@
           echo '<span class="ping">'.$unread.'</span>';
         }
         ?>
-          <a href="message.php"><i class="icon icon__friend icon-ic_sms_48px"></i></a>
+          <div><i class="icon icon__message icon-ic_sms_48px"></i></div>
         </div>
       </div>
       <?php

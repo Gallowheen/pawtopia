@@ -18,4 +18,13 @@ $(document).ready(function() {
             container.html(result);
         });
     });
+
+    $('.icon__message').click(function(){
+        $.ajax({
+            url:"message.php",
+        })
+        .done(function(result){
+            container.html(result);
+        });
+    });
 })
