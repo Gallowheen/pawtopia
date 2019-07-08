@@ -31,6 +31,9 @@
 
                 </div> -->
                 <h3 class="h3 -title">Trouvez votre balade idéale</h3>
+                <div class="find__more">
+                    <button class="button -color -blue" id="filter">Filtrer les balades</button>
+                </div>
                 <div class="map__container">
                     <div class="map__legend">
                         <div class="map__legend__element">
@@ -47,9 +50,6 @@
                         </div>
                     </div>
                     <div class="map" class="map" id="map"></div>
-                </div>
-                <div class="find__more">
-                    <button class="button -color -blue" id="filter">Filtrer les balades</button>
                 </div>
                 <div class="map__container">
                     <div class="map__legend">

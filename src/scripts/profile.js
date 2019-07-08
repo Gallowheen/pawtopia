@@ -108,6 +108,7 @@ $(document).ready(function() {
         })
         .done(function(result) {
             container.html(result);
+            $(window).scrollTop(0);
         });
     });
 
