@@ -1771,7 +1771,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background: #0067b0;
   color: white;
   font-size: 16px;
-  width: fit-content;
+  display: table;
 }
 .message__content.-other {
   background: #003780;
@@ -1808,13 +1808,31 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-left: 20%;
   text-align: right;
 }
+.message__body.-bounce {
+  animation: bounced 1s;
+}
 
+@keyframes bounced {
+  from, 20%, 53%, 80%, to {
+    transform: translateY(0);
+  }
+  40%, 43% {
+    transform: translateY(-15px);
+  }
+  70% {
+    transform: translateY(-8px);
+  }
+  90% {
+    transform: translateY(0px);
+  }
+}
 .message__name {
   margin-top: 4px;
 }
 
 .messages {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .edit__profile {

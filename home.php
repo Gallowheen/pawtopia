@@ -136,7 +136,8 @@
           // foreach ($banList as $ban)
           //   echo $ban;
 
-          echo '<span class="ping">'.$unread.'</span>';
+          if ($unread != 0)
+            echo '<span class="ping">'.$unread.'</span>';
         }
         ?>
           <div><i class="icon icon__message icon-ic_sms_48px"></i></div>

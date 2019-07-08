@@ -12,30 +12,29 @@ $(document).ready(function() {
 	pubnub.addListener({
 	    message: function(message) {
 
-
             $('.messages').append(message.message);
             $('.messages').children().last().css('opacity','0');
+            $('.messages').children().last().css('height','0');
 
             setTimeout(function(){
                 if ($('.messages').children().last().data('id') == userID){
-
+               
                     $('.messages').children().last().remove();
-                    $('.messages').children().last().css('opacity','1');
+                  
                 }else{
-                     $('.messages').children().last().css('opacity','1');
+                    
+                    $('.messages').children().last().css('opacity','1');
+                    $('.messages').children().last().css('height','initial');
                 }
             },10);
 
-            //$('.messages').children().last().css('opacity','1');
-
             let realHeight  = $('.messages').scrollTop() + ($('.message__body').height() * 2);
 
-            setTimeout(function(){
+            // setTimeout(function(){
                 $('.messages').animate({
                     scrollTop: realHeight
                 }, 500);
-            },100);
-
+            // },100);
 		}
 	});
 
