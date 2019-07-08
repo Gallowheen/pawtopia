@@ -3167,6 +3167,8 @@ input[type=range]::-webkit-slider-runnable-track {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 300px;
+  text-align: center;
 }
 .header__title.-left {
   margin-left: 40px;

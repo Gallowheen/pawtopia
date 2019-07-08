@@ -71,15 +71,15 @@ $(document).ready(function(){
         return window.location.href = "members.php";
     });
 
-    $('.label').click(function(){
+    // $('.label').click(function(){
 
-        $('.label').each(function(){
-            $(this).removeClass('selected');
-        })
+    //     $('.label').each(function(){
+    //         $(this).removeClass('selected');
+    //     })
 
-        if (!$(this).hasClass('selected'))
-            $(this).addClass('selected');
-    });
+    //     if (!$(this).hasClass('selected'))
+    //         $(this).addClass('selected');
+    // });
 
     // event
     // $('.clickme').click(function(){

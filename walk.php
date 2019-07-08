@@ -84,7 +84,7 @@
                                 <input class="slider" type="range" id="slider" name="km" min="0" max="250">
                                 <span class="range__number">250</span>
                             </div> -->
-                            <h3 class="h4 filter__title">Type de balade préféré</h3>
+                            <h3 class="h4 filter__title">Type de balade choisi</h3>
                             <div class="button_choice">
                                 <label class="label selected" for="Sportive"><div class="button_container">
                                     <input class="hidden" type="radio" name="walk" id="Sportive" value="Sportive" checked>

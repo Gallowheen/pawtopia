@@ -186,10 +186,10 @@
                                     else
                                         echo" <div class='information_group -nopadding'><i class='icon information__city icon-ic_people_48px'></i><span class='information_space'>".(count($row_friends_mutual)-1)."</span></div></div>";
 
-                                    if ( $row['BIO'])
-                                        echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>".$row['BIO']."</p></div>";
-                                    else
-                                        echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>L'utilisateur n'a pas encore de biographie</p></div>";
+                                    // if ( $row['BIO'])
+                                    //     echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>".$row['BIO']."</p></div>";
+                                    // else
+                                    //     echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>L'utilisateur n'a pas encore de biographie</p></div>";
                                     if ( $row['WALK'])
                                         echo"<div class='information_group'><p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p></div>";
 

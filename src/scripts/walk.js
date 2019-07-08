@@ -123,17 +123,24 @@ $(document).ready(function(){
             });
         }
 
+        $('.label').click(function(event){
+
+            //event.stopPropagation();
+            event.preventDefault();
+
+            // $('.label').each(function(){
+            //     if($(this).hasClass('selected'))
+            //         $(this).removeClass('selected');
+            // })
+
+            if ($(this).hasClass('selected') && clicked == true){
+                $(this).removeClass('selected');
+            }else{              
+                $(this).addClass('selected');
+            }
+        });
+
         $('#filter').click(function() {
-
-            $('.label').click(function(){
-
-                $('.label').each(function(){
-                    $(this).removeClass('selected');
-                })
-        
-                if (!$(this).hasClass('selected'))
-                    $(this).addClass('selected');
-            });
         
             $("html, body").animate({ scrollTop: 0 }, "slow");
             var today = new Date();
@@ -152,6 +159,7 @@ $(document).ready(function(){
             document.getElementById("date").setAttribute("min", today);
             document.getElementById("date").setAttribute("value", today);
             $(".walk__handler").find("input:radio").prop("checked", false);
+
             $(".label").each(function(){
                 if($(this).hasClass('selected'))
                     $(this).removeClass('selected')
@@ -296,10 +304,18 @@ $(document).ready(function(){
 
         setTimeout(function(){
 
+            let walks = [];
+
+            $('.label').each(function(){
+                if($(this).hasClass('selected')){
+                    walks.push($(this).children().eq(0).children().eq(2).text());
+                }
+            });
+
             $.ajax({
                 method: "GET",
                 data:{
-                    walk:$('form input[type=radio]:checked').val(),
+                    walk:walks,
                     //km : $('#slider').val(),
                     date : $('#date').val(),
                     LAT : latUser,

@@ -1,14 +1,31 @@
 $(document).ready(function() {
 
+    $('.label').click(function(event){
+        event.preventDefault();
+
+        // $('.label').each(function(){
+        //     if($(this).hasClass('selected'))
+        //         $(this).removeClass('selected');
+        // })
+
+        if ($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        }else{              
+            $(this).addClass('selected');
+        }
+    });
+
+
     $('#filter').click(function(){
         $(".members__handler").find("input:radio").prop("checked", false);
+
+        $("body").css('overflow','hidden');
+        $(".members__handler__container").css('display','block');
+
         $(".label").each(function(){
             if($(this).hasClass('selected'))
                 $(this).removeClass('selected')
         });
-
-        $("body").css('overflow','hidden');
-        $(".members__handler__container").css('display','block');
 
         setTimeout(function(){
             $(".members__handler__container").css('transform','translateY(0%)');
@@ -17,6 +34,7 @@ $(document).ready(function() {
         setTimeout(function(){
             $(".members__handler__container").css('background','#00000024');
         }, 1500);
+
     });
 
     $('#add_friend').click(function(){
@@ -57,10 +75,18 @@ $(document).ready(function() {
 
         e.preventDefault();
 
+        let walks = [];
+
+        $('.label').each(function(){
+            if($(this).hasClass('selected')){
+                walks.push($(this).children().eq(0).children().eq(2).text());
+            }
+        });
+
         $.ajax({
             method: "GET",
             data:{
-                walk:$('form input[type=radio]:checked').val(),
+                walk:walks,
                 km : $('#slider').val()
             },
             url:"src/php/managefriend.php",
