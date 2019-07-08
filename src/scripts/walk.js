@@ -5,7 +5,7 @@ $(document).ready(function(){
 
         navigator.geolocation.getCurrentPosition(function(location) {
             var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-            map = L.map('map').setView(latlng, 10);
+            map = L.map('map').setView(latlng, 8);
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -16,7 +16,7 @@ $(document).ready(function(){
 
             //layerGroup = L.layerGroup().addTo(map);
 
-            mymap = L.map('mapid').setView(latlng, 10);
+            mymap = L.map('mapid').setView(latlng, 8);
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

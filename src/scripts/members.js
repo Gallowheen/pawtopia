@@ -142,7 +142,7 @@ $(document).ready(function() {
                             let tap = containerFilter.children().eq(1).children().eq(2);
 
                             let height = containerFilter.children().eq(1).height();
-                            containerFilter.animate({ height: height + 75}, "fast");
+                            containerFilter.animate({ height: height + 25}, "fast");
                             setTimeout(function(){
                                 tap.animate({opacity : 1},"slow");
                             },250);

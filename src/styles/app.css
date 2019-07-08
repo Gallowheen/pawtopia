@@ -1055,6 +1055,8 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .discover {
   text-align: center;
+  padding-bottom: 72px;
+  padding-top: 12px;
 }
 
 .information_group:last-child {

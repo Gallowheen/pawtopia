@@ -193,7 +193,7 @@
                                     if ( $row['WALK'])
                                         echo"<div class='information_group'><p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p></div>";
 
-                                    echo "<div class='discover'><button data-id='".$_GET['ID']."' class='view button -color -add'>Profil Complet</button></div>";
+                                    echo "<div class='discover'><button data-id='".$_GET['ID']."' class='view button -color -blue -add'>Profil Complet</button></div>";
                             ?>
                         </div>
                     </div>
