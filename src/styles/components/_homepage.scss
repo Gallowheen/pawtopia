@@ -673,7 +673,7 @@
   max-width: 100px;
 
   &.-nolimit{
-    max-width: auto;
+    max-width: initial;
   }
 
   &.-walk{
@@ -1143,9 +1143,6 @@
 .town__container{
 
   max-height: 35px;
-  // white-space: nowrap;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
 
   .icon{
     color: #0077c0;
@@ -1157,10 +1154,9 @@
 
 .date__container{
   font-size: 16px;
-  // display: flex;
-  // justify-content: space-around;
   font-weight: bold;
-  flex-wrap: wrap;
+  margin-bottom: 0px;
+  margin-top: 8px;
 
   &.-flex{
     display: flex;
@@ -1218,13 +1214,9 @@
   font-weight: bold;
 }
 
-.date__container, .town__container, .location__container{
+.town__container, .location__container{
   margin : 8px 0px;
 }
-
-// .date__container{
-//   margin : 8px 16px;
-// }
 
 .name__container, .date__container{
   position: relative;
@@ -1275,7 +1267,7 @@
   }
 
   &.-home {
-    max-height: 140px;
+    max-height: 130px;
     overflow: scroll;
   }
 }

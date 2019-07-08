@@ -1192,7 +1192,7 @@ input[type=range]::-webkit-slider-runnable-track {
   max-width: 100px;
 }
 .dog_name.-nolimit {
-  max-width: auto;
+  max-width: initial;
 }
 .dog_name.-walk {
   font-size: 16px;
@@ -1647,7 +1647,8 @@ input[type=range]::-webkit-slider-runnable-track {
 .date__container {
   font-size: 16px;
   font-weight: bold;
-  flex-wrap: wrap;
+  margin-bottom: 0px;
+  margin-top: 8px;
 }
 .date__container.-flex {
   display: flex;
@@ -1701,7 +1702,7 @@ input[type=range]::-webkit-slider-runnable-track {
   font-weight: bold;
 }
 
-.date__container, .town__container, .location__container {
+.town__container, .location__container {
   margin: 8px 0px;
 }
 
@@ -1745,7 +1746,7 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: none;
 }
 .user_walk.-home {
-  max-height: 140px;
+  max-height: 130px;
   overflow: scroll;
 }
 
