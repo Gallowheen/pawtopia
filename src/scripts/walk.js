@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-    $('.content_container').css('padding-top','60px');
-
     var mapsize = $(window).height() - 120;
     $('.map').css('height',mapsize);
     $('body').css('overflow-y','hidden');

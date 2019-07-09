@@ -200,6 +200,7 @@
   margin-bottom: 32px;
 }
 .statuts{
+  margin-top: 16px;
   text-align: right;
   margin-bottom: 8px;
 
@@ -244,7 +245,7 @@
 }
 .content_container{
   //height: calc(100% - 120px);
-  padding-top: 80px;
+  padding-top: 60px;
   margin-bottom: 80px;
   //transition: .25s all;
 
@@ -1049,6 +1050,13 @@
     font-size: 14px;
     text-transform: uppercase;
   }
+
+  &.-member{
+    position: relative;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    display: block;
+  }
 }
 
 .walk__type{
@@ -1310,6 +1318,14 @@
   z-index: 10000;
   background: white;
   opacity: 0;
+}
+
+.message__viewer__container{
+  margin-top: 16px;
+}
+
+.message__container{
+  margin-top: 16px;
 }
 
 .message__content{

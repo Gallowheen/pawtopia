@@ -47,6 +47,9 @@ body {
 .h3.-space {
   margin-bottom: 24px;
 }
+.h3.-first {
+  margin-top: 16px;
+}
 .h4 {
   font-family: "Fira Sans", sans-serif;
   font-size: 20px;
@@ -784,6 +787,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .statuts {
+  margin-top: 16px;
   text-align: right;
   margin-bottom: 8px;
 }
@@ -820,7 +824,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .content_container {
-  padding-top: 80px;
+  padding-top: 60px;
   margin-bottom: 80px;
 }
 .content_container.-small {
@@ -1565,6 +1569,12 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 14px;
   text-transform: uppercase;
 }
+.find__more.-member {
+  position: relative;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  display: block;
+}
 
 .walk__type {
   font-size: 12px;
@@ -1800,6 +1810,14 @@ input[type=range]::-webkit-slider-runnable-track {
   z-index: 10000;
   background: white;
   opacity: 0;
+}
+
+.message__viewer__container {
+  margin-top: 16px;
+}
+
+.message__container {
+  margin-top: 16px;
 }
 
 .message__content {
@@ -2059,6 +2077,9 @@ body {
 }
 .h3.-space {
   margin-bottom: 24px;
+}
+.h3.-first {
+  margin-top: 16px;
 }
 .h4 {
   font-family: "Fira Sans", sans-serif;
@@ -2723,6 +2744,9 @@ body {
 }
 .h3.-space {
   margin-bottom: 24px;
+}
+.h3.-first {
+  margin-top: 16px;
 }
 .h4 {
   font-family: "Fira Sans", sans-serif;

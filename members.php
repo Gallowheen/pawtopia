@@ -29,9 +29,9 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="h3 -title">Trouvez votre partenaire de balade idéale</h3>
+                <h3 class="h3 -title -first">Trouvez votre partenaire de balade idéale</h3>
                 <div class="showcase__member"><?php include ("src/php/showcase_member.php"); ?></div>
-                <div class="find__more">
+                <div class="find__more -member">
                     <button class="button -color -blue" id="filter">Découvrez nos membres</button>
                 </div>
             </div>
