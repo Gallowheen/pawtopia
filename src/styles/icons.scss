@@ -22,6 +22,8 @@ $icon-ic_pets_48px: unicode(ea0f);
 $icon-ic_check_48px: unicode(ea10);
 $icon-email-84: unicode(ea11);
 $icon-ic_sms_48px: unicode(ea12);
+$icon-add_dog: unicode(ea14);
+$icon-add_event: unicode(ea15);
 
 .icon-home-52::before {
   content: $icon-home-52;
@@ -89,5 +91,13 @@ $icon-ic_sms_48px: unicode(ea12);
 
 .icon-ic_sms_48px::before {
   content: $icon-ic_sms_48px;
+}
+
+.icon-add_dog::before {
+  content: $icon-add_dog;
+}
+
+.icon-add_event::before {
+  content: $icon-add_event;
 }
 

@@ -7,6 +7,8 @@ $(document).ready(function(){
             var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
             map = L.map('map').setView(latlng, 8);
 
+            L.marker(latlng).addTo(map);
+
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
@@ -48,6 +50,7 @@ $(document).ready(function(){
 
                     var latlng = new L.LatLng(latitude, longitude);
                     map = L.map('map').setView(latlng, 10);
+                    var marker = L.marker(latlng).addTo(map);
 
                     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',

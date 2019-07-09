@@ -386,6 +386,14 @@ Generated using nucleoapp.com
   content: "\ea12";
 }
 
+.icon-add_dog::before {
+  content: "\ea14";
+}
+
+.icon-add_event::before {
+  content: "\ea15";
+}
+
 .input {
   border: 1px solid white;
   border-radius: 2px;
@@ -1618,7 +1626,17 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 0px;
 }
 .walk__card.-home {
-  padding: 8px;
+  width: 80vw;
+  margin-bottom: 0px;
+  margin-right: 10px;
+}
+.walk__card.-home:last-child {
+  margin-right: 0;
+}
+
+.walk__container {
+  display: flex;
+  float: left;
 }
 
 .name__container {
@@ -1748,7 +1766,6 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: none;
 }
 .user_walk.-home {
-  max-height: 130px;
   overflow: scroll;
 }
 
@@ -2312,6 +2329,14 @@ Generated using nucleoapp.com
 
 .icon-ic_sms_48px::before {
   content: "\ea12";
+}
+
+.icon-add_dog::before {
+  content: "\ea14";
+}
+
+.icon-add_event::before {
+  content: "\ea15";
 }
 
 .input {
@@ -2960,6 +2985,14 @@ Generated using nucleoapp.com
 
 .icon-ic_sms_48px::before {
   content: "\ea12";
+}
+
+.icon-add_dog::before {
+  content: "\ea14";
+}
+
+.icon-add_event::before {
+  content: "\ea15";
 }
 
 .input {
