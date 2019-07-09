@@ -22,18 +22,23 @@
 ?>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <div class="input__container -first -right">
+            <div class="">
+                <!-- <div class="input__container -first -right">
                     <button class="button -color -blue -add" id="new_walk">Créer une balade</button>
-                </div>
+                </div> -->
                 <!-- <h3 class="h3 -title">Vos balades à venir</h3>
                 <div class="user_walk">
 
                 </div> -->
-                <h3 class="h3 -title">Trouvez votre balade idéale</h3>
+                <!-- <h3 class="h3 -title">Trouvez votre balade idéale</h3> -->
                 <div class="find__more">
-                    <button class="button -color -blue" id="filter">Filtrer les balades</button>
-                </div>
+                    <!-- <button class="button -color -blue -inverted" id="filter">Filtrer les balades</button> -->
+                    <div id="filter" class="option">
+                        <i class="icon icon__footer icon__friend icon-zoom-2"></i><span>Filtrer</span>
+                    </div>
+                    <div id="new_walk" class="option">
+                        <i class="icon icon__footer icon__friend icon-add_event" ></i><span>Créer</span></div>
+                    </div>
                 <div class="map__container">
                     <div class="map__legend">
                         <div class="map__legend__element">

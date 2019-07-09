@@ -45,7 +45,7 @@ $(document).ready(function(){
         .done(function(result){
             let title;
 
-            $("body").css('overflow', 'initial');
+            //$("body").css('overflow', 'initial');
             var name = $('.nav_button_group .icon__name').each(function(){
                 if($(this).hasClass('-active')){
                     title = $(this).text();
