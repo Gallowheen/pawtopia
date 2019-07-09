@@ -10,7 +10,14 @@ $(document).ready(function(){
     var mymap;
     var layerGroup;
 
+    var lat;
+    var lon;
+
     navigator.geolocation.getCurrentPosition(function(location) {
+
+        lat = location.coords.latitude;
+        lon = location.coords.longitude;
+
         var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
         map = L.map('map').setView(latlng, 8);
 
@@ -37,7 +44,6 @@ $(document).ready(function(){
         layerGroup = L.layerGroup().addTo(mymap);
     });
 
-
     //if geoloc failed
     setTimeout(function(){
         if (map == undefined || mymap == undefined){
@@ -55,6 +61,9 @@ $(document).ready(function(){
                 latitude  = data.LAT;
                 longitude  = data.LON;
 
+                lat = data.LAT;
+                lon = data.LON;
+
                 var latlng = new L.LatLng(latitude, longitude);
                 map = L.map('map').setView(latlng, 8);
                 var marker = L.marker(latlng).addTo(map);
@@ -71,6 +80,7 @@ $(document).ready(function(){
 
                 var latlng = new L.LatLng(latitude, longitude);
                 mymap = L.map('mapid').setView(latlng, 10);
+                var marker = L.marker(latlng).addTo(mymap);
 
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -130,6 +140,9 @@ $(document).ready(function(){
 
             latUser  = data.LAT;
             lonUser  = data.LON;
+
+            lat = data.LAT;
+            lon = data.LON;
         });
     }
 
@@ -148,6 +161,12 @@ $(document).ready(function(){
         }else{              
             $(this).addClass('selected');
         }
+    });
+
+    $('.whereami').each(function(){
+        $(this).click(function(){
+            map.setView(new L.LatLng(lat, lon), 14);
+        });
     });
 
     $('#filter').click(function() {
@@ -295,6 +314,12 @@ $(document).ready(function(){
 
     $('#submit__walks').click(function(e){
 
+        $('.whereami').each(function(){
+            $(this).click(function(){
+                mymap.setView(new L.LatLng(lat, lon), 14);
+            });
+        });
+
         e.preventDefault();
 
         //Si la géoloc ne fonctionne pas ou n'est pas activ
@@ -382,7 +407,10 @@ $(document).ready(function(){
                     }, 0);
                     layerGroup.clearLayers();
 
-                    $('.content_container .container .row .col').eq(0).append('<div class="walk__container__result"></div>');
+                    let latlng = new L.LatLng(lat, lon);
+                    var marker = L.marker(latlng).addTo(mymap);
+
+                    $('.content_container .container .row').eq(0).append('<div class="walk__container__result"></div>');
 
                     $('.walk__container__result').append('<p class="search__result"><b>'+data.length+'</b> résultats correspondant à votre recherche</p>');
 
@@ -494,7 +522,7 @@ $(document).ready(function(){
                     $("body").css('overflow','auto');
 
                     $([document.documentElement, document.body]).animate({
-                        scrollTop: $("#mapid").offset().top - 150
+                        scrollTop: $(".walk__container__result").offset().top - 150
                     }, 500);
                 }, 1250);
 

@@ -25,6 +25,7 @@ $icon-ic_sms_48px: unicode(ea12);
 $icon-add_dog: unicode(ea14);
 $icon-add_event: unicode(ea15);
 $icon-zoom-2: unicode(ea16);
+$icon-ic_location_searching_48px: unicode(ea17);
 
 .icon-home-52::before {
   content: $icon-home-52;
@@ -104,5 +105,9 @@ $icon-zoom-2: unicode(ea16);
 
 .icon-zoom-2::before {
   content: $icon-zoom-2;
+}
+
+.icon-ic_location_searching_48px::before {
+  content: $icon-ic_location_searching_48px;
 }
 

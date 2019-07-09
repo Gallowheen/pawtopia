@@ -34,12 +34,15 @@
                 <div class="find__more">
                     <!-- <button class="button -color -blue -inverted" id="filter">Filtrer les balades</button> -->
                     <div id="filter" class="option">
-                        <i class="icon icon__footer icon__friend icon-zoom-2"></i><span>Filtrer</span>
+                        <i class="icon icon-zoom-2"></i><span>Filtrer</span>
                     </div>
                     <div id="new_walk" class="option">
-                        <i class="icon icon__footer icon__friend icon-add_event" ></i><span>Créer</span></div>
+                        <i class="icon icon-add_event" ></i><span>Créer</span></div>
                     </div>
                 <div class="map__container">
+                    <div class="whereami">
+                        <i class="icon icon-ic_location_searching_48px" ></i>
+                    </div>
                     <div class="map__legend">
                         <div class="map__legend__element">
                             <img class="map__legend__img" src="src/assets/img/ressources/bluetopia.png"/>
@@ -57,6 +60,9 @@
                     <div class="map" class="map" id="map"></div>
                 </div>
                 <div class="map__container">
+                    <div class="whereami">
+                        <i class="icon icon-ic_location_searching_48px" ></i>
+                    </div>
                     <div class="map__legend">
                         <div class="map__legend__element">
                             <img class="map__legend__img" src="src/assets/img/ressources/bluetopia.png"/>

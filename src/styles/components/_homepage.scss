@@ -1147,6 +1147,11 @@
   float: left;
 }
 
+.walk__container__result{
+  width: calc(100% - 30px);
+  margin-left: 15px;
+}
+
 .name__container{
   font-size: 20px;
   font-weight: bold;
@@ -1488,10 +1493,10 @@
   position: absolute;
   left: 12px;
   z-index: 8000;
-  bottom: 70px;
+  bottom: 65px;
   width: 80px;
   background: white;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 8px 0;
 }
 
@@ -1508,15 +1513,38 @@
   background: white;
   border-radius: 4px;
   padding: 8px;
-  color: black;
-  font-weight: bold;
   margin-right: 10px;
-  border: 2px solid rgba(0,0,0,0.2);
   font-size: 14px;
   display: flex;
 
   i{
     font-size: 24px;
     margin-right: 10px;
+    color : #003780;
+    font-weight: bold;
   }
+
+  span{
+    color: #003780;
+  }
+}
+
+.whereami{
+  position: absolute;
+  font-size: 32px;
+  z-index: 8000;
+  right: 15px;
+  bottom: 70px;
+  color: #003780;
+  background: white;
+  padding: 8px;
+  border-radius: 50%;
+
+  i{
+    display: block;
+  }
+}
+
+.leaflet-control-container{
+  display: none;
 }
