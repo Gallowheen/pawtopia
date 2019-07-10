@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="desktop">
-            <h1 class="wip">This is how we do landing page in Uganda</h1>
+            <h1 class="wip">Cher utilisateur, Pawtopia est uniquement disponible en version mobile.</h1>
         </div>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>
