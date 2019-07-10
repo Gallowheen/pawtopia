@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $('body').css('overflow-y','scroll');
+
     initSwipe();
 
     $(".edit-profile").click(function(e){
