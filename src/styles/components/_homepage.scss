@@ -342,29 +342,17 @@
   font-weight: bold;
 }
 
-.private{
-  margin-top : 32px;
-  margin-bottom : 0px;
-  font-weight : bold;
-  color : #C72C1C;
-}
-
-.friend__button{
-  top: 0%;
-  right: 15px;
-  position: absolute;
-
-  .icon__friend{
-    margin: 0px 8px 0px 4px;
-  }
-}
-
 .friend__container{
   margin-top : 32px;
 
   &.-nospace{
     margin-top: 0px;
   }
+}
+
+.friend__button{
+  display: flex;
+  justify-content: space-between;
 }
 
 .friend_pending{
@@ -498,6 +486,10 @@
   &.-empty{
     margin-bottom: 24px;
   }
+
+  &.-center{
+    text-align: center;
+  }
 }
 
 .information_group{
@@ -526,8 +518,8 @@
 
 .discover{
   text-align: center;
-  padding-bottom: 72px;
-  padding-top: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .information_group:last-child{
@@ -560,6 +552,8 @@
 .dog__img{
   width: 80%;
   margin-left: 10%;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .dog_information_button{
@@ -1468,16 +1462,6 @@
   position: absolute;
   right: 105px;
   top: 5px;
-}
-
-.friend__message.-friend{
-  right: 125px;
-}
-
-.friend__link{
-  height: 32px;
-  width: 32px;
-  display: block;
 }
 
 // MAP

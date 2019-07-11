@@ -103,6 +103,7 @@ $(document).ready(function() {
     $(".more__friend button").click(function(e){
 
         var user = $(this).data("id");
+
         $.ajax({
             method: "GET",
             url:"friends.php",
@@ -111,6 +112,22 @@ $(document).ready(function() {
         .done(function(result) {
             container.html(result);
             $(window).scrollTop(0);
+            $('.h1').text('Amis');
+        });
+    });
+
+    $("#discover").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        $.ajax({
+            method: "GET",
+            url:"members.php"
+        })
+        .done(function(result) {
+            container.html(result);
+            $('.h1').text('Membres');
+            setReturnButton("friends", {} , $(".header__title").html());
         });
     });
 

@@ -911,27 +911,16 @@ input[type=range]::-webkit-slider-runnable-track {
   font-weight: bold;
 }
 
-.private {
-  margin-top: 32px;
-  margin-bottom: 0px;
-  font-weight: bold;
-  color: #C72C1C;
-}
-
-.friend__button {
-  top: 0%;
-  right: 15px;
-  position: absolute;
-}
-.friend__button .icon__friend {
-  margin: 0px 8px 0px 4px;
-}
-
 .friend__container {
   margin-top: 32px;
 }
 .friend__container.-nospace {
   margin-top: 0px;
+}
+
+.friend__button {
+  display: flex;
+  justify-content: space-between;
 }
 
 .friend_pending {
@@ -1054,6 +1043,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .information_space.-empty {
   margin-bottom: 24px;
 }
+.information_space.-center {
+  text-align: center;
+}
 
 .information_group {
   padding: 8px 16px;
@@ -1077,8 +1069,8 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .discover {
   text-align: center;
-  padding-bottom: 72px;
-  padding-top: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .information_group:last-child {
@@ -1110,6 +1102,8 @@ input[type=range]::-webkit-slider-runnable-track {
 .dog__img {
   width: 80%;
   margin-left: 10%;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .dog_information_button {
@@ -1938,16 +1932,6 @@ input[type=range]::-webkit-slider-runnable-track {
   position: absolute;
   right: 105px;
   top: 5px;
-}
-
-.friend__message.-friend {
-  right: 125px;
-}
-
-.friend__link {
-  height: 32px;
-  width: 32px;
-  display: block;
 }
 
 .map {

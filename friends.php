@@ -18,6 +18,8 @@
         exit;
     }
 
+    $pagename = 'Amis';
+
     // Récupérer l'utilisateur
     $user;
     if (empty($_GET))
@@ -143,7 +145,7 @@
                                     //own profile
                                     if (empty($_GET)){
                                         if($result_friend_mutual->num_rows <= 1){
-                                            echo "<div class='discover'><button id='discover' class='button -color'>Découvrez nos membres</button></div>";
+                                            echo "<p>Aucun ami pour l'instant.</p><div class='discover'><button id='discover' class='button -color -blue'>Découvrez nos membres</button></div>";
                                         }else{
                                             echo '<div class="friend_widget_container">';
                                             $friends_global = [];
@@ -189,7 +191,7 @@
 
                                         $result_friend_mutual = $query_friend_mutual->get_result();
                                         if($result_friend_mutual->num_rows === 0){
-                                            echo 'Vous n"avez pas d"amis :(';
+                                            echo 'Aucun amis à afficher pour le moment';
                                         }else{
                                             $row_friends_mutual = resultToArray($result_friend_mutual);
 

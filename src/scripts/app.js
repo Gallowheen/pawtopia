@@ -297,6 +297,7 @@ function setReturnButton(target, params = {}, title = "")
                 case("home"):
                 case("profile"):
                 case("members"):
+                case("friends"):
                 case("walk"):
                 case("message"):
                     $(".header__nav").html(logo);

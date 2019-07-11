@@ -71,6 +71,21 @@ $(document).ready(function() {
         });
     });
 
+    $("#discover").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        $.ajax({
+            method: "GET",
+            url:"members.php"
+        })
+        .done(function(result) {
+            container.html(result);
+            $('.h1').text('Membres');
+            setReturnButton("friends", {} , $(".header__title").html());
+        });
+    });
+
     // CREATE YES BUTTON
     $("#accept").click(function(e){
         e.preventDefault();

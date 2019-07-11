@@ -175,10 +175,10 @@
                         if($result->num_rows === 0){
                             if(!empty($_GET)){
                             ?>
-                                <h3 class="information h3">Ses compagnons (0)</h3>
+                                <h3 class="information h3">Ses compagnons</h3>
                             <?php
                             }else{ ?>
-                                <h3 class="information h3">Mes compagnons (0)</h3>
+                                <h3 class="information h3">Mes compagnons</h3>
                             <?php
                             }
                             if(!empty($_GET))
@@ -278,15 +278,15 @@
                         if ((count($row_friends_mutual)-1) <= 0){
                             if(!empty($_GET)){
                             ?>
-                                <h3 class="information h3">Ses amis (0)</h3><?php
+                                <h3 class="information h3">Ses amis</h3><?php
                             }else{ ?>
-                                <h3 class="information h3">Mes amis (0)</h3>
+                                <h3 class="information h3">Mes amis</h3>
                             <?php
                             }
                             if(!empty($_GET))
-                                echo "<p class='information_space'>Cet utilisateur n'a aucun ami pour le moment.</p>";
+                                echo "<p class='information_space -center'>Cet utilisateur n'a aucun ami pour le moment.</p>";
                             else{
-                                echo "<p class='information_space'>Vous n'avez aucun ami pour le moment.</p>";
+                                echo "<p class='information_space -center'>Vous n'avez aucun ami pour le moment.</p>";
                             }
                         }else{
                             if(!empty($_GET)){?>
@@ -309,9 +309,7 @@
                         if (empty($_GET)){
                             if($result_friend_mutual->num_rows <= 1){
                                 ?>
-                                <div class="more__friend">
-                                    <span><button class="button -color -blue">Plus d'amis</button></span>
-                                </div>
+                                <div class="discover"><button id="discover" class="button -color -blue">Découvrez nos membres</button></div>
                             <?php
                             }else{
                                 echo '<div class="friend_widget_container -notEmpty">';
@@ -359,7 +357,7 @@
                             $query_friend_mutual->execute();
 
                             $result_friend_mutual = $query_friend_mutual->get_result();
-                            if($result_friend_mutual->num_rows === 1){
+                            if($result_friend_mutual->num_rows <= 1){
 
                             }else{
                                 $row_friends_mutual = resultToArray($result_friend_mutual);
