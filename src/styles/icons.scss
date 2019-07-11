@@ -26,6 +26,14 @@ $icon-add_dog: unicode(ea14);
 $icon-add_event: unicode(ea15);
 $icon-zoom-2: unicode(ea16);
 $icon-ic_location_searching_48px: unicode(ea17);
+$icon-ic_location_on_48px: unicode(ea18);
+$icon-ic_location_off_48px: unicode(ea19);
+$icon-ic_view_carousel_48px: unicode(ea1a);
+$icon-ic_view_list_48px: unicode(ea1b);
+$icon-ic_favorite_48px: unicode(ea1d);
+$icon-ic_import_contacts_48px: unicode(ea1e);
+$icon-ic_share_48px: unicode(ea1f);
+$icon-ic_notifications_48px: unicode(ea20);
 
 .icon-home-52::before {
   content: $icon-home-52;
@@ -109,5 +117,37 @@ $icon-ic_location_searching_48px: unicode(ea17);
 
 .icon-ic_location_searching_48px::before {
   content: $icon-ic_location_searching_48px;
+}
+
+.icon-ic_location_on_48px::before {
+  content: $icon-ic_location_on_48px;
+}
+
+.icon-ic_location_off_48px::before {
+  content: $icon-ic_location_off_48px;
+}
+
+.icon-ic_view_carousel_48px::before {
+  content: $icon-ic_view_carousel_48px;
+}
+
+.icon-ic_view_list_48px::before {
+  content: $icon-ic_view_list_48px;
+}
+
+.icon-ic_favorite_48px::before {
+  content: $icon-ic_favorite_48px;
+}
+
+.icon-ic_import_contacts_48px::before {
+  content: $icon-ic_import_contacts_48px;
+}
+
+.icon-ic_share_48px::before {
+  content: $icon-ic_share_48px;
+}
+
+.icon-ic_notifications_48px::before {
+  content: $icon-ic_notifications_48px;
 }
 
