@@ -37,4 +37,17 @@ $(document).ready(function() {
             setReturnButton("home", {}, title);
         });
     });
+
+    $(".logout").click(function(){
+        if(confirm('Voulez-vous vraiment vous déconnecter ?'))
+        {
+            $.ajax({
+                url:"src/php/logout.php",
+            })
+            .done(function(result){
+                if(result == 1)
+                    window.location.href = "index.php";
+            });
+        }
+    });
 })

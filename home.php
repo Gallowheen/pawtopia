@@ -166,6 +166,7 @@
       </div>
     </div>
   </div>
+  <button class='logout'>Déconnexion</button>
 </div>
 
 <script src="src/scripts/home.js"></script>
