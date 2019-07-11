@@ -83,6 +83,8 @@ $(document).ready(function() {
             }
         });
 
+        console.log(walks);
+
         $.ajax({
             method: "GET",
             data:{

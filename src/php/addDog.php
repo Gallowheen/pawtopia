@@ -8,7 +8,7 @@
     mysqli_query($link, "SET NAMES UTF8");
 
     if (empty($_GET)){
-        echo '<div class="dog_card">';
+        echo '<div class="container"><div class="row"><div class="col"><div class="dog_card -add">';
             echo "<h4 data-editable class='dog_name -nolimit'>Nom<i class='icon edit icon-ic_edit_48px'></i></h4>";
                 echo'<label for="uploadfiles" class="label-file">Choisir une image</label><input class="input-file" type="file" id="uploadfiles" accept="image/*"></input>';
                 echo'<div class="dog_button -add">';
@@ -46,15 +46,15 @@
                     while ( $results[] = mysqli_fetch_object ( $query ) );
                     array_pop ( $results );
 
-                    echo '<select required placeholder="Race" class="select -addDog" name="breed" id="breed">';
-                            echo '<option value="" disabled selected hidden>Race</option>';
+                    echo '<input placeholder="Race de votre chien" class="input select -addDog" list="breeds" id="breed" name="breed" />';
+                            echo '<datalist id="breeds">';
                             foreach ( $results as $option ) :
-                                echo'<option value="'.$option->ID.'">'.$option->NAME.'</option>';
+                                echo'<option data-value="'.$option->ID.'>'.$option->NAME.'" value="'.$option->NAME.'"</option>';
                             endforeach;
-                        echo'</select>';
+                        echo'</datalist>';
             echo'</div>';
         echo'</div>';
-        echo'<button id="addDog" class="button -color -blue -margintop">Ajouter</button>';
+        echo'<button id="addDog" class="button -color -blue -margintop">Ajouter</button></div></div></div>';
     }
     else{
         $query = $link->prepare("SELECT USERNAME FROM user WHERE ID = ?");

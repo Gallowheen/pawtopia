@@ -130,7 +130,10 @@ $(document).ready(function() {
 
             });
         }else{
-            $(".content_container .container .row .col .message__container").append('<h3 class="h3 -title">Aucun message pour le moment</h3>');
+            $(".content_container .container .row .col .message__container").append('<img class="message__img" src="src/assets/img/ressources/no_conversation.png">');
+            $('.message__container').css('height','100vh');
+            $('.message__container').css('width','100%');
+            $('body').css('overflow','hidden');
         }
     })
 });

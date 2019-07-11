@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+
+    $('body').css('overflow','scroll');
+    
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;

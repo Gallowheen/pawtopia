@@ -131,114 +131,203 @@ $(document).ready(function() {
     });
 
     $('#add_dog').click(function(){
-        let position = $(window).scrollTop();
-        let size = $(window).height();
-
-        $(document).mouseup(function (e){
-            if (!$('.dog_handler_container .row').find("*").is(e.target) && !$('.dog_handler_container .row').is(e.target)){
-                $('.dog_handler').remove();
-                $(document).off();
-                $(document.body).css('overflow','scroll');
-            }
-        });
 
         $.ajax({
-            method: "GET",
-            url:"src/php/addDog.php",
-        })
-        .done(function(result){
-            $(document.body).css('overflow','hidden');
-            $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -noBg"><div class="container"><div class="row"><div class="col"></div></div></div></div></div>');
-            $('.dog_handler').css('top',position);
+                method: "GET",
+                url:"src/php/addDog.php",
+            })
+            .done(function(result){
+                var title = $(".header__title").html();
+                container.html(result);
+                $('.h1').text('Nouveau compagnon');
+                setReturnButton("profile", {}, title);
 
-            $('.dog_handler_container .container .row .col').append(result);
-
-            let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
-            $('.dog_handler_container').css('top',position_popup);
-            $('.dog_handler_container').animate({"opacity": 1}, "normal");
-
-            $('#addDog').click(function(){
-                if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
-                    if($('.dog_name').last().text() == "Nom")
-                        $('.dog_name').last().addClass('error');
-                    if($('#breed').val() == null)
-                        $('#breed').addClass("-error");
-                }else{
-                    var uploadfiles = document.querySelector('#uploadfiles');
-
-                    let name = $('.dog_name').last().text();
-                    let breed = $('#breed').val();
-                    let age = $('#age').val();
-                    let sexe = $('#sexe').val();
-                    let image;
-
-                    if (uploadfiles.files.length > 0){
-                        image = uploadfiles.files[0].name;
+                $('#addDog').click(function(){
+                    if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
+                        if($('.dog_name').last().text() == "Nom")
+                            $('.dog_name').last().addClass('error');
+                        if($('#breed').val() == null)
+                            $('#breed').addClass("-error");
                     }else{
-                        image = "none";
+                        var uploadfiles = document.querySelector('#uploadfiles');
+    
+                        let name = $('.dog_name').last().text();
+
+                        let breedname  = $('#breed').val();
+                        let breed = $('#breeds [value="' + breedname + '"]').data('value');
+                        let age = $('#age').val();
+                        let sexe = $('#sexe').val();
+                        let image;
+    
+                        if (uploadfiles.files.length > 0){
+                            image = uploadfiles.files[0].name;
+                        }else{
+                            image = "none";
+                        }
+    
+                        $.ajax({
+                            method: "GET",
+                            url:"src/php/addDog.php",
+                            data:{
+                                name:name,
+                                breed:breed,
+                                age:age,
+                                sexe:sexe,
+                                image:image
+                            },
+                        })
+                        .done(function(result){
+                            alert('gg');
+                            console.log(result);
+                            //redirection
+                        });
                     }
+                });
 
-                    $.ajax({
-                        method: "GET",
-                        url:"src/php/addDog.php",
-                        data:{
-                            name:name,
-                            breed:breed,
-                            age:age,
-                            sexe:sexe,
-                            image:image
-                        },
-                    })
-                    .done(function(result){
+                
+                $('#uploadfiles').on("change", function(){
 
-                        setTimeout(function(){
-                            $('.dog_handler').animate({"opacity": 0}, "normal");
-                        }, 750);
+                    // var uploadfiles = $('#uploadfiles');
+                    // var files = uploadfiles.files;
+                    // for(var i=0; i<files.length; i++){
+                    //     uploadFile(uploadfiles.files[i]);
+                    // }
 
-                        setTimeout(function(){
-                            $('.dog_handler').remove();
-                            $(document).off();
-                            $(document.body).css('overflow','scroll');
-                        }, 1250);
+                    if ($('.dog_name').last().text() != "Nom"){
+                        $("#addDog").prop('disabled', true);
+                        if (gallery.children.length == 0){
+                            var files = this.files;
+                            for(var i=0; i<files.length; i++){
+                                previewImage(this.files[i]);
+                            }
 
-                        document.location.reload(true);
-
-                    });
-                }
-            });
-
-            $('#uploadfiles').on("change", function(){
-
-                // var uploadfiles = $('#uploadfiles');
-                // var files = uploadfiles.files;
-                // for(var i=0; i<files.length; i++){
-                //     uploadFile(uploadfiles.files[i]);
-                // }
-
-                if ($('.dog_name').last().text() != "Nom"){
-                    $("#addDog").prop('disabled', true);
-                    if (gallery.children.length == 0){
-                        var files = this.files;
-                        for(var i=0; i<files.length; i++){
-                            previewImage(this.files[i]);
+                            var files = uploadfiles.files;
+                            var page = "dog";
+                            var name = $('.dog_name').last().text();
+                            for(var i=0; i<files.length; i++){
+                                uploadFile(uploadfiles.files[i],name,page);
+                            }
                         }
 
-                        var files = uploadfiles.files;
-                        var page = "dog";
-                        var name = $('.dog_name').last().text();
-                        for(var i=0; i<files.length; i++){
-                            uploadFile(uploadfiles.files[i],name,page);
-                        }
+                        $('.label-file').hide();
+                        //let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
+                        //$('.dog_handler_container').css('top',position_popup);
+                    }else{
+                        $('.dog_name').last().addClass('error');
                     }
-
-                    $('.label-file').hide();
-                    let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
-                    $('.dog_handler_container').css('top',position_popup);
-                }else{
-                    $('.dog_name').last().addClass('error');
-                }
+                });
             });
-        });
+            
+
+
+        // let position = $(window).scrollTop();
+        // let size = $(window).height();
+
+        // $(document).mouseup(function (e){
+        //     if (!$('.dog_handler_container .row').find("*").is(e.target) && !$('.dog_handler_container .row').is(e.target)){
+        //         $('.dog_handler').remove();
+        //         $(document).off();
+        //         $(document.body).css('overflow','scroll');
+        //     }
+        // });
+
+        // $.ajax({
+        //     method: "GET",
+        //     url:"src/php/addDog.php",
+        // })
+        // .done(function(result){
+        //     $(document.body).css('overflow','hidden');
+        //     $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -noBg"><div class="container"><div class="row"><div class="col"></div></div></div></div></div>');
+        //     $('.dog_handler').css('top',position);
+
+        //     $('.dog_handler_container .container .row .col').append(result);
+
+        //     let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
+        //     $('.dog_handler_container').css('top',position_popup);
+        //     $('.dog_handler_container').animate({"opacity": 1}, "normal");
+
+        //     $('#addDog').click(function(){
+        //         if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
+        //             if($('.dog_name').last().text() == "Nom")
+        //                 $('.dog_name').last().addClass('error');
+        //             if($('#breed').val() == null)
+        //                 $('#breed').addClass("-error");
+        //         }else{
+        //             var uploadfiles = document.querySelector('#uploadfiles');
+
+        //             let name = $('.dog_name').last().text();
+        //             let breed = $('#breed').val();
+        //             let age = $('#age').val();
+        //             let sexe = $('#sexe').val();
+        //             let image;
+
+        //             if (uploadfiles.files.length > 0){
+        //                 image = uploadfiles.files[0].name;
+        //             }else{
+        //                 image = "none";
+        //             }
+
+        //             $.ajax({
+        //                 method: "GET",
+        //                 url:"src/php/addDog.php",
+        //                 data:{
+        //                     name:name,
+        //                     breed:breed,
+        //                     age:age,
+        //                     sexe:sexe,
+        //                     image:image
+        //                 },
+        //             })
+        //             .done(function(result){
+
+        //                 setTimeout(function(){
+        //                     $('.dog_handler').animate({"opacity": 0}, "normal");
+        //                 }, 750);
+
+        //                 setTimeout(function(){
+        //                     $('.dog_handler').remove();
+        //                     $(document).off();
+        //                     $(document.body).css('overflow','scroll');
+        //                 }, 1250);
+
+        //                 document.location.reload(true);
+
+        //             });
+        //         }
+        //     });
+
+            // $('#uploadfiles').on("change", function(){
+
+            //     // var uploadfiles = $('#uploadfiles');
+            //     // var files = uploadfiles.files;
+            //     // for(var i=0; i<files.length; i++){
+            //     //     uploadFile(uploadfiles.files[i]);
+            //     // }
+
+            //     if ($('.dog_name').last().text() != "Nom"){
+            //         $("#addDog").prop('disabled', true);
+            //         if (gallery.children.length == 0){
+            //             var files = this.files;
+            //             for(var i=0; i<files.length; i++){
+            //                 previewImage(this.files[i]);
+            //             }
+
+            //             var files = uploadfiles.files;
+            //             var page = "dog";
+            //             var name = $('.dog_name').last().text();
+            //             for(var i=0; i<files.length; i++){
+            //                 uploadFile(uploadfiles.files[i],name,page);
+            //             }
+            //         }
+
+            //         $('.label-file').hide();
+            //         let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);
+            //         $('.dog_handler_container').css('top',position_popup);
+            //     }else{
+            //         $('.dog_name').last().addClass('error');
+            //     }
+            // });
+        // });
     });
 
     $('.dog_delete').click(function(){
@@ -257,7 +346,7 @@ $(document).ready(function() {
         });
 
         $(document.body).css('overflow','hidden');
-        $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -small"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir supprimer <b class="capitalize">'+ name +'</b> ?</p><div class="dog_handler_button_container"><button id="dog_accepted" class="button -color -blue -right">Oui</button><button id="dog_denied" class="button -color -blue">Non</button><div></div></div></div></div></div>')
+        $(document.body).append('<div class="dog_handler"><div class="dog_handler_container -small"><div class="container"><div class="row"><div class="col"><p>Êtes-vous sûr de vouloir retirer <b class="capitalize">'+ name +'</b> ?</p><div class="dog_handler_button_container"><button id="dog_accepted" class="button -color -blue -right">Oui</button><button id="dog_denied" class="button -color -blue">Non</button><div></div></div></div></div></div>')
         $('.dog_handler').css('top',position);
 
         let position_popup = (size / 2) - (($('.dog_handler_container').height() + 40) / 2);

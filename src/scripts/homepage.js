@@ -116,12 +116,15 @@ $(document).ready(function(){
     $("#register").click(function(e){
         e.preventDefault();
 
+        let town__name = $("#town").val();
+        let town = $('#towns [value="' + town__name + '"]').data('value');
+
         $.post(
             'src/php/register.php',
             {
             username : $("#username").val(),
             email : $("#email").val(),
-            town : $("#town").val(),
+            town : town,
             password_1 : $("#password_1").val(),
             password_2 : $("#password_2").val()
             },

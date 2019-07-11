@@ -432,6 +432,8 @@ Generated using nucleoapp.com
   border: none;
   border-bottom: 1px solid white;
   background: transparent;
+  width: 100%;
+  color: white;
 }
 .input.-transparent::placeholder {
   color: white;
@@ -1192,6 +1194,12 @@ input[type=range]::-webkit-slider-runnable-track {
   border-right: 1px solid #0067B0;
   transition: 0.5s all;
 }
+.dog_card.-add {
+  border: none;
+  background: none;
+  margin-top: 16px;
+  text-align: center;
+}
 .dog_card.-walk {
   border: none;
   margin-right: 0px;
@@ -1837,6 +1845,14 @@ input[type=range]::-webkit-slider-runnable-track {
   float: right;
 }
 
+.message__img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
 .message__info {
   display: flex;
   color: #003780;
@@ -2463,6 +2479,8 @@ Generated using nucleoapp.com
   border: none;
   border-bottom: 1px solid white;
   background: transparent;
+  width: 100%;
+  color: white;
 }
 .input.-transparent::placeholder {
   color: white;
@@ -3130,6 +3148,8 @@ Generated using nucleoapp.com
   border: none;
   border-bottom: 1px solid white;
   background: transparent;
+  width: 100%;
+  color: white;
 }
 .input.-transparent::placeholder {
   color: white;

@@ -653,6 +653,13 @@
   border-right: 1px solid #0067B0;
   transition: .5s all;
 
+  &.-add{
+    border: none;
+    background: none;
+    margin-top: 16px;
+    text-align: center;
+  }
+
   &.-walk{
     border : none;
     margin-right: 0px;
@@ -1345,6 +1352,14 @@
     border-radius: 15px 0px 7.5px 15px;
     float: right;
   }
+}
+
+.message__img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
 }
 
 .message__info{
