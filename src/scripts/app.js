@@ -43,6 +43,8 @@ $(document).ready(function(){
             url:$(this).data('url')+".php",
         })
         .done(function(result){
+            if(!checkSession(result))
+                return;
             let title;
 
             //$("body").css('overflow', 'initial');
@@ -113,6 +115,15 @@ $('body').on('click', '[data-editable]', function(){
     $input.one('blur', save).focus();
 
 });
+
+function checkSession(result)
+{
+    if(result == 0) {
+        window.location.href = "index.php";
+        return false;
+    }
+    return true;
+}
 
 function previewImage(file) {
     var gallery = $('#gallery');

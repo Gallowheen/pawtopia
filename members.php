@@ -18,7 +18,7 @@
     $error = false;
 
     if(!isset($_SESSION['ID'])){
-        header('Location:index.php');
+        echo 0;
         exit;
     }
     $user = $_SESSION['ID'];

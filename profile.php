@@ -14,7 +14,7 @@
     }
 
     if(!isset($_SESSION['ID'])){
-        header('Location:index.php');
+        echo 0;
         exit;
     }
 

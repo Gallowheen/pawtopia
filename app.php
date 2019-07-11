@@ -4,8 +4,8 @@
 
   $pagename = 'Accueil';
 
-  if(!isset($_SESSION)){
-      header('index.php');
+  if(!isset($_SESSION['ID'])){
+      header('Location:index.php');
       exit;
   }
 ?>

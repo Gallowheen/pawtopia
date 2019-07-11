@@ -4,8 +4,8 @@
 
   $pagename = 'Messages';
 
-  if(!isset($_SESSION)){
-    header('index.php');
+  if(!isset($_SESSION['ID'])){
+    echo 0;
     exit;
 }
 ?>
