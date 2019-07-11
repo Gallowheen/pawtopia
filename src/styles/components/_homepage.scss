@@ -505,10 +505,10 @@
     margin-bottom: 8px;
   }
 
-  .information__city{
+  .information__icon{
     color: #0077c0;
     transform: translateY(20%);
-    font-size: 32px;
+    font-size: 24px;
   }
 
   &.-nopadding{
@@ -1454,14 +1454,6 @@
 
 .align-right{
   text-align: right;
-}
-
-.friend__message{
-  font-size: 32px !important;
-  color: #003780;
-  position: absolute;
-  right: 105px;
-  top: 5px;
 }
 
 // MAP

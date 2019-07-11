@@ -66,36 +66,6 @@
                             echo "<p class='private'>Ce profil est privé</p>";
                     ?>
                     <?php
-
-                        if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
-
-                            // CHECK IF FRIEND
-
-                            $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 1 LIMIT 1");
-                            $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
-                            $query->execute();
-
-                            $result_friend = $query->get_result();
-                            $row_friend = $result_friend->fetch_assoc();
-
-                            $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 0 LIMIT 1");
-                            $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
-                            $query->execute();
-
-                            $result_friend_requested = $query->get_result();
-                            $row_friend_requested = $result_friend_requested->fetch_assoc();
-
-                            if ($row_friend['MUTUAL']){
-                                echo "<div><span class='friend__link' data-id=".$_GET['ID']." ><i class='icon friend__message icon__friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Ami</button></div>";
-                            }else{
-                                if($row_friend_requested){
-                                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon icon__friend friend__message -friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Envoyé</button></div";
-                                }else{
-                                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon friend__message -friend icon__friend icon-ic_sms_48px'></i></span><button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button></div>";
-                                }
-                            }
-                        }
-
                         // SELECT AVATAR
 
                         $query = $link->prepare("SELECT * FROM dog WHERE OWNER_ID = ? and ACTIVE = 1 LIMIT 1");
@@ -155,12 +125,42 @@
                                     echo" <span>".$row['NAME']."</span>";
                                 }
                             }
-                        }
+                        }else
                         ?>
                 </div>
             </div>
         </div>
     </div>
+    <?php
+        if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
+
+            // CHECK IF FRIEND
+
+            $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 1 LIMIT 1");
+            $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
+            $query->execute();
+
+            $result_friend = $query->get_result();
+            $row_friend = $result_friend->fetch_assoc();
+
+            $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 0 LIMIT 1");
+            $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
+            $query->execute();
+
+            $result_friend_requested = $query->get_result();
+            $row_friend_requested = $result_friend_requested->fetch_assoc();
+
+            if ($row_friend['MUTUAL']){
+                echo "<div><span class='friend__link' data-id=".$_GET['ID']." ><i class='icon friend__message icon__friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Ami</button></div>";
+            }else{
+                if($row_friend_requested){
+                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon icon__friend friend__message -friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Envoyé</button></div";
+                }else{
+                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon friend__message -friend icon__friend icon-ic_sms_48px'></i></span><button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button></div>";
+                }
+            }
+        }
+    ?>
     <div class="information__container">
         <div class="container">
             <div class="row">
@@ -183,14 +183,14 @@
 
                             $townToInsert = $row_city['NAME'];
 
-                            echo" <div class='information_group'><i class='icon information__city icon-home-52'></i><span class='information_space'>".$townToInsert."</span></div>";
+                            echo" <div class='information_group'><i class='icon information__icon icon-home-52'></i><span class='information_space'>".$townToInsert."</span></div>";
 
                             if ( $row['BIO'])
-                                echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>".$row['BIO']."</p></div>";
+                                echo"<div class='information_group'><i class='icon information__icon icon-ic_import_contacts_48px'></i><span class='information_space'>".$row['BIO']."</span></div>";
                             else
-                                echo"<div class='information_group'><p class='information_title'>Biographie</p><p class='information_space'>L'utilisateur n'a pas encore de biographie</p></div>";
+                                echo"<div class='information_group'><i class='icon information__icon icon-ic_import_contacts_48px'></i><span class='information_space'>L'utilisateur n'a pas encore de biographie</span></div>";
                             if ( $row['WALK'])
-                                echo"<div class='information_group'><p class='information_title'>Type de balade préféré</p><p class='information_space'>".$row['WALK']."</p></div>";
+                                echo"<div class='information_group'><i class='icon information__icon icon-ic_favorite_48px'></i><span class='information_space'>".$row['WALK']."</span></div>";
                         ?>
                     </div>
                 </div>

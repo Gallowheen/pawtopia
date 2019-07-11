@@ -50,7 +50,10 @@ $(document).ready(function() {
 
                 let bio = $('#bio').val();
                 let walk = $('#walk').val();
-                let town = $('#town').val();
+
+                let town__name = $("#town").val();
+                let town = $('#towns [value="' + town__name + '"]').data('value');
+
                 let image;
 
                 if (uploadfiles.files.length > 0){
@@ -71,11 +74,16 @@ $(document).ready(function() {
                 })
                 .done(function(result){
 
-                    //console.log(result);
-
-                    // setTimeout(function(){
-                    document.location.reload(true);
-                    // },2000);
+                    $.ajax({
+                        method: "GET",
+                        url:"profile.php",
+                    })
+                    .done(function(result){
+                        container.html(result);
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $(".information__container").offset().top - 150
+                        }, 250);
+                    });
                 });
             });
         });
