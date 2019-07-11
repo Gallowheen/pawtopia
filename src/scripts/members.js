@@ -100,122 +100,132 @@ $(document).ready(function() {
             let data = JSON.parse(result);
             let member;
 
-            if(data.length == 0){
+                
+            if($('.member_widget_container'))
+                $('.member_widget_container').remove();
 
-            }else{
+            if($('.tag_container'))
+                $('.tag_container').remove();
 
-                if($('.member_widget_container'))
-                    $('.member_widget_container').remove();
+            console.log(walks);
 
-                if($('.tag_container'))
-                    $('.tag_container').remove();
+            if (walks.length == 0 || walks.length == 3 )
+                $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>Moins de '+$('#slider').val()+'km de vous</span></div><div class="tags"><span>Tout les types de balades</span></div></div>');
+            else{
+                $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>Moins de '+$('#slider').val()+'km de vous</span></div></div>');
 
-                if ($('form input[type=radio]:checked').val() != undefined)
-                    $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('form input[type=radio]:checked').val()+'</span></div><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
-                else
-                $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>'+$('#slider').val()+'km</span></div></div>');
+                for(i = 0; i < walks.length;i++){
+                    $('.tag_container').append('<div class="tags"><span>'+walks[i]+'</span></div>');
+                }
+            }
 
-                $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
+            //<div class="tags"><span>Tout les types de balades</span></div>
+
+            $('.member__filtred .container .row .col').append('<div class="member_widget_container"></div>');
+
+            if(data.length > 0){
 
                 for( let i = 0; i < data.length; i++){
                     member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+data[i].AVATAR+'"><div class="container__info"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div></div></div>';
                     $(".member__filtred .container .row .col .member_widget_container").append(member);
                 }
+            }else{
+                $(".member__filtred .container .row .col .member_widget_container").append('<p>Aucun résultat trouvé.</p>');
+            }
 
 
-                $(".test").click(function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
+            $(".test").click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
 
-                    var user = $(this).data("id");
-                    var containerFilter = $(this);
+                var user = $(this).data("id");
+                var containerFilter = $(this);
 
-                    $.ajax({
-                        method: "GET",
-                        url:"src/php/simple_profile.php?ID="+user,
-                    })
-                    .done(function(result){
+                $.ajax({
+                    method: "GET",
+                    url:"src/php/simple_profile.php?ID="+user,
+                })
+                .done(function(result){
 
-                        if ( containerFilter.hasClass('expanded')){
+                    if ( containerFilter.hasClass('expanded')){
 
-                        }else{
-                            containerFilter.append(result);
-                            containerFilter.addClass('expanded');
-                            let tap = containerFilter.children().eq(1).children().eq(2);
+                    }else{
+                        containerFilter.append(result);
+                        containerFilter.addClass('expanded');
+                        let tap = containerFilter.children().eq(1).children().eq(2);
 
-                            let height = containerFilter.children().eq(1).height();
-                            containerFilter.animate({ height: height + 25}, "fast");
-                            setTimeout(function(){
-                                tap.animate({opacity : 1},"slow");
-                            },250);
-                            containerFilter.children().eq(0).hide();
-                            initSwipe();
+                        let height = containerFilter.children().eq(1).height();
+                        containerFilter.animate({ height: height + 25}, "fast");
+                        setTimeout(function(){
+                            tap.animate({opacity : 1},"slow");
+                        },250);
+                        containerFilter.children().eq(0).hide();
+                        initSwipe();
 
-                            $(".view").click(function(e){
-                                e.preventDefault();
-                                e.stopPropagation();
-                        
-                                var user = $(this).data("id");
-                        
-                                $.ajax({
-                                    method: "GET",
-                                    url:"profile.php",
-                                    data: {ID:user}
-                                })
-                                .done(function(result) {
-                                    container.html(result);  
-                                    var name = $('.username').text();
-                                    $('.h1').text('Profil de ' + name);      
-                                });
-                            });
-                        }
-
-                        $('.tapToClose').click(function(e){
+                        $(".view").click(function(e){
+                            e.preventDefault();
                             e.stopPropagation();
-
-                            var containerFilter = $(this).parent().parent();
-                            var child = $(this).parent().parent().eq(0).children().eq(1);
-                            $(this).parent().parent().removeClass('expanded');
-                            $(this).parent().parent().children().eq(0).css("display","block");
-                            $(this).parent().parent().css("height", "75px");
-                            $([document.documentElement, document.body]).animate({
-                                scrollTop: containerFilter.offset().top - 100
-                            }, 1000);
-                            child.animate({opacity : 0},"slow");
-
-                            setTimeout(function(){
-                                child.remove();
-                            },250);
-                        });
-
-                        $('.add__friend').click(function(){
-
-                            let user = $(this).data("id");
+                    
+                            var user = $(this).data("id");
+                    
                             $.ajax({
                                 method: "GET",
-                                data:{ID:user},
-                                url:"src/php/add_friend.php",
+                                url:"profile.php",
+                                data: {ID:user}
                             })
-                            .done(function(result){
-                                $('.avatar__container #add_friend').remove();
-                                $('.avatar__container .container--full .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
+                            .done(function(result) {
+                                container.html(result);  
+                                var name = $('.username').text();
+                                $('.h1').text('Profil de ' + name);      
                             });
+                        });
+                    }
+
+                    $('.tapToClose').click(function(e){
+                        e.stopPropagation();
+
+                        var containerFilter = $(this).parent().parent();
+                        var child = $(this).parent().parent().eq(0).children().eq(1);
+                        $(this).parent().parent().removeClass('expanded');
+                        $(this).parent().parent().children().eq(0).css("display","block");
+                        $(this).parent().parent().css("height", "75px");
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: containerFilter.offset().top - 100
+                        }, 1000);
+                        child.animate({opacity : 0},"slow");
+
+                        setTimeout(function(){
+                            child.remove();
+                        },250);
+                    });
+
+                    $('.add__friend').click(function(){
+
+                        let user = $(this).data("id");
+                        $.ajax({
+                            method: "GET",
+                            data:{ID:user},
+                            url:"src/php/add_friend.php",
+                        })
+                        .done(function(result){
+                            $('.avatar__container #add_friend').remove();
+                            $('.avatar__container .container--full .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
                         });
                     });
                 });
-            }
-
-            $(".members__handler__container").css('background','transparent');
-
-            setTimeout(function(){
-                $(".members__handler__container").css('transform','translateY(100%)');
-            }, 750);
-
-            setTimeout(function(){
-                $(".members__handler__container").css('display','none');
-                $("body").css('overflow','auto');
-                $(".showcase__member").css("height","0px");
-            }, 1250);
+            });
         });
+
+        $(".members__handler__container").css('background','transparent');
+
+        setTimeout(function(){
+            $(".members__handler__container").css('transform','translateY(100%)');
+        }, 750);
+
+        setTimeout(function(){
+            $(".members__handler__container").css('display','none');
+            $("body").css('overflow','auto');
+            $(".showcase__member").css("height","0px");
+        }, 1250);
     });
 });

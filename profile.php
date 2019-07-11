@@ -178,13 +178,15 @@
                                 <h3 class="information h3">Ses compagnons (0)</h3>
                             <?php
                             }else{ ?>
-                                <h3 class="information h3">Ses compagnons (0)</h3>
+                                <h3 class="information h3">Mes compagnons (0)</h3>
                             <?php
                             }
                             if(!empty($_GET))
-                                echo "<p class='information_space'>Cet utilisateur n'a aucun chien pour le moment.</p>";
+                                //echo "<p class='information_space'>Cet utilisateur n'a aucun chien pour le moment.</p>";
+                                echo "<img class='dog__img' src='src/assets/img/ressources/no_dog.png'/>";
                             else{
-                                echo "<p class='information_space -empty'>Vous n'avez aucun chien pour le moment.</p>";
+                                echo "<img class='dog__img' src='src/assets/img/ressources/no_dog.png'/>";
+                                //echo "<p class='information_space -empty'>Vous n'avez aucun chien pour le moment.</p>";
                                 echo "<div class='dog_information_button'><button id='add_dog' class='button -color -blue'>Ajouter un compagnon</button></div>";
                             }
                         }else{
