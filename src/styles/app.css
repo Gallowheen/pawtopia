@@ -837,9 +837,10 @@ input[type=range]::-webkit-slider-runnable-track {
   color: #0067B0;
   display: inline-block;
   position: relative;
-}
-.statuts .status__icon:first-child {
   margin-right: 16px;
+}
+.statuts .status__icon:last-child {
+  margin-right: 0px;
 }
 .statuts .ping {
   font-size: 12px;
@@ -943,7 +944,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .action__container {
   display: flex;
-  justify-content: space;
+  justify-content: space-evenly;
 }
 
 .username {

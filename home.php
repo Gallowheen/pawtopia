@@ -27,6 +27,9 @@
     <div class="col">
       <div class="statuts">
         <div class="status__icon">
+          <div><i class="icon icon-ic_notifications_48px"></i></div>
+        </div>
+        <div class="status__icon">
         <?php
           $banList = array();
 

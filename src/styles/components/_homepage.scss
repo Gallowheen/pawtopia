@@ -213,9 +213,10 @@
     color : #0067B0;
     display: inline-block;
     position: relative;
+    margin-right: 16px;
 
-    &:first-child{
-      margin-right: 16px;
+    &:last-child{
+      margin-right: 0px;
     }
   }
 
@@ -339,7 +340,7 @@
 
 .action__container{
   display: flex;
-  justify-content: space;
+  justify-content: space-evenly;
 }
 
 .username{

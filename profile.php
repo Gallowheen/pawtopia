@@ -157,7 +157,7 @@
                         <div class="action__container">
                             <?php
 
-                            echo '<div class="action__element" data-id="'.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i><span>Message</span></div>';
+                            echo '<div class="action__element friend__link" data-id="'.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i><span>Message</span></div>';
 
                             if ($row_friend['MUTUAL']){
                                 echo '<div class="action__element"><i class="icon icon__friend icon-single-01"></i><span>Ami</span></div>';
