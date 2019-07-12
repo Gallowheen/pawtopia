@@ -1589,6 +1589,10 @@ input[type=range]::-webkit-slider-runnable-track {
   display: flex;
   margin: 24px 0;
 }
+.tag_container.-walk {
+  width: calc(100% - 30px);
+  margin-left: 15px;
+}
 
 .tags {
   color: #003780;

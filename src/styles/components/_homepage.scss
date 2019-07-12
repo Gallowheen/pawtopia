@@ -1034,6 +1034,11 @@
 .tag_container{
   display: flex;
   margin: 24px 0;
+
+  &.-walk{
+    width: calc(100% - 30px);
+    margin-left: 15px;
+  }
 }
 
 .tags{

@@ -277,6 +277,18 @@ $(document).ready(function(){
                 if($('.tag_container'))
                     $('.tag_container').remove();
 
+                console.log(walks.length+'  lel  ');
+            
+                if (walks.length == 0 || walks.length == 3 )
+                    $('.content_container .container .row').eq(0).append('<div class="tag_container -walk"><div class="tags"><span>Tout les types de balades</span></div></div>');
+                else{
+                    $('.content_container .container .row').eq(0).append('<div class="tag_container -walk"></div>');
+            
+                    for(i = 0; i < walks.length;i++){
+                        $('.tag_container').append('<div class="tags"><span>'+walks[i]+'</span></div>');
+                    }
+                    }    
+
                 if($('.walk__noresult'))
                     $('.walk__noresult').remove();
 
@@ -426,8 +438,6 @@ $(document).ready(function(){
             });
         },500);
     });
-
-    console.log('lel');
 });
 
 function goToWalk(walk, name)
