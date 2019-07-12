@@ -50,6 +50,7 @@ $(document).ready(function(){
         accessToken: 'pk.eyJ1IjoiZ2FsbG93IiwiYSI6ImNqeGtqNm5sZjA0b2k0MG5vZjVqbzZuMHgifQ.eUzgUh43YajD2CCcs3Eveg'
     }).addTo(map);
     group = new L.featureGroup();
+    map.addLayer(layerGroup);
     yourPositionMarker = L.marker([latUser, lonUser]).addTo(map);
     yourPositionMarker.addTo(group);
     yourPositionMarker.bindPopup("Vous êtes ici.");
@@ -72,12 +73,11 @@ $(document).ready(function(){
             var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: icon}).addTo(map).on('click', function(){
             });
             marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
-            marker.addTo(group);
             marker.addTo(layerGroup);
+            marker.addTo(group);
+            
         }
     }
-
-    console.log(layerGroup);
 
     setTimeout(function(){map.fitBounds(group.getBounds()); yourPositionMarker.openPopup();});
 
@@ -282,8 +282,6 @@ $(document).ready(function(){
 
                 if (data.length >= 1){
 
-                    console.log(layerGroup);
-
                     setTimeout(() => {
                         map.invalidateSize();
                     }, 0);
@@ -426,9 +424,10 @@ $(document).ready(function(){
                     //window.location = "walk_detail?ID="+$(this).data('id');
                 });
             });
-
         },500);
     });
+
+    console.log('lel');
 });
 
 function goToWalk(walk, name)
