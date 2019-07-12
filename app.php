@@ -31,6 +31,17 @@
     <?php
     include ('src/php/footer.php');
     ?>
+    <?php
+    ob_start();
+    include ('src/php/get_lat_long_city.php');
+    $townUser = ob_get_contents();
+    ob_clean();
+    ?>
+    <script>
+      var townUser = <?php echo $townUser; ?>;
+      var latUser = townUser.LAT;
+      var lonUser = townUser.LON;
+    </script>
   </body>
   <script src="src/scripts/lib/bootstrap.min.js"></script>
   <script src="src/scripts/lib/jquery.touchSwipe.min.js"></script>

@@ -1,7 +1,6 @@
-var latUser;
-var lonUser;
 var container;
 var logo;
+var map, group;
 
 $(document).ready(function(){
 

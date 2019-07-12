@@ -19,6 +19,7 @@
         echo 0;
         exit;
     }
+    ob_start();
 ?>
     <div class="container">
         <div class="row">
@@ -57,27 +58,7 @@
                             <span class="map__legend__title">Découverte</span>
                         </div>
                     </div>
-                    <div class="map" class="map" id="map"></div>
-                </div>
-                <div class="map__container">
-                    <div class="whereami">
-                        <i class="icon icon-ic_location_searching_48px" ></i>
-                    </div>
-                    <div class="map__legend">
-                        <div class="map__legend__element">
-                            <img class="map__legend__img" src="src/assets/img/ressources/bluetopia.png"/>
-                            <span class="map__legend__title">Récréative</span>
-                        </div>
-                        <div class="map__legend__element">
-                            <img class="map__legend__img" src="src/assets/img/ressources/redtopia.png"/>
-                            <span class="map__legend__title">Sportive</span>
-                        </div>
-                        <div class="map__legend__element">
-                            <img class="map__legend__img" src="src/assets/img/ressources/greentopia.png"/>
-                            <span class="map__legend__title">Découverte</span>
-                        </div>
-                    </div>
-                    <div class="map" class="map" id="mapid"></div>
+                    <div class="map" id="map"></div>
                 </div>
             </div>
         </div>
@@ -128,4 +109,19 @@
     </div>
 
     <script src="src/scripts/walk.js"></script>
+<?php
+    $html = ob_get_contents();
+    ob_end_clean();
+    echo $html;
 
+    ob_start();
+    $_GET['date'] = date('yyyy-mm-dd');
+    $_GET['LAT'] = $_SESSION['LAT'];
+    $_GET['LON'] = $_SESSION['LON'];
+    include ('src/php/managewalk.php');
+    $walks = ob_get_contents();
+    ob_end_clean();
+?>
+    <script>
+        var walks = <?php echo $walks; ?>;
+    </script>

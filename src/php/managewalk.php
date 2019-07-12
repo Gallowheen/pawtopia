@@ -1,8 +1,7 @@
 <?php
-    header('Content-Type: text/html; charset=utf-8');
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    session_start();
+    @session_start();
 
     require_once("bdd.php");
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -70,7 +69,7 @@
                 $query->bind_param("ssss", $firstwalk, $secondwalk, $thirdwalk, $date);
             }
         }
-        
+
         //$query->bind_param("ss", $walk, $date);
     }else{
         $query = $link->prepare("SELECT * FROM event WHERE DATE_START > ? ORDER BY NAME");
@@ -91,8 +90,8 @@
     $membresProches = [];
     $town1 = $_SESSION['TOWN_ID'];
 
-    $lat1 = $_GET['LAT'];
-    $lon1 = $_GET['LON'];
+    $lat1 = (isset($_GET['LAT']) ? $_GET['LAT'] : $_SESSION['LAT']);
+    $lon1 = (isset($_GET['LON']) ? $_GET['LON'] : $_SESSION['LON']);
 
     $lat2;
     $lon2;
