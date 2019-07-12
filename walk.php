@@ -115,7 +115,7 @@
     echo $html;
 
     ob_start();
-    $_GET['date'] = date('yyyy-mm-dd');
+    $_GET['date'] = date("Y-m-d");
     $_GET['LAT'] = $_SESSION['LAT'];
     $_GET['LON'] = $_SESSION['LON'];
     include ('src/php/managewalk.php');

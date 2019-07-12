@@ -56,6 +56,8 @@ $(document).ready(function(){
 
     data = walks;
 
+    console.log(data);
+
     if (data.length >= 1){
         for( let i = 0; i < data.length; i++){
             var icon;
@@ -71,8 +73,11 @@ $(document).ready(function(){
             });
             marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
             marker.addTo(group);
+            marker.addTo(layerGroup);
         }
     }
+
+    console.log(layerGroup);
 
     setTimeout(function(){map.fitBounds(group.getBounds()); yourPositionMarker.openPopup();});
 
@@ -236,6 +241,7 @@ $(document).ready(function(){
 
                 console.log(result);
                 data = JSON.parse(result);
+                console.log(data);
                 //console.log(result);
 
                 //map.removeLayer();
@@ -275,6 +281,8 @@ $(document).ready(function(){
                     $('.walk__noresult').remove();
 
                 if (data.length >= 1){
+
+                    console.log(layerGroup);
 
                     setTimeout(() => {
                         map.invalidateSize();
@@ -402,8 +410,6 @@ $(document).ready(function(){
 
                 //$(".map__container").show();
 
-                $('.map__container').eq(0).hide();
-                $(".map__container").eq(1).show();
                 $('.get_to_walk').click(function(){
                     var title = $(".header__title").html();
                     var newtitle = $(this).parent().parent().find('.name__container span').html();
@@ -423,8 +429,6 @@ $(document).ready(function(){
 
         },500);
     });
-
-    $('.map__container').eq(0).show();
 });
 
 function goToWalk(walk, name)

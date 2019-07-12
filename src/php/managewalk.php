@@ -32,15 +32,13 @@
     }
 
     //$distanceMax = (int)$_GET['km'];
-
     if (isset($_GET['walk']))
         if ($_GET['walk'] !== 'undefined')
             $walk = $_GET['walk'];
-    if (isset($_GET['date']))
+    if (isset($_GET['date'])){
         if ($_GET['date'] !== 'undefined')
             $date = $_GET['date'];
-
-    // echo $date;
+    }
 
     if (isset($walk)){
 
