@@ -269,6 +269,7 @@
 .avatar__container{
   text-align : center;
 }
+
 .avatar{
   border-radius : 50%;
   margin-top : 32px;
@@ -336,6 +337,11 @@
   }
 }
 
+.action__container{
+  display: flex;
+  justify-content: space;
+}
+
 .username{
   margin-top : 16px;
   font-family: 'Fira Sans', sans-serif;
@@ -353,6 +359,25 @@
 .friend__button{
   display: flex;
   justify-content: space-between;
+}
+
+.action__element{
+  font-size: 14px;
+  text-align: center;
+  padding: 16px;
+  background: white;
+  border-radius: 50%;
+  width: 84px;
+  margin-top: 16px;
+
+  span{
+    display: block;
+  }
+
+  i{
+    font-size: 24px;
+    color: #0067B0;
+  }
 }
 
 .friend_pending{

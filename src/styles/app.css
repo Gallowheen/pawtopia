@@ -437,6 +437,10 @@ Generated using nucleoapp.com
   content: "\ea20";
 }
 
+.icon-sent::before {
+  content: "\ea21";
+}
+
 .input {
   border: 1px solid white;
   border-radius: 2px;
@@ -937,6 +941,11 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-right: 16px;
 }
 
+.action__container {
+  display: flex;
+  justify-content: space;
+}
+
 .username {
   margin-top: 16px;
   font-family: "Fira Sans", sans-serif;
@@ -953,6 +962,23 @@ input[type=range]::-webkit-slider-runnable-track {
 .friend__button {
   display: flex;
   justify-content: space-between;
+}
+
+.action__element {
+  font-size: 14px;
+  text-align: center;
+  padding: 16px;
+  background: white;
+  border-radius: 50%;
+  width: 84px;
+  margin-top: 16px;
+}
+.action__element span {
+  display: block;
+}
+.action__element i {
+  font-size: 24px;
+  color: #0067B0;
 }
 
 .friend_pending {
@@ -2497,6 +2523,10 @@ Generated using nucleoapp.com
   content: "\ea20";
 }
 
+.icon-sent::before {
+  content: "\ea21";
+}
+
 .input {
   border: 1px solid white;
   border-radius: 2px;
@@ -3196,6 +3226,10 @@ Generated using nucleoapp.com
 
 .icon-ic_notifications_48px::before {
   content: "\ea20";
+}
+
+.icon-sent::before {
+  content: "\ea21";
 }
 
 .input {

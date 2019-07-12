@@ -34,6 +34,7 @@ $icon-ic_favorite_48px: unicode(ea1d);
 $icon-ic_import_contacts_48px: unicode(ea1e);
 $icon-ic_share_48px: unicode(ea1f);
 $icon-ic_notifications_48px: unicode(ea20);
+$icon-sent: unicode(ea21);
 
 .icon-home-52::before {
   content: $icon-home-52;
@@ -149,5 +150,9 @@ $icon-ic_notifications_48px: unicode(ea20);
 
 .icon-ic_notifications_48px::before {
   content: $icon-ic_notifications_48px;
+}
+
+.icon-sent::before {
+  content: $icon-sent;
 }
 

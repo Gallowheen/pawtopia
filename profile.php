@@ -131,36 +131,56 @@
             </div>
         </div>
     </div>
-    <?php
-        if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <?php
+                    if (!empty($_GET) && $_GET['ID'] != $_SESSION['ID']){
 
-            // CHECK IF FRIEND
+                        // CHECK IF FRIEND
 
-            $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 1 LIMIT 1");
-            $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
-            $query->execute();
+                        $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 1 LIMIT 1");
+                        $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
+                        $query->execute();
 
-            $result_friend = $query->get_result();
-            $row_friend = $result_friend->fetch_assoc();
+                        $result_friend = $query->get_result();
+                        $row_friend = $result_friend->fetch_assoc();
 
-            $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 0 LIMIT 1");
-            $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
-            $query->execute();
+                        $query = $link->prepare("SELECT * FROM friends WHERE ID_USER1 = ? AND ID_USER2 = ? AND MUTUAL = 0 LIMIT 1");
+                        $query->bind_param("ii", $_SESSION['ID'], $_GET['ID']);
+                        $query->execute();
 
-            $result_friend_requested = $query->get_result();
-            $row_friend_requested = $result_friend_requested->fetch_assoc();
+                        $result_friend_requested = $query->get_result();
+                        $row_friend_requested = $result_friend_requested->fetch_assoc();
 
-            if ($row_friend['MUTUAL']){
-                echo "<div><span class='friend__link' data-id=".$_GET['ID']." ><i class='icon friend__message icon__friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Ami</button></div>";
-            }else{
-                if($row_friend_requested){
-                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon icon__friend friend__message -friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Envoyé</button></div";
-                }else{
-                    echo "<div id='friend__button'><span class='friend__link' data-id='".$_GET['ID']."'><i class='icon friend__message -friend icon__friend icon-ic_sms_48px'></i></span><button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button></div>";
-                }
-            }
-        }
-    ?>
+                        ?>
+                        <div class="action__container">
+                            <?php
+
+                            echo '<div class="action__element" data-id="'.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i><span>Message</span></div>';
+
+                            if ($row_friend['MUTUAL']){
+                                echo '<div class="action__element"><i class="icon icon__friend icon-single-01"></i><span>Ami</span></div>';
+                            }else{
+                                if($row_friend_requested){
+                                    echo '<div class="action__element"><i class="icon icon__friend icon-sent"></i><span>Envoyé</span></div>';
+                                    //echo "<span class='friend__link' data-id='".$_GET['ID']."'><i class='icon icon__friend friend__message -friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Envoyé</button>";
+                                }else{
+                                    echo '<div class="action__element" id="add_friend" data-id="'.$_GET['ID'].'"><i class="icon icon__friend icon icon-ic_person_add_48px"></i><span>Ajouter</span></div>';
+
+
+                                    //<button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button>";
+                                    //echo "<span class='friend__link' data-id='".$_GET['ID']."'><i class='icon friend__message -friend icon__friend icon-ic_sms_48px'></i></span><button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button>";
+                                }
+                            }
+                        ?>
+                        </div>
+                        <?php
+                    }
+                ?>
+            </div>
+        </div>
+    </div>
     <div class="information__container">
         <div class="container">
             <div class="row">
