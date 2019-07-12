@@ -1133,8 +1133,20 @@
 
 // WALK
 
-.user_walk{
-  margin-bottom: 16px;
+.user__walk__action{
+  text-align: right;
+
+  i{
+    margin-left: 16px;
+    font-size: 28px;
+    -webkit-text-stroke: .6px;
+    -webkit-text-stroke-color: #003780;
+    -webkit-text-fill-color: transparent;
+
+    &.-selected{
+      -webkit-text-fill-color: #003780;
+    }
+  }
 }
 
 .input__name{
@@ -1307,6 +1319,7 @@
 
 .user_walk{
   //margin-bottom: 32px;
+  margin-bottom: 16px;
 
   &::-webkit-scrollbar-thumb {
     border-radius: 8px;
@@ -1335,8 +1348,7 @@
   }
 
   &.-home {
-    //max-height: 130px;
-    overflow: scroll;
+    overflow-x: scroll;
   }
 }
 

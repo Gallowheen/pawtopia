@@ -164,8 +164,12 @@
       </div>
       <?php } ?>
       <h3 class="h3 -title -space">Vos balades à venir</h3>
+      <div class="user__walk__action">
+        <i class="icon -selected icon__message icon-ic_view_carousel_48px"></i>
+        <i class="icon icon__message icon-ic_view_list_48px"></i>
+      </div>
       <div class="user_walk -home">
-          <?php include("./src/php/get_user_walk.php"); ?>
+        <?php include("./src/php/get_user_walk.php"); ?>
       </div>
     </div>
   </div>

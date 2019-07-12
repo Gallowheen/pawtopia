@@ -401,7 +401,7 @@
                                 echo '</div></button>';
                                 ?>
                                 <div class="more__friend">
-                                    <span><button class="button -color -blue">Plus d'amis</button></span>
+                                    <button class="button -color -blue">Plus d'amis</button>
                                 </div>
                                 <?php
 

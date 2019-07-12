@@ -1681,8 +1681,18 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 32px;
 }
 
-.user_walk {
-  margin-bottom: 16px;
+.user__walk__action {
+  text-align: right;
+}
+.user__walk__action i {
+  margin-left: 16px;
+  font-size: 28px;
+  -webkit-text-stroke: 0.6px;
+  -webkit-text-stroke-color: #003780;
+  -webkit-text-fill-color: transparent;
+}
+.user__walk__action i.-selected {
+  -webkit-text-fill-color: #003780;
 }
 
 .input__name {
@@ -1842,6 +1852,9 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 32px;
 }
 
+.user_walk {
+  margin-bottom: 16px;
+}
 .user_walk::-webkit-scrollbar-thumb {
   border-radius: 8px;
   border: 2px solid white;
@@ -1863,7 +1876,7 @@ input[type=range]::-webkit-slider-runnable-track {
   box-shadow: none;
 }
 .user_walk.-home {
-  overflow: scroll;
+  overflow-x: scroll;
 }
 
 .message__viewer {
