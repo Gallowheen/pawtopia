@@ -1690,7 +1690,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .user__walk__action i {
   margin-left: 16px;
-  font-size: 28px;
+  font-size: 32px;
   -webkit-text-stroke: 0.6px;
   -webkit-text-stroke-color: #003780;
   -webkit-text-fill-color: transparent;
@@ -1737,19 +1737,28 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 70vw;
   margin-bottom: 0px;
   margin-right: 10px;
+  overflow: hidden;
 }
 .walk__card.-home:last-child {
   margin-right: 0;
+}
+.walk__card.-home.-list {
+  height: 120px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 8px;
+  box-shadow: 0px 0px 6px 0px #0000003b;
 }
 
 .walk__background {
   height: 100%;
   overflow: hidden;
   position: absolute;
-  background: url("http://cdn.akc.org/content/article-body-image/golden_walking_body_image.jpg");
   width: 100%;
-  background-position-y: -150px;
-  background-position-x: -50px;
+}
+.walk__background.-list {
+  width: 40%;
+  position: inherit;
 }
 
 .walk__contrast {
@@ -1758,10 +1767,15 @@ input[type=range]::-webkit-slider-runnable-track {
   position: absolute;
   width: 100%;
 }
+.walk__contrast.-list {
+  background: transparent;
+  position: inherit;
+  width: 60%;
+}
 
 .walk__bottom {
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   width: 100%;
 }
 
@@ -1770,27 +1784,14 @@ input[type=range]::-webkit-slider-runnable-track {
   float: left;
   margin-bottom: 16px;
 }
+.walk__container.-list {
+  display: block;
+  float: inherit;
+}
 
 .walk__container__result {
   width: calc(100% - 30px);
   margin-left: 15px;
-}
-
-.name__container {
-  font-size: 20px;
-  font-weight: bold;
-  color: #0067B0;
-  margin-bottom: 8px;
-  color: white;
-  padding: 8px 16px 0px 16px;
-}
-.name__container.-home {
-  font-size: 18px;
-  margin-bottom: 4px;
-  max-width: 70%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .town__container {
@@ -1803,59 +1804,62 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-right: 16px;
 }
 
+.button__container {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.date__container, .name__container, .address__container {
+  color: black;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.date__container.-home, .name__container.-home, .address__container.-home {
+  text-shadow: 2px 2px 2px #000000, -2px -2px 2px #000000, -2px 2px 2px #000000, 2px -2px 2px #000000;
+}
+.date__container.-home.-list, .name__container.-home.-list, .address__container.-home.-list {
+  color: black;
+  text-shadow: inherit;
+}
+
 .date__container {
   font-size: 16px;
-  font-weight: bold;
   margin-bottom: 0px;
   margin-top: 8px;
-  padding: 0px 16px 0px 16px;
-  color: white;
 }
 .date__container.-flex {
   display: flex;
   justify-content: space-around;
 }
 .date__container.-home {
+  padding: 0px 16px 0px 16px;
+  color: white;
+  margin-top: 0px;
   font-size: 14px;
-  font-weight: normal;
   margin: 0;
+}
+
+.name__container {
+  font-size: 20px;
   font-weight: bold;
-  max-width: 70%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #0067B0;
+  margin-bottom: 8px;
+}
+.name__container.-home {
+  color: white;
+  padding: 8px 16px 0px 16px;
+  font-size: 18px;
 }
 
 .address__container {
   font-size: 16px;
   margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+.address__container.-home {
   color: white;
   padding: 8px 16px 0px 16px;
-}
-
-.button__container {
-  text-align: center;
-  margin: 16px 0 0px 0;
-}
-.button__container.-preview {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0;
-}
-.button__container .icon {
-  height: 15px;
-  width: 16px;
-  transform: rotate(-45deg);
-  border-color: #003780;
-  right: 5px;
-  position: relative;
-  bottom: auto;
-  margin: 0;
 }
 
 .learn__more {
@@ -1907,11 +1911,11 @@ input[type=range]::-webkit-slider-runnable-track {
 .user_walk::-webkit-scrollbar-corner {
   background: #f6f8fa;
 }
-.user_walk .walk__card {
-  box-shadow: none;
-}
 .user_walk.-home {
   overflow-x: scroll;
+}
+.user_walk.-home.-list {
+  overflow: inherit;
 }
 
 .message__viewer {

@@ -1143,7 +1143,7 @@
 
   i{
     margin-left: 16px;
-    font-size: 28px;
+    font-size: 32px;
     -webkit-text-stroke: .6px;
     -webkit-text-stroke-color: #003780;
     -webkit-text-fill-color: transparent;
@@ -1194,9 +1194,18 @@
     width: 70vw;
     margin-bottom: 0px;
     margin-right: 10px;
+    overflow: hidden;
 
     &:last-child{
       margin-right: 0;
+    }
+
+    &.-list{
+      height: 120px;
+      width: 100%;
+      display: flex;
+      margin-bottom: 8px;
+      box-shadow: 0px 0px 6px 0px #0000003b;
     }
   }
 }
@@ -1205,10 +1214,12 @@
   height: 100%;
   overflow: hidden;
   position: absolute;
-  background: url('http://cdn.akc.org/content/article-body-image/golden_walking_body_image.jpg');
   width: 100%;
-  background-position-y: -150px;
-  background-position-x: -50px;
+
+  &.-list{
+    width: 40%;
+    position: inherit;
+  }
 }
 
 .walk__contrast{
@@ -1216,11 +1227,17 @@
   background: #00000070;
   position: absolute;
   width: 100%;
+
+  &.-list{
+    background: transparent;
+    position: inherit;
+    width: 60%;
+  }
 }
 
 .walk__bottom{
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   width: 100%;
 }
 
@@ -1228,32 +1245,16 @@
   display: flex;
   float: left;
   margin-bottom: 16px;
+
+  &.-list{
+    display: block;
+    float  : inherit;
+  }
 }
 
 .walk__container__result{
   width: calc(100% - 30px);
   margin-left: 15px;
-}
-
-.name__container{
-  font-size: 20px;
-  font-weight: bold;
-  color : #0067B0;
-  margin-bottom: 8px;
-
-  //
-  color: white;
-  padding: 8px 16px 0px 16px;
-  //
-
-  &.-home{
-    font-size: 18px;
-    margin-bottom : 4px;
-    max-width: 70%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 }
 
 .town__container{
@@ -1268,16 +1269,33 @@
   }
 }
 
+.button__container{
+  text-align: center;
+  margin-top: 16px;
+}
+
+.date__container,.name__container, .address__container{
+  color: black;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.-home{
+    text-shadow: 2px 2px 2px #000000, -2px -2px 2px #000000, -2px 2px 2px #000000, 2px -2px 2px #000000;
+
+    &.-list{
+      color: black;
+      text-shadow: inherit;
+    }
+  }
+}
+
 .date__container{
   font-size: 16px;
-  font-weight: bold;
+ 
   margin-bottom: 0px;
   margin-top: 8px;
-
-  //
-  padding: 0px 16px 0px 16px;
-  color: white;
-  //
 
   &.-flex{
     display: flex;
@@ -1285,53 +1303,36 @@
   }
 
   &.-home{
+    padding: 0px 16px 0px 16px;
+    color: white;
+    margin-top: 0px;
     font-size: 14px;
-    font-weight: normal;
     margin: 0;
-    font-weight: bold;
-    max-width: 70%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  }
+}
+
+.name__container{
+  font-size: 20px;
+  font-weight: bold;
+  color : #0067B0;
+  margin-bottom: 8px;
+
+  &.-home{
+    color: white;
+    padding: 8px 16px 0px 16px;
+    font-size: 18px;
   }
 }
 
 .address__container{
   font-size: 16px;
   margin-bottom: 4px;
-  //max-width: 70%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 
-  //
-  color: white;
-  padding: 8px 16px 0px 16px;
-  //
-}
-
-.button__container{
-  text-align: center;
-  margin: 16px 0 0px 0;
-
-  &.-preview{
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
+  &.-home{
+    color: white;
+    padding: 8px 16px 0px 16px;
   }
 
-  .icon{
-    height: 15px;
-    width: 16px;
-    transform: rotate(-45deg);
-    border-color: #003780;
-    right: 5px;
-    position: relative;
-    bottom: auto;
-    margin: 0;
-  }
 }
 
 .learn__more{
@@ -1389,12 +1390,12 @@
     background: #f6f8fa;
   }
 
-  .walk__card {
-    box-shadow: none;
-  }
-
   &.-home {
     overflow-x: scroll;
+
+    &.-list{
+      overflow: inherit;
+    }
   }
 }
 

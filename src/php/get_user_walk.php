@@ -121,12 +121,12 @@
 
                 $walk = '<div class="walk__background"></div>
                 <div class="walk__contrast">
-                    <div class="name__container">
+                    <div class="name__container -home">
                         <span>' . $data[$i]['NAME'] . '</span>
                     </div>
                     <div class="walk__bottom">
-                        <div class="address__container">' . $data[$i]['ROAD'] . ' ' . $data[$i]['CITY'] . '</div>
-                        <div class="date__container">
+                        <div class="address__container -home">' . $data[$i]['ROAD'] . ' ' . $data[$i]['CITY'] . '</div>
+                        <div class="date__container -home">
                             <span class="">' . $date . '</span>
                         </div>
                     </div>

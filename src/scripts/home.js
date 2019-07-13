@@ -50,4 +50,56 @@ $(document).ready(function() {
             });
         }
     });
+
+    //update image
+
+    imgBank = ['src/assets/img/ressources/walk_1.jpg','src/assets/img/ressources/walk_2.jpg','src/assets/img/ressources/walk_3.jpg','src/assets/img/ressources/walk_4.jpg','src/assets/img/ressources/walk_5.jpg','src/assets/img/ressources/walk_6.jpg'];
+
+    $('.walk__background').each(function(){
+        let random = Math.floor(Math.random() * imgBank.length);
+        console.log(imgBank[random]);
+        $(this).css('background','url("'+imgBank[random]+'")');
+        $(this).css('background-size','100% 100%');
+    });
+
+    //change layout
+
+    $('.icon__action').click(function(){
+
+        $('.icon__action').each(function(){
+            $(this).removeClass('-selected');
+        })
+        $(this).addClass('-selected');
+
+        if( $(this).hasClass('carousel')){
+            changeToCarousel();
+        }else{
+            changeToList();
+        }
+    });
+
+    function changeToList(){
+
+        $('.user_walk.-home').addClass('-list');
+        $('.walk__container').addClass('-list');
+        $('.walk__card').addClass('-list');
+        $('.walk__background').addClass('-list');
+        $('.walk__contrast').addClass('-list');
+        $('.name__container').addClass('-list');
+        $('.address__container').addClass('-list');
+        $('.date__container').addClass('-list');
+    }
+
+    function changeToCarousel(){
+        $('.user_walk.-home').removeClass('-list');
+        $('.walk__container').removeClass('-list');
+        $('.walk__card').removeClass('-list');
+        $('.walk__background').removeClass('-list');
+        $('.walk__contrast').removeClass('-list');
+        $('.name__container').removeClass('-list');
+        $('.address__container').removeClass('-list');
+        $('.date__container').removeClass('-list');
+    }
+
+    
 })
