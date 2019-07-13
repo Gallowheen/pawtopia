@@ -1725,7 +1725,6 @@ input[type=range]::-webkit-slider-runnable-track {
   padding: 16px;
   background: white;
   margin-bottom: 16px;
-  border: 2px solid #0067b030;
   position: relative;
 }
 .walk__card:last-child {
@@ -1747,7 +1746,7 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   display: flex;
   margin-bottom: 8px;
-  box-shadow: 0px 0px 6px 0px #0000003b;
+  box-shadow: 0px 0px 4px 0px #0000003b;
 }
 
 .walk__background {
@@ -1811,7 +1810,6 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .date__container, .name__container, .address__container {
   color: black;
-  font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1,4 +1,22 @@
 $(document).ready(function() {
+
+    if (localStorage.getItem("layout") !== null) {
+        if(localStorage.getItem("layout") == "carousel"){
+            changeToCarousel();
+        }else{
+            changeToList();
+        }
+
+        $('.icon__action').each(function(){
+
+            if($(this).hasClass(localStorage.getItem("layout")))
+                $(this).addClass('-selected');
+            else{
+                $(this).removeClass('-selected');
+            }
+        })
+    }
+
     $('.get_to_walk').click(function(){
         var title = $(".header__title").html();
         var newtitle = $(this).parent().parent().find('.name__container span').html();
@@ -73,8 +91,10 @@ $(document).ready(function() {
 
         if( $(this).hasClass('carousel')){
             changeToCarousel();
+            localStorage.setItem('layout', 'carousel');
         }else{
             changeToList();
+            localStorage.setItem('layout', 'list');
         }
     });
 
