@@ -56,8 +56,6 @@ $(document).ready(function() {
                 let town__name = $("#town").val();
                 let town = $('#towns [value="' + town__name + '"]').data('value');
 
-                console.log(town);
-
                 let image;
 
                 if (uploadfiles.files.length > 0){
@@ -77,8 +75,6 @@ $(document).ready(function() {
                     },
                 })
                 .done(function(result){
-
-                    console.log(result);
 
                     $.ajax({
                         method: "GET",

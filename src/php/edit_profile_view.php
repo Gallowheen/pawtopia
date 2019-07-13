@@ -41,7 +41,7 @@
             $town_name = $query->get_result()->fetch_assoc();
         ?>
 
-        <input placeholder="<?php echo $town_name['NAME'] ?>" class="input select -walk -nomargin" list="towns" id="town" name="town" />
+        <input placeholder="<?php echo $town_name['NAME'] ?>" value="<?php echo $town_name['NAME'] ?>" class="input select -walk -nomargin" list="towns" id="town" name="town" />
         <datalist id="towns">
             <?php foreach ( $results as $option ) : ?>
                 <option data-value="<?php echo $option->ID; echo $option->NAME; ?>" value="<?php echo $option->NAME;  ?>"></option>
