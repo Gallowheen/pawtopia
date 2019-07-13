@@ -1732,7 +1732,9 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 0px;
 }
 .walk__card.-home {
-  width: 80vw;
+  padding: 0px;
+  height: 200px;
+  width: 70vw;
   margin-bottom: 0px;
   margin-right: 10px;
 }
@@ -1740,9 +1742,33 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-right: 0;
 }
 
+.walk__background {
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  background: url("http://cdn.akc.org/content/article-body-image/golden_walking_body_image.jpg");
+  width: 100%;
+  background-position-y: -150px;
+  background-position-x: -50px;
+}
+
+.walk__contrast {
+  height: 100%;
+  background: #00000070;
+  position: absolute;
+  width: 100%;
+}
+
+.walk__bottom {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}
+
 .walk__container {
   display: flex;
   float: left;
+  margin-bottom: 16px;
 }
 
 .walk__container__result {
@@ -1755,6 +1781,8 @@ input[type=range]::-webkit-slider-runnable-track {
   font-weight: bold;
   color: #0067B0;
   margin-bottom: 8px;
+  color: white;
+  padding: 8px 16px 0px 16px;
 }
 .name__container.-home {
   font-size: 18px;
@@ -1780,6 +1808,8 @@ input[type=range]::-webkit-slider-runnable-track {
   font-weight: bold;
   margin-bottom: 0px;
   margin-top: 8px;
+  padding: 0px 16px 0px 16px;
+  color: white;
 }
 .date__container.-flex {
   display: flex;
@@ -1799,10 +1829,11 @@ input[type=range]::-webkit-slider-runnable-track {
 .address__container {
   font-size: 16px;
   margin-bottom: 4px;
-  max-width: 70%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: white;
+  padding: 8px 16px 0px 16px;
 }
 
 .button__container {

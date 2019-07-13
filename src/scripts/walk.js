@@ -453,5 +453,6 @@ function goToWalk(walk, name)
         container.html(result);
         $('.h1').text(newtitle);
         setReturnButton("walk", {}, title);
+        $('body').css('overflow','scroll');
     });
 }
