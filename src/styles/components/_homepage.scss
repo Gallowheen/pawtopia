@@ -682,7 +682,6 @@
   &.-add{
     border: none;
     background: none;
-    margin-top: 16px;
     text-align: center;
   }
 
@@ -1048,6 +1047,9 @@
   font-size: 14px;
   margin-right: 16px;
   border-bottom: 3px solid #003780;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .slider{

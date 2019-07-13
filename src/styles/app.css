@@ -132,6 +132,9 @@ body {
 .button.-color.-walk {
   padding: 8px 16px;
 }
+.button.-margintop {
+  margin-top: 32px;
+}
 .button.edit-profile {
   float: right;
   font-size: 16px;
@@ -1254,7 +1257,6 @@ input[type=range]::-webkit-slider-runnable-track {
 .dog_card.-add {
   border: none;
   background: none;
-  margin-top: 16px;
   text-align: center;
 }
 .dog_card.-walk {
@@ -1599,6 +1601,9 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 14px;
   margin-right: 16px;
   border-bottom: 3px solid #003780;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .slider {
@@ -2269,6 +2274,9 @@ body {
 }
 .button.-color.-walk {
   padding: 8px 16px;
+}
+.button.-margintop {
+  margin-top: 32px;
 }
 .button.edit-profile {
   float: right;
@@ -2975,6 +2983,9 @@ body {
 }
 .button.-color.-walk {
   padding: 8px 16px;
+}
+.button.-margintop {
+  margin-top: 32px;
 }
 .button.edit-profile {
   float: right;

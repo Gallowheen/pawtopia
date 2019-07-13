@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $('body').css('overflow-y','scroll');
+
     $('.label').click(function(event){
         event.preventDefault();
 
@@ -17,6 +19,9 @@ $(document).ready(function() {
 
 
     $('#filter').click(function(){
+
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        
         $(".members__handler").find("input:radio").prop("checked", false);
 
         $("body").css('overflow','hidden');

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $('body').css('overflow-y','scroll');
+
     if (localStorage.getItem("layout") !== null) {
         if(localStorage.getItem("layout") == "carousel"){
             changeToCarousel();
