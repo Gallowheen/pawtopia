@@ -133,7 +133,7 @@
                 </div>';
                 // A rajouter à la ligne du dessus pour repasser à l'ancienne version
                 //+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+'</span></div><div class="align-right"><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div></div>'
-                $html .= '<div class="walk__card -home test  get_to_walk" data-id=' . $data[$i]['ID'] . '">' . $walk . '</div>';
+                $html .= '<div class="walk__card -home get_to_walk" data-id=' . $data[$i]['ID'] . '">' . $walk . '</div>';
             }
             $html .= '</div>';
         }

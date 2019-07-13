@@ -46,6 +46,8 @@ $(document).ready(function() {
 
             $("#update").click(function(e){
 
+                console.log('test');
+
                 var uploadfiles = document.querySelector('#uploadfiles');
 
                 let bio = $('#bio').val();
@@ -53,6 +55,8 @@ $(document).ready(function() {
 
                 let town__name = $("#town").val();
                 let town = $('#towns [value="' + town__name + '"]').data('value');
+
+                console.log(town);
 
                 let image;
 
@@ -73,6 +77,8 @@ $(document).ready(function() {
                     },
                 })
                 .done(function(result){
+
+                    console.log(result);
 
                     $.ajax({
                         method: "GET",

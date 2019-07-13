@@ -25,6 +25,10 @@
                     <span class="link_footer"><i class="icon icon__footer icon-calendar-60"></i></span>
                     <span class="icon__name">Balades</span>
                 </div>
+                <div class="nav_button_group message" data-url="notification">
+                    <span class="link_footer"><i class="icon icon__footer icon-ic_notifications_48px"></i></span>
+                    <span class="icon__name">Notifications</span>
+                </div>
                 <div class="nav_button_group message" data-url='message'>
                     <span class="link_footer"><i class="icon icon__footer icon__friend icon-ic_sms_48px"></i></span>
                     <span class="icon__name">Messages</span>

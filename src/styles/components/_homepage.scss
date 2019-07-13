@@ -366,17 +366,18 @@
   font-size: 14px;
   text-align: center;
   padding: 16px;
-  background: white;
+  //background: white;
   border-radius: 50%;
   width: 84px;
   margin-top: 16px;
+  //box-shadow: 0px 0px 10px 0px #00000040;
 
   span{
     display: block;
   }
 
   i{
-    font-size: 24px;
+    font-size: 32px;
     color: #0067B0;
   }
 }
@@ -653,7 +654,7 @@
   }
 }
 
-.dog_card_bubble_container{
+.dog_card_bubble_container, .walk_card_bubble_container{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1207,6 +1208,10 @@
       margin-bottom: 16px;
       box-shadow: 0px 0px 6px 0px #0000003b;
     }
+
+    &.-alone{
+      width: 92vw;
+    }
   }
 }
 
@@ -1219,6 +1224,10 @@
   &.-list{
     width: 40%;
     position: inherit;
+  }
+
+  &.-alone{
+    background-size: 100%;
   }
 }
 
@@ -1244,7 +1253,7 @@
 .walk__container{
   display: flex;
   float: left;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 
   &.-list{
     display: block;

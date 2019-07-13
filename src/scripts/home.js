@@ -111,6 +111,11 @@ $(document).ready(function() {
     }
 
     function changeToCarousel(){
+
+        if ($('.walk__card').length == 1){
+            $('.walk__card').addClass('-alone');
+            $('.walk__background').addClass('-alone');
+        } 
         $('.user_walk.-home').removeClass('-list');
         $('.walk__container').removeClass('-list');
         $('.walk__card').removeClass('-list');
@@ -120,6 +125,4 @@ $(document).ready(function() {
         $('.address__container').removeClass('-list');
         $('.date__container').removeClass('-list');
     }
-
-    
 })

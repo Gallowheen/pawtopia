@@ -284,6 +284,8 @@ function setReturnButton(target, params = {}, title = "")
     var button = $("<button class='button back'><i class='left'></i></button>");
     $(".header__nav").html(button);
     button.click(function() {
+
+        $('body').css('overflow','scroll');
         $.ajax({
             method: "GET",
             url:target+".php",

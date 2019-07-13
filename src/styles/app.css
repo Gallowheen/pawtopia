@@ -969,7 +969,6 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 14px;
   text-align: center;
   padding: 16px;
-  background: white;
   border-radius: 50%;
   width: 84px;
   margin-top: 16px;
@@ -978,7 +977,7 @@ input[type=range]::-webkit-slider-runnable-track {
   display: block;
 }
 .action__element i {
-  font-size: 24px;
+  font-size: 32px;
   color: #0067B0;
 }
 
@@ -1229,7 +1228,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background: #0077C0;
 }
 
-.dog_card_bubble_container {
+.dog_card_bubble_container, .walk_card_bubble_container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1748,6 +1747,9 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 16px;
   box-shadow: 0px 0px 6px 0px #0000003b;
 }
+.walk__card.-home.-alone {
+  width: 92vw;
+}
 
 .walk__background {
   height: 100%;
@@ -1758,6 +1760,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .walk__background.-list {
   width: 40%;
   position: inherit;
+}
+.walk__background.-alone {
+  background-size: 100%;
 }
 
 .walk__contrast {
@@ -1781,7 +1786,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .walk__container {
   display: flex;
   float: left;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 .walk__container.-list {
   display: block;
@@ -2791,7 +2796,8 @@ input[type=range]::-webkit-slider-runnable-track {
 .nav_button_group {
   width: 20%;
   text-align: center;
-  padding: 6px;
+  flex: 0 0 16.5%;
+  padding-top: 6px;
 }
 .nav_button_group:first-child i {
   font-size: 32px;
@@ -2818,7 +2824,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .icon__name {
-  font-size: 14px;
+  font-size: 12px;
   display: block;
   margin-top: 4px;
   color: #3c6382;

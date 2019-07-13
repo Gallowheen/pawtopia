@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+    $('body').css('overflow','scroll');
+    
     $('.chat').click(function(e){
         e.preventDefault();
         e.stopPropagation();

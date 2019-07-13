@@ -10,7 +10,13 @@
 .nav_button_group{
     width: 20%;
     text-align: center;
-    padding: 6px;
+    
+    //padding: 6px;
+
+    //
+    flex: 0 0 16.5%;
+    padding-top: 6px;
+    //
 
     &:first-child{
         i{
@@ -42,7 +48,8 @@
 }
 
 .icon__name{
-    font-size: 14px;
+    //font-size: 14px;
+    font-size: 12px;
     display: block;
     margin-top : 4px;
     color: #3c6382;
