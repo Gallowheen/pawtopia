@@ -45,7 +45,6 @@ $(document).ready(function(){
 
         if (localStorage.getItem("page") !== null) {
             page = localStorage.getItem("page");
-            console.log('lol')
         }else{
             page = pageClicked;
         }
@@ -77,13 +76,11 @@ $(document).ready(function(){
                     container.html(result);
                     $('.h1').text(title);
                     $(window).scrollTop(0); 
-                    console.log('wtf ?.');
                 }else{
                     var slideDuree = 500;
                     var oldContent = container.clone();
 
                     if(page > pageClicked){
-                        console.log('plus');
                         $(oldContent).removeClass('content_container').addClass('fake_content_container');
                         $('body').append(oldContent);
                         $(oldContent).addClass('fading_from_left');
@@ -96,7 +93,6 @@ $(document).ready(function(){
                         container.addClass('fading_to_right');
                         setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
                     }else{
-                        console.log('moins');
                         $(oldContent).removeClass('content_container').addClass('fake_content_container');
                         $('body').append(oldContent);
                         $(oldContent).addClass('fading_to_left');
