@@ -19,6 +19,7 @@ $(document).ready(function(){
 
                 if(data == 'Success'){
                     return window.location.href = "app.php";
+                    localStorage.setItem('page', 0);
                 }else{
                     $("#log_error").html("<p>La connexion a echouée</p>");
                 }

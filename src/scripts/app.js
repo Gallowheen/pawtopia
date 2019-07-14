@@ -1,6 +1,7 @@
 var container;
 var logo;
 var map, group;
+var page;
 
 $(document).ready(function(){
 
@@ -34,9 +35,22 @@ $(document).ready(function(){
     let lon;
 
     $(".nav_button_group").click(function(e) {
+
+        let page;
+        let pageClicked = $(this).index();
+
         $(".-active").removeClass('-active');
         $(this).children().eq(0).addClass('-active');
         $(this).children().eq(1).addClass('-active');
+
+        if (localStorage.getItem("page") !== null) {
+            page = localStorage.getItem("page");
+            console.log('lol')
+        }else{
+            page = pageClicked;
+        }
+        
+        //console.log($(this).index());
 
         $.ajax({
             method: "GET",
@@ -45,12 +59,6 @@ $(document).ready(function(){
         .done(function(result){
             if(!checkSession(result))
                 return;
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
             let title;
 
@@ -59,13 +67,53 @@ $(document).ready(function(){
                     title = $(this).text();
                 }
             });
-            container.html(result);
-            $('.h1').text(title);
-            $(window).scrollTop(0);
+        
+            if (localStorage.getItem("page") == null){
+                container.html(result);
+                $('.h1').text(title);
+                $(window).scrollTop(0);
+            }else{         
+                if(page == pageClicked){
+                    container.html(result);
+                    $('.h1').text(title);
+                    $(window).scrollTop(0); 
+                    console.log('wtf ?.');
+                }else{
+                    var slideDuree = 500;
+                    var oldContent = container.clone();
 
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+                    if(page > pageClicked){
+                        console.log('plus');
+                        $(oldContent).removeClass('content_container').addClass('fake_content_container');
+                        $('body').append(oldContent);
+                        $(oldContent).addClass('fading_from_left');
+                        setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
+                        container.html(result);
+                        $('.h1').text(title);
+                        $(window).scrollTop(0);
+
+                        container.addClass('fading_to_right');
+                        setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
+                    }else{
+                        console.log('moins');
+                        $(oldContent).removeClass('content_container').addClass('fake_content_container');
+                        $('body').append(oldContent);
+                        $(oldContent).addClass('fading_to_left');
+                        setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
+                        container.html(result);
+                        $('.h1').text(title);
+                        $(window).scrollTop(0);
+
+                        container.addClass('fading_from_right');
+                        setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+                    }
+                }
+            }
         });
+
+        localStorage.setItem('page', pageClicked);
     });
 
     var pubnub = new PubNub({
@@ -302,8 +350,30 @@ function setReturnButton(target, params = {}, title = "")
             data: params
         })
         .done(function(result) {
-            $(".header__title").html(title)
+
+            var slideDuree = 500;
+            var oldContent = container.clone();
+            $(oldContent).removeClass('content_container').addClass('fake_content_container');
+            $('body').append(oldContent);
+            $(oldContent).addClass('fading_to_left');
+            setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
+            let title;
+
+            var name = $('.nav_button_group .icon__name').each(function(){
+                if($(this).hasClass('-active')){
+                    title = $(this).text();
+                }
+            });
             container.html(result);
+            $('.h1').text(title);
+            $(window).scrollTop(0);
+
+            container.addClass('fading_from_right');
+            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+
+            // $(".header__title").html(title)
+            // container.html(result);
             switch(target){
                 case("home"):
                 case("profile"):

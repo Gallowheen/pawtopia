@@ -57,7 +57,7 @@
             ?>
         <div class="content_container -small">
             <div class="avatar__container">
-                <div class="container--full">
+                <div>
                     <div class="row">
                         <div class="col">
                             <?php
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="information__container -nospace">
-                <div class="container--full">
+                <div>
                     <div class="row">
                         <div class="col">
                                 <?php

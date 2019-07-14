@@ -877,6 +877,8 @@ input[type=range]::-webkit-slider-runnable-track {
   height: auto;
   padding-top: 0px;
   margin-bottom: 0px;
+  position: relative;
+  width: 100%;
 }
 .content_container.-message {
   margin-bottom: 60px;
@@ -1537,10 +1539,10 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .members__handler__container, .walk__handler__container {
   background: transparent;
-  height: calc(100% - 120px);
+  height: calc(100% - 60px);
   width: 100%;
   position: absolute;
-  bottom: 60px;
+  bottom: 0px;
   transition: all 1s;
   display: none;
   transform: translateY(100%);
@@ -2055,6 +2057,10 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-left: 0;
 }
 
+.map__container {
+  position: relative;
+}
+
 .search__result {
   font-size: 16px;
   margin: 0;
@@ -2096,7 +2102,7 @@ input[type=range]::-webkit-slider-runnable-track {
   position: absolute;
   left: 12px;
   z-index: 8000;
-  bottom: 65px;
+  bottom: 15px;
   width: 80px;
   background: white;
   border-radius: 4px;
@@ -2131,7 +2137,7 @@ input[type=range]::-webkit-slider-runnable-track {
   font-size: 32px;
   z-index: 8000;
   right: 15px;
-  bottom: 70px;
+  bottom: 15px;
   color: #003780;
   background: white;
   padding: 8px;
@@ -2156,9 +2162,18 @@ input[type=range]::-webkit-slider-runnable-track {
   animation: fadingToLeft 0.5s;
 }
 
+.fading_to_right {
+  animation: fadingToRight 0.5s;
+}
+
 .fading_from_right {
   position: fixed;
   animation: fadingFromRight 0.5s;
+}
+
+.fading_from_left {
+  position: fixed;
+  animation: fadingFromLeft 0.5s;
 }
 
 @keyframes fadingToLeft {
@@ -2171,6 +2186,16 @@ input[type=range]::-webkit-slider-runnable-track {
     opacity: 0;
   }
 }
+@keyframes fadingToRight {
+  from {
+    left: -100vw;
+    opacity: 0;
+  }
+  to {
+    left: 0vw;
+    opacity: 1;
+  }
+}
 @keyframes fadingFromRight {
   from {
     left: 100vw;
@@ -2179,6 +2204,16 @@ input[type=range]::-webkit-slider-runnable-track {
   to {
     left: 0vw;
     opacity: 1;
+  }
+}
+@keyframes fadingFromLeft {
+  from {
+    left: 0vw;
+    opacity: 1;
+  }
+  to {
+    left: 100vw;
+    opacity: 0;
   }
 }
 body {
@@ -3608,3 +3643,5 @@ input[type=range]::-webkit-slider-runnable-track {
   position: absolute;
   top: 37.5%;
 }
+
+/*# sourceMappingURL=app.css.map */
