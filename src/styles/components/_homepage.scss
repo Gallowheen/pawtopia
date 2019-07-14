@@ -244,10 +244,15 @@
     transform: translateY(-50%);
   }
 }
-.content_container{
-  //height: calc(100% - 120px);
+.content_container, .fake_content_container {
+  position: absolute;
+  opacity: 1;
+  width: 100vw;
   padding-top: 60px;
   margin-bottom: 80px;
+}
+.content_container{
+  //height: calc(100% - 120px);
   //transition: .25s all;
 
   &.-small{
@@ -962,7 +967,7 @@
 // MEEMBERS
 
 .member__content{
- 
+
 }
 
 .showcase__member{
@@ -1303,7 +1308,7 @@
 
 .date__container{
   font-size: 16px;
- 
+
   margin-bottom: 0px;
   margin-top: 8px;
 
@@ -1650,4 +1655,42 @@
 
 .leaflet-control-container{
   display: none;
+}
+
+.fake_content_container {
+  position: absolute;
+  top: 0;
+  left: 0vw;
+  width: 100vw;
+}
+
+.fading_to_left {
+  animation: fadingToLeft 0.5s;
+}
+
+.fading_from_right {
+  position: fixed;
+  animation: fadingFromRight 0.5s;
+}
+
+@keyframes fadingToLeft {
+    from {
+        left: 0vw;
+        opacity:1;
+    }
+    to {
+        left: -100vw;
+        opacity:0;
+    }
+}
+
+@keyframes fadingFromRight {
+    from {
+        left: 100vw;
+        opacity:0;
+    }
+    to {
+        left: 0vw;
+        opacity:1;
+    }
 }

@@ -865,10 +865,14 @@ input[type=range]::-webkit-slider-runnable-track {
   transform: translateY(-50%);
 }
 
-.content_container {
+.content_container, .fake_content_container {
+  position: absolute;
+  opacity: 1;
+  width: 100vw;
   padding-top: 60px;
   margin-bottom: 80px;
 }
+
 .content_container.-small {
   height: auto;
   padding-top: 0px;
@@ -2141,6 +2145,42 @@ input[type=range]::-webkit-slider-runnable-track {
   display: none;
 }
 
+.fake_content_container {
+  position: absolute;
+  top: 0;
+  left: 0vw;
+  width: 100vw;
+}
+
+.fading_to_left {
+  animation: fadingToLeft 0.5s;
+}
+
+.fading_from_right {
+  position: fixed;
+  animation: fadingFromRight 0.5s;
+}
+
+@keyframes fadingToLeft {
+  from {
+    left: 0vw;
+    opacity: 1;
+  }
+  to {
+    left: -100vw;
+    opacity: 0;
+  }
+}
+@keyframes fadingFromRight {
+  from {
+    left: 100vw;
+    opacity: 0;
+  }
+  to {
+    left: 0vw;
+    opacity: 1;
+  }
+}
 body {
   font-family: "Cabin", sans-serif !important;
   font-size: 18px;
@@ -3512,7 +3552,7 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .header, .footer {
   height: 60px;
-  width: 100%;
+  width: 100vw;
   z-index: 10000;
 }
 
@@ -3568,5 +3608,3 @@ input[type=range]::-webkit-slider-runnable-track {
   position: absolute;
   top: 37.5%;
 }
-
-/*# sourceMappingURL=app.css.map */
