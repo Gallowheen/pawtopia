@@ -837,7 +837,7 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .statuts .status__icon {
   font-size: 36px;
-  color: #0067B0;
+  color: #003780;
   display: inline-block;
   position: relative;
   margin-right: 16px;
@@ -1437,6 +1437,10 @@ input[type=range]::-webkit-slider-runnable-track {
   justify-content: space-evenly;
 }
 
+.member_widget_container {
+  padding-bottom: 60px;
+}
+
 .friend_widget {
   height: 75px;
   width: 100%;
@@ -1697,6 +1701,9 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .user__walk__action {
   text-align: right;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
 }
 .user__walk__action i {
   margin-left: 16px;
@@ -1825,7 +1832,6 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 .date__container, .name__container, .address__container {
-  color: black;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1858,13 +1864,15 @@ input[type=range]::-webkit-slider-runnable-track {
 .name__container {
   font-size: 20px;
   font-weight: bold;
-  color: #0067B0;
   margin-bottom: 8px;
 }
 .name__container.-home {
   color: white;
   padding: 8px 16px 0px 16px;
   font-size: 18px;
+}
+.name__container.-list {
+  color: #0067B0 !important;
 }
 
 .address__container {

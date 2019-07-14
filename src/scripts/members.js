@@ -20,6 +20,10 @@ $(document).ready(function() {
 
     $('#filter').click(function(){
 
+        height = $(window).height() - 120;
+        console.log(height);
+        $('.member__content').css('height',height+'px');
+
         $("html, body").animate({ scrollTop: 0 }, "slow");
         
         $(".members__handler").find("input:radio").prop("checked", false);

@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+    height = $(window).height() - 120;
+    console.log(height);
+    $('.walk__handler__container').css('height',height+'px');
+    $('.walk__handler__container').css('top','60px');
+    
     //icon map
     var bluetopia = L.icon({
         iconUrl: 'src/assets/img/ressources/bluetopia.png',
@@ -131,7 +137,7 @@ $(document).ready(function(){
         //         $(this).removeClass('selected');
         // })
 
-        if ($(this).hasClass('selected') && clicked == true){
+        if ($(this).hasClass('selected')){
             $(this).removeClass('selected');
         }else{
             $(this).addClass('selected');
