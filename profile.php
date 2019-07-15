@@ -210,7 +210,7 @@
                             else
                                 echo"<div class='information_group'><i class='icon information__icon icon-ic_import_contacts_48px'></i><span class='information_space'>L'utilisateur n'a pas encore de biographie</span></div>";
                             if ( $row['WALK'])
-                                echo"<div class='information_group'><i class='icon information__icon icon-ic_favorite_48px'></i><span class='information_space'>".$row['WALK']."</span></div>";
+                                echo"<div class='information_group'><i class='icon information__icon icon-ic_favorite_48px'></i><span class='information_space'>Balade <span style='text-transform : lowercase;'>".$row['WALK']."</span></span></div>";
                         ?>
                     </div>
                 </div>

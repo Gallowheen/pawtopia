@@ -29,6 +29,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
+            $(window).scrollTop(0);
             $('.h1').text(newtitle);
             setReturnButton("home", {}, title);
         });

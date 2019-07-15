@@ -4,7 +4,7 @@ $(document).ready(function(){
     console.log(height);
     $('.walk__handler__container').css('height',height+'px');
     $('.walk__handler__container').css('top','60px');
-    
+
     //icon map
     var bluetopia = L.icon({
         iconUrl: 'src/assets/img/ressources/bluetopia.png',
@@ -436,6 +436,7 @@ $(document).ready(function(){
                     })
                     .done(function(result){
                         container.html(result);
+                        $(window).scrollTop(0);
                         $('.h1').text(newtitle);
                         setReturnButton("walk", {}, title);
                     });

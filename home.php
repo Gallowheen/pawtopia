@@ -165,7 +165,7 @@
       <?php } ?>
       <div class="user__walk__action">
         <h3 class="h3 -title">Vos balades à venir</h3>
-        <div>
+        <div class="icon__action__container">
           <i class="icon -selected icon__action carousel icon-ic_view_carousel_48px"></i>
           <i class="icon icon__action list icon-ic_view_list_48px"></i>
         </div>
