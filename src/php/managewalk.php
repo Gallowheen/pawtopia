@@ -1,8 +1,7 @@
 <?php
-    header('Content-Type: text/html; charset=utf-8');
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    session_start();
+    @session_start();
 
     require_once("bdd.php");
     $link = mysqli_connect(HOST, USER, PWD, BASE);
@@ -33,19 +32,43 @@
     }
 
     //$distanceMax = (int)$_GET['km'];
-
     if (isset($_GET['walk']))
         if ($_GET['walk'] !== 'undefined')
             $walk = $_GET['walk'];
-    if (isset($_GET['date']))
+    if (isset($_GET['date'])){
         if ($_GET['date'] !== 'undefined')
             $date = $_GET['date'];
-
-    // echo $date;
+    }
 
     if (isset($walk)){
-        $query = $link->prepare("SELECT * FROM event WHERE WALK = ? AND DATE_START > ? ORDER BY NAME");
-        $query->bind_param("ss", $walk, $date);
+
+        if(sizeof($walk) == 1){
+            //echo ('lol');
+
+            $firstwalk = $walk[0];
+
+            $query = $link->prepare("SELECT * FROM event WHERE WALK = ? AND DATE_START > ? ORDER BY NAME");
+            $query->bind_param("ss", $firstwalk, $date);
+        }else{
+
+            $firstwalk = $walk[0];
+            $secondwalk = $walk[1];
+
+            if(sizeof($walk) == 2){
+                $query = $link->prepare("SELECT * FROM event WHERE WALK IN (?,?) AND DATE_START > ? ORDER BY NAME");
+                $query->bind_param("sss", $firstwalk, $secondwalk, $date);
+            }
+            if(sizeof($walk) == 3){
+                $firstwalk = $walk[0];
+                $secondwalk = $walk[1];
+                $thirdwalk = $walk[2];
+
+                $query = $link->prepare("SELECT * FROM event WHERE WALK IN (?,?,?) AND DATE_START > ? ORDER BY NAME");
+                $query->bind_param("ssss", $firstwalk, $secondwalk, $thirdwalk, $date);
+            }
+        }
+
+        //$query->bind_param("ss", $walk, $date);
     }else{
         $query = $link->prepare("SELECT * FROM event WHERE DATE_START > ? ORDER BY NAME");
         $query->bind_param("s", $date);
@@ -65,8 +88,8 @@
     $membresProches = [];
     $town1 = $_SESSION['TOWN_ID'];
 
-    $lat1 = $_GET['LAT'];
-    $lon1 = $_GET['LON'];
+    $lat1 = (isset($_GET['LAT']) ? $_GET['LAT'] : $_SESSION['LAT']);
+    $lon1 = (isset($_GET['LON']) ? $_GET['LON'] : $_SESSION['LON']);
 
     $lat2;
     $lon2;

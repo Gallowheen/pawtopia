@@ -2,18 +2,9 @@
     require_once("bdd.php");
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    session_start();
+    @session_start();
     $link = mysqli_connect(HOST, USER, PWD, BASE);
     mysqli_query($link, "SET NAMES UTF8");
-
-    //Function to return table of result
-    function resultToArray($result) {
-        $rows = array();
-        while($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        return $rows;
-    }
 
     //$town1 = $_SESSION['TOWN_ID'];
 
@@ -32,8 +23,14 @@
     $query->execute();
 
     $result = $query->get_result();
+    $html = "";
     if($result->num_rows === 0){
-
+        if($pagename == "Accueil") {
+            $html .= "<p class='information'>Vous n'êtes inscrit à aucune balades pour le moment !</p><div class='center'><a href='walk.php'><button class='button -color'>Découvrez les balades</button></a></div>";
+        }
+        else {
+            $html .= "<img class='map__img' src='src/assets/img/ressources/no_walk.png'/>";
+        }
     }else{
         $rows = resultToArray($result);
 
@@ -83,6 +80,63 @@
         //     $valid_event[$cle]['town_name'] = $town_name[$cle];
         // }
 
-        echo json_encode($valid_event);
+        // echo json_encode($valid_event);
+        $data = $valid_event;
+
+        //savoir le jour
+        $jourLibelles = [
+            1 => "Lundi",
+            2 => "Mardi",
+            3 => "Mercredi",
+            4 => "Jeudi",
+            5 => "Vendredi",
+            6 => "Samedi",
+            0 => "Dimanche",
+        ];
+
+        //savoir le mois
+        $moisLibelles = [
+            1 => "Janvier",
+            2 => "Février",
+            3 => "Mars",
+            4 => "Avril",
+            5 => "Mai",
+            6 => "Juin",
+            7 => "Juillet",
+            8 => "Août",
+            9 => "Septembre",
+            10 => "Octobre",
+            11 => "Novembre",
+            12 => "Décembre",
+        ];
+
+        if (count($data)){
+
+            $html .= '<div class="walk__container">';
+            for($i = 0; $i < count($data); $i++){
+                $date = date(strtotime($data[$i]['DATE_START']));
+                $mois = $moisLibelles[date("n", $date)];
+                $jour = $jourLibelles[date("w", $date)];
+                $date = $jour . " ". date('j', $date) . " " . $mois . " " . date('H:i', $date);
+
+                $walk = '<div class="walk__background"></div>
+                <div class="walk__contrast">
+                    <div class="name__container -home">
+                        <span>' . $data[$i]['NAME'] . '</span>
+                    </div>
+                    <div class="walk__bottom">
+                        <div class="address__container -home">' . $data[$i]['ROAD'] . ' ' . $data[$i]['CITY'] . '</div>
+                        <div class="date__container -home">
+                            <span class="">' . $date . '</span>
+                        </div>
+                    </div>
+                </div>';
+                // A rajouter à la ligne du dessus pour repasser à l'ancienne version
+                //+'<span class="walk__name">'+data[i]['LENGTH']+' heures</span><span>'+data[i]['WALK']+'</span></div><div class="town__container"><i class="icon home icon-ic_home_48px"></i><span class="">'+data[i]['LOCATION']+'</span></div><div class="align-right"><div class="button__container"><button class="button -color -blue -round -walk get_to_walk" data-id='+data[i]['ID']+'>En savoir plus</button></div></div>'
+                $html .= '<div class="walk__card -home get_to_walk" data-id=' . $data[$i]['ID'] . '">' . $walk . '</div>';
+            }
+            $html .= '</div>';
+        }
     }
+    echo $html;
 ?>

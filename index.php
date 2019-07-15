@@ -59,12 +59,12 @@
                                     ?>
                                     <div class="input__container">
                                         <!-- <div class="log_error" id="town_error"></div> -->
-                                        <select required placeholder="Votre ville" class="select -transparent register__town" name="town" id="town">
-                                            <option value="" disabled selected hidden>Choisissez votre ville</option>
+                                        <input placeholder="Votre ville" class="input -transparent" list="towns" id="town" name="town" />
+                                            <datalist id="towns">
                                             <?php foreach ( $results as $option ) : ?>
-                                                <option value="<?php echo $option->ID; ?>"><?php echo $option->NAME; ?></option>
+                                                <option data-value="<?php echo $option->ID; echo $option->NAME; ?>" value="<?php echo $option->NAME; ?>"></option>
                                             <?php endforeach; ?>
-                                        </select>
+                                        </datalist>
                                     </div>
                                     <div class="input__container">
                                         <!-- <div class="log_error" id="password_error"></div> -->
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="desktop">
-            <h1 class="wip">This is how we do landing page in Uganda</h1>
+            <h1 class="wip">Cher utilisateur, Pawtopia est uniquement disponible en version mobile.</h1>
         </div>
     </body>
     <script src="src/scripts/jquery-3.4.0.min.js"></script>

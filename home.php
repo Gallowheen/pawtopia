@@ -1,6 +1,8 @@
 <?php
+  @session_start();
   require_once("src/php/bdd.php");
-  session_start();
+  $link = mysqli_connect(HOST, USER, PWD, BASE);
+  mysqli_query($link, "SET NAMES UTF8");
 
   //Function to return table of result
   function resultToArray($result) {
@@ -13,174 +15,167 @@
 
   $pagename = 'Accueil';
 
-  if(!isset($_SESSION)){
-    header('index.php');
+  if(!isset($_SESSION['ID'])){
+    echo 0;
     exit;
-}
+  }
+  $user = $_SESSION['ID'];
 ?>
 
-<!DOCTYPE html>
-<html>
-  <?php
-      include ('src/php/head.php');
-  ?>
-  <body class="home">
-    <?php
-      include ('src/php/header.php');
-    ?>
-    <div class=content_container>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="statuts">
-              <div class="status__icon">
-              <?php
-                $banList = array();
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="statuts">
+        <div class="status__icon">
+          <div><i class="icon icon-ic_notifications_48px"></i></div>
+        </div>
+        <div class="status__icon">
+        <?php
+          $banList = array();
 
-                $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
-                $query_friend_invite->bind_param("i", $user);
-                $query_friend_invite->execute();
+          $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
+          $query_friend_invite->bind_param("i", $user);
+          $query_friend_invite->execute();
 
-                $result_friend_invite = $query_friend_invite->get_result();
-                if($result_friend_invite->num_rows === 0){
+          $result_friend_invite = $query_friend_invite->get_result();
+          if($result_friend_invite->num_rows === 0){
 
-                }else{
-                  echo '<span class="ping">'.$result_friend_invite->num_rows.'</span>';
-                }
-              ?>
-                <a href="friends.php"><i class="icon icon__friend icon-ic_people_48px"></i></a>
-              </div>
-              <div class="status__icon">
-              <?php
+          }else{
+            echo '<span class="ping">'.$result_friend_invite->num_rows.'</span>';
+          }
+        ?>
+          <div><i class="icon icon__friend icon-ic_people_48px"></i></div>
+        </div>
+        <div class="status__icon">
+        <?php
 
-              $unread = 0;
+        $unread = 0;
 
-              $query = $link->prepare("SELECT * FROM message WHERE ID_USER2 = ? OR ID_USER1 = ? ORDER BY DATE DESC");
-              $query->bind_param("ii", $_SESSION['ID'], $_SESSION['ID']);
+        $query = $link->prepare("SELECT * FROM message WHERE ID_USER2 = ? OR ID_USER1 = ? ORDER BY DATE DESC");
+        $query->bind_param("ii", $_SESSION['ID'], $_SESSION['ID']);
+        $query->execute();
+
+        $result = $query->get_result();
+        if($result->num_rows === 0){
+
+        }else{
+          $row = resultToArray($result);
+          $error = false;
+
+          foreach ($row as $message){
+
+            //echo $message['ID_USER1'];
+            if ($message['ID_USER1'] != $_SESSION['ID'] && $message['ID_USER2'] == $_SESSION['ID'] ){
+
+              //echo $message['CONTENT'].'<br>';
+
+              //echo $message['ID_USER1'];
+
+              $query = $link->prepare("SELECT * FROM message WHERE (ID_USER2 = ? && ID_USER1 = ?) OR (ID_USER2 = ? && ID_USER1 = ?) ORDER BY DATE DESC");
+              $query->bind_param("iiii", $_SESSION['ID'], $message['ID_USER1'], $message['ID_USER1'], $_SESSION['ID']);
               $query->execute();
 
               $result = $query->get_result();
               if($result->num_rows === 0){
 
               }else{
-                $row = resultToArray($result);
+                $row_check = resultToArray($result);
+              }
+
+              //var_dump($row_check);
+
+              if ($row_check[0]['ID_USER2'] != $message['ID_USER1']){
+
+                //echo $row_check[0]['ID_USER2'].' = '.$message['ID_USER1'].'<br>';
+
                 $error = false;
+                //echo count($banList);
+                if(count($banList) > 0){
+                  //echo 'lol';
 
-                foreach ($row as $message){
+                  // foreach ($banList as $ban)
+                  //   echo $ban;
 
-                  //echo $message['ID_USER1'];
-                  if ($message['ID_USER1'] != $_SESSION['ID'] && $message['ID_USER2'] == $_SESSION['ID'] ){
-
-                    //echo $message['CONTENT'].'<br>';
-
-                    //echo $message['ID_USER1'];
-
-                    $query = $link->prepare("SELECT * FROM message WHERE (ID_USER2 = ? && ID_USER1 = ?) OR (ID_USER2 = ? && ID_USER1 = ?) ORDER BY DATE DESC");
-                    $query->bind_param("iiii", $_SESSION['ID'], $message['ID_USER1'], $message['ID_USER1'], $_SESSION['ID']);
-                    $query->execute();
-
-                    $result = $query->get_result();
-                    if($result->num_rows === 0){
+                  for ($i = 0; $i < count($banList); $i++){
+                    if($message['ID_USER1'] != $banList[$i]){
 
                     }else{
-                      $row_check = resultToArray($result);
-                    }
 
-                    //var_dump($row_check);
-
-                    if ($row_check[0]['ID_USER2'] != $message['ID_USER1']){
-
-                      //echo $row_check[0]['ID_USER2'].' = '.$message['ID_USER1'].'<br>';
-
-                      $error = false;
-                      //echo count($banList);
-                      if(count($banList) > 0){
-                        //echo 'lol';
-
-                        // foreach ($banList as $ban)
-                        //   echo $ban;
-
-                        for ($i = 0; $i < count($banList); $i++){
-                          if($message['ID_USER1'] != $banList[$i]){
-
-                          }else{
-
-                            $error = true;
-                          }
-                        }
-
-                        if (!$error){
-                          //echo $message['STATUT'];
-
-                          if ($message['STATUT'] == "Unread"){
-                            $unread += 1;
-                          }
-                          //echo $unread;
-                          array_push($banList,$message['ID_USER1']);
-
-                          // foreach ($banList as $ban)
-                          //   echo $ban;
-                        }
-                      }else{
-
-                        //echo $message['ID_USER1'];
-                        if ($message['STATUT'] == "Unread"){
-                          $unread += 1;
-                        }
-                        //echo $unread;
-                        array_push($banList,$message['ID_USER1']);
-
-                        // foreach ($banList as $ban)
-                        //   echo $ban;
-                      }
+                      $error = true;
                     }
                   }
+
+                  if (!$error){
+                    //echo $message['STATUT'];
+
+                    if ($message['STATUT'] == "Unread"){
+                      $unread += 1;
+                    }
+                    //echo $unread;
+                    array_push($banList,$message['ID_USER1']);
+
+                    // foreach ($banList as $ban)
+                    //   echo $ban;
+                  }
+                }else{
+
+                  //echo $message['ID_USER1'];
+                  if ($message['STATUT'] == "Unread"){
+                    $unread += 1;
+                  }
+                  //echo $unread;
+                  array_push($banList,$message['ID_USER1']);
 
                   // foreach ($banList as $ban)
                   //   echo $ban;
                 }
-
-                // foreach ($banList as $ban)
-                //   echo $ban;
-
-                echo '<span class="ping">'.$unread.'</span>';
               }
-              ?>
-                <a href="message.php"><i class="icon icon__friend icon-ic_sms_48px"></i></a>
-              </div>
-            </div>
-            <?php
+            }
 
-            $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
-            $query->bind_param("i", $_SESSION['ID']);
-            $query->execute();
+            // foreach ($banList as $ban)
+            //   echo $ban;
+          }
 
-            $result = $query->get_result();
-            $row = $result->fetch_assoc();
+          // foreach ($banList as $ban)
+          //   echo $ban;
 
-            if($row['BIO'] == null || $row['WALK'] == null ){ ?>
-            <h3 class="h3 -title -space">Attention : information</h3>
-            <div class="reminder">
-              <?php
-                echo "<p class='information' >Vos informations ne sont pas complètes.</p><p class='information'>Certaines informations sont importantes pour votre visibilité auprès des autres utilisateurs.</p><p class='information -red'> Nous vous recommandons de compléter votre profil.</p>";
-              ?>
-            </div>
-            <?php } ?>
-            <h3 class="h3 -title -space">Vos balades à venir</h3>
-            <div class="user_walk">
-
-            </div>
-          </div>
+          if ($unread != 0)
+            echo '<span class="ping">'.$unread.'</span>';
+        }
+        ?>
+          <div><i class="icon icon__message icon-ic_sms_48px"></i></div>
         </div>
       </div>
+      <?php
+
+      $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
+      $query->bind_param("i", $_SESSION['ID']);
+      $query->execute();
+
+      $result = $query->get_result();
+      $row = $result->fetch_assoc();
+
+      if($row['BIO'] == null || $row['WALK'] == null ){ ?>
+      <h3 class="h3 -title -space">Attention : information</h3>
+      <div class="reminder">
+        <?php
+          echo "<p class='information' >Vos informations ne sont pas complètes.</p><p class='information'>Certaines informations sont importantes pour votre visibilité auprès des autres utilisateurs.</p><p class='information -red'> Nous vous recommandons de compléter votre profil.</p>";
+        ?>
+      </div>
+      <?php } ?>
+      <div class="user__walk__action">
+        <h3 class="h3 -title">Vos balades à venir</h3>
+        <div class="icon__action__container">
+          <i class="icon -selected icon__action carousel icon-ic_view_carousel_48px"></i>
+          <i class="icon icon__action list icon-ic_view_list_48px"></i>
+        </div>
+      </div>
+      <div class="user_walk -home">
+        <?php include("./src/php/get_user_walk.php"); ?>
+      </div>
     </div>
-    <?php
-    include ('src/php/footer.php');
-    ?>
-  </body>
-  <script src="src/scripts/jquery-3.4.0.min.js"></script>
-  <script src="src/scripts/bootstrap.min.js"></script>
-  <script src="src/scripts/jquery.touchSwipe.min.js"></script>
-  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
-  <script src="src/scripts/app.js"></script>
-</html>
+  </div>
+  <button class='logout'>Déconnexion</button>
+</div>
+
+<script src="src/scripts/home.js"></script>

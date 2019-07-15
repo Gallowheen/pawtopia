@@ -18,6 +18,8 @@
         exit;
     }
 
+    $pagename = 'Amis';
+
     // Récupérer l'utilisateur
     $user;
     if (empty($_GET))
@@ -50,31 +52,8 @@
     $friends = [];
     $friends_pending = [];
     $friends_invite= [];
-
-    $error = false;
 ?>
 
-<!DOCTYPE html>
-<html>
-    <?php
-        include ('src/php/head.php');
-    ?>
-    <body class="friends">
-        <?php
-            include ('src/php/header.php');
-        ?>
-        <?php
-        if ($error){ ?>
-        <div class="error__container">
-            <div class="container">
-                <div class="row">
-                    <h2>Impossible de trouver cet utilisateur</h2>
-                </div>
-            </div>
-        </div>
-        <?php
-        }else{?>
-        <div class="content_container">
             <div class="friend_pending">
                 <div class="container">
                     <div class="row">
@@ -150,9 +129,9 @@
 
 
                                 if ((count($row_friends_mutual)-1) < 0){ ?>
-                                    <h3 class="h3 information -blue">Mes amis</h3><?php
+                                    <h3 class="h3 information -blue"><?= $pagename ?></h3><?php
                                 }else{?>
-                                    <h3 class="h3 information -blue">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
+                                    <h3 class="h3 information -blue"><?= $pagename ?> <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
                                 }
                             ?>
                             <?php
@@ -166,7 +145,7 @@
                                     //own profile
                                     if (empty($_GET)){
                                         if($result_friend_mutual->num_rows <= 1){
-                                            echo "<div class='discover'><button id='discover' class='button -color'>Découvrez nos membres</button></div>";
+                                            echo "<p>Aucun ami pour l'instant.</p><div class='discover'><button id='discover' class='button -color -blue'>Découvrez nos membres</button></div>";
                                         }else{
                                             echo '<div class="friend_widget_container">';
                                             $friends_global = [];
@@ -197,8 +176,8 @@
                                                 echo '<button data-id="'.$friend['ID'].'" class="button chat"><i  class="icon icon-ic_sms_48px"></i></button>';?>
                                                 <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
-                                                echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';?>
-                                                <button data-friend=<?php echo '"'.$friend["ID"].'"' ?> class="friend_delete icon close-icon -friendlist"></button>
+                                                echo "<span class='friend_name'>".$friend['USERNAME']."</span>";?>
+                                                <button data-friend="<?= $friend['ID'] ?>" class="friend_delete icon close-icon -friendlist"></button>
                                                 <?php
                                                 echo '</div>';
                                             endforeach;
@@ -212,7 +191,7 @@
 
                                         $result_friend_mutual = $query_friend_mutual->get_result();
                                         if($result_friend_mutual->num_rows === 0){
-                                            echo 'Vous n"avez pas d"amis :(';
+                                            echo 'Aucun amis à afficher pour le moment';
                                         }else{
                                             $row_friends_mutual = resultToArray($result_friend_mutual);
 
@@ -248,7 +227,7 @@
 
                                             foreach ($newArray as $friend) :
                                                 echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';
-                                                echo '<button data-id="'.$friend['ID'].'" class="button chat"><i class="ico icon-ic_sms_48px"></i>';?>
+                                                echo '<button data-id="'.$friend['ID'].'" class="button chat"><i class="ico icon-ic_sms_48px"></i></button>';?>
                                                 <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
                                                 echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';
@@ -258,20 +237,9 @@
                                         }
                                     }
                                 }
-                            }
                             ?>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </body>
-    <?php
-        include ('src/php/footer.php');
-    ?>
-    <script src="src/scripts/jquery-3.4.0.min.js"></script>
-    <script src="src/scripts/bootstrap.min.js"></script>
-    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
-    <script src="src/scripts/app.js"></script>
-</html>
+            <script src="src/scripts/friends.js"></script>

@@ -42,13 +42,13 @@
 
     //Les chiens
     $dogs = $_GET['DOG'];
-    
+
     $lat = $_GET['LAT'];
     $lon = $_GET['LON'];
 
-    $road = $_GET['ROAD'];
-    $city = $_GET['CITY'];
-    $zip = $_GET['POSTCODE'];
+    $road = (isset($_GET['ROAD']) ? $_GET['ROAD'] : "");
+    $city = (isset($_GET['CITY']) ? $_GET['CITY'] : "");
+    $zip = (isset($_GET['ZIP']) ? $_GET['ZIP'] : "");
 
     //INSERT INTO EVENT
     $query_add_event = $link->prepare("INSERT INTO event (`ID_OWNER`, `NAME`, `LOCATION`, `WALK`, `DATE_START`, `LENGTH`, `LAT`, `LON`, `ROAD`, `CITY`, `ZIP`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
@@ -69,7 +69,7 @@
     }
 
     if($query_add_event && $query_add_event_attendee && $query_add_event_dog){
-        echo 'success';
+        include('../../walk.php');
     }else{
         echo 'failed';
     }

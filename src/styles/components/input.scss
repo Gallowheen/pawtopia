@@ -66,6 +66,8 @@
     border : none;
     border-bottom: 1px solid white;
     background: transparent;
+    width: 100%;
+    color: white;
 
     &:not(:placeholder-shown)
     {

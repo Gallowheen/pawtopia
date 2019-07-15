@@ -37,12 +37,43 @@
         if ($_GET['walk'] !== 'undefined')
             $walk = $_GET['walk'];
 
+    //var_dump($walk);
+
     if (!isset($walk)){
         $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE ID != ? ORDER BY USERNAME");
         $query->bind_param("i", $_SESSION['ID']);
     }else{
-        $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK = ? AND ID != ? ORDER BY USERNAME");
-        $query->bind_param("si", $walk, $_SESSION['ID']);
+        if(sizeof($walk) == 1){
+            //echo ('lol');
+
+            $firstwalk = $walk[0];
+
+            //echo $firstwalk;
+            $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK = ? AND ID != ? ORDER BY USERNAME");
+            $query->bind_param("si", $firstwalk, $_SESSION['ID']);
+        }else{
+
+            $firstwalk = $walk[0];
+            $secondwalk = $walk[1];
+
+            if(sizeof($walk) == 2){
+                $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK IN (?,?) AND ID != ? ORDER BY USERNAME");
+                $query->bind_param("ssi", $firstwalk, $secondwalk, $_SESSION['ID']);
+            }
+            if(sizeof($walk) == 3){
+                $firstwalk = $walk[0];
+                $secondwalk = $walk[1];
+                $thirdwalk = $walk[2];
+
+                $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK IN (?,?,?) AND ID != ? ORDER BY USERNAME");
+                $query->bind_param("sssi", $firstwalk, $secondwalk, $thirdwalk, $_SESSION['ID']);
+            }
+        }
+        
+        //$query->bind_param("ss", $walk, $date);
+        
+        // $query = $link->prepare("SELECT AVATAR, USERNAME, TOWN_ID, ID FROM user WHERE WALK = ? AND ID != ? ORDER BY USERNAME");
+        // $query->bind_param("si", $walk, $_SESSION['ID']);
     }
     $query->execute();
 
@@ -56,6 +87,8 @@
         $rows[] = $e;
     }
 
+    //var_dump($rows);
+
     $membresProches = [];
     $town1 = $_SESSION['TOWN_ID'];
     $lat1;
@@ -66,6 +99,8 @@
 
 
     foreach($rows as $cle => $membre){
+
+        //var_dump($membre);
 
         $query_town_1 = $link->prepare("SELECT LAT, LON FROM towns WHERE ID = ?");
         $query_town_1->bind_param("i", $town1);
@@ -96,6 +131,8 @@
             $membresProches[] = $membre;
         }
     }
+
+    //var_dump($membresProches);
 
     $x = 1;
     $newArray = [];

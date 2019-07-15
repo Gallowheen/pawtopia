@@ -66,14 +66,14 @@
         //echo $dDiff->format('%a days');
 
         if ($message['ID_USER1'] != $_SESSION['ID']){
-            echo '<div data-id="'.$message['ID_USER2'].'" class="message__body">';
+            echo '<div data-id="'.$message['ID_USER2'].'" class="message__body -bounce">';
             echo '<div class="message__info"><img class="avatar -message" src="'.$message['AVATAR'].'"/><div class="message__name">'.$message['USERNAME'].'</div></div>';
             echo '<div class="message__content">'.$message['CONTENT'].'</div>';
             echo '<div class="message__date">'.$time.'</div>';
 
             echo '</div>';
         }else{
-            echo '<div data-id="'.$message['ID_USER1'].'" class="message__body -other">';
+            echo '<div data-id="'.$message['ID_USER1'].'" class="message__body -bounce -other">';
             echo '<div class="message__content -other">'.$message['CONTENT'].'</div>';
             echo '<div class="message__date">'.$time.'</div>';
             echo '</div>';

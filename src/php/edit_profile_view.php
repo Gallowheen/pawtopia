@@ -30,19 +30,23 @@
 
         ?>
     </div>
-    <div class="input__container -flex">
-        <i class="icon icon__friend information__city icon-home-52"></i>
-        <select class="select -walk -nomargin" required placeholder="Votre ville" class="select -transparent register__town" name="town" id="town">
-            <option value="" disabled hidden>Choisissez votre ville</option>
+    <div class='information_group'>
+        <p class='information_title'>Ville<p>
+        <!-- <i class="icon icon__friend information__city icon-home-52"></i> -->
+
+        <?php
+            $query = $link->prepare("SELECT NAME FROM towns WHERE ID = ?");
+            $query->bind_param("i", $_SESSION['TOWN_ID']);
+            $query->execute();
+            $town_name = $query->get_result()->fetch_assoc();
+        ?>
+
+        <input placeholder="<?php echo $town_name['NAME'] ?>" value="<?php echo $town_name['NAME'] ?>" class="input select -walk -nomargin" list="towns" id="town" name="town" />
+        <datalist id="towns">
             <?php foreach ( $results as $option ) : ?>
-            	<?php
-            	$selected = "";
-            	if((int)$option->ID === (int)$user['TOWN_ID'])
-            		$selected = "selected";
-            	?>
-                <option value="<?php echo $option->ID; ?>" <?= $selected ?>><?php echo $option->NAME; ?></option>
+                <option data-value="<?php echo $option->ID; echo $option->NAME; ?>" value="<?php echo $option->NAME;  ?>"></option>
             <?php endforeach; ?>
-        </select>
+        </datalist>
     </div>
 
     <?php

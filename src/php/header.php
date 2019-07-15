@@ -35,7 +35,7 @@
                     </h1>
                 </div>
             </div>
-            
+            <div class='header__nav'>
             <?php if(!isset($retour)) { ?>
                 <svg class="logo -small" data-name="Layer 1" viewBox="0 0 244.74 170.42" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -65,7 +65,8 @@
                 </svg>
             <?php }else{ ?>
                 <button class="button back" onclick="history.go(-1);"><i class="left"></i></button>
-            <?php } ?>   
+            <?php } ?>
+            </div>
         </div>
     </div>
 </header>
