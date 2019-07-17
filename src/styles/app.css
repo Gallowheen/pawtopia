@@ -1790,6 +1790,13 @@ input[type=range]::-webkit-slider-runnable-track {
   background-size: 100%;
 }
 
+.nowalk {
+  width: 80%;
+  margin-top: 24px;
+  margin-bottom: 36px;
+  margin-left: 10%;
+}
+
 .walk__contrast {
   height: 100%;
   background: #00000024;
