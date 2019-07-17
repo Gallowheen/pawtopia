@@ -2,15 +2,15 @@
     <title>Pawtopia | <?= $pagename ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/src/styles/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/src/styles/app.css">
-    <link rel="stylesheet" type="text/css" href="/src/styles/sanitize.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/img/logo/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/src/assets/img/logo/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/assets/img/logo/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/src/assets/img/logo/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/src/assets/img/logo/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="./src/styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./src/styles/app.css">
+    <link rel="stylesheet" type="text/css" href="./src/styles/sanitize.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./src/assets/img/logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./src/assets/img/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./src/assets/img/logo/favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="mask-icon" href="./src/assets/img/logo/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="./src/assets/img/logo/favicon.ico">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""/>
@@ -18,7 +18,7 @@
     integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
     crossorigin="">
 
-    <script src="src/scripts/lib/jquery-3.4.0.min.js"></script>
+    <script src="./src/scripts/lib/jquery-3.4.0.min.js"></script>
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/browserconfig.xml">

@@ -99,16 +99,15 @@
             <h1 class="wip">Cher utilisateur, Pawtopia est uniquement disponible en version mobile.</h1>
         </div>
     </body>
-    <script src="src/scripts/jquery-3.4.0.min.js"></script>
-    <script src="src/scripts/bootstrap.min.js"></script>
-    <script src="src/scripts/jquery.touchSwipe.min.js"></script>
-    <script src="src/scripts/homepage.js"></script>
+    <script src="./src/scripts/lib/bootstrap.min.js"></script>
+    <script src="./src/scripts/lib/jquery.touchSwipe.min.js"></script>
+    <script src="./src/scripts/homepage.js"></script>
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.24.1.js"></script>
-    <script src="src/scripts/app.js"></script>
+    <script src="./src/scripts/app.js"></script>
 
     <script>
 
-        var url ="src/assets/video/pawtopia_";
+        var url ="./src/assets/video/pawtopia_";
         var urlEnd = ".mp4"
 
         var choice = Math.floor((Math.random() * 3) + 1);
