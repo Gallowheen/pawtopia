@@ -673,7 +673,7 @@ input[type=range]::-webkit-slider-runnable-track {
 .logo.-small {
   width: 60px;
   top: 18%;
-  left: 5%;
+  left: 15px;
 }
 
 .container__introduction {
@@ -1268,6 +1268,9 @@ input[type=range]::-webkit-slider-runnable-track {
   border: none;
   background: none;
   text-align: center;
+  padding: 0px 24px;
+  position: absolute;
+  left: 0;
 }
 .dog_card.-walk {
   border: none;
@@ -1713,11 +1716,11 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-left: 16px;
   font-size: 32px;
   -webkit-text-stroke: 0.6px;
-  -webkit-text-stroke-color: #003780;
+  -webkit-text-stroke-color: #0077C0;
   -webkit-text-fill-color: transparent;
 }
 .user__walk__action i.-selected {
-  -webkit-text-fill-color: #003780;
+  -webkit-text-fill-color: #0077C0;
 }
 
 .input__name {
@@ -2891,7 +2894,8 @@ input[type=range]::-webkit-slider-runnable-track {
 .nav_button_group {
   width: 20%;
   text-align: center;
-  flex: 0 0 16.5%;
+  position: relative;
+  flex: 0 0 20%;
   padding-top: 6px;
 }
 .nav_button_group:first-child i {
@@ -2914,6 +2918,20 @@ input[type=range]::-webkit-slider-runnable-track {
   -webkit-text-fill-color: #36a54e;
 }
 
+.ping {
+  font-size: 12px;
+  background: #D73C2C;
+  border-radius: 50%;
+  color: white;
+  display: block;
+  width: 18px;
+  text-align: center;
+  height: 18px;
+  position: absolute;
+  right: 16px;
+  top: 0;
+}
+
 .footer .icon__footer {
   font-size: 28px;
 }
@@ -2927,6 +2945,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .icon__name.-active {
   font-weight: bold;
   color: #36a54e;
+}
+.icon__name.-header {
+  display: none;
 }
 
 .footer {
@@ -3615,6 +3636,17 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .header__title.-left {
   margin-left: 40px;
+}
+
+.notifications {
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+.notifications .link {
+  font-size: 36px;
 }
 
 .back {

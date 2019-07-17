@@ -66,6 +66,9 @@
             <?php }else{ ?>
                 <button class="button back" onclick="history.go(-1);"><i class="left"></i></button>
             <?php } ?>
+            <div class="notifications" data-url='notifications'>
+                <span class="link"><i class="icon icon__footer icon-ic_notifications_48px"></i></span>
+            </div>
             </div>
         </div>
     </div>

@@ -26,7 +26,7 @@
   &.-small{
     width: 60px;
     top: 18%;
-    left: 5%;
+    left: 15px;
   }
 }
 
@@ -694,6 +694,9 @@
     border: none;
     background: none;
     text-align: center;
+    padding: 0px 24px;
+    position: absolute;
+    left: 0;
   }
 
   &.-walk{
@@ -1166,11 +1169,11 @@
     margin-left: 16px;
     font-size: 32px;
     -webkit-text-stroke: .6px;
-    -webkit-text-stroke-color: #003780;
+    -webkit-text-stroke-color: #0077C0;
     -webkit-text-fill-color: transparent;
 
     &.-selected{
-      -webkit-text-fill-color: #003780;
+      -webkit-text-fill-color: #0077C0;
     }
   }
 }

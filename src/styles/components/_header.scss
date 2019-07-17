@@ -29,6 +29,18 @@
     }
 }
 
+.notifications{
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+
+    .link{
+        font-size: 36px;
+    }
+}
+
 .back{
     position: absolute;
     top: 30px;

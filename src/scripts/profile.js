@@ -168,7 +168,7 @@ $(document).ready(function() {
             var oldContent = container.clone();
             $(oldContent).removeClass('content_container').addClass('fake_content_container');
             $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
+            $(oldContent).addClass('fadding_from_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
             var title = $(".header__title").html();
@@ -176,8 +176,14 @@ $(document).ready(function() {
             $('.h1').text('Nouveau compagnon');
             setReturnButton("profile", {}, title);
 
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            container.addClass('fading_to_right');
+            setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
+
+            console.log('lol');
+            console.log($('.dog_card'));
+            $('.dog_card.-add').css({'position':'absolute','left':'0'});
+            let height = (($(window).height() - 120) -  $('.dog_card.-add').height()) / 2;
+            $('.dog_card.-add').css('top',height+'px');
 
             $('#addDog').click(function(){
                 if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
@@ -214,7 +220,6 @@ $(document).ready(function() {
                         },
                     })
                     .done(function(result){
-                        alert('gg');
                         console.log(result);
                         //redirection
                     });

@@ -36,6 +36,8 @@ $(document).ready(function(){
 
     $(".nav_button_group").click(function(e) {
 
+        console.log('hello');
+
         let page;
         let pageClicked = $(this).index();
 
@@ -119,6 +121,32 @@ $(document).ready(function(){
 
     $(document).on('input', '#slider', function() {
         $('#slider_value').html( $(this).val() + " km" );
+    });
+
+    $('.notifications').click(function(){
+
+        $.ajax({
+            method: "GET",
+            url:"notifications.php",
+        })
+        .done(function(result){
+            var slideDuree = 500;
+            var slideDuree2 = 250;
+            var oldContent = container.clone();
+            $(oldContent).removeClass('content_container').addClass('fake_content_container');
+            $('body').append(oldContent);
+            $(oldContent).addClass('fading_to_left');
+            setTimeout(function() {$(oldContent).remove();}, slideDuree2);
+
+            var title = $(".header__title").html();
+            container.html(result);
+            $('.h1').text('Notifications');
+            setReturnButton("home", {}, title);
+
+            container.addClass('fading_from_right');
+            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            
+        });
     });
 
     $("#discover").click(function(e){
@@ -351,7 +379,7 @@ function setReturnButton(target, params = {}, title = "")
             var oldContent = container.clone();
             $(oldContent).removeClass('content_container').addClass('fake_content_container');
             $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
+            $(oldContent).addClass('fadding_from_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
             let title;
@@ -365,8 +393,8 @@ function setReturnButton(target, params = {}, title = "")
             $('.h1').text(title);
             $(window).scrollTop(0);
 
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            container.addClass('fading_to_right');
+            setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
 
             // $(".header__title").html(title)
             // container.html(result);
@@ -375,6 +403,7 @@ function setReturnButton(target, params = {}, title = "")
                 case("profile"):
                 case("members"):
                 case("friends"):
+                case("notifications"):
                 case("walk"):
                 case("message"):
                     $(".header__nav").html(logo);
