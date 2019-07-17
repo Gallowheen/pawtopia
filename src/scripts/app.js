@@ -36,8 +36,6 @@ $(document).ready(function(){
 
     $(".nav_button_group").click(function(e) {
 
-        console.log('hello');
-
         let page;
         let pageClicked = $(this).index();
 
@@ -50,8 +48,6 @@ $(document).ready(function(){
         }else{
             page = pageClicked;
         }
-        
-        //console.log($(this).index());
 
         $.ajax({
             method: "GET",
@@ -68,16 +64,16 @@ $(document).ready(function(){
                     title = $(this).text();
                 }
             });
-        
+
             if (localStorage.getItem("page") == null){
                 container.html(result);
                 $('.h1').text(title);
                 $(window).scrollTop(0);
-            }else{         
+            }else{
                 if(page == pageClicked){
                     container.html(result);
                     $('.h1').text(title);
-                    $(window).scrollTop(0); 
+                    $(window).scrollTop(0);
                 }else{
                     var slideDuree = 500;
                     var oldContent = container.clone();
@@ -145,36 +141,9 @@ $(document).ready(function(){
 
             container.addClass('fading_from_right');
             setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
-            
+
         });
     });
-
-    $("#discover").click(function(e){
-        e.preventDefault();
-        return window.location.href = "members.php";
-    });
-
-    // $('.label').click(function(){
-
-    //     $('.label').each(function(){
-    //         $(this).removeClass('selected');
-    //     })
-
-    //     if (!$(this).hasClass('selected'))
-    //         $(this).addClass('selected');
-    // });
-
-    // event
-    // $('.clickme').click(function(){
-    //     $.ajax({
-    //         method: "GET",
-    //         url:"src/php/add_event.php",
-    //     })
-    //     .done(function(result){
-
-    //     });
-    // });
-
 });
 
 $('body').on('click', '[data-editable]', function(){
@@ -379,7 +348,7 @@ function setReturnButton(target, params = {}, title = "")
             var oldContent = container.clone();
             $(oldContent).removeClass('content_container').addClass('fake_content_container');
             $('body').append(oldContent);
-            $(oldContent).addClass('fadding_from_left');
+            $(oldContent).addClass('fading_from_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
             let title;
