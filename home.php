@@ -25,24 +25,6 @@
 <div class="container">
   <div class="row">
     <div class="col">
-     
-      <?php
-
-      $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
-      $query->bind_param("i", $_SESSION['ID']);
-      $query->execute();
-
-      $result = $query->get_result();
-      $row = $result->fetch_assoc();
-
-      if($row['BIO'] == null || $row['WALK'] == null ){ ?>
-      <h3 class="h3 -title -space">Attention : information</h3>
-      <div class="reminder">
-        <?php
-          echo "<p class='information' >Vos informations ne sont pas complètes.</p><p class='information'>Certaines informations sont importantes pour votre visibilité auprès des autres utilisateurs.</p><p class='information -red'> Nous vous recommandons de compléter votre profil.</p>";
-        ?>
-      </div>
-      <?php } ?>
       <div class="user__walk__action">
         <h3 class="h3 -title">Vos balades à venir</h3>
         <div class="icon__action__container">
