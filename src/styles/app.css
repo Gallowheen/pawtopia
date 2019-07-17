@@ -952,6 +952,21 @@ input[type=range]::-webkit-slider-runnable-track {
   justify-content: space-evenly;
 }
 
+.pop {
+  animation: iconpop 0.5s;
+}
+
+@keyframes iconpop {
+  20% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .icon__action__container {
   display: flex;
 }

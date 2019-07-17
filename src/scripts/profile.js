@@ -143,15 +143,23 @@ $(document).ready(function() {
 
     $('#add_friend').click(function(){
         let user = $(this).data("id");
+
+        $('.action__container #add_friend').remove();
+        let button = '<div class="action__element" id="add_friend" data-id="271"><i class="icon icon-sent"></i><span>Ajouté</span></div>';
+        $('.action__container').append(button);
+        $('.action__container #add_friend').addClass('pop');
+   
+
         $.ajax({
             method: "GET",
             data:{ID:user},
             url:"src/php/add_friend.php",
         })
         .done(function(result){
-            $('.avatar__container #friend__button').remove();
-            let button = '<div id="friend__button"><span class="friend__link" data-id='+user+'><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></span><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>';
-            $(button).insertBefore($('.avatar__container .container .row .col .avatars'));
+            $('.action__container #add_friend').remove();
+            let button = '<div class="action__element" id="add_friend" data-id="271"><i class="icon icon-sent"></i><span>Ajouté</span></div>';
+            $('.action__container').append(button);
+            $('.action__container #add_friend').addClass('pop');
             attachListenersFriendMessage();
             //$('.avatar__container .container .row .col').append('<div id="friend__button"><a class="friend__link" href="getMessage.php?ID='+user+'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i></a><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
         });
@@ -179,9 +187,6 @@ $(document).ready(function() {
             container.addClass('fading_to_right');
             setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
 
-            console.log('lol');
-            console.log($('.dog_card'));
-            $('.dog_card.-add').css({'position':'absolute','left':'0'});
             let height = (($(window).height() - 120) -  $('.dog_card.-add').height()) / 2;
             $('.dog_card.-add').css('top',height+'px');
 

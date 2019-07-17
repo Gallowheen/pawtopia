@@ -26,7 +26,7 @@
     $html = "";
     if($result->num_rows === 0){
         if($pagename == "Accueil") {
-            $html .= "<img class='nowalk' src='/src/assets/img/ressources/no_walk.png'/><div class='center'><a href='walk.php'><button class='button -color'>Découvrez les balades</button></a></div>";
+            $html .= "<img class='nowalk' src='/src/assets/img/ressources/no_walk.png'/><div class='center'><button id='walk' class='button -color'>Découvrez les balades</button></div>";
         }
         else {
             $html .= "<img class='map__img' src='src/assets/img/ressources/no_walk.png'/>";
