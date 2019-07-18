@@ -316,8 +316,24 @@ function attachListenersFriendMessage()
             data: {ID:user}
         })
         .done(function(result) {
+
+            var slideDuree = 500;
+            var oldContent = container.clone();
+            $(oldContent).removeClass('content_container').addClass('fake_content_container');
+            $('body').append(oldContent);
+            $(oldContent).addClass('fading_to_left');
+            setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
+            var title = $(".header__title").html();
             container.html(result);
+            $('.h1').text(name);
             setReturnButton("profile", {ID:user}, $(".header__title").html());
+
+            container.addClass('fading_from_right');
+            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+
+            container.html(result);
+            
         });
     });
 }
