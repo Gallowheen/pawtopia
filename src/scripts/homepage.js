@@ -118,7 +118,14 @@ $(document).ready(function(){
         e.preventDefault();
 
         let town__name = $("#town").val();
-        let town = $('#towns [value="' + town__name + '"]').data('value');
+        let town;
+
+        if (town__name != "")
+            town = $('#towns [value="' + town__name + '"]').data('value');
+        else
+            town = null;
+
+        console.log(town);
 
         $.post(
             'src/php/register.php',
@@ -183,10 +190,10 @@ $(document).ready(function(){
                     if(data.indexOf('town_needed') > -1){
                         // $("#resultat").append("<p>Entrez votre ville svp</p>");
                         // $("#town_error").append("<p>Veuillez entrer votre ville</p>");
-                        $(".register__town").addClass("-error");
+                        $("#town").addClass("-error");
                     }else{
-                        if ($('.register__town').hasClass('-error'))
-                            $(".register__town").removeClass("-error");
+                        if ($('#town').hasClass('-error'))
+                            $("#town").removeClass("-error");
                     }
 
                     if(data.indexOf('password_no_match') > -1){

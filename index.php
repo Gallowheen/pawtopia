@@ -59,7 +59,7 @@
                                     ?>
                                     <div class="input__container">
                                         <!-- <div class="log_error" id="town_error"></div> -->
-                                        <input placeholder="Votre ville" class="input -transparent" list="towns" id="town" name="town" />
+                                        <input required placeholder="Votre ville" class="input -transparent" list="towns" id="town" name="town" />
                                             <datalist id="towns">
                                             <?php foreach ( $results as $option ) : ?>
                                                 <option data-value="<?php echo $option->ID; echo $option->NAME; ?>" value="<?php echo $option->NAME; ?>"></option>
