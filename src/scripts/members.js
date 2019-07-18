@@ -74,9 +74,20 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
+            var slideDuree = 500;
+            var oldContent = container.clone();
+            $(oldContent).removeClass('content_container').addClass('fake_content_container');
+            $('body').append(oldContent);
+            $(oldContent).addClass('fading_to_left');
+            setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
+            var title = $(".header__title").html();
             container.html(result);
-            var name = $('.username').text();
-            $('.h1').text('Profil de ' + name);
+            $('.h1').text('Membres');
+            setReturnButton("members", {}, title);
+
+            container.addClass('fading_from_right');
+            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
         });
     });
 
@@ -183,9 +194,20 @@ $(document).ready(function() {
                                 data: {ID:user}
                             })
                             .done(function(result) {
-                                container.html(result);  
-                                var name = $('.username').text();
-                                $('.h1').text('Profil de ' + name);      
+                                var slideDuree = 500;
+                                var oldContent = container.clone();
+                                $(oldContent).removeClass('content_container').addClass('fake_content_container');
+                                $('body').append(oldContent);
+                                $(oldContent).addClass('fading_to_left');
+                                setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
+                                var title = $(".header__title").html();
+                                container.html(result);
+                                $('.h1').text('Membres');
+                                setReturnButton("members", {}, title);
+
+                                container.addClass('fading_from_right');
+                                setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);   
                             });
                         });
                     }

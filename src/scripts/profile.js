@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     initSwipe();
 
-    $(".edit-profile").click(function(e){
+    $(".edit").click(function(e){
         $.ajax({
             method: "POST",
             url:"src/php/edit_profile_view"
@@ -110,9 +110,10 @@ $(document).ready(function() {
         });
     });
 
-    $(".more__friend button").click(function(e){
+    $(".more__friend").click(function(e){
 
         var user = $(this).data("id");
+        var title = $(".header__title").html();
 
         $.ajax({
             method: "GET",
@@ -120,9 +121,21 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
+            var slideDuree = 500;
+            var oldContent = container.clone();
+            $(oldContent).removeClass('content_container').addClass('fake_content_container');
+            $('body').append(oldContent);
+            $(oldContent).addClass('fading_to_left');
+            setTimeout(function() {$(oldContent).remove();}, slideDuree);
+
             container.html(result);
+            $('.h1').text("Amis");
+            setReturnButton("profile", {}, title);
+
+            container.addClass('fading_from_right');
+            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+
             $(window).scrollTop(0);
-            $('.h1').text('Amis');
         });
     });
 
@@ -172,11 +185,14 @@ $(document).ready(function() {
             url:"src/php/addDog.php",
         })
         .done(function(result){
+
+            $(window).scrollTop(0);
+
             var slideDuree = 500;
             var oldContent = container.clone();
             $(oldContent).removeClass('content_container').addClass('fake_content_container');
             $('body').append(oldContent);
-            $(oldContent).addClass('fadding_from_left');
+            $(oldContent).addClass('fading_to_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
             var title = $(".header__title").html();
@@ -184,11 +200,8 @@ $(document).ready(function() {
             $('.h1').text('Nouveau compagnon');
             setReturnButton("profile", {}, title);
 
-            container.addClass('fading_to_right');
-            setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
-
-            let height = (($(window).height() - 120) -  $('.dog_card.-add').height()) / 2;
-            $('.dog_card.-add').css('top',height+'px');
+            container.addClass('fading_from_right');
+            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
 
             $('#addDog').click(function(){
                 if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){

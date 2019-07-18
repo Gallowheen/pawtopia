@@ -188,7 +188,7 @@
                     <?php
                         $editBouton = "";
                         if(empty($_GET))
-                            $editBouton = "<button class='button -color -blue edit-profile'><i class='icon edit edit__user icon-ic_edit_48px'></i>Éditer</button>";
+                            $editBouton = "<button class='button -color -blue edit-profile edit'><i class='icon edit edit__user icon-ic_edit_48px'></i>Éditer</button>";
                     ?>
                     <h3 class="information h3">Informations <?= $editBouton ?> </h3>
                     <div class="information_editable">
@@ -234,7 +234,7 @@
                                 <h3 class="information h3">Ses compagnons</h3>
                             <?php
                             }else{ ?>
-                                <h3 class="information h3">Mes compagnons</h3>
+                                <h3 class="information h3">Mes compagnons <button id="add_dog" class="button -color -blue edit-profile"><i class="icon edit__user icon-add_dog"></i>Ajouter</button></h3>
                             <?php
                             }
                             if(!empty($_GET))
@@ -253,14 +253,7 @@
                                 <?php
                             }else{
                                 ?>
-                                <h3 class="information h3">Mes compagnons <?php echo '('.count($rows).')' ?></h3>
-                                <?php
-                                    if(empty($_GET)){
-                                        ?>
-                                        <div class="dog_information_button"><button id="add_dog" class="button -color -blue">Ajouter un compagnon</button></div>
-                                <?php
-                                    }
-                                ?>
+                                <h3 class="information h3">Mes compagnons <?php echo '('.count($rows).') <button id="add_dog" class="button -color -blue edit-profile"><i class="icon edit__user icon-add_dog"></i>Ajouter</button>' ?></h3>
                                 <div class='dog_card_container'>
                                 <?php
                                 foreach ( $rows as $dog ) :
@@ -346,10 +339,10 @@
                             }
                         }else{
                             if(!empty($_GET)){?>
-                            <h3 class="information -nospace h3">Ses amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3>
+                            <h3 class="information h3 -first">Ses amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
                             <?php
                             }else{ ?>
-                            <h3 class="information -nospace h3">Mes amis <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3>
+                            <h3 class="information h3 -first">Mes amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
                             <?php
                             }
                         }
@@ -400,9 +393,9 @@
                                 endforeach;
                                 echo '</div></button>';
                                 ?>
-                                <div class="more__friend">
+                                <!-- <div class="more__friend">
                                     <button class="button -color -blue">Plus d'amis</button>
-                                </div>
+                                </div> -->
                                 <?php
 
                             }
@@ -454,9 +447,9 @@
                                 endforeach;
                                 echo '</div>';
                                 ?>
-                                <div class="more__friend">
+                                <!-- <div class="more__friend">
                                     <span><button class="button -color -blue" data-id="<?= $user ?>">Plus d'amis</button></span>
-                                </div>
+                                </div> -->
                                 <?php
                             }
                         }
