@@ -114,7 +114,7 @@ $(document).ready(function() {
 
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text('Profil  de '+name);
+            setTitle('Profil  de '+name);
             setReturnButton("profile", {}, title);
 
             container.addClass('fading_from_right');
@@ -143,7 +143,7 @@ $(document).ready(function() {
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
             container.html(result);
-            $('.h1').text("Amis");
+            setTitle("Amis");
             setReturnButton("profile", {}, title);
 
             container.addClass('fading_from_right');
@@ -163,7 +163,7 @@ $(document).ready(function() {
         })
         .done(function(result) {
             container.html(result);
-            $('.h1').text('Membres');
+            setTitle('Membres');
             setReturnButton("friends", {} , $(".header__title").html());
         });
     });
@@ -211,7 +211,7 @@ $(document).ready(function() {
 
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text('Nouveau compagnon');
+            setTitle('Nouveau compagnon');
             setReturnButton("profile", {}, title);
 
             container.addClass('fading_from_right');

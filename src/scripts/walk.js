@@ -202,7 +202,7 @@ $(document).ready(function(){
 
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text("Nouvelle balade");
+            setTitle("Nouvelle balade");
 
             container.addClass('fading_from_right');
             setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
@@ -450,7 +450,7 @@ $(document).ready(function(){
                     .done(function(result){
                         container.html(result);
                         $(window).scrollTop(0);
-                        $('.h1').text(newtitle);
+                        setTitle(newtitle);
                         setReturnButton("walk", {}, title);
                     });
                     //window.location = "walk_detail?ID="+$(this).data('id');
@@ -471,7 +471,7 @@ function goToWalk(walk, name)
     })
     .done(function(result){
         container.html(result);
-        $('.h1').text(newtitle);
+        setTitle(newtitle);
         setReturnButton("walk", {}, title);
         $('body').css('overflow','scroll');
     });

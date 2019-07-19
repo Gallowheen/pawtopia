@@ -69,12 +69,12 @@ $(document).ready(function(){
 
             if (localStorage.getItem("page") == null){
                 container.html(result);
-                $('.h1').text(title);
+                setTitle(title);
                 $(window).scrollTop(0);
             }else{
                 if(page == pageClicked){
                     container.html(result);
-                    $('.h1').text(title);
+                    setTitle(title);
                     $(window).scrollTop(0);
                 }else{
                     var slideDuree = 500;
@@ -91,11 +91,11 @@ $(document).ready(function(){
                     setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
                     container.html(result);
-                    $('.h1').text(title);
                     $(window).scrollTop(0);
 
                     container.addClass(directionNew);
                     setTimeout(function() {container.removeClass(directionNew)}, slideDuree);
+                    setTitle(title);
                 }
             }
         });
@@ -127,9 +127,8 @@ $(document).ready(function(){
             $(oldContent).addClass('fading_to_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree2);
 
-            var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text('Notifications');
+            setTitle('Notifications');
             setReturnButton("home", {}, title);
 
             container.addClass('fading_from_right');
@@ -324,9 +323,9 @@ function attachListenersFriendMessage()
             $(oldContent).addClass('fading_to_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
+            setTitle(name);
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text(name);
             setReturnButton("profile", {ID:user}, $(".header__title").html());
 
             container.addClass('fading_from_right');
@@ -360,15 +359,9 @@ function setReturnButton(target, params = {}, title = "")
             $(oldContent).addClass('fading_from_left');
             setTimeout(function() {$(oldContent).remove();}, slideDuree);
 
-            let title;
-
-            var name = $('.nav_button_group .icon__name').each(function(){
-                if($(this).hasClass('-active')){
-                    title = $(this).text();
-                }
-            });
             container.html(result);
-            $('.h1').text(title);
+            let title = $('.nav_button_group .icon__name.-active').html();
+            setTitle(title);
             $(window).scrollTop(0);
 
             container.addClass('fading_to_right');
@@ -394,4 +387,9 @@ function setReturnButton(target, params = {}, title = "")
 function setLogo()
 {
     $(".header__nav").html(logo);
+}
+
+function setTitle(newTitle)
+{
+    $(".header__title").html(newTitle);
 }

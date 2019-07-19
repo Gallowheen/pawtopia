@@ -17,7 +17,7 @@ $(document).ready(function() {
         .done(function(result){
             console.log(result);
             container.html(result);
-            $('.h1').text(name);
+            setTitle(name);
         });
 
     });
@@ -84,7 +84,7 @@ $(document).ready(function() {
         })
         .done(function(result) {
             container.html(result);
-            $('.h1').text('Membres');
+            setTitle('Membres');
             setReturnButton("friends", {} , $(".header__title").html());
         });
     });
@@ -119,7 +119,7 @@ $(document).ready(function() {
         .done(function(result) {
             container.html(result);
             var name = $('.username').text();
-            $('.h1').text('Profil de ' + name);
+            setTitle('Profil de ' + name);
             $(window).scrollTop(0);
         });
     });

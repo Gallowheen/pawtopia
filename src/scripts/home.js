@@ -28,11 +28,6 @@ $(document).ready(function() {
             data:{ID:$(this).data('id')}
         })
         .done(function(result){
-            // container.html(result);
-            // $(window).scrollTop(0);
-            // $('.h1').text(newtitle);
-            // setReturnButton("home", {}, title);
-           
             var slideDuree = 500;
             var oldContent = container.clone();
             $(oldContent).removeClass('content_container').addClass('fake_content_container');
@@ -42,7 +37,7 @@ $(document).ready(function() {
 
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text(newtitle);
+            setTitle(newtitle);
 
             container.addClass('fading_from_right');
             setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
@@ -57,7 +52,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
-            $('.h1').text('Amis');
+            setTitle('Amis');
             setReturnButton("home", {}, title);
         });
     });
@@ -69,7 +64,7 @@ $(document).ready(function() {
         })
         .done(function(result){
             container.html(result);
-            $('.h1').text('Messages');
+            setTitle('Messages');
             setReturnButton("home", {}, title);
         });
     });
@@ -159,7 +154,7 @@ $(document).ready(function() {
 
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text('Balades');
+            setTitle('Balades');
 
             container.addClass('fading_from_right');
             setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);

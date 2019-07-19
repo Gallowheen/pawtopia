@@ -83,7 +83,7 @@ $(document).ready(function() {
 
             var title = $(".header__title").html();
             container.html(result);
-            $('.h1').text('Membres');
+            setTitle('Membres');
             setReturnButton("members", {}, title);
 
             container.addClass('fading_from_right');
@@ -203,7 +203,7 @@ $(document).ready(function() {
 
                                 var title = $(".header__title").html();
                                 container.html(result);
-                                $('.h1').text('Membres');
+                                setTitle('Membres');
                                 setReturnButton("members", {}, title);
 
                                 container.addClass('fading_from_right');

@@ -132,7 +132,7 @@ $(document).ready(function() {
                     setTimeout(function() {$(oldContent).remove();}, slideDuree);
     
                     container.html(result);
-                    $('.h1').text(name);
+                    setTitle(name);
                     $(window).scrollTop(0);
                     setReturnButton("message", {}, title);
         
