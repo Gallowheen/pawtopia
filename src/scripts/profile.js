@@ -219,8 +219,16 @@ $(document).ready(function() {
                         },
                     })
                     .done(function(result){
-                        console.log(result);
-                        //redirection
+
+                        $.ajax({
+                            method: "GET",
+                            url:"profile.php",
+                        })
+                        .done(function(result){
+                            console.log(result);
+                            slidePage(result, 'left');
+                            setTitle("Profil");
+                        });
                     });
                 }
             });
