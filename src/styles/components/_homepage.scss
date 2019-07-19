@@ -274,6 +274,11 @@
   width: 60%;
   margin-left: 20%;
   position: relative;
+
+  &.-preview{
+    width: auto;
+    margin-left: 0%;
+  }
 }
 
 .avatar__container{
@@ -287,10 +292,6 @@
   height: 128px;
   width: 128px;
   object-fit: cover;
-
-  &.-negative{
-    margin-top : -48px;
-  }
 
   &.-noMargin{
     margin-top: 0px;
@@ -322,6 +323,14 @@
     position: absolute;
     left: 10%;
     bottom: 0;
+
+    &.-preview{
+      height: 96px;
+      width: 96px;
+      margin-top: 0;
+      left: -25%;
+      bottom: -5%;
+    }
   }
 
   &.-friend{
@@ -344,6 +353,12 @@
     height: 32px;
     width: 32px;
     margin-right: 16px;
+  }
+
+  &.-preview{
+    height: 96px;
+    width: 96px;
+    margin-top: 0;
   }
 }
 
@@ -451,7 +466,7 @@
     left: 0px;
     font-size: 14px;
     font-weight: bold;
-    color: #0067B0;
+    color: grey;
   }
 
   &.-walk{
@@ -491,13 +506,13 @@
 }
 
 .information_editable{
-  margin: 16px 0px;
+  margin: 32px 0px 16px 0px;
 }
 
 .information__flex{
   display: flex;
   justify-content: space-between;
-  margin: 16px 0px 8px 0;
+  margin: 32px 0px 8px 0;
 }
 
 .expanded{
@@ -571,8 +586,10 @@
     font-size: 24px;
   }
 
-  &.-nopadding{
-    padding: 0;
+  &.-preview{
+    color: #0077C0;
+    font-weight: bold;
+    font-size: 18px;
   }
 }
 
@@ -580,6 +597,10 @@
   text-align: center;
   padding-top: 24px;
   padding-bottom: 24px;
+
+  &.-preview{
+    padding-top: 12px;
+  }
 }
 
 .information_group:last-child{
@@ -944,11 +965,6 @@
     border-right: 1px solid #0067B0;
   }
 
-  &.-hidden{
-    overflow: hidden;
-    transition : .4s all;
-  }
-
   &.-unread{
     background: #0067B0;
     color: white;
@@ -997,8 +1013,10 @@
 
 // MEEMBERS
 
-.member__content{
-
+.preview__member{
+  display: flex;
+  margin-top: 8px;
+  justify-content: space-evenly;
 }
 
 .showcase__member{

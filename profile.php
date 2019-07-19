@@ -243,7 +243,6 @@
                             else{
                                 echo "<img class='dog__img' src='src/assets/img/ressources/no_dog.png'/>";
                                 //echo "<p class='information_space -empty'>Vous n'avez aucun chien pour le moment.</p>";
-                                echo "<div class='dog_information_button'><button id='add_dog' class='button -color -blue'>Ajouter un compagnon</button></div>";
                             }
                         }else{
                             $rows = resultToArray($result);
@@ -339,10 +338,10 @@
                             }
                         }else{
                             if(!empty($_GET)){?>
-                            <h3 class="information h3 -first">Ses amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
+                            <h3 class="information h3 -first">Ses amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend' data-id='$user'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
                             <?php
                             }else{ ?>
-                            <h3 class="information h3 -first">Mes amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
+                            <h3 class="information h3 -first">Mes amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Gérer</button>" ?></h3>
                             <?php
                             }
                         }

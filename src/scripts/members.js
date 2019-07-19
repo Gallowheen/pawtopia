@@ -62,25 +62,6 @@ $(document).ready(function() {
         });
     });
 
-    $(".view").click(function(e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        var user = $(this).data("id");
-
-        $.ajax({
-            method: "GET",
-            url:"profile.php",
-            data: {ID:user}
-        })
-        .done(function(result) {
-            slidePage(result);
-            var title = $(".header__title").html();
-            setReturnButton("members", {}, title);
-            setTitle('Membres');
-        });
-    });
-
     $('#submit__members').click(function(e){
 
         e.preventDefault();
@@ -136,93 +117,29 @@ $(document).ready(function() {
             if(data.length > 0){
 
                 for( let i = 0; i < data.length; i++){
-                    member = '<div data-id="'+data[i].ID+'" class="test friend_widget -hidden"><div class="friend__info"><img class="avatar -friendlist" src="'+data[i].AVATAR+'"><div class="container__info"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div></div></div>';
+                    member = '<div data-id="'+data[i].ID+'" class="friend_widget view"><div class="friend__info"><img class="avatar -friendlist" src="'+data[i].AVATAR+'"><div class="container__info"><span class="friend_name -member">'+data[i].USERNAME+'</span><span class="friend_name -km">A '+data[i].km+' km de vous</span></div></div></div>';
                     $(".member__filtred .container .row .col .member_widget_container").append(member);
                 }
             }else{
                 $(".member__filtred .container .row .col .member_widget_container").append('<p>Aucun résultat trouvé.</p>');
             }
 
-
-            $(".test").click(function(e){
+            $(".view").click(function(e){
                 e.preventDefault();
                 e.stopPropagation();
-
+        
                 var user = $(this).data("id");
-                var containerFilter = $(this);
-
+        
                 $.ajax({
                     method: "GET",
-                    url:"src/php/simple_profile.php?ID="+user,
+                    url:"profile.php",
+                    data: {ID:user}
                 })
-                .done(function(result){
-
-                    if ( containerFilter.hasClass('expanded')){
-
-                    }else{
-                        containerFilter.append(result);
-                        containerFilter.addClass('expanded');
-                        let tap = containerFilter.children().eq(1).children().eq(2);
-
-                        let height = containerFilter.children().eq(1).height();
-                        containerFilter.animate({ height: height + 25}, "fast");
-                        setTimeout(function(){
-                            tap.animate({opacity : 1},"slow");
-                        },250);
-                        containerFilter.children().eq(0).hide();
-                        initSwipe();
-
-                        $(".view").click(function(e){
-                            e.preventDefault();
-                            e.stopPropagation();
-                    
-                            var user = $(this).data("id");
-                    
-                            $.ajax({
-                                method: "GET",
-                                url:"profile.php",
-                                data: {ID:user}
-                            })
-                            .done(function(result) {
-                                slidePage('result');
-                                var title = $(".header__title").html();
-                                setReturnButton("members", {}, title);
-                                setTitle('Membres');
-                            });
-                        });
-                    }
-
-                    $('.tapToClose').click(function(e){
-                        e.stopPropagation();
-
-                        var containerFilter = $(this).parent().parent();
-                        var child = $(this).parent().parent().eq(0).children().eq(1);
-                        $(this).parent().parent().removeClass('expanded');
-                        $(this).parent().parent().children().eq(0).css("display","block");
-                        $(this).parent().parent().css("height", "75px");
-                        $([document.documentElement, document.body]).animate({
-                            scrollTop: containerFilter.offset().top - 100
-                        }, 1000);
-                        child.animate({opacity : 0},"slow");
-
-                        setTimeout(function(){
-                            child.remove();
-                        },250);
-                    });
-
-                    $('.add__friend').click(function(){
-
-                        let user = $(this).data("id");
-                        $.ajax({
-                            method: "GET",
-                            data:{ID:user},
-                            url:"src/php/add_friend.php",
-                        })
-                        .done(function(result){
-                            $('.avatar__container #add_friend').remove();
-                            $('.avatar__container .container--full .row .col').append('<div id="friend__button"><button class="friend__button button -friend"><i class="icon icon__friend icon-ic_check_48px"></i>Envoyé</button></div>');
-                        });
-                    });
+                .done(function(result) {
+                    slidePage(result,'right');
+                    var title = $(".header__title").html();
+                    setReturnButton("members", {}, title);
+                    setTitle('Membres');
                 });
             });
         });
@@ -238,5 +155,24 @@ $(document).ready(function() {
             $("body").css('overflow','auto');
             $(".showcase__member").css("height","0px");
         }, 1250);
+    });
+
+    $(".view").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        var user = $(this).data("id");
+
+        $.ajax({
+            method: "GET",
+            url:"profile.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            slidePage(result,'right');
+            var title = $(".header__title").html();
+            setReturnButton("members", {}, title);
+            setTitle('Membres');
+        });
     });
 });

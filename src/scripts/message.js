@@ -123,7 +123,7 @@ $(document).ready(function() {
                     url:"getMessage.php",
                 })
                 .done(function(result){
-                    slidePage(result);
+                    slidePage(result,'right');
                     setReturnButton("message", {}, title);
                     setTitle(name);
                 });

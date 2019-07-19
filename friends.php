@@ -127,13 +127,10 @@
                                     }
                                 endforeach;
 
-
-                                if ((count($row_friends_mutual)-1) < 0){ ?>
-                                    <h3 class="h3 information -blue"><?= $pagename ?></h3><?php
-                                }else{?>
-                                    <h3 class="h3 information -blue"><?= $pagename ?> <?php echo '('.(count($row_friends_mutual)-1).')' ?></h3><?php
-                                }
-                            ?>
+                                ?>
+                        
+                                    <h3 class="h3 information -blue"><?= $pagename ?></h3>
+                                
                             <?php
 
                                 if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
@@ -227,7 +224,7 @@
 
                                             foreach ($newArray as $friend) :
                                                 echo '<div data-id="'.$friend['ID'].'" class="view friend_widget">';
-                                                echo '<button data-id="'.$friend['ID'].'" class="button chat"><i class="ico icon-ic_sms_48px"></i></button>';?>
+                                                echo '<button data-id="'.$friend['ID'].'" class="button chat -alone"><i class="icon icon-ic_sms_48px"></i></button>';?>
                                                 <img class="avatar -friendlist" src="<?php echo $friend['AVATAR']?>"/>
                                                 <?php
                                                 echo '<span class="friend_name">'.$friend['USERNAME'].'</span>';

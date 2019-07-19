@@ -5,12 +5,17 @@ $(document).ready(function() {
     initSwipe();
 
     $(".edit").click(function(e){
+
         $.ajax({
-            method: "POST",
+            method: "GET",
             url:"src/php/edit_profile_view"
         })
         .done(function(result) {
-            $(".information_editable").html(result);
+            slidePage(result,'right');
+            var title = $(".header__title").html();
+            setReturnButton("profile", {}, title);
+            setTitle('Editer le profil');
+
 
             $('#uploadfiles').on("change", function(){
                 $("#update").prop('disabled', true);
