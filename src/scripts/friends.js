@@ -120,7 +120,6 @@ $(document).ready(function() {
             container.html(result);
             var name = $('.username').text();
             setTitle('Profil de ' + name);
-            $(window).scrollTop(0);
         });
     });
 

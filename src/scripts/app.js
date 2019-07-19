@@ -362,7 +362,6 @@ function setReturnButton(target, params = {}, title = "")
             container.html(result);
             let title = $('.nav_button_group .icon__name.-active').html();
             setTitle(title);
-            $(window).scrollTop(0);
 
             container.addClass('fading_to_right');
             setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);

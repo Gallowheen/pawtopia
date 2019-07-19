@@ -119,8 +119,6 @@ $(document).ready(function() {
 
             container.addClass('fading_from_right');
             setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
-
-            $(window).scrollTop(0);
         });
     });
 
@@ -148,8 +146,6 @@ $(document).ready(function() {
 
             container.addClass('fading_from_right');
             setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
-
-            $(window).scrollTop(0);
         });
     });
 
@@ -199,9 +195,6 @@ $(document).ready(function() {
             url:"src/php/addDog.php",
         })
         .done(function(result){
-
-            $(window).scrollTop(0);
-
             var slideDuree = 500;
             var oldContent = container.clone();
             $(oldContent).removeClass('content_container').addClass('fake_content_container');
