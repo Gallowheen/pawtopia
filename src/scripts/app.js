@@ -290,7 +290,7 @@ function attachListenersFriendMessage()
             data: {ID:user}
         })
         .done(function(result) {
-            slidePage(result, 'left');
+            slidePage(result, 'right');
             setTitle(name);
             var title = $(".header__title").html();
             setReturnButton("profile", {ID:user}, $(".header__title").html());

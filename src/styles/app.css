@@ -1065,7 +1065,6 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .friend_name.-walk {
   margin-top: 8px;
-  position: absolute;
   top: 6px;
   left: auto;
   right: -2px;
