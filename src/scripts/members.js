@@ -172,7 +172,8 @@ $(document).ready(function() {
             slidePage(result,'right');
             var title = $(".header__title").html();
             setReturnButton("members", {}, title);
-            setTitle('Membres');
+            setTitle('Profil');
+            $(window).scrollTop(0);
         });
     });
 });

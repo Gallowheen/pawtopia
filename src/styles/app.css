@@ -1052,6 +1052,7 @@ input[type=range]::-webkit-slider-runnable-track {
   transform: translateY(0%);
   left: 0px;
   font-size: 18px;
+  font-weight: bold;
 }
 .friend_name.-km {
   position: relative;
