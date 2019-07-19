@@ -123,23 +123,9 @@ $(document).ready(function() {
                     url:"getMessage.php",
                 })
                 .done(function(result){
-
-                    var slideDuree = 500;
-                    var oldContent = container.clone();
-                    $(oldContent).removeClass('content_container').addClass('fake_content_container');
-                    $('body').append(oldContent);
-                    $(oldContent).addClass('fading_to_left');
-                    setTimeout(function() {$(oldContent).remove();}, slideDuree);
-    
-                    container.html(result);
-                    setTitle(name);
-                    $(window).scrollTop(0);
+                    slidePage(result);
                     setReturnButton("message", {}, title);
-        
-                    container.addClass('fading_from_right');
-                    setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
-
-                    
+                    setTitle(name);
                 });
 
             });

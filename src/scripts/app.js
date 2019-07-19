@@ -77,24 +77,11 @@ $(document).ready(function(){
                     setTitle(title);
                     $(window).scrollTop(0);
                 }else{
-                    var slideDuree = 500;
-                    var oldContent = container.clone();
-                    var directionOld = 'fading_to_left';
-                    var directionNew = 'fading_from_right';
-                    if(page > pageClicked){
-                        directionOld = 'fading_from_left';
-                        directionNew = 'fading_to_right';
-                    }
-                    $(oldContent).removeClass('content_container').addClass('fake_content_container');
-                    $('body').append(oldContent);
-                    $(oldContent).addClass(directionOld);
-                    setTimeout(function() {$(oldContent).remove();}, slideDuree);
+                    if(page > pageClicked)
+                        slidePage(result, "left");
+                    else
+                        slidePage(result, "right");
 
-                    container.html(result);
-                    $(window).scrollTop(0);
-
-                    container.addClass(directionNew);
-                    setTimeout(function() {container.removeClass(directionNew)}, slideDuree);
                     setTitle(title);
                 }
             }
@@ -119,21 +106,9 @@ $(document).ready(function(){
             url:"notifications.php",
         })
         .done(function(result){
-            var slideDuree = 500;
-            var slideDuree2 = 250;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree2);
-
-            container.html(result);
+            slidePage(result, 'left', 500, 250);
             setTitle('Notifications');
             setReturnButton("home", {}, title);
-
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
-
         });
     });
 });
@@ -315,24 +290,10 @@ function attachListenersFriendMessage()
             data: {ID:user}
         })
         .done(function(result) {
-
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
+            slidePage(result, 'left');
             setTitle(name);
             var title = $(".header__title").html();
-            container.html(result);
             setReturnButton("profile", {ID:user}, $(".header__title").html());
-
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
-
-            container.html(result);
-            
         });
     });
 }
@@ -351,23 +312,9 @@ function setReturnButton(target, params = {}, title = "")
             data: params
         })
         .done(function(result) {
-
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_from_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
-            container.html(result);
+            slidePage(result);
             let title = $('.nav_button_group .icon__name.-active').html();
             setTitle(title);
-
-            container.addClass('fading_to_right');
-            setTimeout(function() {container.removeClass('fading_to_right')}, slideDuree);
-
-            // $(".header__title").html(title)
-            // container.html(result);
             switch(target){
                 case("home"):
                 case("profile"):
@@ -391,4 +338,30 @@ function setLogo()
 function setTitle(newTitle)
 {
     $(".header__title").html(newTitle);
+}
+
+function slidePage(html='', direction='left', slideFadeIn=500, slideFadeOut=500)
+{
+    var slideFadeOut = 500;
+    var slideFadeIn = 500;
+    var oldContent = container.clone();
+    var directionOld, directionNew;
+    if(direction == 'left'){
+        directionOld = 'fading_from_left';
+        directionNew = 'fading_to_right';
+    }
+    else if(direction == 'right') {
+        directionOld = 'fading_to_left';
+        directionNew = 'fading_from_right';
+    }
+
+    $(oldContent).removeClass('content_container').addClass('fake_content_container');
+    $('body').append(oldContent);
+    $(oldContent).addClass(directionOld);
+    setTimeout(function() {$(oldContent).remove();}, slideFadeOut);
+
+    container.html(html);
+
+    container.addClass(directionNew);
+    setTimeout(function() {container.removeClass(directionNew)}, slideFadeIn);
 }

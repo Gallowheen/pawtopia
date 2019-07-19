@@ -74,20 +74,10 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
+            slidePage(result);
             var title = $(".header__title").html();
-            container.html(result);
-            setTitle('Membres');
             setReturnButton("members", {}, title);
-
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            setTitle('Membres');
         });
     });
 
@@ -194,20 +184,10 @@ $(document).ready(function() {
                                 data: {ID:user}
                             })
                             .done(function(result) {
-                                var slideDuree = 500;
-                                var oldContent = container.clone();
-                                $(oldContent).removeClass('content_container').addClass('fake_content_container');
-                                $('body').append(oldContent);
-                                $(oldContent).addClass('fading_to_left');
-                                setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
+                                slidePage('result');
                                 var title = $(".header__title").html();
-                                container.html(result);
-                                setTitle('Membres');
                                 setReturnButton("members", {}, title);
-
-                                container.addClass('fading_from_right');
-                                setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);   
+                                setTitle('Membres');
                             });
                         });
                     }

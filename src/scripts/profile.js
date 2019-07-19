@@ -104,21 +104,10 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
-
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
+            slidePage(result, 'right');
             var title = $(".header__title").html();
-            container.html(result);
-            setTitle('Profil  de '+name);
             setReturnButton("profile", {}, title);
-
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            setTitle('Profil  de '+name);
         });
     });
 
@@ -133,19 +122,9 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
-            container.html(result);
-            setTitle("Amis");
+            slidePage(result);
             setReturnButton("profile", {}, title);
-
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            setTitle("Amis");
         });
     });
 
@@ -195,20 +174,10 @@ $(document).ready(function() {
             url:"src/php/addDog.php",
         })
         .done(function(result){
-            var slideDuree = 500;
-            var oldContent = container.clone();
-            $(oldContent).removeClass('content_container').addClass('fake_content_container');
-            $('body').append(oldContent);
-            $(oldContent).addClass('fading_to_left');
-            setTimeout(function() {$(oldContent).remove();}, slideDuree);
-
+            slidePage(result, 'right');
             var title = $(".header__title").html();
-            container.html(result);
-            setTitle('Nouveau compagnon');
             setReturnButton("profile", {}, title);
-
-            container.addClass('fading_from_right');
-            setTimeout(function() {container.removeClass('fading_from_right')}, slideDuree);
+            setTitle('Nouveau compagnon');
 
             $('#addDog').click(function(){
                 if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
