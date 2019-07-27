@@ -330,8 +330,6 @@ function setTitle(newTitle)
 
 function slidePage(html='', direction='left', slideFadeIn=500, slideFadeOut=500)
 {
-    var slideFadeOut = 500;
-    var slideFadeIn = 500;
     var oldContent = container.clone();
     var directionOld, directionNew;
     if(direction == 'left'){
