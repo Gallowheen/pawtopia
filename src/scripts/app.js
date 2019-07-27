@@ -4,7 +4,7 @@ var map, group;
 var page;
 
 $(document).ready(function(){
-
+    localStorage.setItem("page", 0);
     container = $(".content_container");
     logo = $(".header__nav").html();
     let city;
@@ -36,18 +36,12 @@ $(document).ready(function(){
 
     $(".nav_button_group").click(function(e) {
 
-        let page;
+        let page = localStorage.getItem("page");
         let pageClicked = $(this).index();
 
         $(".-active").removeClass('-active');
         $(this).children().eq(0).addClass('-active');
         $(this).children().eq(1).addClass('-active');
-
-        if (localStorage.getItem("page") !== null) {
-            page = localStorage.getItem("page");
-        }else{
-            page = pageClicked;
-        }
 
         $.ajax({
             method: "GET",
@@ -67,23 +61,17 @@ $(document).ready(function(){
 
             setLogo();
 
-            if (localStorage.getItem("page") == null){
+            if(page == pageClicked){
                 container.html(result);
                 setTitle(title);
                 $(window).scrollTop(0);
             }else{
-                if(page == pageClicked){
-                    container.html(result);
-                    setTitle(title);
-                    $(window).scrollTop(0);
-                }else{
-                    if(page > pageClicked)
-                        slidePage(result, "left");
-                    else
-                        slidePage(result, "right");
+                if(page > pageClicked)
+                    slidePage(result, "left");
+                else
+                    slidePage(result, "right");
 
-                    setTitle(title);
-                }
+                setTitle(title);
             }
         });
 
