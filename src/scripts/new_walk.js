@@ -8,6 +8,8 @@ $(document).ready(function() {
     var walk_date;
     var walk_length;
 
+    var step = 1;
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
@@ -27,34 +29,65 @@ $(document).ready(function() {
 
     $("#next").click(function(e){
 
-        error = [];
         e.preventDefault();
-        if($("#walk_name").val() == null){
-            error.push("true");
-            $("#walk_name").addClass('-error');
-        }
-        if( $("#info").val() == ""){
-            error.push("true");
-            $("#info").addClass('-error');
-        }
-        if( $("#walk_type").val() == null){
-            error.push("true");
-            $("#walk_type").addClass('-error');
-        }
-        if( $("#date").val() == null){
-            error.push("true");
-            $("#date").addClass('-error');
-        }
-        if($("#time").val() ==""){
-            error.push("true");
-            $("#time").addClass('-error');
-        }
-        if( $("#length").val() == null){
-            error.push("true");
-            $("#length").addClass('-error');
+        switch(step)
+        {
+            case(1):
+                if($("#walk_name").val() == null){
+                    $("#walk_name").addClass('-error');
+                    return;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                $("[data-step="+step+"]").removeClass('hidden_form');
+                break;
+            case(2):
+                if( $("#walk_type").val() == null){
+                    $("#walk_type").addClass('-error');
+                    return;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                $("[data-step="+step+"]").removeClass('hidden_form');
+                break;
+            case(3):
+                if( $("#info").val() == ""){
+                    $("#info").addClass('-error');
+                    return;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                $("[data-step="+step+"]").removeClass('hidden_form');
+                break;
+            case(4):
+                if( $("#date").val() == null){
+                    $("#date").addClass('-error');
+                    retun;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                $("[data-step="+step+"]").removeClass('hidden_form');
+                break;
+            case(5):
+                if($("#time").val() ==""){
+                    $("#time").addClass('-error');
+                    return;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                $("[data-step="+step+"]").removeClass('hidden_form');
+                break;
+            case(6):
+                if( $("#length").val() == null){
+                    $("#length").addClass('-error');
+                    return;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                break;
         }
 
-        if (error.length == 0){
+        if (step > 6){
             walk_id_owner = $("form").data('id');
             walk_name = $("#walk_name").val();
             walk_location = $("#info").val();

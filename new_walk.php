@@ -42,15 +42,15 @@
 ?>
 
             <div class="container">
-                <div class="row">
+                <div class="row centered_form">
                     <div class="col">
                         <form id="event_information" data-id="<?php echo $_SESSION['ID'] ?>">
                             <h3 class="h3 information">Informations de la balade</h3>
-                            <div class="input__container -first">
+                            <div class="input__container -first" data-step=1>
                                 <span class="input__name">Nom de la balade</span>
                                 <input placeholder="Nom de votre balade" class="input -walk" value="Balade de <?php echo $row['USERNAME'] ?>"type="text" name="walk_name" id="walk_name">
                             </div>
-                            <div class="input__container">
+                            <div class="input__container walk_type_wrapper hidden_form" data-step=2>
                                 <span class="input__name">Type de la balade</span>
                                 <select required placeholder="Type de balade" class="select -walk" name="walk_type" id="walk_type">
                                     <option value="" disabled selected hidden>Type de la balade</option>
@@ -60,9 +60,6 @@
                                 </select>
                             </div>
                             <?php
-                                $link = mysqli_connect(HOST, USER, PWD, BASE);
-                                mysqli_query($link, "SET NAMES UTF8");
-
                                 $sql = "SELECT * FROM towns";
                                 $query = mysqli_query($link,$sql);
                                 while ( $results[] = mysqli_fetch_object ( $query ) );
@@ -77,16 +74,19 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div> -->
-                            <div class="input__container">
+                            <div class="input__container walk_info_wrapper hidden_form" data-step=3>
                                 <span class="input__name">Lieu de la balade</span>
                                 <input placeholder="Lieu de la balade" class="input input -walk" type="text" name="info" id="info">
                             </div>
-                            <div class="input__container">
-                                <span class="input__name"> Date de la balade</span>
-                                <input class="input -walk -time" type="time" id="time" name="time" required>
-                                <input placeholder="Lieu de la balade" class="input -walk" type="date" name="date" id="date">
+                            <div class="input__container walk_date_wrapper hidden_form" data-step=4>
+                                <span class="input__name">Date de la balade</span>
+                                <input class="input -walk" type="date" name="date" id="date">
                             </div>
-                            <div class="input__container">
+                            <div class="input__container walk_date_wrapper hidden_form" data-step=5>
+                                <span class="input__name">Heure de la balade</span>
+                                <input class="input -walk -time" type="time" id="time" name="time" required>
+                            </div>
+                            <div class="input__container walk_length_wrapper hidden_form" data-step=6>
                                 <span class="input__name"> Durée approximative</span>
                                 <select required placeholder="Type de balade" class="select -walk" name="length" id="length">
                                     <option value="" disabled selected hidden>Durée approximative</option>

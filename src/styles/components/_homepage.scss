@@ -1429,6 +1429,17 @@
   margin-bottom: 24px;
 }
 
+.hidden_form {
+  display: none;
+}
+
+.centered_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:80vh;
+}
+
 .chien__container, .master__container{
   margin: 0px 8px;
   display: flex;
