@@ -1,6 +1,6 @@
 <head>
     <title>Pawtopia | <?= $pagename ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,700|Fira+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./src/styles/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./src/styles/app.css">
