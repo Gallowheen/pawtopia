@@ -4,14 +4,19 @@ $(document).ready(function() {
         url:"src/php/showcase_message.php",
     })
     .done(function(result){
-        if(result != "noMsg")
-            data = JSON.parse(result);
+        if(result == "noMsg" || !data) {
+            $(".content_container .container .row .col .message__container").append('<img class="message__img" src="src/assets/img/ressources/no_conversation.png">');
+            $('.message__container').css('height','100vh');
+            $('.message__container').css('width','100%');
+            $('body').css('overflow','hidden');
+            return;
+        }
+        data = JSON.parse(result);
         let user = [];
         let userList = [];
         let banlist = [];
         let found = false;
 
-        if (typeof data !== 'undefined' && data.length > 0){
             for (i = 0; i < data.length; i++){
                 if (user.length > 0){
                     let error = false;
@@ -102,12 +107,9 @@ $(document).ready(function() {
 
             $('.toMessage').click(function(){
 
-                console.log("test");
-
                 let IDuser = $(this).data('id');
                 var title = $(".header__title").html();
                 let name = $(this).children().eq(0).children().eq(1).children().eq(0).text();
-                console.log(name);
 
                 $.ajax({
                     method: "GET",
@@ -129,11 +131,5 @@ $(document).ready(function() {
                 });
 
             });
-        }else{
-            $(".content_container .container .row .col .message__container").append('<img class="message__img" src="src/assets/img/ressources/no_conversation.png">');
-            $('.message__container').css('height','100vh');
-            $('.message__container').css('width','100%');
-            $('body').css('overflow','hidden');
-        }
     })
 });
