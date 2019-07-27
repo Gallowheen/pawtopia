@@ -127,7 +127,7 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
-            slidePage(result);
+            slidePage(result, "right");
             setReturnButton("profile", {}, title);
             setTitle("Amis");
         });
@@ -155,7 +155,7 @@ $(document).ready(function() {
         let button = '<div class="action__element" id="add_friend" data-id="271"><i class="icon icon-sent"></i><span>Ajouté</span></div>';
         $('.action__container').append(button);
         $('.action__container #add_friend').addClass('pop');
-   
+
 
         $.ajax({
             method: "GET",
@@ -233,7 +233,7 @@ $(document).ready(function() {
                 }
             });
 
-            
+
             $('#uploadfiles').on("change", function(){
 
                 // var uploadfiles = $('#uploadfiles');
