@@ -351,5 +351,5 @@ function slidePage(html='', direction='left', slideFadeIn=500, slideFadeOut=500)
     container.html(html);
 
     container.addClass(directionNew);
-    setTimeout(function() {container.removeClass(directionNew)}, slideFadeIn);
+    setTimeout(function() {$(window).scrollTop(0);container.removeClass(directionNew)}, slideFadeIn);
 }
