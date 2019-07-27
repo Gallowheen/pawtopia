@@ -1,8 +1,13 @@
 $(document).ready(function() {
-
-
     $('body').css('overflow','scroll');
-    
+
+    var walk_id_owner;
+    var walk_name;
+    var walk_location;
+    var walk_type;
+    var walk_date;
+    var walk_length;
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;
@@ -50,6 +55,12 @@ $(document).ready(function() {
         }
 
         if (error.length == 0){
+            walk_id_owner = $("form").data('id');
+            walk_name = $("#walk_name").val();
+            walk_location = $("#info").val();
+            walk_type = $("#walk_type").val();
+            walk_length = $("#length").val();
+            walk_date = $("#date").val() + " " + $("#time").val();
 
             $('#event_information').css('display','none');
             $('.walk__dog').css('display','block');
@@ -113,8 +124,6 @@ $(document).ready(function() {
     $("#validate").click(function(e){
         e.preventDefault();
 
-        var date = $("#date").val() + " " + $("#time").val();
-
         let dogSelected = [];
         let x = 0;
 
@@ -124,7 +133,7 @@ $(document).ready(function() {
             }
         });
 
-        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$('#info').val()+'&addressdetails=1', function(data){
+        $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+walk_location+'&addressdetails=1', function(data){
 
             lat = data[0].lat;
             lon = data[0].lon;
@@ -145,12 +154,12 @@ $(document).ready(function() {
             $.get(
                 'src/php/add_event.php',
                 {
-                    ID_OWNER : $("form").data('id'),
-                    NAME : $("#walk_name").val(),
-                    LOCATION : $("#info").val(),
-                    TYPE : $("#walk_type").val(),
-                    DATE : date,
-                    LENGTH : $("#length").val(),
+                    ID_OWNER : walk_id_owner,
+                    NAME : walk_name,
+                    LOCATION : walk_location,
+                    TYPE : walk_type,
+                    DATE : walk_date,
+                    LENGTH : walk_length,
                     DOG : dogSelected,
                     LAT : lat,
                     LON : lon,
