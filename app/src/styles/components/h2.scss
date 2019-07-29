@@ -43,8 +43,14 @@
   //
   ////////////////////////////////////////////////////
 
-  &.-white{
-
+  &.-landing{
+    position: absolute;
+    top: 65%;
+    z-index: 100;
+    left: 50%;
+    transform : translateX(-50%);
+    display: inline-table;
+    color: white;
   }
 
   /*

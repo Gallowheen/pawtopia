@@ -1,0 +1,325 @@
+@import "styles.scss";
+
+body{
+  background : white;
+}
+
+header{
+  height: 100vh;
+}
+
+.video-responsive
+{
+  position: absolute;
+  width: 400vw;
+  height: 100vh;
+  left: -150%;
+  filter: blur(2px);
+}
+
+.logo{
+  position : absolute;
+  z-index: 100;
+  width: 30%;
+  left: 35%;
+  top: 15%;
+}
+
+.dotting{
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: linear-gradient(45deg, black, #00000012 50%, #0000004f, #00000066);
+  background-size: 2px 2px;
+}
+  
+.introduction{
+  position: absolute;
+  color: white;
+  top: 72.5%;
+  text-align: center;
+  z-index: 100;
+  left: 50%;
+  transform : translateX(-50%);
+  display: inline-table;
+  padding: 0px 24px;
+}
+
+.icon__down{
+  position: absolute;
+  bottom: 5%;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 15px;
+  transform: rotate(-315deg) translateX(-50%);
+  z-index: 100;
+  left: 50%;
+  animation: levitation 2s infinite;
+}
+
+@keyframes levitation {
+  0% {
+    bottom: 5%
+  }
+  50% {
+    bottom: 3.5%
+  }
+  100% {
+    bottom: 5%
+  }
+}
+
+.information{
+  padding: 64px 0px;
+
+  h2{
+    color : #0067B0;
+    margin-bottom: 48px;
+    font-weight: bold;
+  }
+}
+
+.numbers{
+  padding-top: 48px;
+}
+
+.element__flex{
+  display: flex;
+  justify-content: center;
+  color:  #0067B0;
+  font-size: 32px;
+  margin-bottom: 8px;
+
+  i{
+    margin-right: 16px;
+  }
+}
+
+.numbers{
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+
+  span{
+    font-size: 20px;
+  }
+}
+//walks
+
+.walks{
+  padding: 64px 0px 32px 0px;
+  background: #F6F8FA;
+
+  h2{
+    color : #0067B0;
+    margin-bottom: 24px;
+    font-weight: bold;
+  }
+
+  h3{
+    font-weight: bold;
+    margin-bottom: 36px;
+  }
+
+  .walks__container{
+    display: flex;
+    flex-wrap : wrap;
+    justify-content : space-around;
+  }
+
+  .walks__element{
+    margin-bottom: 64px;
+
+    &:last-child{
+      margin-bottom: 0px;
+    }
+  }
+
+  .layers{
+    width: 50%;
+    background : url('/app/src/assets/img/ressources/splashlayer.png');
+    background-repeat : no-repeat;
+    height: 500px;
+    background-size : 100%;
+    width: 150vw;
+
+    img{
+      position: absolute;
+      margin-left : 25%;
+      margin-top : -170px;
+      position: absolute;
+      margin-left: 55%;
+      margin-top: 0px;
+      width: 60%;  
+    }
+  }
+}
+
+.shadow__float{
+  animation : 1s shadow forwards;
+}
+
+@keyframes shadow {
+  100%{
+   transform : translate(7.5%,15%);
+  }
+}
+
+.map__float{
+  animation : 1s map forwards;
+}
+
+@keyframes map {
+ 100%{
+   transform : translate(-7.5%,-9%);
+  }
+}
+
+//specs
+
+.specs{
+  padding: 64px 0px;
+  background : url("/app/src/assets/img/ressources/background.png");
+  background-repeat: repeat-y;
+  background-size: 200% 20%;
+
+  h2{
+    color : #0067B0;
+    margin-bottom: 48px;
+    font-weight: bold;
+  }
+}
+
+.card{
+  position: relative;
+  padding: 32px;
+  border-radius: 25px;
+  margin-bottom: 48px;
+  height: 550px;
+  width: 90%;
+  margin-left: 5%;
+  box-shadow: 0px 0px 20px 0px #0000004f;
+
+  &:last-child{
+    margin-bottom: 0px;
+  }
+
+  .card__img{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 32px;
+
+    &.-extra{
+      margin-top: 16px;
+      width: 50%;
+      margin-left: 25%;
+    }
+  }
+
+  .card__text{
+    position: absolute;
+    bottom: 32px;
+    width: 80%;
+  }
+
+  h3{
+    font-weight: bold;
+    margin-bottom: 32px;
+  }
+}
+
+//footer
+
+.footer{
+  padding-bottom: 64px;
+
+  h2{
+    color : #0067B0;
+    margin-bottom: 48px;
+    font-weight: bold;
+  }
+
+  .stores{
+    display: flex;
+    justify-content: center;
+  }
+
+  .store{
+    margin-right: 24px;
+
+    &:last-child{
+      margin-right: 0px;
+    }
+  }
+}
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  
+    //CSS
+    
+  }
+  
+  /* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+  
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    
+    //CSS
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (portrait)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    
+    //CSS
+    
+  }
+  
+  /* 
+    ##Device = Tablets, Ipads (landscape)
+    ##Screen = B/w 768px to 1024px
+  */
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    
+    //CSS
+    
+  }
+  
+  /* 
+    ##Device = Low Resolution Tablets, Mobiles (Landscape)
+    ##Screen = B/w 481px to 767px
+  */
+  
+  @media (min-width: 481px) and (max-width: 767px) {
+    
+    //CSS
+    
+  }
+  
+  /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+  
+  @media (min-width: 320px) and (max-width: 480px) {
+    
+    //CSS
+    
+  }

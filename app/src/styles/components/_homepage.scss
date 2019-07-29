@@ -170,7 +170,7 @@
   }
 }
 
-@media only screen and (max-aspect-ratio: 13/9){
+@media only screen and (max-aspect-ratio: 13/9) and (max-width : 450px){
   .mobile{
     display : block;
   }

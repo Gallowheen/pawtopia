@@ -49,6 +49,19 @@
 
   }
 
+  &.-landing{
+    font-size: 64px;
+    position: absolute;
+    top: 30%;
+    z-index: 100;
+    left: 50%;
+    transform : translateX(-50%);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: white;
+    display: inline-table;
+  }
+
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */

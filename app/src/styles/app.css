@@ -16,6 +16,18 @@ body {
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.h1.-landing {
+  font-size: 64px;
+  position: absolute;
+  top: 30%;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  -webkit-text-fill-color: white;
+  display: inline-table;
+}
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -23,6 +35,15 @@ body {
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
+}
+.h2.-landing {
+  position: absolute;
+  top: 65%;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-table;
+  color: white;
 }
 .h3 {
   font-family: "Fira Sans", sans-serif;
@@ -800,7 +821,7 @@ input[type=range]::-webkit-slider-runnable-track {
   text-align: center;
 }
 
-@media only screen and (max-aspect-ratio: 13/9) {
+@media only screen and (max-aspect-ratio: 13/9) and (max-width: 450px) {
   .mobile {
     display: block;
   }
@@ -2301,6 +2322,18 @@ body {
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.h1.-landing {
+  font-size: 64px;
+  position: absolute;
+  top: 30%;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  -webkit-text-fill-color: white;
+  display: inline-table;
+}
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -2308,6 +2341,15 @@ body {
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
+}
+.h2.-landing {
+  position: absolute;
+  top: 65%;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-table;
+  color: white;
 }
 .h3 {
   font-family: "Fira Sans", sans-serif;
@@ -3027,6 +3069,18 @@ body {
   R   E   S   P   O   N   S   I   V   E
                                         */
 }
+.h1.-landing {
+  font-size: 64px;
+  position: absolute;
+  top: 30%;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  -webkit-text-fill-color: white;
+  display: inline-table;
+}
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -3034,6 +3088,15 @@ body {
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
+}
+.h2.-landing {
+  position: absolute;
+  top: 65%;
+  z-index: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-table;
+  color: white;
 }
 .h3 {
   font-family: "Fira Sans", sans-serif;
