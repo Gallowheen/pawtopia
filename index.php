@@ -35,7 +35,7 @@
                     <div class="col">
                         <div class="texte">
                             <h2>Rejoignez la communauté !</h2>
-                            <p>Pawtopia est un service gratuit qui pour but de rassembler tout les amoureux des balades avec leur chiens.</p>
+                            <p>Pawtopia est un service gratuit qui a pour but de rassembler tout les amoureux de balades en compagnie de leur chien.</p>
                             <p>Il propose un outil qui permet de mettre en relation rapidement et simplement les maîtres et leur chiens afin d'organiser des balades communautaires.</p>
                         </div>
                         <div class="numbers">

@@ -28,6 +28,13 @@ body {
   -webkit-text-fill-color: white;
   display: inline-table;
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+  .h1.-landing {
+    left: 65%;
+    top: 15%;
+  }
+}
+
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -45,6 +52,13 @@ body {
   display: inline-table;
   color: white;
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 45%;
+  }
+}
+
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;
@@ -911,6 +925,96 @@ header {
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  .logo {
+    width: 20%;
+    left: 20%;
+  }
+
+  .introduction {
+    font-size: 32px;
+    width: 80%;
+    top: 55%;
+  }
+
+  .icon__down {
+    padding: 30px;
+    border-width: 0 6px 6px 0;
+  }
+
+  .dotting {
+    background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
+  }
+
+  .information h2 {
+    font-size: 36px;
+  }
+  .information p {
+    width: 70%;
+  }
+  .information .element__flex {
+    font-size: 48px;
+  }
+  .information .members__title, .information .walks__title {
+    font-size: 32px;
+  }
+  .information .numbers span {
+    font-size: 32px;
+  }
+
+  .walks {
+    padding: 64px 0px 64px 0px;
+  }
+  .walks h2 {
+    font-size: 36px;
+  }
+  .walks .walks__container {
+    justify-content: unset;
+  }
+  .walks .layers {
+    background-size: auto;
+  }
+  .walks .layers img {
+    width: 40%;
+    margin-left: 35%;
+    margin-top: -50px;
+  }
+
+  .walks__element:first-child {
+    width: 70%;
+  }
+
+  .specs {
+    background-size: 150% 35%;
+  }
+  .specs h2 {
+    font-size: 36px;
+  }
+
+  .card {
+    width: 70%;
+    left: 15%;
+  }
+  .card .card__img {
+    width: 50%;
+    left: 25%;
+  }
+  .card .card__img.-extra {
+    width: 40%;
+    left: 30%;
+  }
+
+  .footer {
+    padding: 64px 0px 64px 0px;
+  }
+  .footer h2 {
+    font-size: 36px;
+  }
+}
 /* 
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px

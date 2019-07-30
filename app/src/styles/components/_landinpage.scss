@@ -286,8 +286,117 @@ header{
   */
   
   @media (min-width: 768px) and (max-width: 1024px) {
+
+    html::-webkit-scrollbar {
+      display: none;
+    } 
     
-    //CSS
+    .logo{
+      width: 20%;
+      left: 20%;
+    }
+
+    .introduction{
+      font-size: 32px;
+      width: 80%;
+      top: 55%;
+    }
+
+    .icon__down{
+      padding: 30px;
+      border-width: 0 6px 6px 0;
+    }
+
+    .dotting{
+      background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
+    }
+
+    //information 
+
+    .information{
+
+      h2{
+        font-size: 36px;
+      }
+
+      p{
+        width: 70%;
+      }
+
+      .element__flex{
+        font-size: 48px;
+      }
+
+      .members__title, .walks__title{
+        font-size: 32px;
+      }
+
+      .numbers span{
+        font-size: 32px;
+      }
+    }
+
+    .walks{
+      padding: 64px 0px 64px 0px;
+
+      h2{
+        font-size: 36px;
+      }
+
+      .walks__container{
+        justify-content: unset;
+      }
+
+      .layers{
+        background-size: auto;
+
+        img{
+          width: 40%;
+          margin-left: 35%;
+          margin-top: -50px;
+        }
+      }
+
+    }
+
+    .walks__element{
+      &:first-child{
+        width: 70%;
+      }
+    }
+
+    .specs{
+
+      background-size: 150% 35%;
+
+      h2{
+        font-size: 36px;
+      }
+    }
+
+    .card{
+      width: 70%;
+      left: 15%;
+
+      .card__img{
+        width: 50%;
+        left: 25%;
+
+        &.-extra{
+          width: 40%;
+          left: 30%;
+        }
+      }
+    }
+
+    .footer{
+      padding: 64px 0px 64px 0px;
+
+      h2{
+        font-size: 36px;
+      }
+    }
+
     
   }
   

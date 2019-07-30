@@ -56,9 +56,11 @@
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */
-  @include respond-below(sm) {
-    & {
+  @media (min-width: 768px) and (max-width: 1024px) {
 
+    &.-landing{
+      font-size: 48px;
+      top: 45%;
     }
-  }
+  }                                          
 }
