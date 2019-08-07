@@ -28,6 +28,27 @@ body {
   -webkit-text-fill-color: white;
   display: inline-table;
 }
+@media (min-width: 1281px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h1.-landing {
+    font-size: 92px;
+    top: 15%;
+    left: 65%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h1.-landing {
+    left: 65%;
+    top: 15%;
+  }
+}
+
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -45,6 +66,25 @@ body {
   display: inline-table;
   color: white;
 }
+@media (min-width: 1281px) {
+  .h2.-landing {
+    top: 60%;
+    font-size: 64px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 60%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 45%;
+  }
+}
+
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;
@@ -1979,7 +2019,7 @@ input[type=range]::-webkit-slider-runnable-track {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 90vh;
 }
 
 .chien__container, .master__container {
@@ -2334,6 +2374,27 @@ body {
   -webkit-text-fill-color: white;
   display: inline-table;
 }
+@media (min-width: 1281px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h1.-landing {
+    font-size: 92px;
+    top: 15%;
+    left: 65%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h1.-landing {
+    left: 65%;
+    top: 15%;
+  }
+}
+
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -2351,6 +2412,25 @@ body {
   display: inline-table;
   color: white;
 }
+@media (min-width: 1281px) {
+  .h2.-landing {
+    top: 60%;
+    font-size: 64px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 60%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 45%;
+  }
+}
+
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;
@@ -3081,6 +3161,27 @@ body {
   -webkit-text-fill-color: white;
   display: inline-table;
 }
+@media (min-width: 1281px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h1.-landing {
+    font-size: 92px;
+    top: 15%;
+    left: 65%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h1.-landing {
+    left: 65%;
+    top: 15%;
+  }
+}
+
 .h2 {
   font-family: "Fira Sans", sans-serif;
   font-size: 28px;
@@ -3098,6 +3199,25 @@ body {
   display: inline-table;
   color: white;
 }
+@media (min-width: 1281px) {
+  .h2.-landing {
+    top: 60%;
+    font-size: 64px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 60%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h2.-landing {
+    font-size: 48px;
+    top: 45%;
+  }
+}
+
 .h3 {
   font-family: "Fira Sans", sans-serif;
   font-size: 24px;

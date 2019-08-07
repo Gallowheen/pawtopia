@@ -59,32 +59,32 @@ $(document).ready(function() {
                 step++;
                 $("[data-step="+step+"]").removeClass('hidden_form');
                 break;
-            case(4):
-                if( $("#date").val() == null){
-                    $("#date").addClass('-error');
-                    retun;
-                }
-                $("[data-step="+step+"]").addClass('hidden_form');
-                step++;
-                $("[data-step="+step+"]").removeClass('hidden_form');
-                break;
-            case(5):
-                if($("#time").val() ==""){
-                    $("#time").addClass('-error');
-                    return;
-                }
-                $("[data-step="+step+"]").addClass('hidden_form');
-                step++;
-                $("[data-step="+step+"]").removeClass('hidden_form');
-                break;
-            case(6):
-                if( $("#length").val() == null){
-                    $("#length").addClass('-error');
-                    return;
-                }
-                $("[data-step="+step+"]").addClass('hidden_form');
-                step++;
-                break;
+            // case(4):
+            //     if( $("#date").val() == null){
+            //         $("#date").addClass('-error');
+            //         retun;
+            //     }
+            //     $("[data-step="+step+"]").addClass('hidden_form');
+            //     step++;
+            //     $("[data-step="+step+"]").removeClass('hidden_form');
+            //     break;
+            // case(5):
+            //     if($("#time").val() ==""){
+            //         $("#time").addClass('-error');
+            //         return;
+            //     }
+            //     $("[data-step="+step+"]").addClass('hidden_form');
+            //     step++;
+            //     $("[data-step="+step+"]").removeClass('hidden_form');
+            //     break;
+            // case(6):
+            //     if( $("#length").val() == null){
+            //         $("#length").addClass('-error');
+            //         return;
+            //     }
+            //     $("[data-step="+step+"]").addClass('hidden_form');
+            //     step++;
+            //     break;
         }
 
         if (step > 6){

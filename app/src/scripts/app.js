@@ -33,6 +33,23 @@ $(document).ready(function(){
 
     let lat;
     let lon;
+   
+    $('.notifications .link').off();
+    $('.notifications .link').click(function(){
+
+        let title = "Notififcations";
+
+        $.ajax({
+            method: "GET",
+            url:"notifications.php",
+        })
+        .done(function(result){
+            slidePage(result, 'left', 500, 250);
+            setTitle('Notifications');
+            setReturnButton("home", {}, title);
+        });
+    });
+    
 
     $(".nav_button_group").click(function(e) {
 
@@ -73,6 +90,25 @@ $(document).ready(function(){
 
                 setTitle(title);
             }
+
+            console.log($('.notifications .link'));
+   
+            $('.notifications .link').off();
+            $('.notifications .link').click(function(){
+
+                console.log('lol');
+                let title = "Notififcations";
+        
+                $.ajax({
+                    method: "GET",
+                    url:"notifications.php",
+                })
+                .done(function(result){
+                    slidePage(result, 'left', 500, 250);
+                    setTitle('Notifications');
+                    setReturnButton("home", {}, title);
+                });
+            });
         });
 
         localStorage.setItem('page', pageClicked);
@@ -85,19 +121,6 @@ $(document).ready(function(){
 
     $(document).on('input', '#slider', function() {
         $('#slider_value').html( $(this).val() + " km" );
-    });
-
-    $('.notifications').click(function(){
-
-        $.ajax({
-            method: "GET",
-            url:"notifications.php",
-        })
-        .done(function(result){
-            slidePage(result, 'left', 500, 250);
-            setTitle('Notifications');
-            setReturnButton("home", {}, title);
-        });
     });
 });
 
@@ -314,6 +337,22 @@ function setReturnButton(target, params = {}, title = "")
                     setLogo();
                     break;
             }
+   
+            $('.notifications .link').off();
+            $('.notifications .link').click(function(){
+
+                let title = "Notififcations";
+
+                $.ajax({
+                    method: "GET",
+                    url:"notifications.php",
+                })
+                .done(function(result){
+                    slidePage(result, 'left', 500, 250);
+                    setTitle('Notifications');
+                    setReturnButton("home", {}, title);
+                });
+            });
         });
     })
 }

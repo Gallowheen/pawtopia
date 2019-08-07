@@ -25,7 +25,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-        <h1>hELLO</h1>
+        <h1>Hello <?php echo $_SESSION['ID'] ?></h1>
     </div>
   </div>
 </div>
