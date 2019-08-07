@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="texte">
-                            <h2>Rejoignez la communauté !</h2>
+                            <h2 class="h2">Rejoignez la communauté !</h2>
                             <p>Pawtopia est un service gratuit qui a pour but de rassembler tout les amoureux de balades en compagnie de leur chien.</p>
                             <p>Il propose un outil qui permet de mettre en relation rapidement et simplement les maîtres et leur chiens afin d'organiser des balades communautaires.</p>
                         </div>
@@ -111,7 +111,8 @@
                                 <img class="card__img" src="/app/src/assets/img/ressources/review.png"/>
                                 <div class="card__text">
                                     <h3 class="h3">Votre avis compte !</h3>
-                                    <p>Une mauvaise surprise ? Une belle rencontre ? Utilisez le système de review pour aider nos membres à trouver leur partenaire de balade idéale !</p>
+                                    <p>Une belle rencontre ? Une mauvaise surprise ?</p>
+                                    <p>Utilisez le système de review pour aider nos membres à trouver leur partenaire de balade idéale !</p>
                                 </div>
                             </div>
                             <div class="card">

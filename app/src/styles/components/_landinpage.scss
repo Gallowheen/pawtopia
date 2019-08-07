@@ -14,7 +14,6 @@ header{
   width: 400vw;
   height: 100vh;
   left: -150%;
-  filter: blur(2px);
 }
 
 .logo{
@@ -264,171 +263,430 @@ header{
 */
 
 @media (min-width: 1281px) {
-  
-    //CSS
-    
-  }
-  
-  /* 
-    ##Device = Laptops, Desktops
-    ##Screen = B/w 1025px to 1280px
-  */
-  
-  @media (min-width: 1025px) and (max-width: 1280px) {
-    
-    //CSS
-    
-  }
-  
-  /* 
-    ##Device = Tablets, Ipads (portrait)
-    ##Screen = B/w 768px to 1024px
-  */
-  
-  @media (min-width: 768px) and (max-width: 1024px) {
 
-    html::-webkit-scrollbar {
-      display: none;
-    } 
-    
-    .logo{
-      width: 20%;
-      left: 20%;
+  .video-responsive{
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    left: auto;
+    height: auto;
+  }
+
+  .logo{
+    width: 300px;
+    left: 25%;
+  }
+
+  .introduction{
+    font-size: 36px;
+  }
+
+  .icon__down{
+    padding: 30px;
+    border-width: 0 6px 6px 0;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .dotting{
+    background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
+  }
+
+  .information{
+
+    h2{
+      font-size: 36px;
     }
 
-    .introduction{
+    p{
+      width: 50%;
+    }
+
+    .element__flex{
+      font-size: 48px;
+    }
+
+    .members__title, .walks__title{
       font-size: 32px;
+    }
+
+    .numbers span{
+      font-size: 32px;
+    }
+  }
+
+  .walks{
+    padding: 64px 0px 64px 0px;
+
+    h2{
+      font-size: 36px;
+    }
+
+    .walks__container{
+      justify-content: space-between;
+    }
+
+    .layers{
+      background-size: auto;
+
+      img{
+        width: 30%;
+        margin-left: 25%;
+        margin-top: 0px;
+      }
+    }
+
+  }
+
+  .walks__element{
+    width: 45%;
+
+    &:first-child{
+      margin-top: 80px;
+    }
+  }
+
+  .specs{
+
+    background-size: 100%;
+
+    h2{
+      font-size: 36px;
+    }
+  }
+
+  .card__container{
+    margin-top: 72px;
+    display: flex;
+  }
+
+  .card{
+
+    width: 30%;
+    height: 600px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+
+    .card__text{
+      text-align: center;
       width: 80%;
-      top: 55%;
+      height: 300px;
+      bottom: 0;
     }
 
-    .icon__down{
-      padding: 30px;
-      border-width: 0 6px 6px 0;
-    }
-
-    .dotting{
-      background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
-    }
-
-    //information 
-
-    .information{
-
-      h2{
-        font-size: 36px;
-      }
-
-      p{
-        width: 70%;
-      }
-
-      .element__flex{
-        font-size: 48px;
-      }
-
-      .members__title, .walks__title{
-        font-size: 32px;
-      }
-
-      .numbers span{
-        font-size: 32px;
-      }
-    }
-
-    .walks{
-      padding: 64px 0px 64px 0px;
-
-      h2{
-        font-size: 36px;
-      }
-
-      .walks__container{
-        justify-content: unset;
-      }
-
-      .layers{
-        background-size: auto;
-
-        img{
-          width: 40%;
-          margin-left: 35%;
-          margin-top: -50px;
-        }
-      }
-
-    }
-
-    .walks__element{
-      &:first-child{
-        width: 70%;
-      }
-    }
-
-    .specs{
-
-      background-size: 150% 35%;
-
-      h2{
-        font-size: 36px;
-      }
-    }
-
-    .card{
-      width: 70%;
-      left: 15%;
-
-      .card__img{
+    .card__img{
+      &.-extra{
         width: 50%;
-        left: 25%;
+      }
+    }
+  }
 
-        &.-extra{
-          width: 40%;
-          left: 30%;
-        }
+  .footer{
+
+    padding: 64px 0px 64px 0px;
+
+    h2{
+      font-size: 36px;
+    }
+
+    .store{
+      width: 300px;
+      margin-right: 48px;
+
+      &:last-child{
+        margin-right: 0px;
+      }
+    }
+  }
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  
+  .logo{
+    width: 20%;
+    left: 20%;
+  }
+
+  .introduction{
+    font-size: 24px;
+  }
+
+  .icon__down{
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .icon__down{
+    padding: 30px;
+    border-width: 0 6px 6px 0;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .information{
+
+    h2{
+      font-size: 28px;
+    }
+
+    p{
+      width: 60%;
+    }
+
+    .element__flex{
+      font-size: 36px;
+    }
+
+    .members__title, .walks__title{
+      font-size: 24px;
+    }
+
+    .numbers span{
+      font-size: 28px;
+    }
+  }
+
+  .walks{
+    padding: 64px 0px 64px 0px;
+
+    h2{
+      font-size: 28px;
+    }
+
+    .walks__container{
+      justify-content: unset;
+    }
+
+    .layers{
+      background-size: auto;
+
+      img{
+        width: 35%;
+        margin-left: 35%;
+        margin-top: -50px;
       }
     }
 
-    .footer{
-      padding: 64px 0px 64px 0px;
+  }
 
-      h2{
-        font-size: 36px;
+  .walks__element{
+
+    margin-left: 25%;
+
+    &:first-child{
+      width: 60%;
+      margin-left: 0;
+    }
+  }
+
+  .specs{
+
+    background-size: 100%;
+
+    h2{
+      font-size: 28px;
+    }
+  }
+
+  .card__container{
+    margin-top: 72px;
+    display: flex;
+  }
+
+  .card{
+
+    &:first-child{
+      margin-left: 0px;
+    }
+
+    width: 30%;
+    height: 600px;
+
+    .card__text{
+      text-align: center;
+      width: 75%;
+      height: 350px;
+      bottom: 0;
+    }
+
+    .card__img{
+      &.-extra{
+        width: 50%;
+      }
+    }
+  }
+
+  .footer{
+
+    padding: 64px 0px 64px 0px;
+
+    h2{
+      font-size: 28px;
+    }
+
+    .store{
+      width: 300px;
+      margin-right: 48px;
+
+      &:last-child{
+        margin-right: 0px;
+      }
+    }
+  }
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  html::-webkit-scrollbar {
+    display: none;
+  } 
+  
+  .logo{
+    width: 20%;
+    left: 20%;
+  }
+
+  .introduction{
+    font-size: 32px;
+    width: 80%;
+    top: 55%;
+  }
+
+  .icon__down{
+    padding: 30px;
+    border-width: 0 6px 6px 0;
+  }
+
+  .dotting{
+    background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
+  }
+
+  //information 
+
+  .information{
+
+    h2{
+      font-size: 36px;
+    }
+
+    p{
+      width: 70%;
+    }
+
+    .element__flex{
+      font-size: 48px;
+    }
+
+    .members__title, .walks__title{
+      font-size: 32px;
+    }
+
+    .numbers span{
+      font-size: 32px;
+    }
+  }
+
+  .numbers{
+    padding-top: 72px;
+    padding-bottom: 24px;
+  }
+
+  .walks{
+    padding: 64px 0px 64px 0px;
+
+    h2{
+      font-size: 36px;
+    }
+
+    .walks__container{
+      justify-content: unset;
+    }
+
+    .layers{
+      background-size: auto;
+
+      img{
+        width: 40%;
+        margin-left: 35%;
+        margin-top: -50px;
       }
     }
 
-    
   }
-  
-  /* 
-    ##Device = Tablets, Ipads (landscape)
-    ##Screen = B/w 768px to 1024px
-  */
-  
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    
-    //CSS
-    
+
+  .walks__element{
+    &:first-child{
+      width: 70%;
+    }
   }
-  
-  /* 
-    ##Device = Low Resolution Tablets, Mobiles (Landscape)
-    ##Screen = B/w 481px to 767px
-  */
-  
-  @media (min-width: 481px) and (max-width: 767px) {
-    
-    //CSS
-    
+
+  .specs{
+
+    background-size: 150% 35%;
+
+    h2{
+      font-size: 36px;
+    }
   }
-  
-  /* 
-    ##Device = Most of the Smartphones Mobiles (Portrait)
-    ##Screen = B/w 320px to 479px
-  */
-  
-  @media (min-width: 320px) and (max-width: 480px) {
-    
-    //CSS
-    
+
+  .card{
+    width: 70%;
+    left: 15%;
+
+    .card__text{
+      text-align: center;
+      width: 85%;
+    }
+
+    .card__img{
+      width: 50%;
+      left: 25%;
+
+      &.-extra{
+        width: 40%;
+        left: 30%;
+      }
+    }
   }
+
+  .footer{
+    padding: 64px 0px 64px 0px;
+
+    h2{
+      font-size: 36px;
+    }
+  }
+
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
