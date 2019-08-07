@@ -4,6 +4,9 @@ $(document).ready(function() {
         url:"src/php/showcase_message.php",
     })
     .done(function(result){
+
+        var data = JSON.parse(result);
+
         if(result == "noMsg" || !data) {
             $(".content_container .container .row .col .message__container").append('<img class="message__img" src="src/assets/img/ressources/no_conversation.png">');
             $('.message__container').css('height','100vh');
@@ -11,7 +14,6 @@ $(document).ready(function() {
             $('body').css('overflow','hidden');
             return;
         }
-        data = JSON.parse(result);
         let user = [];
         let userList = [];
         let banlist = [];

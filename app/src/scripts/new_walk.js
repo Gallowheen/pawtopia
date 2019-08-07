@@ -27,6 +27,9 @@ $(document).ready(function() {
     document.getElementById("date").setAttribute("value", today);
     document.getElementById("time").setAttribute("min", hour);
 
+    let steps = $('.multi-steps').children();
+    console.log(steps[0]);
+
     $("#next").click(function(e){
 
         e.preventDefault();
@@ -37,27 +40,63 @@ $(document).ready(function() {
                     $("#walk_name").addClass('-error');
                     return;
                 }
-                $("[data-step="+step+"]").addClass('hidden_form');
-                step++;
-                $("[data-step="+step+"]").removeClass('hidden_form');
-                break;
-            case(2):
                 if( $("#walk_type").val() == null){
                     $("#walk_type").addClass('-error');
                     return;
                 }
+
                 $("[data-step="+step+"]").addClass('hidden_form');
                 step++;
                 $("[data-step="+step+"]").removeClass('hidden_form');
+
+                $('.multi-steps').children().each(function(){
+                    if($(this).hasClass('is-active')){
+                        $(this).removeClass('is-active');
+                    }
+                });
+
+                $(steps[step - 1]).addClass('is-active');
                 break;
-            case(3):
+            case(2):
                 if( $("#info").val() == ""){
                     $("#info").addClass('-error');
+                    return;
+                }
+                if( $("#date").val() == null){
+                    $("#date").addClass('-error');
+                    retun;
+                }
+                $("[data-step="+step+"]").addClass('hidden_form');
+                step++;
+                $("[data-step="+step+"]").removeClass('hidden_form');
+
+                $('.multi-steps').children().each(function(){
+                    if($(this).hasClass('is-active')){
+                        $(this).removeClass('is-active');
+                    }
+                });
+
+                $(steps[step - 1]).addClass('is-active');
+                break;
+            case(3):
+                if($("#time").val() ==""){
+                    $("#time").addClass('-error');
+                    return;
+                }
+                if( $("#length").val() == null){
+                    $("#length").addClass('-error');
                     return;
                 }
                 $("[data-step="+step+"]").addClass('hidden_form');
                 step++;
                 $("[data-step="+step+"]").removeClass('hidden_form');
+                $('.multi-steps').children().each(function(){
+                    if($(this).hasClass('is-active')){
+                        $(this).removeClass('is-active');
+                    }
+                });
+
+                $(steps[step - 1]).addClass('is-active');
                 break;
             // case(4):
             //     if( $("#date").val() == null){
@@ -87,13 +126,21 @@ $(document).ready(function() {
             //     break;
         }
 
-        if (step > 6){
+        if (step >= 4){
             walk_id_owner = $("form").data('id');
             walk_name = $("#walk_name").val();
             walk_location = $("#info").val();
             walk_type = $("#walk_type").val();
             walk_length = $("#length").val();
             walk_date = $("#date").val() + " " + $("#time").val();
+
+            $('.multi-steps').children().each(function(){
+                if($(this).hasClass('is-active')){
+                    $(this).removeClass('is-active');
+                }
+            });
+
+            $(steps[step - 1]).addClass('is-active');
 
             $('#event_information').css('display','none');
             $('.walk__dog').css('display','block');

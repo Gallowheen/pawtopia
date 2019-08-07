@@ -44,6 +44,12 @@
             <div class="container">
                 <div class="row centered_form">
                     <div class="col">
+                        <ul class="list-unstyled multi-steps">
+                            <li class="is-active"></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
                         <form id="event_information" data-id="<?php echo $_SESSION['ID'] ?>">
                             <!-- <h3 class="h3 information">Informations de la balade</h3> -->
                             <div class="input__container -first" data-step=1>
@@ -117,6 +123,12 @@
                         $rows = resultToArray($result);
                         ?>
                         <div class="walk__dog">
+                            <ul class="list-unstyled multi-steps">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li class="is-active"></li>
+                            </ul>
                             <h3 class="h3 information">Votre partenaire de balade</h3>
                             <div class="walk__dog__container">
                                 <?php
