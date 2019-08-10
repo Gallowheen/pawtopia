@@ -157,22 +157,17 @@
                         <div class="action__container">
                             <?php
 
-                            echo '<div class="action__element friend__link" data-id="'.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i><span>Message</span></div>';
-
                             if ($row_friend['MUTUAL']){
                                 echo '<div class="action__element"><i class="icon icon__friend icon-single-01"></i><span>Ami</span></div>';
                             }else{
                                 if($row_friend_requested){
                                     echo '<div class="action__element"><i class="icon icon__friend icon-sent"></i><span>Envoyé</span></div>';
-                                    //echo "<span class='friend__link' data-id='".$_GET['ID']."'><i class='icon icon__friend friend__message -friend icon-ic_sms_48px'></i></span><button class='friend__button button -friend'><i class='icon icon__friend icon-ic_check_48px'></i>Envoyé</button>";
                                 }else{
                                     echo '<div class="action__element" id="add_friend" data-id="'.$_GET['ID'].'"><i class="icon icon__friend icon icon-ic_person_add_48px"></i><span>Ajouter</span></div>';
-
-
-                                    //<button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button>";
-                                    //echo "<span class='friend__link' data-id='".$_GET['ID']."'><i class='icon friend__message -friend icon__friend icon-ic_sms_48px'></i></span><button id='add_friend' data-id='".$_GET['ID']."' class='friend__button button -friend'><i class='icon icon__friend icon icon-ic_person_add_48px'></i>Ajouter</button>";
                                 }
                             }
+                            echo '<div class="action__element" id="review_profile" data-id="'.$_GET["ID"].'"><i class="icon friend__review -friend icon__friend icon-ic_favorite_48px"></i><span>Évaluer</span></div>';
+                            echo '<div class="action__element friend__link" data-id="'.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i><span>Message</span></div>';
                         ?>
                         </div>
                         <?php
@@ -293,6 +288,61 @@
                                 <?php
                             }
                         }
+                        ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
+    <div class="review__container" style='margin-top: 32px;'>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <!-- DOG VIEWER FUNCTION -->
+                    <?php
+                        $query = $link->prepare("SELECT r.*, u.USERNAME, u.AVATAR FROM reviews r, user u WHERE r.ID_USER = ? AND r.ID_REVIEWER = u.ID");
+                        $query->bind_param("i", $row['ID']);
+                        $query->execute();
+
+                        $result = $query->get_result();
+                        $reviews;
+                        $note = 0;
+                        if($result->num_rows === 0){
+                            // Pas d'évaluations
+                        }else{
+                            $reviews = resultToArray($result);
+                            foreach ($reviews as $k => $v) {
+                                $note += $v['NOTE'];
+                            }
+                            $note = $note / count($reviews);
+                        }
+                        $note = number_format($note, 1);
+                        ?>
+
+                        <h3 class="information h3">Évaluations <?php echo '('.$note.' / 5)'; ?> </h3>
+                        <?php
+                        foreach ( $reviews as $review ) :
+                        ?>
+                            <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
+                            <div class="review_card" style='clear:both; padding:4px; margin:4px;'>
+                                <?php
+                                // Partie avatar
+                                echo "<div><img class='avatar' style='float:left; width:62px; height:62px; margin-top:0px; margin-right:12px;' src=\"".$review['AVATAR']."\" /></div>";
+
+                                // Partie nom
+                                echo "<div>".$review['USERNAME']."</div>";
+
+                                // Partie étoiles
+                                for($i=0; $i<$review['NOTE']; $i++)
+                                {
+                                    echo "<i class='icon information__icon icon-ic_favorite_48px'></i>";
+                                }
+
+                                // Partie commentaire
+                                echo "<div>".$review['MESSAGE']."</div>"; ?>
+                            </div>
+                        <?php
+                        endforeach;
                         ?>
                 </div>
             </div>

@@ -116,6 +116,26 @@ $(document).ready(function() {
         });
     });
 
+    $("#review_profile").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        var user = $(this).data("id");
+        var name = $(this).children().eq(0).children().eq(1).text();
+
+        $.ajax({
+            method: "GET",
+            url:"review.php",
+            data: {ID:user}
+        })
+        .done(function(result) {
+            slidePage(result, 'right');
+            var title = $(".header__title").html();
+            setReturnButton("profile", {}, title);
+            setTitle('Évaluer '+name);
+        });
+    });
+
     $(".more__friend").click(function(e){
 
         var user = $(this).data("id");
