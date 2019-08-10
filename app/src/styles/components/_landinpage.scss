@@ -257,12 +257,6 @@ header{
   }
 }
 
-
-/* 
-  ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
-*/
-
 @media (min-width: 1920px){
   .video-responsive{
     right: 0;
@@ -396,7 +390,7 @@ header{
     }
 
     .store{
-      width: 300px;
+      width: 250px;
       margin-right: 48px;
 
       &:last-child{
@@ -406,7 +400,7 @@ header{
   }
 }
 
-@media (min-width: 1440px) and (max-width: 1918px){
+@media (min-width: 1440px) and (max-width: 1919px){
   .video-responsive{
     right: 0;
     bottom: 0;
@@ -419,7 +413,7 @@ header{
 
   .logo{
     width: 300px;
-    left: 25%;
+    left: 15%;
   }
 
   .introduction{
@@ -474,11 +468,13 @@ header{
     }
 
     .layers{
-      background-size: auto;
+      background-size: 100% 80%;
+      background-position: center;
+      width: 100%;
 
       img{
-        width: 30%;
-        margin-left: 25%;
+        width: 25%;
+        margin-left: 15%;
         margin-top: 0px;
       }
     }
@@ -539,7 +535,7 @@ header{
     }
 
     .store{
-      width: 300px;
+      width: 250px;
       margin-right: 48px;
 
       &:last-child{
@@ -683,7 +679,7 @@ header{
     }
 
     .store{
-      width: 300px;
+      width: 250px;
       margin-right: 48px;
 
       &:last-child{
@@ -974,6 +970,56 @@ header{
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   
-  //CSS
+  .footer{
+    .store{
+      width: 250px;
+    }
+  }
   
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  .logo{
+    width: 15%;
+    left: 42.5%;
+    top: 12.5%;
+  }
+
+  .introduction{
+    top: 75%;
+  }
+
+  .walks{
+    .layers{
+      background-size: contain;
+      width: 80vw;
+
+      img{
+        width: 50%;
+        margin-left: 35%;
+        margin-top: 0px;
+      }
+    }
+  }
+
+  .specs{
+    background-size: 100%;
+  }
+
+  .card{
+    width: 70%;
+    left: 15%;
+
+    .card__img{
+      width: 50%;
+      left: 25%;
+
+      &.-extra{
+        width: 40%;
+        left: 30%;
+      }
+    }
+  }
 }
