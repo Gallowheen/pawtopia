@@ -259,7 +259,7 @@
                                         <div class="dog_button">
                                         <?php
                                             if (empty($_GET)){ ?>
-                                                <button data-dog=<?php echo '"'.$dog["ID"].'"' ?> class="icon close-icon dog_delete"></button>
+                                                <button data-dog="<?php echo $dog["ID"] ?>" class="icon close-icon dog_delete"></button>
                                         <?php
                                             }
                                         echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';?>
