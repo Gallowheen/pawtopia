@@ -66,7 +66,23 @@
   R   E   S   P   O   N   S   I   V   E
                                         */
 
-  @media (min-width: 1281px) {
+  @media (min-width: 1920px){
+    &.-landing{
+      top: 15%;
+      left: 60%;
+      font-size: 128px;
+    }
+  }
+
+  @media (min-width: 1440px) and (max-width: 1918px) {
+    &.-landing{
+      top: 15%;
+      left: 60%;
+      font-size: 128px;
+    }
+  }
+
+  @media (min-width: 1281px) and (max-width : 1439px) {
     &.-landing{
       top: 15%;
       left: 60%;

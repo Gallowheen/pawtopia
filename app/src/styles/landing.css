@@ -28,7 +28,21 @@ body {
   -webkit-text-fill-color: white;
   display: inline-table;
 }
-@media (min-width: 1281px) {
+@media (min-width: 1920px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1918px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+@media (min-width: 1281px) and (max-width: 1439px) {
   .h1.-landing {
     top: 15%;
     left: 60%;
@@ -66,7 +80,19 @@ body {
   display: inline-table;
   color: white;
 }
-@media (min-width: 1281px) {
+@media (min-width: 1920px) {
+  .h2.-landing {
+    top: 60%;
+    font-size: 64px;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1918px) {
+  .h2.-landing {
+    top: 60%;
+    font-size: 64px;
+  }
+}
+@media (min-width: 1281px) and (max-width: 1439px) {
   .h2.-landing {
     top: 60%;
     font-size: 64px;
@@ -81,7 +107,7 @@ body {
 @media (min-width: 768px) and (max-width: 1023px) {
   .h2.-landing {
     font-size: 48px;
-    top: 45%;
+    top: 60%;
   }
 }
 
@@ -933,6 +959,7 @@ header {
 }
 .footer .store {
   margin-right: 24px;
+  width: 45%;
 }
 .footer .store:last-child {
   margin-right: 0px;
@@ -942,7 +969,239 @@ header {
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
-@media (min-width: 1281px) {
+@media (min-width: 1920px) {
+  .video-responsive {
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    left: auto;
+    height: auto;
+  }
+
+  .logo {
+    width: 300px;
+    left: 25%;
+  }
+
+  .introduction {
+    font-size: 36px;
+  }
+
+  .icon__down {
+    padding: 30px;
+    border-width: 0 6px 6px 0;
+  }
+  .icon__down:hover {
+    cursor: pointer;
+  }
+
+  .dotting {
+    background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
+  }
+
+  .information h2 {
+    font-size: 36px;
+  }
+  .information p {
+    width: 50%;
+  }
+  .information .element__flex {
+    font-size: 48px;
+  }
+  .information .members__title, .information .walks__title {
+    font-size: 32px;
+  }
+  .information .numbers span {
+    font-size: 32px;
+  }
+
+  .walks {
+    padding: 64px 0px 64px 0px;
+  }
+  .walks h2 {
+    font-size: 36px;
+  }
+  .walks .walks__container {
+    justify-content: space-between;
+  }
+  .walks .layers {
+    background-size: auto;
+  }
+  .walks .layers img {
+    width: 30%;
+    margin-left: 25%;
+    margin-top: 0px;
+  }
+
+  .walks__element {
+    width: 45%;
+  }
+  .walks__element:first-child {
+    margin-top: 80px;
+  }
+
+  .specs {
+    background-size: 100%;
+  }
+  .specs h2 {
+    font-size: 36px;
+  }
+
+  .card__container {
+    margin-top: 72px;
+    display: flex;
+  }
+
+  .card {
+    width: 30%;
+    height: 600px;
+  }
+  .card:first-child {
+    margin-left: 0;
+  }
+  .card .card__text {
+    text-align: center;
+    width: 80%;
+    height: 300px;
+    bottom: 0;
+  }
+  .card .card__img.-extra {
+    width: 50%;
+  }
+
+  .footer {
+    padding: 64px 0px 64px 0px;
+  }
+  .footer h2 {
+    font-size: 36px;
+  }
+  .footer .store {
+    width: 300px;
+    margin-right: 48px;
+  }
+  .footer .store:last-child {
+    margin-right: 0px;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1918px) {
+  .video-responsive {
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    left: auto;
+    height: auto;
+  }
+
+  .logo {
+    width: 300px;
+    left: 25%;
+  }
+
+  .introduction {
+    font-size: 36px;
+  }
+
+  .icon__down {
+    padding: 30px;
+    border-width: 0 6px 6px 0;
+  }
+  .icon__down:hover {
+    cursor: pointer;
+  }
+
+  .dotting {
+    background: linear-gradient(45deg, transparent, #00000026 50%, #00000075, #000000a3);
+  }
+
+  .information h2 {
+    font-size: 36px;
+  }
+  .information p {
+    width: 50%;
+  }
+  .information .element__flex {
+    font-size: 48px;
+  }
+  .information .members__title, .information .walks__title {
+    font-size: 32px;
+  }
+  .information .numbers span {
+    font-size: 32px;
+  }
+
+  .walks {
+    padding: 64px 0px 64px 0px;
+  }
+  .walks h2 {
+    font-size: 36px;
+  }
+  .walks .walks__container {
+    justify-content: space-between;
+  }
+  .walks .layers {
+    background-size: auto;
+  }
+  .walks .layers img {
+    width: 30%;
+    margin-left: 25%;
+    margin-top: 0px;
+  }
+
+  .walks__element {
+    width: 45%;
+  }
+  .walks__element:first-child {
+    margin-top: 80px;
+  }
+
+  .specs {
+    background-size: 100%;
+  }
+  .specs h2 {
+    font-size: 36px;
+  }
+
+  .card__container {
+    margin-top: 72px;
+    display: flex;
+  }
+
+  .card {
+    width: 30%;
+    height: 600px;
+  }
+  .card:first-child {
+    margin-left: 0;
+  }
+  .card .card__text {
+    text-align: center;
+    width: 80%;
+    height: 300px;
+    bottom: 0;
+  }
+  .card .card__img.-extra {
+    width: 50%;
+  }
+
+  .footer {
+    padding: 64px 0px 64px 0px;
+  }
+  .footer h2 {
+    font-size: 36px;
+  }
+  .footer .store {
+    width: 300px;
+    margin-right: 48px;
+  }
+  .footer .store:last-child {
+    margin-right: 0px;
+  }
+}
+@media (min-width: 1281px) and (max-width: 1439px) {
   .video-responsive {
     right: 0;
     bottom: 0;
@@ -1069,7 +1328,7 @@ header {
   }
 
   .introduction {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .icon__down:hover {
@@ -1186,7 +1445,7 @@ header {
   .introduction {
     font-size: 32px;
     width: 80%;
-    top: 55%;
+    top: 70%;
   }
 
   .icon__down {

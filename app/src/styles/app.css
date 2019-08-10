@@ -2358,6 +2358,7 @@ input[type=range]::-webkit-slider-runnable-track {
   display: table;
   table-layout: fixed;
   width: 100%;
+  margin-bottom: 48px;
 }
 .multi-steps > li {
   counter-increment: stepNum;
