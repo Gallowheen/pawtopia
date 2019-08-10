@@ -23,7 +23,6 @@
         $user = $_SESSION['ID'];
     else
         $user = $_GET['ID'];
-
     if($user) {
         $query = $link->prepare("SELECT * FROM user WHERE ID = ?");
         $query->bind_param("i", $user);
@@ -84,7 +83,7 @@
 
                         if($result->num_rows === 0){ ?>
                             <?php
-                            $filename = $avatar_path;
+                            $filename = $_SERVER['DOCUMENT_ROOT']."/app/".$avatar_path;
 
                             if (file_exists($filename)){ ?>
                                 <img class="avatar" src="<?php echo $avatar_path ?>"/>
@@ -99,7 +98,7 @@
                             <img class="avatar avatar -dog" src="<?php echo $avatar_dog ?>"/>
 
                             <?php
-                            $filename = $avatar_path;
+                            $filename = $_SERVER['DOCUMENT_ROOT']."/app/".$avatar_path;
 
                             if (file_exists($filename)){ ?>
                                 <img class="avatar -small -master" src="<?php echo $avatar_path ?>"/>
@@ -481,7 +480,7 @@
 
 
                                     echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';
-                                    $filename = $row_friend_info['AVATAR'];
+                                    $filename = $_SERVER['DOCUMENT_ROOT']."/app/".$row_friend_info['AVATAR'];
 
                                     if (file_exists($filename)){ ?>
                                         <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
