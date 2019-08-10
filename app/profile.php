@@ -343,6 +343,7 @@
                                     {
                                         echo "<i class='icon information__icon icon-ic_favorite_48px'></i>";
                                     }
+                                    echo $review['DATE'];
     
                                     // Partie commentaire
                                     echo "<div>".$review['MESSAGE']."</div>"; ?>
