@@ -78,7 +78,7 @@ $(document).ready(function(){
 
             var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: icon}).addTo(map).on('click', function(){
             });
-            marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
+            marker.bindPopup("<span>"+data[i]['NAME']+"</span><span>"+data[i]['ROAD']+" "+data[i]['CITY']+"</span><button class='button -color -blue -top -walk -full get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
             marker.addTo(layerGroup);
             marker.addTo(group);
             

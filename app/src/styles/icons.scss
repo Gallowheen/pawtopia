@@ -5,6 +5,15 @@
   @return unquote("\"\\#{$str}\"");
 }
 
+.icon{
+  &.-review{
+    font-size:15vw; 
+    width:20%;-webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: #3c6382;
+    color:transparent;
+  }
+}
+
 $icon-home-52: unicode(ea02);
 $icon-ic_photo_camera_48px: unicode(ea03);
 $icon-ic_edit_48px: unicode(ea04);

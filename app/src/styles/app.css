@@ -242,6 +242,9 @@ body {
 .button.-top {
   margin-top: 16px;
 }
+.button.-full {
+  width: 100%;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -411,6 +414,14 @@ Generated using nucleoapp.com
 /*------------------------
 	icons
 -------------------------*/
+.icon.-review {
+  font-size: 15vw;
+  width: 20%;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #3c6382;
+  color: transparent;
+}
+
 .icon-home-52::before {
   content: "\ea02";
 }
@@ -2038,6 +2049,12 @@ input[type=range]::-webkit-slider-runnable-track {
   margin-bottom: 24px;
 }
 
+.note_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .hidden_form {
   display: none;
 }
@@ -2047,6 +2064,9 @@ input[type=range]::-webkit-slider-runnable-track {
   justify-content: center;
   align-items: center;
   height: 90vh;
+}
+.centered_form.-review {
+  height: 80vh;
 }
 
 .chien__container, .master__container {
@@ -2228,10 +2248,6 @@ input[type=range]::-webkit-slider-runnable-track {
   display: none;
 }
 
-.leaflet-popup-content {
-  text-align: center !important;
-}
-
 .map__legend__title {
   display: block;
   font-size: 12px;
@@ -2304,6 +2320,10 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .leaflet-control-container {
   display: none;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0 !important;
 }
 
 .fake_content_container {
@@ -2682,6 +2702,9 @@ body {
 .button.-top {
   margin-top: 16px;
 }
+.button.-full {
+  width: 100%;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -2851,6 +2874,14 @@ Generated using nucleoapp.com
 /*------------------------
 	icons
 -------------------------*/
+.icon.-review {
+  font-size: 15vw;
+  width: 20%;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #3c6382;
+  color: transparent;
+}
+
 .icon-home-52::before {
   content: "\ea02";
 }
@@ -3495,6 +3526,9 @@ body {
 .button.-top {
   margin-top: 16px;
 }
+.button.-full {
+  width: 100%;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -3664,6 +3698,14 @@ Generated using nucleoapp.com
 /*------------------------
 	icons
 -------------------------*/
+.icon.-review {
+  font-size: 15vw;
+  width: 20%;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: #3c6382;
+  color: transparent;
+}
+
 .icon-home-52::before {
   content: "\ea02";
 }

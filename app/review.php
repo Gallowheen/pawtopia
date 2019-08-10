@@ -23,16 +23,15 @@
 ?>
 
 <div class="container">
-  <div class="row">
+  <div class="row centered_form -review">
     <div class="col">
       <div class="edit__profile">
-        <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
         <div class='information_group'><p class='information_title'>Votre note</p>
-          <div class='note_wrapper' style='display: flex; justify-content: center; align-items: center;'>
+          <div class='note_wrapper'>
             <?php
             for($i=0; $i<5; $i++) {
             ?>
-            <i class="icon friend__review -friend icon__friend icon-ic_favorite_48px" style='font-size:15vw; width:20%;-webkit-text-stroke: 2px;-webkit-text-stroke-color: #3c6382;color:transparent;'></i>
+            <i class="icon -review icon__friend icon-ic_favorite_48px"></i>
             <?php
             }
             ?>

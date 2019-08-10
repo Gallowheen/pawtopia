@@ -205,6 +205,8 @@
                                 echo"<div class='information_group'><i class='icon information__icon icon-ic_import_contacts_48px'></i><span class='information_space'>L'utilisateur n'a pas encore de biographie</span></div>";
                             if ( $row['WALK'])
                                 echo"<div class='information_group'><i class='icon information__icon icon-ic_favorite_48px'></i><span class='information_space'>Balade <span style='text-transform : lowercase;'>".$row['WALK']."</span></span></div>";
+                            else
+                                echo"<div class='information_group'><i class='icon information__icon icon-ic_favorite_48px'></i><span class='information_space'>Pas de type de balade favori</span></div>";
                         ?>
                     </div>
                 </div>
@@ -304,7 +306,7 @@
                         $query->execute();
 
                         $result = $query->get_result();
-                        $reviews;
+                        $reviews = array();
                         $note = 0;
                         if($result->num_rows === 0){
                             // Pas d'évaluations
@@ -315,34 +317,40 @@
                             }
                             $note = $note / count($reviews);
                         }
-                        $note = number_format($note, 1);
-                        ?>
-
-                        <h3 class="information h3">Évaluations <?php echo '('.$note.' / 5)'; ?> </h3>
+                        if (!$reviews){ ?>
+                            <h3 class="information h3">Évaluations</h3>
+                            <p class="information_space private">Aucune review pour le moment.</p>
                         <?php
-                        foreach ( $reviews as $review ) :
-                        ?>
-                            <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
-                            <div class="review_card" style='clear:both; padding:4px; margin:4px;'>
-                                <?php
-                                // Partie avatar
-                                echo "<div><img class='avatar' style='float:left; width:62px; height:62px; margin-top:0px; margin-right:12px;' src=\"".$review['AVATAR']."\" /></div>";
-
-                                // Partie nom
-                                echo "<div>".$review['USERNAME']."</div>";
-
-                                // Partie étoiles
-                                for($i=0; $i<$review['NOTE']; $i++)
-                                {
-                                    echo "<i class='icon information__icon icon-ic_favorite_48px'></i>";
-                                }
-
-                                // Partie commentaire
-                                echo "<div>".$review['MESSAGE']."</div>"; ?>
-                            </div>
-                        <?php
-                        endforeach;
-                        ?>
+                        }else{
+                            $note = number_format($note, 1);
+                            ?>
+    
+                            <h3 class="information h3">Évaluations <?php echo '('.$note.' / 5)'; ?> </h3>
+                            <?php
+                            foreach ( $reviews as $review ) :
+                            ?>
+                                <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
+                                <div class="review_card" style='clear:both; padding:4px; margin:4px;'>
+                                    <?php
+                                    // Partie avatar
+                                    echo "<div><img class='avatar' style='float:left; width:62px; height:62px; margin-top:0px; margin-right:12px;' src=\"".$review['AVATAR']."\" /></div>";
+    
+                                    // Partie nom
+                                    echo "<div>".$review['USERNAME']."</div>";
+    
+                                    // Partie étoiles
+                                    for($i=0; $i<$review['NOTE']; $i++)
+                                    {
+                                        echo "<i class='icon information__icon icon-ic_favorite_48px'></i>";
+                                    }
+    
+                                    // Partie commentaire
+                                    echo "<div>".$review['MESSAGE']."</div>"; ?>
+                                </div>
+                            <?php
+                            endforeach;
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -381,9 +389,9 @@
                             <?php
                             }
                             if(!empty($_GET))
-                                echo "<p class='information_space -center'>Cet utilisateur n'a aucun ami pour le moment.</p>";
+                                echo "<p class='information_space'>Cet utilisateur n'a aucun ami pour le moment.</p>";
                             else{
-                                echo "<p class='information_space -center'>Vous n'avez aucun ami pour le moment.</p>";
+                                echo "<p class='information_space'>Vous n'avez aucun ami pour le moment.</p>";
                             }
                         }else{
                             if(!empty($_GET)){?>
