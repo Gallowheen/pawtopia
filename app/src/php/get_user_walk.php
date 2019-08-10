@@ -137,6 +137,10 @@
             }
             $html .= '</div>';
         }
+        else
+        {
+            $html .= "<img class='map__img' src='src/assets/img/ressources/no_walk.png'/>";
+        }
     }
     echo $html;
 ?>
