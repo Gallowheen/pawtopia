@@ -294,7 +294,6 @@
             </div>
         </div>
     </div>
-    <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
     <div class="review__container" style='margin-top: 32px;'>
         <div class="container">
             <div class="row">
@@ -329,23 +328,19 @@
                             <?php
                             foreach ( $reviews as $review ) :
                             ?>
-                                <!-- Le CSS écrit en dur ici est à placer dans des classes / selecteurs des fichiers CSS -->
-                                <div class="review_card" style='clear:both; padding:4px; margin:4px;'>
+                                <div class="review_card">
                                     <?php
-                                    // Partie avatar
-                                    echo "<div><img class='avatar' style='float:left; width:62px; height:62px; margin-top:0px; margin-right:12px;' src=\"".$review['AVATAR']."\" /></div>";
-    
-                                    // Partie nom
+                                    
+                                    echo "<div><img class='avatar review__img' src=\"".$review['AVATAR']."\" /></div>";
+                                    
                                     echo "<div>".$review['USERNAME']."</div>";
     
-                                    // Partie étoiles
                                     for($i=0; $i<$review['NOTE']; $i++)
                                     {
                                         echo "<i class='icon information__icon icon-ic_favorite_48px'></i>";
                                     }
                                     echo $review['DATE'];
-    
-                                    // Partie commentaire
+
                                     echo "<div>".$review['MESSAGE']."</div>"; ?>
                                 </div>
                             <?php

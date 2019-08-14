@@ -1163,6 +1163,7 @@ input[type=range]::-webkit-slider-runnable-track {
   color: grey;
 }
 .friend_name.-walk {
+  position: absolute;
   margin-top: 8px;
   top: 6px;
   left: auto;
@@ -2457,6 +2458,20 @@ input[type=range]::-webkit-slider-runnable-track {
 .multi-steps > li.is-active ~ li:before {
   background-color: #ededed;
   border-color: #ededed;
+}
+
+.review__card {
+  clear: both;
+  padding: 4px;
+  margin: 4px;
+}
+
+.review__img {
+  float: left;
+  width: 62px;
+  height: 62px;
+  margin-top: 0px;
+  margin-right: 12px;
 }
 
 body {

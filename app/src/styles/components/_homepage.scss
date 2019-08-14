@@ -471,6 +471,7 @@
   }
 
   &.-walk{
+    position: absolute;
     margin-top: 8px;
     top: 6px;
     left: auto;
@@ -1898,4 +1899,20 @@ $grey-light: #ededed;
       }
     }
   }
+}
+
+// Review
+
+.review__card{
+  clear:both; 
+  padding:4px; 
+  margin:4px;
+}
+
+.review__img{
+  float:left; 
+  width:62px; 
+  height:62px; 
+  margin-top:0px; 
+  margin-right:12px;
 }
