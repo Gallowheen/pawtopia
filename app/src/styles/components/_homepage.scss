@@ -1434,6 +1434,65 @@
   display: flex; 
   justify-content: center;
   align-items: center;
+
+  i{
+    font-size: 48px;
+    color: transparent;
+    transition: 1s all;
+    -webkit-text-stroke: 1px #000000;
+  }
+}
+
+.review__icon{
+  margin-right: 16px;
+    
+  &:last-child{
+    margin-right: 0;
+  }
+
+  &.-small{
+    font-size: 18px;
+    color : #003780;
+    margin-right: 8px;
+    
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+
+  &.-empty{
+    color: transparent;
+    -webkit-text-stroke: 1px black;
+  }
+
+  &.-selected{
+    color: #003780;
+    -webkit-text-stroke: transparent;
+    animation: review__bounce 1s 2;
+  }
+
+  @keyframes review__bounce {
+    from,
+    20%,
+    53%,
+    80%,
+    to {
+      transform: translateY(0);
+    }
+  
+    40%,
+    43% {
+      transform: translateY(-15px);
+    }
+  
+    70% {
+      transform: translateY(-8px);
+    }
+  
+    90% {
+      transform: translateY(0px);
+    }
+  }
 }
 
 .hidden_form {

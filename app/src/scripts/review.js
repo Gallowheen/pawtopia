@@ -1,6 +1,27 @@
 $(document).ready(function() {
 
+
     $('body').css('overflow-y','scroll');
+
+    $(".review__icon").click(function(){
+        console.log($(this).index());
+
+        //hard reset so the user can still change his note
+        for (i = 0; i < 5; i++){
+            $('.review__icon').eq(i).addClass('-empty');
+            $('.review__icon').eq(i).removeClass('-selected');
+        }
+
+        for (i = 0; i <= $(this).index(); i++){
+          
+                console.log(250 * i);
+                console.log(i);
+                $('.review__icon').eq(i).delay(250 * i).removeClass('-empty');
+                $('.review__icon').eq(i).delay(250 * i).addClass('-selected');
+
+        }
+
+    });
 
     $("#update").click(function(e){
         e.preventDefault();
@@ -8,7 +29,7 @@ $(document).ready(function() {
 
         var user = $(this).data("id");
         var name = $(this).data("name");
-        var note = 5; // Changer ça pour prendre en compte les étoiles selectionnées
+        var note = 0;
         var message = $("#review_message").val();
 
         $.ajax({

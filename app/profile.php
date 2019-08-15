@@ -165,7 +165,7 @@
                                     echo '<div class="action__element" id="add_friend" data-id="'.$_GET['ID'].'"><i class="icon icon__friend icon icon-ic_person_add_48px"></i><span>Ajouter</span></div>';
                                 }
                             }
-                            echo '<div class="action__element" id="review_profile" data-id="'.$_GET["ID"].'"><i class="icon friend__review -friend icon__friend icon-ic_favorite_48px"></i><span>Évaluer</span></div>';
+                            echo '<div class="action__element" id="review_profile" data-id="'.$_GET["ID"].'"><i class="icon friend__review -friend icon__friend icon-review"></i><span>Évaluer</span></div>';
                             echo '<div class="action__element friend__link" data-id="'.$_GET["ID"].'"><i class="icon friend__message -friend icon__friend icon-ic_sms_48px"></i><span>Message</span></div>';
                         ?>
                         </div>
@@ -330,18 +330,37 @@
                             ?>
                                 <div class="review_card">
                                     <?php
-                                    
-                                    echo "<div><img class='avatar review__img' src=\"".$review['AVATAR']."\" /></div>";
-                                    
-                                    echo "<div>".$review['USERNAME']."</div>";
-    
-                                    for($i=0; $i<$review['NOTE']; $i++)
-                                    {
-                                        echo "<i class='icon information__icon icon-ic_favorite_48px'></i>";
-                                    }
-                                    echo $review['DATE'];
 
-                                    echo "<div>".$review['MESSAGE']."</div>"; ?>
+                                    if ($review['MESSAGE']){
+                                        echo "<div><img class='avatar review__img' src=\"".$review['AVATAR']."\" /></div>";
+                                    
+                                        echo "<div>".$review['USERNAME']."</div>";
+
+                                        $x = 0;
+        
+                                        for($i=0; $i<$review['NOTE']; $i++)
+                                        {
+                                            echo "<i class='icon icon-review review__icon -small'></i>";
+                                            $x += 1;
+                                        }
+
+                                        $y = $x;
+
+                                        if( $x < 5){
+                                            for($i=0; $i < 5-$y; $i++)
+                                            {
+                                                echo "<i class='icon icon-review review__icon -small -empty'></i>";
+                                                $x += 1;
+                                            }
+                                        }
+
+                                        $x = 0;
+                                        echo $review['DATE'];
+
+                                        echo "<div>".$review['MESSAGE']."</div>"; 
+                                    }
+                                    
+                                    ?>
                                 </div>
                             <?php
                             endforeach;

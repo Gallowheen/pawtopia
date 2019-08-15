@@ -31,7 +31,7 @@
             <?php
             for($i=0; $i<5; $i++) {
             ?>
-            <i class="icon -review icon__friend icon-ic_favorite_48px"></i>
+            <i class="icon -review icon-review review__icon review__icon<?php echo $i ?>"></i>
             <?php
             }
             ?>

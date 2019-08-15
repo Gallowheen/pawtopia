@@ -123,12 +123,6 @@
                         $rows = resultToArray($result);
                         ?>
                         <div class="walk__dog">
-                            <ul class="list-unstyled multi-steps">
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li class="is-active"></li>
-                            </ul>
                             <h3 class="h3 information">Votre partenaire de balade</h3>
                             <div class="walk__dog__container">
                                 <?php
