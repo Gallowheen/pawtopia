@@ -15,5 +15,8 @@ $(window).on('scroll' , function(){
         $('.shadow__layer').removeClass('shadow__float');
         $('.map__layer').removeClass('map__float');
     }
-
 })
+
+$('.store').click(function(){
+    window.location.href = "app/index.php";
+});

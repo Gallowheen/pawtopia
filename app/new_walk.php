@@ -130,7 +130,7 @@
                                 </select>
                             </div>
                             <div class="input__container -center -button">
-                                <button class="button -color -blue -nomargin -walk" id="previous"><i class="icon previous"></i>Précédent</button>
+                                <button class="button -color -blue -nomargin -walk" id="previous"><i class="icon previous"></i></button>
                                 <button class="button -color -blue -nomargin -walk" id="next">Suivant<i class="icon next"></i></button>
                             </div>
                         </form>

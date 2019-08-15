@@ -1905,7 +1905,6 @@ input[type=range]::-webkit-slider-runnable-track {
   border-width: 0 3px 3px 0;
   padding: 3px;
   transform: rotate(-225deg);
-  margin-right: 16px;
 }
 
 .date {

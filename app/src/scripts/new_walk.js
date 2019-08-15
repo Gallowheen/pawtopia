@@ -3,7 +3,6 @@ $(document).ready(function() {
 
     $('#time').clockTimePicker();
     $('.input__container button').eq(0).css('display','none');
-    $('.input__container button').eq(0).css('background-color','#003780c2');
     $('.input__container').eq(6).css('justify-content', 'flex-end');
 
 
