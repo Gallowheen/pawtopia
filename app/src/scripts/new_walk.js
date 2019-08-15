@@ -1,5 +1,11 @@
 $(document).ready(function() {
-    $('body').css('overflow','scroll');
+    $('body').css('overflow','hidden');
+
+    $('#time').clockTimePicker();
+    $('.input__container button').eq(0).css('display','none');
+    $('.input__container button').eq(0).css('background-color','#003780c2');
+    $('.input__container').eq(6).css('justify-content', 'flex-end');
+
 
     var walk_id_owner;
     var walk_name;
@@ -28,7 +34,59 @@ $(document).ready(function() {
     document.getElementById("time").setAttribute("min", hour);
 
     let steps = $('.multi-steps').children();
-    console.log(steps[0]);
+    
+    $('.label').click(function(event){
+        event.preventDefault();
+        console.log('lol');
+
+        $('.label').each(function(){
+            if($(this).hasClass('selected'))
+                $(this).removeClass('selected');
+        })
+
+        if ($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        }else{              
+            $(this).addClass('selected');
+        }
+    });
+
+    $('#previous').click(function(e){
+        e.preventDefault();
+
+            switch(step)
+            {
+                case(2):
+                    $("[data-step="+step+"]").addClass('hidden_form');
+                    step--;
+                    $("[data-step="+step+"]").removeClass('hidden_form');
+
+                    $('.multi-steps').children().each(function(){
+                        if($(this).hasClass('is-active')){
+                            $(this).removeClass('is-active');
+                        }
+                    });
+
+                    $(steps[step - 1]).addClass('is-active');
+                    $('.input__container button').eq(0).css('display','none');
+                    $('.input__container').eq(6).css('justify-content', 'flex-end');
+                    break;
+                case(3):
+                    $("[data-step="+step+"]").addClass('hidden_form');
+                    step--;
+                    $("[data-step="+step+"]").removeClass('hidden_form');
+                    $('.multi-steps').children().each(function(){
+                        if($(this).hasClass('is-active')){
+                            $(this).removeClass('is-active');
+                        }
+                    });
+
+                    $(steps[step - 1]).addClass('is-active');
+                    $('.input__container button').eq(0).css('display','block');
+                    $('.input__container').eq(6).css('justify-content', 'space-between');
+                    break;
+            }
+    });
 
     $("#next").click(function(e){
 
@@ -40,10 +98,12 @@ $(document).ready(function() {
                     $("#walk_name").addClass('-error');
                     return;
                 }
-                if( $("#walk_type").val() == null){
-                    $("#walk_type").addClass('-error');
-                    return;
-                }
+
+                $('.label').each(function(){
+                    if($(this).hasClass('selected')){
+                        walk_type = $(this).children().eq(0).children().eq(2).text();
+                    }
+                });
 
                 $("[data-step="+step+"]").addClass('hidden_form');
                 step++;
@@ -56,6 +116,8 @@ $(document).ready(function() {
                 });
 
                 $(steps[step - 1]).addClass('is-active');
+                $('.input__container button').eq(0).css('display','block');
+                $('.input__container').eq(6).css('justify-content', 'space-between');
                 break;
             case(2):
                 if( $("#info").val() == ""){
@@ -77,6 +139,8 @@ $(document).ready(function() {
                 });
 
                 $(steps[step - 1]).addClass('is-active');
+                $('.input__container button').eq(0).css('display','block');
+                $('.input__container').eq(6).css('justify-content', 'space-between');
                 break;
             case(3):
                 if($("#time").val() ==""){
@@ -97,40 +161,15 @@ $(document).ready(function() {
                 });
 
                 $(steps[step - 1]).addClass('is-active');
+                $('.input__container button').eq(0).css('display','block');
+                $('.input__container').eq(6).css('justify-content', 'space-between');
                 break;
-            // case(4):
-            //     if( $("#date").val() == null){
-            //         $("#date").addClass('-error');
-            //         retun;
-            //     }
-            //     $("[data-step="+step+"]").addClass('hidden_form');
-            //     step++;
-            //     $("[data-step="+step+"]").removeClass('hidden_form');
-            //     break;
-            // case(5):
-            //     if($("#time").val() ==""){
-            //         $("#time").addClass('-error');
-            //         return;
-            //     }
-            //     $("[data-step="+step+"]").addClass('hidden_form');
-            //     step++;
-            //     $("[data-step="+step+"]").removeClass('hidden_form');
-            //     break;
-            // case(6):
-            //     if( $("#length").val() == null){
-            //         $("#length").addClass('-error');
-            //         return;
-            //     }
-            //     $("[data-step="+step+"]").addClass('hidden_form');
-            //     step++;
-            //     break;
         }
 
         if (step >= 4){
             walk_id_owner = $("form").data('id');
             walk_name = $("#walk_name").val();
             walk_location = $("#info").val();
-            walk_type = $("#walk_type").val();
             walk_length = $("#length").val();
             walk_date = $("#date").val() + " " + $("#time").val();
 

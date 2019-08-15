@@ -133,6 +133,13 @@
     width: 90%;
     margin-left: 5%;
   }
+
+  &.-button{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 16px;
+    margin-top: 48px;
+  }
 }
 
 .choice{
@@ -159,12 +166,24 @@
 
 .desktop{
   height : 100vh;
+  background : url("/app/src/assets/img/ressources/background.png");
+  background-repeat: repeat;
+  background-size: 75%;
 
   h1{
     margin : 0;
     position : absolute;
     left : 50%;
     top : 50%;
+    transform : translate(-50%,-50%);
+    text-align : center;
+  }
+
+  h2{
+    margin : 0;
+    position : absolute;
+    left : 50%;
+    top : 60%;
     transform : translate(-50%,-50%);
     text-align : center;
   }
@@ -827,6 +846,11 @@
   &.-center{
     text-align: center;
   }
+ 
+  &.-review{
+    margin-bottom: 24px;
+    display: block;
+  }
 }
 
 .dog_button_container{
@@ -1233,6 +1257,22 @@
   justify-content: space-around;
 }
 
+.next{
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  padding: 3px;
+  transform: rotate(-45deg);
+  margin-left: 16px;
+}
+
+.previous{
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  padding: 3px;
+  transform: rotate(-225deg);
+  margin-right: 16px;
+}
+
 .date{
   margin-bottom: 16px;
 }
@@ -1468,30 +1508,45 @@
   &.-selected{
     color: #003780;
     -webkit-text-stroke: transparent;
-    animation: review__bounce 1s 2;
+    animation: review__bounce 1s;
   }
 
   @keyframes review__bounce {
-    from,
-    20%,
-    53%,
-    80%,
-    to {
-      transform: translateY(0);
-    }
-  
-    40%,
-    43% {
-      transform: translateY(-15px);
-    }
-  
-    70% {
-      transform: translateY(-8px);
+   
+    20% {
+      transform: scale(1.2)
     }
   
     90% {
-      transform: translateY(0px);
+      transform: scale(1)
     }
+  }
+}
+
+.review__date{
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.review__message{
+  width: 70%;
+  margin-left: 21%;
+}
+
+.review__name{
+  font-weight: bold;
+}
+
+.title__small{
+  font-size: 18px;
+}
+
+.review_card{
+  padding: 0px 16px;
+  margin-bottom: 16px;
+
+  &:last-child{
+    margin-bottom: 0px;
   }
 }
 

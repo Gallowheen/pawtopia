@@ -243,12 +243,12 @@
                         }else{
                             $rows = resultToArray($result);
                             if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
-                                <h3 class="information h3">Ses compagnons <?php echo '('.count($rows).')' ?></h3>
+                                <h3 class="information h3">Ses compagnons <span class="title__small"><?php echo '('.count($rows).')' ?></span></h3>
                                 <p class="information_space private"> Ce profil est privé</p>
                                 <?php
                             }else{
                                 ?>
-                                <h3 class="information h3">Mes compagnons <?php echo '('.count($rows).') <button id="add_dog" class="button -color -blue edit-profile"><i class="icon edit__user icon-add_dog"></i>Ajouter</button>' ?></h3>
+                                <h3 class="information h3">Mes compagnons <span class="title__small"><?php echo '('.count($rows).')</span> <button id="add_dog" class="button -color -blue edit-profile"><i class="icon edit__user icon-add_dog"></i>Ajouter</button>' ?></h3>
                                 <div class='dog_card_container'>
                                 <?php
                                 foreach ( $rows as $dog ) :
@@ -324,17 +324,17 @@
                             $note = number_format($note, 1);
                             ?>
     
-                            <h3 class="information h3">Évaluations <?php echo '('.$note.' / 5)'; ?> </h3>
+                            <h3 class="information h3">Évaluations <span class="title__small"><?php echo '('.$note."<i class='icon icon-review review__icon -small'></i>".' / 5)'; ?></span></h3>
                             <?php
                             foreach ( $reviews as $review ) :
+
+                                if ($review['MESSAGE']){
                             ?>
                                 <div class="review_card">
                                     <?php
-
-                                    if ($review['MESSAGE']){
-                                        echo "<div><img class='avatar review__img' src=\"".$review['AVATAR']."\" /></div>";
+                                        echo "<div><img class='avatar review__img view' data-id=".$review['ID_REVIEWER']." src=\"".$review['AVATAR']."\" /></div>";
                                     
-                                        echo "<div>".$review['USERNAME']."</div>";
+                                        echo "<div class='review__name'>".$review['USERNAME']."</div>";
 
                                         $x = 0;
         
@@ -355,14 +355,15 @@
                                         }
 
                                         $x = 0;
-                                        echo $review['DATE'];
 
-                                        echo "<div>".$review['MESSAGE']."</div>"; 
-                                    }
-                                    
+                                      
+                                        echo '<span class="review__date">'.substr($review['DATE'],0,10).'</span>';
+
+                                        echo "<div class='review__message'>".$review['MESSAGE']."</div>";                    
                                     ?>
                                 </div>
                             <?php
+                            }
                             endforeach;
                         }
                     ?>
@@ -410,10 +411,10 @@
                             }
                         }else{
                             if(!empty($_GET)){?>
-                            <h3 class="information h3 -first">Ses amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend' data-id='$user'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
+                            <h3 class="information h3 -first">Ses amis <span class="title__small"><?php echo '('.(count($row_friends_mutual)-1).")</span> <button class='button -color -blue edit-profile more__friend' data-id='$user'><i class='icon edit__user icon-ic_people_48px'></i>Plus d'amis</button>" ?></h3>
                             <?php
                             }else{ ?>
-                            <h3 class="information h3 -first">Mes amis <?php echo '('.(count($row_friends_mutual)-1).") <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Gérer</button>" ?></h3>
+                            <h3 class="information h3 -first">Mes amis <span class="title__small"><?php echo '('.(count($row_friends_mutual)-1).")</span> <button class='button -color -blue edit-profile more__friend'><i class='icon edit__user icon-ic_people_48px'></i>Gérer</button>" ?></h3>
                             <?php
                             }
                         }

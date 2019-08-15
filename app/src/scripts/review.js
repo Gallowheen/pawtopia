@@ -1,10 +1,14 @@
 $(document).ready(function() {
 
+    var note = 0;
 
     $('body').css('overflow-y','scroll');
 
     $(".review__icon").click(function(){
         //hard reset so the user can still change his note
+
+        note = $(this).index() + 1;
+
         $('.review__icon').addClass('-empty');
         $('.review__icon').removeClass('-selected');
 
@@ -21,24 +25,56 @@ $(document).ready(function() {
 
         var user = $(this).data("id");
         var name = $(this).data("name");
-        var note = 0;
         var message = $("#review_message").val();
 
-        $.ajax({
-            method: "GET",
-            url:"./src/php/add_review.php",
-            data: {
-                ID:user,
-                NOTE:note,
-                MESSAGE:message
+        if (note != 0){
+            $.ajax({
+                method: "GET",
+                url:"./src/php/add_review.php",
+                data: {
+                    ID:user,
+                    NOTE:note,
+                    MESSAGE:message
+                }
+            })
+            .done(function(result) {
+                if (result == "failed"){
+    
+                    let span = "<span class='error -review'>Vous avez déjà review cette personne</span>"
+    
+                    console.log($('.edit__profile').children().eq(0));
+    
+                    if($('.edit__profile').children().eq(0).hasClass('error')){
+                        $('.edit__profile').children().eq(0).remove();
+                    }
+                    
+                    $(span).insertBefore( $( ".information_group" )[0] );
+                    
+                    setTimeout(function(){
+    
+                    },2000);
+                }else{
+                    slidePage(result, 'left');
+                    var title = $(".header__title").html();
+                    setReturnButton("profile", {}, title);
+                    setTitle('Profil  de '+name);
+
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $(".review__container").offset().top - 150
+                    }, 250);
+                }
+            });
+        }else{
+            let span = "<span class='error -review'>N'oubliez pas votre note !</span>";
+
+            if($('.edit__profile').children().eq(0).hasClass('error')){
+                $('.edit__profile').children().eq(0).remove();
             }
-        })
-        .done(function(result) {
-            slidePage(result, 'left');
-            var title = $(".header__title").html();
-            setReturnButton("profile", {}, title);
-            setTitle('Profil  de '+name);
-        });
+
+            $(span).insertBefore( $( ".information_group" )[0] );    
+        }
+
+       
     });
 
 });

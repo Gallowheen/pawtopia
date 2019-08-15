@@ -58,12 +58,29 @@
                             </div>
                             <div class="input__container walk_type_wrapper" data-step=1>
                                 <span class="input__name">Type de la balade</span>
-                                <select required placeholder="Type de balade" class="select -walk" name="walk_type" id="walk_type">
-                                    <option value="" disabled selected hidden>Type de la balade</option>
-                                    <option value="Récréative">Récréative</option>
-                                    <option value="Sportive">Sportive</option>
-                                    <option value="Découverte">Découverte</option>
-                                </select>
+                                <div class="button_choice">
+                                    <label class="label selected" for="Sportive">
+                                        <div class="button_container">
+                                            <input class="hidden" type="radio" name="walk" id="Sportive" value="Sportive" checked>
+                                            <i class="icon icon-ic_directions_run_48px icon_walk"></i>
+                                            <span class="walk__type">Sportive</span>
+                                        </div>
+                                    </label>
+                                    <label class="label" for="Découverte">
+                                        <div class="button_container">
+                                            <input class="hidden" type="radio" name="walk" id="Découverte" value="Découverte">
+                                            <i class="icon icon-ic_map_48px icon_walk"></i>
+                                            <span class="walk__type">Découverte</span>
+                                        </div>
+                                    </label>
+                                    <label class="label" for="Récréative">
+                                        <div class="button_container">
+                                            <input class="hidden" type="radio" name="walk" id="Récréative" value="Récréative">
+                                            <i class="icon icon-ic_pets_48px icon_walk"></i>
+                                            <span class="walk__type">Récréative</span>
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
                             <?php
                                 $sql = "SELECT * FROM towns";
@@ -87,10 +104,14 @@
                             <div class="input__container walk_date_wrapper hidden_form" data-step=2>
                                 <span class="input__name">Date de la balade</span>
                                 <input class="input -walk" type="date" name="date" id="date">
-                            </div>
+                            </div>                       
+                            <?php 
+                                date_default_timezone_set('Europe/Paris');
+                                $date = date('H:i');
+                            ?>
                             <div class="input__container walk_date_wrapper hidden_form" data-step=3>
                                 <span class="input__name">Heure de la balade</span>
-                                <input class="input -walk -time" type="time" id="time" name="time" required>
+                                <input class="input -walk -time" type="time" id="time" name="time" value="<?php echo $date ?>" required>
                             </div>
                             <div class="input__container walk_length_wrapper hidden_form" data-step=3>
                                 <span class="input__name"> Durée approximative</span>
@@ -108,8 +129,9 @@
                                     <option value="1">10 heures</option>
                                 </select>
                             </div>
-                            <div class="input__container -center">
-                                <button class="input button -color -blue -nomargin" id="next">Suivant</button>
+                            <div class="input__container -center -button">
+                                <button class="button -color -blue -nomargin -walk" id="previous"><i class="icon previous"></i>Précédent</button>
+                                <button class="button -color -blue -nomargin -walk" id="next">Suivant<i class="icon next"></i></button>
                             </div>
                         </form>
                         <?php

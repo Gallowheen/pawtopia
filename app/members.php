@@ -46,10 +46,10 @@
             <div class="col">
                 <form>
                     <h3 class="h3 filter__title">Proximité</h3>
-                    <div class="slider__value" id="slider_value">15 km</div>
+                    <div class="slider__value" id="slider_value">12 km</div>
                     <div class="slider__range">
-                        <span class="range__number">5</span>
-                        <input class="slider" type="range" id="slider" name="km" min="5" max="25">
+                        <span class="range__number">0</span>
+                        <input class="slider" type="range" id="slider" name="km" min="0" max="25">
                         <span class="range__number">25</span>
                     </div>
                     <h3 class="h3 filter__title">Type de balade choisi</h3>

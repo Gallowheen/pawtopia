@@ -19,6 +19,7 @@
     crossorigin="">
 
     <script src="./src/scripts/lib/jquery-3.4.0.min.js"></script>
+    <script src="./src/scripts/lib/jquery-clock-timepicker.js"></script>
 
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="/browserconfig.xml">

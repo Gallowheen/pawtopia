@@ -1,6 +1,7 @@
 <?php
   @session_start();
   require_once("src/php/bdd.php");
+  $link = mysqli_connect(HOST, USER, PWD, BASE);
 
   $pagename = 'Reviews';
 
@@ -37,8 +38,18 @@
             ?>
           </div>
         </div>
+        <?php 
+
+          $query = $link->prepare("SELECT USERNAME FROM user WHERE ID = ?");
+          $query->bind_param("i", $_GET['ID']);
+          $query->execute();
+
+          $result = $query->get_result();
+          $row = $result->fetch_assoc();
+
+        ?>
         <div class='information_group'><p class='information_title'>Commentaire facultatif</p><textarea id="review_message" class='select -walk -nomargin' placeholder='Vous pouvez entrer un commentaire...'></textarea></div>
-        <input class="button -color -blue" type='button' id="update" data-id="<?= $_GET['ID'] ?>" value='Enregistrer' />
+        <input class="button -color -blue" type='button' id="update" data-id="<?= $_GET['ID'] ?>" data-name="<?= $row['USERNAME'] ?>" value='Enregistrer' />
       </div>
     </div>
   </div>

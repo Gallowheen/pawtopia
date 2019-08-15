@@ -97,6 +97,7 @@
         </div>
         <div class="desktop">
             <h1 class="wip">Cher utilisateur, Pawtopia est uniquement disponible en version mobile.</h1>
+            <h2 class="wip">Rendez-vous sur votre smartphone ! </h2>
         </div>
     </body>
     <script src="./src/scripts/lib/bootstrap.min.js"></script>

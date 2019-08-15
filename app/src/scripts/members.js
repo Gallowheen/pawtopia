@@ -9,7 +9,7 @@ $(document).ready(function() {
         //     if($(this).hasClass('selected'))
         //         $(this).removeClass('selected');
         // })
-
+        
         if ($(this).hasClass('selected')){
             $(this).removeClass('selected');
         }else{              
