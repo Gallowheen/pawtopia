@@ -4,21 +4,13 @@ $(document).ready(function() {
     $('body').css('overflow-y','scroll');
 
     $(".review__icon").click(function(){
-        console.log($(this).index());
-
         //hard reset so the user can still change his note
-        for (i = 0; i < 5; i++){
-            $('.review__icon').eq(i).addClass('-empty');
-            $('.review__icon').eq(i).removeClass('-selected');
-        }
+        $('.review__icon').addClass('-empty');
+        $('.review__icon').removeClass('-selected');
 
+        var delay = 250;
         for (i = 0; i <= $(this).index(); i++){
-          
-                console.log(250 * i);
-                console.log(i);
-                $('.review__icon').eq(i).delay(250 * i).removeClass('-empty');
-                $('.review__icon').eq(i).delay(250 * i).addClass('-selected');
-
+            setTimeout(selectStar,delay*i, i);
         }
 
     });
@@ -50,3 +42,8 @@ $(document).ready(function() {
     });
 
 });
+
+function selectStar(nombre) {
+    $('.review__icon').eq(nombre).removeClass('-empty');
+    $('.review__icon').eq(nombre).addClass('-selected');
+}
