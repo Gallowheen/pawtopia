@@ -222,7 +222,7 @@ function uploadFile(file, name, page){
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(xhr.responseText);
+            //console.log(xhr.responseText);
             if (name != "")
                 $("#addDog").prop('disabled', false);
             else

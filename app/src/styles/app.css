@@ -603,6 +603,13 @@ Generated using nucleoapp.com
 .input.-succeed {
   border-bottom-color: green;
 }
+.input.-nomargin {
+  margin-left: 0;
+  width: 100%;
+}
+.input.-bottom {
+  margin-bottom: 24px;
+}
 
 input[type=submit] {
   display: block;
@@ -743,6 +750,9 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .select.-small {
   width: 80%;
+}
+.select.-nomargintop {
+  margin-top: 0;
 }
 
 .capitalize {
@@ -1420,7 +1430,7 @@ input[type=range]::-webkit-slider-runnable-track {
   text-align: center;
   padding: 0px 24px;
   left: 0;
-  margin-top: 15%;
+  margin-top: 10%;
 }
 .dog_card.-walk {
   border: none;
@@ -3182,6 +3192,13 @@ Generated using nucleoapp.com
 .input.-succeed {
   border-bottom-color: green;
 }
+.input.-nomargin {
+  margin-left: 0;
+  width: 100%;
+}
+.input.-bottom {
+  margin-bottom: 24px;
+}
 
 input[type=submit] {
   display: block;
@@ -3322,6 +3339,9 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .select.-small {
   width: 80%;
+}
+.select.-nomargintop {
+  margin-top: 0;
 }
 
 .nav_container {
@@ -4002,6 +4022,13 @@ Generated using nucleoapp.com
 .input.-succeed {
   border-bottom-color: green;
 }
+.input.-nomargin {
+  margin-left: 0;
+  width: 100%;
+}
+.input.-bottom {
+  margin-bottom: 24px;
+}
 
 input[type=submit] {
   display: block;
@@ -4142,6 +4169,9 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 .select.-small {
   width: 80%;
+}
+.select.-nomargintop {
+  margin-top: 0;
 }
 
 .header {

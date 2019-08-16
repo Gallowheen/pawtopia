@@ -207,15 +207,17 @@ $(document).ready(function() {
             setTitle('Nouveau compagnon');
 
             $('#addDog').click(function(){
-                if ($('.dog_name').last().text() == "Nom" || $('#breed').val() == null){
-                    if($('.dog_name').last().text() == "Nom")
-                        $('.dog_name').last().addClass('error');
+                //console.log("lol");
+                if ($('#dog_name').val() == "" || $('#breed').val() == null){
+                    if($('#dog_name').val() == "")
+                        $('#dog_name').val().addClass('-error');
                     if($('#breed').val() == null)
                         $('#breed').addClass("-error");
                 }else{
                     var uploadfiles = document.querySelector('#uploadfiles');
 
-                    let name = $('.dog_name').last().text();
+                    let name = $('#dog_name').val();
+                    //console.log(name);
 
                     let breedname  = $('#breed').val();
                     let breed = $('#breeds [value="' + breedname + '"]').data('value');
@@ -274,7 +276,7 @@ $(document).ready(function() {
 
                         var files = uploadfiles.files;
                         var page = "dog";
-                        var name = $('.dog_name').last().text();
+                        var name = $('#dog_name').val();
                         for(var i=0; i<files.length; i++){
                             uploadFile(uploadfiles.files[i],name,page);
                         }

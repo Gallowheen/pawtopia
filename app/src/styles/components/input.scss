@@ -118,6 +118,15 @@
   &.-succeed{
     border-bottom-color : green;
   }
+
+  &.-nomargin{
+    margin-left: 0;
+    width: 100%;
+  }
+
+  &.-bottom{
+    margin-bottom: 24px;
+  }
 }
 
 input[type="submit"]{

@@ -9,7 +9,8 @@
 
     if (empty($_GET)){
         echo '<div class="container"><div class="row"><div class="col"><div class="dog_card -add">';
-            echo "<h4 data-editable class='dog_name -nolimit'>Nom<i class='icon edit icon-ic_edit_48px'></i></h4>";
+            //echo "<h4 data-editable class='dog_name -nolimit'>Nom<i class='icon edit icon-ic_edit_48px'></i></h4>";
+            echo '<input placeholder="Nom du chien" id="dog_name" class="input -walk -nomargin -bottom"/>';
                 echo'<label for="uploadfiles" class="label-file">Choisir une image</label><input class="input-file" type="file" id="uploadfiles" accept="image/*"></input>';
                 echo'<div class="dog_button -add">';
             //echo '<div class="dog_img -add"><i class="icon dog_add_icon icon-ic_photo_camera_48px"></i></div></div>';
@@ -18,7 +19,7 @@
             echo '<div id="gallery__button"></div></div>';
             echo '<div class="dog_information">';
                     echo '<div class="information_group -dog">
-                    <select class="select -addDog" id="sexe">
+                    <select class="select -addDog -nomargintop" id="sexe">
                         <option value="M">Mâle</option>
                         <option value="F">Femelle</option>
                     </select>';
