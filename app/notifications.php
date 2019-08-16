@@ -63,7 +63,7 @@
         <div class="notification__wrapper -flex">
           <div>
           <i class='icon icon-review'></i>
-          <span class='notification__title'>Un utilisateur a laissé votre avis sur vous !</span>
+          <span class='notification__title'>Un utilisateur vous a notez !</span>
           </div>
             <i class='icon notification__icon'></i>
         </div>
