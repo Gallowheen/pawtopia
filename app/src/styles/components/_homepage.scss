@@ -961,6 +961,9 @@
 
   &.-message{
     margin-bottom: 16px;
+    border-top: 1px solid #a2a0a0;
+    border-right: 1px solid #a2a0a0;
+    border-left: 1px solid #a2a0a0;
   }
 
   &.-opacity{
@@ -2066,4 +2069,58 @@ $grey-light: #ededed;
   height:62px; 
   margin-top:0px; 
   margin-right:12px;
+}
+
+//notification
+
+.notification__container{
+  margin-top: 16px;
+}
+
+.notification__wrapper{
+  width: 100%;
+  position: relative;
+  background: white;
+  padding: 16px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border-bottom: 5px solid #0067B0;
+  border-top: 1px solid #a2a0a0;
+  border-right: 1px solid #a2a0a0;
+  border-left: 1px solid #a2a0a0;
+  box-shadow: 1px 1px 5px #00000040;
+  //border-radius: 10px;
+
+  &.-flex{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  i:first-child{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color : #0067B0;
+  }
+}
+
+.notification__title{
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 32px;
+}
+
+.notification__number{
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.notification__icon{
+  height: 14px;
+  width: 15px;
+  transform: rotate(-45deg);
+  border: solid #003780;
+  border-width: 0 3px 3px 0;
+  right: 15px;
+  margin-top: 8px;
 }

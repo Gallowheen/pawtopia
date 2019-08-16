@@ -68,6 +68,36 @@
             <?php } ?>
             <div class="notifications" data-url='notifications'>
                 <span class="link"><i class="icon icon__footer icon-ic_notifications_48px"></i></span>
+                
+                <?php
+                    //check if user have a notification
+                    $notification = false;
+
+                    //FRIEND INVITE
+                    $friends = [];
+                    $friends_pending = [];
+                    $friends_invite= [];
+
+                    if (!empty($_GET)){
+                        //other profile, we don't have to see what's going on on their channel
+                    }
+                    else{
+                        $query_friend_invite = $link->prepare("SELECT distinct(id_user1) FROM friends WHERE mutual = 0 AND ID_USER2 = ?");
+                        $query_friend_invite->bind_param("i", $user);
+                        $query_friend_invite->execute();
+
+                        $result_friend_invite = $query_friend_invite->get_result();
+                        if($result_friend_invite->num_rows === 0){
+                        
+                        }else{
+                            $notification = true;
+                        }
+                    }
+
+                    if($notification){
+                        echo '<span class="ping -right">!</span>';
+                    }
+                    ?>
             </div>
             </div>
         </div>

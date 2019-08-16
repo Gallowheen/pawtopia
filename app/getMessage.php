@@ -27,7 +27,7 @@
     $result = $query->get_result();
     $row = $result->fetch_assoc();
 
-    $pagename = $row['USERNAME'] ;
+    $pagename = "Messages" ;
 ?>
 
             <div class="container">

@@ -44,7 +44,7 @@ $(document).ready(function(){
             url:"notifications.php",
         })
         .done(function(result){
-            slidePage(result, 'left', 500, 250);
+            slidePage(result, 'right', 500, 250);
             setTitle('Notifications');
             setReturnButton("home", {}, title);
         });
@@ -79,8 +79,6 @@ $(document).ready(function(){
             setLogo();
 
             if(page == pageClicked){
-                container.html(result);
-                setTitle(title);
                 $(window).scrollTop(0);
             }else{
                 if(page > pageClicked)
@@ -104,7 +102,7 @@ $(document).ready(function(){
                     url:"notifications.php",
                 })
                 .done(function(result){
-                    slidePage(result, 'left', 500, 250);
+                    slidePage(result, 'right', 500, 250);
                     setTitle('Notifications');
                     setReturnButton("home", {}, title);
                 });
@@ -350,7 +348,7 @@ function setReturnButton(target, params = {}, title = "")
                     url:"notifications.php",
                 })
                 .done(function(result){
-                    slidePage(result, 'left', 500, 250);
+                    slidePage(result, 'right', 500, 250);
                     setTitle('Notifications');
                     setReturnButton("home", {}, title);
                 });
