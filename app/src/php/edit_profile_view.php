@@ -74,7 +74,7 @@
                 ?>
                     </select>
                 </div>
-                <input class="button -color -blue" type='button' id="update" value='Enregistrer' />
+                <input class="button -color -blue -top" type='button' id="update" value='Enregistrer' />
             </div>
         </div>
     </div>

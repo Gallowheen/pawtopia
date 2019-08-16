@@ -183,8 +183,8 @@ $(document).ready(function() {
             $('#event_information').css('display','none');
             $('.walk__dog').css('display','block');
 
-            if($('.walk__dog__container').length <= 0){
-                $('.walk__dog').append('<div class="information error">Vous devez avoir au moins un compagnon pour créer une balade</div>');
+            if($('.walk__dog__container').length <= 1){
+                $('.walk__dog').append('<div class="information error -center">Vous devez avoir au moins un compagnon pour créer une balade</div>');
                 $("#validate").prop('disabled', true);
             }
 

@@ -2443,8 +2443,16 @@ input[type=range]::-webkit-slider-runnable-track {
   animation: fadingFromRight 0.5s;
 }
 
+.fading_from_right_no_fixed {
+  animation: fadingFromRight 0.5s;
+}
+
 .fading_from_left {
   position: fixed;
+  animation: fadingFromLeft 0.5s;
+}
+
+.fading_from_left_no_fixed {
   animation: fadingFromLeft 0.5s;
 }
 

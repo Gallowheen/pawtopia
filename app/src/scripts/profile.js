@@ -81,6 +81,8 @@ $(document).ready(function() {
                 })
                 .done(function(result){
 
+                    console.log(result);
+
                     $.ajax({
                         method: "GET",
                         url:"profile.php",
@@ -162,9 +164,9 @@ $(document).ready(function() {
             url:"members.php"
         })
         .done(function(result) {
-            container.html(result);
+            slidePage(result,"right");
             setTitle('Membres');
-            setReturnButton("friends", {} , $(".header__title").html());
+            setReturnButton("profile", {} , $(".header__title").html());
         });
     });
 

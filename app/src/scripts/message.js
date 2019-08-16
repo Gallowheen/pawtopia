@@ -5,15 +5,18 @@ $(document).ready(function() {
     })
     .done(function(result){
 
-        var data = JSON.parse(result);
-
-        if(result == "noMsg" || !data) {
+        if(result == "noMsg") {
+            
             $(".content_container .container .row .col .message__container").append('<img class="message__img" src="src/assets/img/ressources/no_conversation.png">');
             $('.message__container').css('height','100vh');
             $('.message__container').css('width','100%');
             $('body').css('overflow','hidden');
             return;
+        }else{
+            var data = JSON.parse(result);
         }
+
+        
         let user = [];
         let userList = [];
         let banlist = [];

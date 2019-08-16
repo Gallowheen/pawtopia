@@ -134,7 +134,7 @@ $(document).ready(function() {
             url:"walk.php",
         })
         .done(function(result){
-            slidePage(result);
+            slidePage(result,"right");
             setTitle('Balades');
         });
     });

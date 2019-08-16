@@ -95,6 +95,10 @@
             $newDirectory = "../../users/" . $id . "_" . $username.'/dogs';
             mkdir($newDirectory, 0777);
 
+            // create dogs directory
+            $newDirectory = "../../users/" . $id . "_" . $username.'/avatar';
+            mkdir($newDirectory, 0777);
+
             //relocate
             //header("location:/pawtopia?register=ok");
             echo "Success";
