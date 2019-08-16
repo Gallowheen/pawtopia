@@ -78,7 +78,7 @@ $(document).ready(function(){
 
             var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: icon}).addTo(map).on('click', function(){
             });
-            marker.bindPopup("<span>"+data[i]['NAME']+"</span><span>"+data[i]['ROAD']+" "+data[i]['CITY']+"</span><button class='button -color -blue -top -walk -full get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
+            marker.bindPopup("<p class='walk__name'>"+data[i]['NAME']+"</p><p class='walk__length'>Durée : "+data[i]['LENGTH']+" heures</p><p class='walk__km'>"+data[i]['km']+" km de vous</p><p class='walk__address'>"+data[i]['ROAD']+" "+data[i]['CITY']+"</p><button class='button -color -blue -more get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
             marker.addTo(layerGroup);
             marker.addTo(group);
             
@@ -321,79 +321,19 @@ $(document).ready(function(){
 
                         setTimeout(function(){
                             if (data[i]['WALK'] == "Récréative"){
-                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: bluetopia}).addTo(map).on('click', function(){
-
-                                    setTimeout(function(){
-                                        $('.get_to_walk').click(function(){
-                                            // window.location = "walk_detail?ID="+data[i]['ID'];
-
-                                            // var title = $(".header__title").html();
-                                            // var newtitle = $(this).parent().parent().find('.name__container span').html();
-                                            // $.ajax({
-                                            //     method: "GET",
-                                            //     url:"walk_detail.php",
-                                            //     data:{ID:data[i]['ID']}
-                                            // })
-                                            // .done(function(result){
-                                            //     container.html(result);
-                                            //     $('.h1').text(newtitle);
-                                            //     setReturnButton("walk", {}, title);
-                                            // });
-                                        });
-                                    },100);
-                                });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: bluetopia}).addTo(map);
+                                marker.bindPopup("<p class='walk__name'>"+data[i]['NAME']+"</p><p class='walk__length'>Durée : "+data[i]['LENGTH']+" heures</p><p class='walk__km'>"+data[i]['km']+" km de vous</p><p class='walk__address'>"+data[i]['ROAD']+" "+data[i]['CITY']+"</p><button class='button -color -blue -more get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
                                 marker.addTo(layerGroup);
                             }
                             if (data[i]['WALK'] == "Sportive"){
-                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: redtopia}).addTo(map).on('click', function(){
-
-                                    setTimeout(function(){
-                                        $('.get_to_walk').click(function(){
-                                            //window.location = "walk_detail?ID="+data[i]['ID'];
-                                            var title = $(".header__title").html();
-
-                                            // var newtitle = $(this).parent().parent().find('.name__container span').html();
-                                            // $.ajax({
-                                            //     method: "GET",
-                                            //     url:"walk_detail.php",
-                                            //     data:{ID:data[i]['ID']}
-                                            // })
-                                            // .done(function(result){
-                                            //     container.html(result);
-                                            //     $('.h1').text(newtitle);
-                                            //     setReturnButton("walk", {}, title);
-                                            // });
-                                        });
-                                    },100);
-                                });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: redtopia}).addTo(map);
+                                marker.bindPopup("<p class='walk__name'>"+data[i]['NAME']+"</p><p class='walk__length'>Durée : "+data[i]['LENGTH']+" heures</p><p class='walk__km'>"+data[i]['km']+" km de vous</p><p class='walk__address'>"+data[i]['ROAD']+" "+data[i]['CITY']+"</p><button class='button -color -blue -more get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
                                 marker.addTo(layerGroup);
 
                             }
                             if (data[i]['WALK'] == "Découverte"){
-                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: greentopia}).addTo(map).on('click', function(){
-
-                                    setTimeout(function(){
-                                        $('.get_to_walk').click(function(){
-                                            //window.location = "walk_detail?ID="+data[i]['ID'];
-                                            var title = $(".header__title").html();
-
-                                            // var newtitle = $(this).parent().parent().find('.name__container span').html();
-                                            // $.ajax({
-                                            //     method: "GET",
-                                            //     url:"walk_detail.php",
-                                            //     data:{ID:data[i]['ID']}
-                                            // })
-                                            // .done(function(result){
-                                            //     container.html(result);
-                                            //     $('.h1').text(newtitle);
-                                            //     setReturnButton("walk", {}, title);
-                                            // });
-                                        });
-                                    },100);
-                                });
-                                marker.bindPopup("<b>"+data[i]['NAME']+"</b></br><b>"+data[i]['ROAD']+" "+data[i]['CITY']+"</b></br><button class='button -color -blue -round -top -walk get_to_walk' data-id='10'>En savoir plus</button>");
+                                var marker = L.marker([data[i]['LAT'], data[i]['LON']],{icon: greentopia}).addTo(map);
+                                marker.bindPopup("<p class='walk__name'>"+data[i]['NAME']+"</p><p class='walk__length'>Durée : "+data[i]['LENGTH']+" heures</p><p class='walk__km'>"+data[i]['km']+" km de vous</p><p class='walk__address'>"+data[i]['ROAD']+" "+data[i]['CITY']+"</p><button class='button -color -blue -more get_to_walk' data-id='10' onclick=\"goToWalk("+data[i]['ID']+", '"+data[i]['NAME']+"')\">En savoir plus</button>");
                                 marker.addTo(layerGroup);
                             }
                         },250);
@@ -438,12 +378,11 @@ $(document).ready(function(){
                         data:{ID:$(this).data('id')}
                     })
                     .done(function(result){
-                        container.html(result);
+                        slidePage(result,'right');
                         $(window).scrollTop(0);
                         setTitle(newtitle);
                         setReturnButton("walk", {}, title);
                     });
-                    //window.location = "walk_detail?ID="+$(this).data('id');
                 });
             });
         },500);
@@ -460,7 +399,7 @@ function goToWalk(walk, name)
         data:{ID:walk}
     })
     .done(function(result){
-        container.html(result);
+        slidePage(result,'right');
         setTitle(newtitle);
         setReturnButton("walk", {}, title);
         $('body').css('overflow','scroll');

@@ -1776,10 +1776,6 @@
   display: none;
 }
 
-// .leaflet-popup-content{
-//   text-align: center !important;
-// }
-
 .map__legend__title{
   display: block;
   font-size: 12px;
@@ -1857,8 +1853,42 @@
   display: none;
 }
 
-.leaflet-popup-content-wrapper {
-  border-radius: 0 !important;
+.leaflet-popup-content{
+  .walk__name{
+    margin: 48px 0px 8px 0px;
+    font-weight: bold;
+    color: #0067B0;
+    font-size: 14px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .walk__length{
+    margin: 8px 0px 8px 0px;
+    font-weight: bold;
+  }
+  
+  .walk__address{
+    margin: 0px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .walk__km{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    background: #0067B0;
+    padding: 8px;
+    border-radius: 15px 0px 15px 0px;
+    font-size: 10px;
+    margin: 0;
+  }
 }
 
 .fake_content_container {

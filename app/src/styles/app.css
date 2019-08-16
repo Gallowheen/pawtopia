@@ -245,6 +245,12 @@ body {
 .button.-full {
   width: 100%;
 }
+.button.-more {
+  font-size: 12px;
+  margin-top: 18px;
+  padding: 4px 8px;
+  width: 100%;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -2429,8 +2435,37 @@ input[type=range]::-webkit-slider-runnable-track {
   display: none;
 }
 
-.leaflet-popup-content-wrapper {
-  border-radius: 0 !important;
+.leaflet-popup-content .walk__name {
+  margin: 48px 0px 8px 0px;
+  font-weight: bold;
+  color: #0067B0;
+  font-size: 14px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leaflet-popup-content .walk__length {
+  margin: 8px 0px 8px 0px;
+  font-weight: bold;
+}
+.leaflet-popup-content .walk__address {
+  margin: 0px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leaflet-popup-content .walk__km {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  background: #0067B0;
+  padding: 8px;
+  border-radius: 15px 0px 15px 0px;
+  font-size: 10px;
+  margin: 0;
 }
 
 .fake_content_container {
@@ -2832,6 +2867,12 @@ body {
   margin-top: 16px;
 }
 .button.-full {
+  width: 100%;
+}
+.button.-more {
+  font-size: 12px;
+  margin-top: 18px;
+  padding: 4px 8px;
   width: 100%;
 }
 /* --------------------------------
@@ -3662,6 +3703,12 @@ body {
   margin-top: 16px;
 }
 .button.-full {
+  width: 100%;
+}
+.button.-more {
+  font-size: 12px;
+  margin-top: 18px;
+  padding: 4px 8px;
   width: 100%;
 }
 /* --------------------------------
