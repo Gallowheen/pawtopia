@@ -24,6 +24,6 @@
     }
 
     if($query_add_event_attendee && $query_add_event_dog){
-        echo "success";
+        include('../../walk.php');
     }
 ?>

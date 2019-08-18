@@ -31,6 +31,38 @@ $(document).ready(function() {
             slidePage(result, 'right');
             setTitle(newtitle);
             setReturnButton("home", {}, title);
+
+            imgBank = ['src/assets/img/ressources/walk_1.jpg','src/assets/img/ressources/walk_2.jpg','src/assets/img/ressources/walk_3.jpg','src/assets/img/ressources/walk_4.jpg','src/assets/img/ressources/walk_5.jpg','src/assets/img/ressources/walk_6.jpg'];
+            setTimeout(function(){
+                $('.walk__detail__background').each(function(){
+                    let random = Math.floor(Math.random() * imgBank.length);
+                    console.log(imgBank[random]);
+                    $(this).css('background','url("'+imgBank[random]+'")');
+                    $(this).css('background-position','center');
+                    $(this).css('background-size','cover');
+                });
+
+                $(".view").click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    console.log('lol');
+
+                    var user = $(this).data("id");
+                    var title = $(this).parent().children().eq(0).text();
+
+                    $.ajax({
+                        method: "GET",
+                        url:"profile.php",
+                        data: {ID:user}
+                    })
+                    .done(function(result) {
+                        slidePage(result, 'right');  
+                        setReturnButton("home", {}, title);
+                        setTitle('Profil de '+title);
+                    });
+                });
+            },500);
         });
     });
 

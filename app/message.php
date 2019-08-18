@@ -14,10 +14,12 @@
   <div class="row">
     <div class="col">
       <div class="message__container">
+        
       </div>
     </div>
   </div>
 </div>
+<div class="new__message"><i class="icon icon-ic_sms_48px"></i></div>
 <script>
   userID = <?php echo $_SESSION['ID'] ?>;
 </script>

@@ -137,4 +137,40 @@ $(document).ready(function() {
 
         });
     })
+
+    $(".new__message").click(function(){
+
+        var title = $(".header__title").html();
+
+        $.ajax({
+            method: "GET",
+            url:"new_message.php",
+        })
+        .done(function(result){
+            slidePage(result,'right');
+            setReturnButton("message", {}, title);
+            setTitle('Nouveau message');
+            $(".new__message").css('display','none');
+        });
+    });
+
+    $('.chat').click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        //console.log($(this).data('id'));
+        var name = $(this).children().eq(1).text();
+
+        $.ajax({
+            method: "GET",
+            url:"getMessage.php?ID=" + $(this).data('id'),
+        })
+        .done(function(result){
+            slidePage(result,'right');
+            var title = $(".header__title").html();
+            setReturnButton("message", {}, title);
+            setTitle(name);
+        });
+
+    });
 });

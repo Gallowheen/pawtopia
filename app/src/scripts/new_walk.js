@@ -88,7 +88,6 @@ $(document).ready(function() {
     });
 
     $("#next").click(function(e){
-
         e.preventDefault();
         switch(step)
         {

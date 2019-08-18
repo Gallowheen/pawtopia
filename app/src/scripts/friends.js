@@ -109,6 +109,8 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
+        console.log('lol');
+
         var user = $(this).data("id");
 
         $.ajax({
@@ -117,7 +119,7 @@ $(document).ready(function() {
             data: {ID:user}
         })
         .done(function(result) {
-            container.html(result);
+            slidePage(result, 'right');  
             var name = $('.username').text();
             setTitle('Profil de ' + name);
         });

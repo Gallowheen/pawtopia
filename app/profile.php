@@ -82,30 +82,16 @@
                         $avatar_path = $row['AVATAR'];
 
                         if($result->num_rows === 0){ ?>
-                            <?php
-                            $filename = $_SERVER['DOCUMENT_ROOT']."/app/".$avatar_path;
-
-                            if (file_exists($filename)){ ?>
-                                <img class="avatar" src="<?php echo $avatar_path ?>"/>
-                            <?php }else{ ?>
-                                <img class="avatar" src="src/assets/img/avatar/default.jpg"/>
-                            <?php
-                            }?>
+ 
+                            <img class="avatar" src="<?php echo $avatar_path ?>"/>
+                           
                         <?php
                         }else{ ?>
 
                         <div class="avatars">
                             <img class="avatar avatar -dog" src="<?php echo $avatar_dog ?>"/>
-
-                            <?php
-                            $filename = $_SERVER['DOCUMENT_ROOT']."/app/".$avatar_path;
-
-                            if (file_exists($filename)){ ?>
-                                <img class="avatar -small -master" src="<?php echo $avatar_path ?>"/>
-                            <?php }else{ ?>
-                                <img class="avatar -small -master" src="src/assets/img/avatar/default.jpg"/>
-                            <?php
-                            }?>
+                            <img class="avatar -small -master" src="<?php echo $avatar_path ?>"/>
+                            
                         </div>
 
                         <?php
@@ -199,6 +185,30 @@
 
                             echo" <div class='information_group'><i class='icon information__icon icon-home-52'></i><span class='information_space'>".$townToInsert."</span></div>";
 
+                            $query = $link->prepare("SELECT r.*, u.USERNAME, u.AVATAR FROM reviews r, user u WHERE r.ID_USER = ? AND r.ID_REVIEWER = u.ID");
+                        $query->bind_param("i", $row['ID']);
+                        $query->execute();
+
+                        $result = $query->get_result();
+                        $reviews = array();
+                        $note = 0;
+                        if($result->num_rows === 0){
+                            // Pas d'évaluations
+                        }else{
+                            $reviews = resultToArray($result);
+                            foreach ($reviews as $k => $v) {
+                                $note += $v['NOTE'];
+                            }
+                            $note = $note / count($reviews);
+                        }
+                        if (!$reviews){ ?>
+                            <p class="information_space">Aucune review pour le moment.</p>
+                        <?php
+                        }else{
+                            $note = number_format($note, 1);
+                            echo"<div class='information_group'><i class='icon information__icon icon-review'></i><span class='information_space'><span class='note'>".$note."</span> / 5 &mdash; ".count($reviews)." reviews</span></div>";
+                        }
+
                             if ( $row['BIO'])
                                 echo"<div class='information_group'><i class='icon information__icon icon-ic_import_contacts_48px'></i><span class='information_space'>".$row['BIO']."</span></div>";
                             else
@@ -242,52 +252,54 @@
                             }
                         }else{
                             $rows = resultToArray($result);
-                            if ($row['PRIVATE'] == 1 && !empty($_GET)){ ?>
+                            if (!empty($_GET)){ ?>
                                 <h3 class="information h3">Ses compagnons <span class="title__small"><?php echo '('.count($rows).')' ?></span></h3>
-                                <p class="information_space private"> Ce profil est privé</p>
+                         
                                 <?php
                             }else{
                                 ?>
-                                <h3 class="information h3">Mes compagnons <span class="title__small"><?php echo '('.count($rows).')</span> <button id="add_dog" class="button -color -blue edit-profile"><i class="icon edit__user icon-add_dog"></i>Ajouter</button>' ?></h3>
-                                <div class='dog_card_container'>
-                                <?php
-                                foreach ( $rows as $dog ) :
-                                ?>
-                                    <div class="dog_card">
-                                        <?php
-                                        echo "<h4 class='h4 dog_name -nolimit'>".$dog['NAME']."</h4>";
-                                        ?>
-                                        <div class="dog_button">
-                                        <?php
-                                            if (empty($_GET)){ ?>
-                                                <button data-dog="<?php echo $dog["ID"] ?>" class="icon close-icon dog_delete"></button>
-                                        <?php
-                                            }
-                                        echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';?>
-
-                                        </div>
-                                        <div class='dog_information'>
-                                            <?php
-                                                echo '<div class="information_group -dog"><p><span class="information_title">Sexe :</span><span class="information_space">'.$dog["GENDER"].'</span></p></div>';
-                                                echo '<div class="information_group -dog"><p><span class="information_title">Age :</span><span class="information_space">'.$dog["AGE"].' ans</span></p></div>';
-
-                                                $query_breeds = $link->prepare("SELECT * FROM breeds WHERE ID = ?");
-                                                $query_breeds->bind_param("i", $dog['BREED_ID']);
-                                                $query_breeds->execute();
-
-                                                $result_breeds = $query_breeds->get_result();
-                                                $row_breeds = $result_breeds->fetch_assoc();
-
-                                                echo '<div class="information_group -dog"><p><span class="information_title">Race :</span><span class="information_space">'.$row_breeds['NAME'].'</span></p></div>';
-                                            ?>
-                                        </div>
-                                    </div>
-                                <?php
-                                endforeach;
-                                ?>
-                                </div>
-                                <?php
+                                <h3 class="information h3">Mes compagnons <span class="title__small"><?php echo '('.count($rows).')<button id="add_dog" class="button -color -blue edit-profile"><i class="icon edit__user icon-add_dog"></i>Ajouter</button>' ?></h3>
+                            <?php
                             }
+                            ?>
+                            <div class='dog_card_container'>
+                            <?php
+                            foreach ( $rows as $dog ) :
+                            ?>
+                                <div class="dog_card">
+                                    <?php
+                                    echo "<h4 class='h4 dog_name -nolimit'>".$dog['NAME']."</h4>";
+                                    ?>
+                                    <div class="dog_button">
+                                    <?php
+                                        if (empty($_GET)){ ?>
+                                            <button data-dog="<?php echo $dog["ID"] ?>" class="icon close-icon dog_delete"></button>
+                                    <?php
+                                        }
+                                    echo '<img class="dog_img" src="'.$dog['PICTURE'].'">';?>
+
+                                    </div>
+                                    <div class='dog_information'>
+                                        <?php
+                                            echo '<div class="information_group -dog"><p><span class="information_title">Sexe :</span><span class="information_space">'.$dog["GENDER"].'</span></p></div>';
+                                            echo '<div class="information_group -dog"><p><span class="information_title">Age :</span><span class="information_space">'.$dog["AGE"].' ans</span></p></div>';
+
+                                            $query_breeds = $link->prepare("SELECT * FROM breeds WHERE ID = ?");
+                                            $query_breeds->bind_param("i", $dog['BREED_ID']);
+                                            $query_breeds->execute();
+
+                                            $result_breeds = $query_breeds->get_result();
+                                            $row_breeds = $result_breeds->fetch_assoc();
+
+                                            echo '<div class="information_group -dog"><p><span class="information_title">Race :</span><span class="information_space">'.$row_breeds['NAME'].'</span></p></div>';
+                                        ?>
+                                    </div>
+                                </div>
+                            <?php
+                            endforeach;
+                            ?>
+                            </div>
+                            <?php
                         }
                         ?>
                 </div>
@@ -324,8 +336,10 @@
                             $note = number_format($note, 1);
                             ?>
     
-                            <h3 class="information h3">Évaluations <span class="title__small"><?php echo '('.$note."<i class='icon icon-review review__icon -small'></i>".' / 5)'; ?></span></h3>
+                            <h3 class="information h3">Évaluations <span class="title__small"><?php echo '('.$note."<i class='icon icon-review review__icon -small -title'></i>".' / 5)'; ?></span></h3>
                             <?php
+
+                            echo '<p class="information -review -blue">Note basée sur '.count($reviews).' reviews</p>';
                             foreach ( $reviews as $review ) :
 
                                 if ($review['MESSAGE']){
@@ -449,16 +463,9 @@
 
                                     echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';?>
 
-                                    <?php
-                                    $filename = $row_friend_info['AVATAR'];
-
-                                    if (file_exists($filename)){ ?>
-                                        <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
-                                    <?php }else{ ?>
-                                        <img class="avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>
-                                    <?php
-                                    }?>
-
+                                   
+                                    <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
+                                    
                                     <?php
                                     echo '<p class="friend__username">'.$row_friend_info['USERNAME'].'</p>';
                                     echo '</div>';
@@ -504,14 +511,9 @@
 
 
                                     echo '<button class="button view" data-id="'.$row_friend_info['ID'].'"><div class="friend_widget -small">';
-                                    $filename = $_SERVER['DOCUMENT_ROOT']."/app/".$row_friend_info['AVATAR'];
-
-                                    if (file_exists($filename)){ ?>
-                                        <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
-                                    <?php }else{ ?>
-                                        <img class="avatar -topFriend" src="src/assets/img/avatar/default.jpg"/>
-                                    <?php
-                                    }?>
+                                    ?>
+                                    
+                                    <img class="avatar -topFriend" src="<?php echo $row_friend_info['AVATAR']?>"/>
 
                                     <?php
                                     echo '<p class="friend__username">'.$row_friend_info['USERNAME'].'</p>';

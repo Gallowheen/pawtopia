@@ -24,7 +24,7 @@
 <div class="notification__container">
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="notification_wrapper__container">
         <?php
         //check if friend invite
         $friends = [];
@@ -63,7 +63,7 @@
         <div class="notification__wrapper -flex">
           <div>
           <i class='icon icon-review'></i>
-          <span class='notification__title'>Un utilisateur vous a notez !</span>
+          <span class='notification__title'>Un utilisateur vous a noté !</span>
           </div>
             <i class='icon notification__icon'></i>
         </div>

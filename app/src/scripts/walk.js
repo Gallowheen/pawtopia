@@ -403,5 +403,86 @@ function goToWalk(walk, name)
         setTitle(newtitle);
         setReturnButton("walk", {}, title);
         $('body').css('overflow','scroll');
+
+        imgBank = ['src/assets/img/ressources/walk_1.jpg','src/assets/img/ressources/walk_2.jpg','src/assets/img/ressources/walk_3.jpg','src/assets/img/ressources/walk_4.jpg','src/assets/img/ressources/walk_5.jpg','src/assets/img/ressources/walk_6.jpg'];
+        
+        setTimeout(function(){
+            $('.walk__detail__background').each(function(){
+                let random = Math.floor(Math.random() * imgBank.length);
+                console.log(imgBank[random]);
+                $(this).css('background','url("'+imgBank[random]+'")');
+                $(this).css('background-position','center');
+                $(this).css('background-size','cover');
+            });
+
+            $(".view").click(function(e){
+                e.preventDefault();
+                e.stopPropagation();
+
+                console.log('lol');
+
+                var user = $(this).data("id");
+
+                $.ajax({
+                    method: "GET",
+                    url:"profile.php",
+                    data: {ID:user}
+                })
+                .done(function(result) {
+                    slidePage(result, 'right');  
+                });
+            });
+        },500);
+    
+        $("#next").click(function(e){  
+            $('.walk__dog').css('display','block');
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $(".walk__dog").offset().top - 50
+            }, 250);
+            $("#validate__sign").prop('disabled', true);
+
+            let dog = [];
+
+            $(".dog__card__id").click(function(e){
+                if (!$(this).children().eq(1).children().eq(0).hasClass('-active')){
+                    dog.push($(this).data('id'));
+                    $(this).children().eq(1).children().eq(0).addClass('-active');
+                    $(this).children().eq(1).children().eq(0).css('box-shadow',' 1px 1px 10px 0px #0067B0');
+                    //console.log(dog.length);
+                    $("#validate__sign").prop('disabled', false);
+                }
+                else{
+                    $(this).children().eq(1).children().eq(0).removeClass('-active');
+                    $(this).children().eq(1).children().eq(0).css('box-shadow','none');
+
+                    if (dog.length < 1){
+                        $("#validate__sign").prop('disabled', true);
+                    }
+                }
+            });
+
+            $("#validate__sign").click(function(e){
+
+                event = $(this).data('id');
+                console.log(event);
+
+                if (dog.length >= 1){
+                    $.ajax({
+                        method: "GET",
+                        url:"src/php/joinwalk.php",
+                        data: {
+                            DOG:dog,
+                            ID:event
+                        }
+                    })
+                    .done(function(result){
+                        slidePage(result, 'right');
+                        var title = $(".header__title").html();
+                        setReturnButton("walk", {}, title);
+                        setTitle('Balades');
+                    });
+                }
+            });
+        });
     });
 }

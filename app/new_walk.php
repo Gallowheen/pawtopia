@@ -118,15 +118,10 @@
                                 <select required placeholder="Type de balade" class="select -walk" name="length" id="length">
                                     <option value="" disabled selected hidden>Durée approximative</option>
                                     <option value="1">1 heure</option>
-                                    <option value="1">2 heures</option>
-                                    <option value="1">3 heures</option>
-                                    <option value="1">4 heures</option>
-                                    <option value="1">5 heures</option>
-                                    <option value="1">6 heures</option>
-                                    <option value="1">7 heures</option>
-                                    <option value="1">8 heures</option>
-                                    <option value="1">9 heures</option>
-                                    <option value="1">10 heures</option>
+                                    <option value="2">2 heures</option>
+                                    <option value="3">3 heures</option>
+                                    <option value="4">4 heures</option>
+                                    <option value="5">5 heures</option>
                                 </select>
                             </div>
                             <div class="input__container -center -button">
@@ -151,7 +146,7 @@
                                 foreach ( $rows as $dog ) :?>
                                 <div class="dog_card -walk" data-id="<?php echo $dog['ID']?>">
                                     <?php
-                                    echo "<h4 class='h4 dog_name'>".$dog['NAME']."</h4>";
+                                    echo "<span class='dog_name'>".$dog['NAME']."</span>";
                                     ?>
                                     <div class="dog_button -walk">
                                     <?php
@@ -164,7 +159,7 @@
                                 ?>
                             </div>
                             <div class="input__container -center">
-                                <button class="input button -color -blue -nomargin" id="validate">Créer</button>
+                                <button class="button -color -blue -nomargin" id="validate">Créer</button>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,11 @@ $(document).ready(function() {
 
     $('body').css('overflow-y','scroll');
 
+    var notes = $('.note').text().split('.');
+    if (notes[1] == 0){
+        $('.note').text(notes[0]);
+    }
+
     initSwipe();
 
     $(".edit").click(function(e){

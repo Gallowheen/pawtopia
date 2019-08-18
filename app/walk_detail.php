@@ -36,11 +36,11 @@
 
     $pagename = $row['NAME'];
 ?>
-
+            <div class="walk__detail__background">
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <h3 class="information -first h3">Informations</h3>
                         <div class="informations">
                             <?php
                                 $query = $link->prepare("SELECT * FROM event WHERE ID = ?");
@@ -118,11 +118,28 @@
                                     break;
                                 }
 
-                                echo" <div class='information_group -walk'><p class='information_title'>Nom de la balade</p><p class='information_space'>".$row['NAME']."</p></div>";
-                                echo" <div class='information_group -walk'><p class='information_title'>Type de balade</p><p class='information_space'>".$row['WALK']."</p></div>";
-                                echo" <div class='information_group -walk'><p class='information_title'>Date</p><p class='information_space'>".$day." ".$day_number." ".$month." ".$year."</p></div>";
-                                echo" <div class='information_group -walk'><p class='information_title'>Ville</p><p class='information_space'>".$townToInsert."</p></div>";
-                                echo" <div class='information_group -walk'><p class='information_title'>Adresse</p><p class='information_space'>".$row['LOCATION']."</p></div>";
+                                echo" <div><p class='walk__title'>".$row['NAME']."</p></div>";
+
+                                $query__user = $link->prepare("SELECT * FROM user WHERE ID = ?");
+                                $query__user->bind_param("i", $row['ID_OWNER']);
+                                $query__user->execute();
+
+                                $result__user = $query__user->get_result();
+                                if($result__user->num_rows === 0){
+                                  
+                                }
+                                $row__user = $result__user->fetch_assoc();
+
+                                echo" <div class='informations__wrapper'><i class='icon icon__footer icon-single-01 informations__icon'></i><p class=''>".$row__user['USERNAME']."</p></div>";
+
+                                if($row['WALK'] == "Sportive")
+                                    echo" <div class='informations__wrapper'><i class='icon icon-ic_directions_run_48px informations__icon'></i><p class=''>Balade <span class='informations__lower'>".$row['WALK']."</span></p></div>";
+                                if($row['WALK'] == "Récréative")
+                                    echo" <div class='informations__wrapper'><i class='icon icon-ic_pets_48px informations__icon'></i><p class=''>Balade <span class='informations__lower'>".$row['WALK']."</span></p></div>";
+                                if($row['WALK'] == "Découverte")
+                                    echo" <div class='informations__wrapper'><i class='icon icon-ic_map_48px informations__icon'></i><p class=''>Balade <span class='informations__lower'>".$row['WALK']."</span></p></div>";
+                                echo" <div class='informations__wrapper'><i class='icon icon-calendar-60 informations__icon'></i><p class=''>".$day." ".$day_number." ".$month." ".$year."</p></div>";
+                                echo" <div class='informations__wrapper'><i class='icon icon-ic_location_on_48px informations__icon'></i><p class=''>".$row['LOCATION']."</p></div>";
                             ?>
                         </div>
                         <h3 class="information -first h3">Participants</h3>
@@ -151,7 +168,7 @@
                                             foreach ( $rows as $master ) :?>
                                                     <div class="center">
                                                         <?php
-                                                        echo "<h4 class='h4 dog_name'>".$master['USERNAME']."</h4>";
+                                                        echo "<span class='dog_name'>".$master['USERNAME']."</span>";
                                                         ?>
                                                         <?php
 
@@ -193,7 +210,7 @@
                                         foreach ( $rows as $dog ) :?>
                                                 <div class="center">
                                                     <?php
-                                                    echo "<h4 class='h4 dog_name'>".$dog['NAME']."</h4>";
+                                                    echo "<span class='dog_name'>".$dog['NAME']."</span>";
                                                     ?>
                                                     <?php
                                                     echo '<img class="dog_img avatar -small -noMargin" src="'.$dog['PICTURE'].'">';?>
@@ -240,13 +257,12 @@
                             ?>
                             <div class="walk__dog">
                                 <h3 class="h3 information -top">Votre partenaire de balade</h3>
-                                <p class="information -blue">Selectionner au moins un compagnon pour vous inscrire</p>
                                 <div class="walk__dog__container">
                                     <?php
                                     foreach ( $rows as $dog ) :?>
-                                    <div class="dog_card -walk" data-id="<?php echo $dog['ID']?>">
+                                    <div class="dog__card__id" data-id="<?php echo $dog['ID']?>">
                                         <?php
-                                        echo "<h4 class='h4 dog_name -walk'>".$dog['NAME']."</h4>";
+                                        echo "<span class='dog_name -walk'>".$dog['NAME']."</span>";
                                         ?>
                                         <div class="dog_button -walk">
                                         <?php
@@ -258,8 +274,8 @@
                                     endforeach;
                                     ?>
                                 </div>
-                                <div class="input__container -center">
-                                    <button class="input button -color -blue -nomargin" data-id="<?php echo $id_event ?>" id="validate__sign">Je valide</button>
+                                <div class="submit__button">
+                                    <button class="button -color -blue -top" data-id="<?php echo $id_event ?>" id="validate__sign">Je valide</button>
                                 </div>
                             </div>
                         </div>

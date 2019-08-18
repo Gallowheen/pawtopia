@@ -140,7 +140,7 @@ header{
 
   .layers{
     width: 50%;
-    background : url('/app/src/assets/img/ressources/splashlayer.png');
+    background : url('../assets/img/ressources/splashlayer.png');
     background-repeat : no-repeat;
     height: 500px;
     background-size : 100%;
@@ -182,7 +182,7 @@ header{
 
 .specs{
   padding: 64px 0px;
-  background : url("/app/src/assets/img/ressources/background.png");
+  background : url("../assets/img/ressources/background.png");
   background-repeat: repeat-y;
   background-size: 200% 20%;
 

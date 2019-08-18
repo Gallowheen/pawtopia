@@ -241,6 +241,15 @@ body {
 .button.-top {
   margin-top: 16px;
 }
+.button.-full {
+  width: 100%;
+}
+.button.-more {
+  font-size: 12px;
+  margin-top: 18px;
+  padding: 4px 8px;
+  width: 100%;
+}
 /* --------------------------------
 
 pawtopia Web Font
@@ -530,6 +539,10 @@ Generated using nucleoapp.com
   content: "\ea21";
 }
 
+.icon-review::before {
+  content: "\ea22";
+}
+
 .input {
   border: 1px solid white;
   border-radius: 2px;
@@ -594,6 +607,13 @@ Generated using nucleoapp.com
 }
 .input.-succeed {
   border-bottom-color: green;
+}
+.input.-nomargin {
+  margin-left: 0;
+  width: 100%;
+}
+.input.-bottom {
+  margin-bottom: 24px;
 }
 
 input[type=submit] {
@@ -736,6 +756,9 @@ input[type=range]::-webkit-slider-runnable-track {
 .select.-small {
   width: 80%;
 }
+.select.-nomargintop {
+  margin-top: 0;
+}
 
 body {
   background: white;
@@ -866,7 +889,7 @@ header {
 }
 .walks .layers {
   width: 50%;
-  background: url("/app/src/assets/img/ressources/splashlayer.png");
+  background: url("../assets/img/ressources/splashlayer.png");
   background-repeat: no-repeat;
   height: 500px;
   background-size: 100%;
@@ -902,7 +925,7 @@ header {
 }
 .specs {
   padding: 64px 0px;
-  background: url("/app/src/assets/img/ressources/background.png");
+  background: url("../assets/img/ressources/background.png");
   background-repeat: repeat-y;
   background-size: 200% 20%;
 }
