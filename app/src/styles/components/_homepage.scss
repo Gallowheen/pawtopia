@@ -16,17 +16,23 @@
   filter: blur(2px);
 }
 
-.logo{
-  position : absolute;
+.logo__container{
   z-index: 100;
-  width: 80%;
-  left: 10%;
-  top: 7.5%;
+  margin-top: 15%;
+  text-align: center;
+  position: absolute;
+  width: 100vw;
+}
+
+.logo{
+  width: 128px;
 
   &.-small{
-    width: 60px;
-    top: 18%;
+    width: 48px;
+    height: 48px;
     left: 15px;
+    position: absolute;
+    top: 6px;
   }
 }
 
@@ -160,7 +166,7 @@
 }
 
 .mobile{
-  display : none;
+  display : flex;
   height: 100vh;
 }
 
@@ -191,7 +197,7 @@
 
 @media only screen and (max-aspect-ratio: 13/9) and (max-width : 450px){
   .mobile{
-    display : block;
+    display : flex;
   }
 
   .desktop{

@@ -62,6 +62,13 @@
     display: inline-table;
   }
 
+  &.-landing__logo{
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 16px;
+    letter-spacing: 2px;
+  }
+
   /*
   R   E   S   P   O   N   S   I   V   E
                                         */

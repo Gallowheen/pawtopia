@@ -36,7 +36,6 @@ $(document).ready(function() {
     
     $('.label').click(function(event){
         event.preventDefault();
-        console.log('lol');
 
         $('.label').each(function(){
             if($(this).hasClass('selected'))
@@ -88,6 +87,7 @@ $(document).ready(function() {
     });
 
     $("#next").click(function(e){
+
         e.preventDefault();
         switch(step)
         {
@@ -183,7 +183,7 @@ $(document).ready(function() {
             $('.walk__dog').css('display','block');
 
             if($('.walk__dog__container').children().length <= 0){
-                console.log('lol');
+           
                 $('.walk__dog').append('<div class="information error -center">Vous devez avoir au moins un compagnon pour créer une balade</div>');
                 $("#validate").prop('disabled', true);
             }
@@ -202,7 +202,7 @@ $(document).ready(function() {
                         selected = true;
                     }
                 }
-                //console.log(selected);
+              
                 if(!selected)
                     $("#validate__sign").prop('disabled', true);
                 else
@@ -287,7 +287,7 @@ $(document).ready(function() {
                 },
 
                 function(data){
-                    console.log(data);
+                   
                     if(data != 'failed'){
                     	container.html(data);
                     	// Afficher ici message "Votre balade a bien été créée"
@@ -299,7 +299,7 @@ $(document).ready(function() {
     });
 
     $("#info").on('keyup', function(){
-        console.log('//nominatim.openstreetmap.org/search?format=json&q='+$(this).val());
+       
         $.get(location.protocol + '//nominatim.openstreetmap.org/search?format=json&q='+$(this).val(),      function(data){
 
             for (i = 2; i < $("#info").parent().children().length; i++){
@@ -307,7 +307,6 @@ $(document).ready(function() {
             }
 
             if(data.length) {
-                console.log(data);
 
                 if($("#info").hasClass('-error'))
                     $("#info").removeClass('-error');
@@ -319,9 +318,7 @@ $(document).ready(function() {
                 $(".pickaddress").click(function(e){
                     e.preventDefault();
                     e.stopPropagation();
-                    //console.log(e);
 
-                    console.log($(this).text());
                     var ville = $(this).text();
 
 

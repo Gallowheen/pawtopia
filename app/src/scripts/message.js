@@ -158,7 +158,6 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
-        //console.log($(this).data('id'));
         var name = $(this).children().eq(1).text();
 
         $.ajax({

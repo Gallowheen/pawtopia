@@ -26,7 +26,7 @@ $(document).ready(function(){
     }
 
     function error(err) {
-        console.warn(`ERREUR (${err.code}): ${err.message}`);
+        //console.warn(`ERREUR (${err.code}): ${err.message}`);
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
@@ -88,13 +88,10 @@ $(document).ready(function(){
 
                 setTitle(title);
             }
-
-            console.log($('.notifications .link'));
    
             $('.notifications .link').off();
             $('.notifications .link').click(function(){
 
-                console.log('lol');
                 let title = "Notififcations";
         
                 $.ajax({
@@ -171,7 +168,6 @@ function previewImage(file) {
     var reader = new FileReader();
     reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
     reader.readAsDataURL(file.slice(0,10 * 4096 * 4096));
-    //console.log(reader);
 
     galleryButton = document.getElementById("gallery__button");
     var button = document.createElement("button");
@@ -208,8 +204,6 @@ function previewImage(file) {
 
 function uploadFile(file, name, page){
 
-    //console.log(name);
-
     if (name != "")
         var url = 'src/php/uploadFile.php?name='+name+'&'+'page='+page;
     else
@@ -220,7 +214,6 @@ function uploadFile(file, name, page){
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            //console.log(xhr.responseText);
             if (name != "")
                 $("#addDog").prop('disabled', false);
             else

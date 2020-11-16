@@ -33,7 +33,6 @@ $(document).ready(function() {
                 // if(this.files[0].size > 2000000){
                 //     $('.error').html("Image trop grande");
                 // }else{
-                    //console.log(gallery);
                     if (gallery.children.length <= 1){
                         var files = this.files;
                         for(var i=0; i<files.length; i++){
@@ -55,8 +54,6 @@ $(document).ready(function() {
             });
 
             $("#update").click(function(e){
-
-                console.log('test');
 
                 var uploadfiles = document.querySelector('#uploadfiles');
 
@@ -85,8 +82,6 @@ $(document).ready(function() {
                     },
                 })
                 .done(function(result){
-
-                    console.log(result);
 
                     $.ajax({
                         method: "GET",
@@ -212,7 +207,6 @@ $(document).ready(function() {
             setTitle('Nouveau compagnon');
 
             $('#addDog').click(function(){
-                //console.log("lol");
                 if ($('#dog_name').val() == "" || $('#breed').val() == null){
                     if($('#dog_name').val() == "")
                         $('#dog_name').val().addClass('-error');
@@ -222,7 +216,6 @@ $(document).ready(function() {
                     var uploadfiles = document.querySelector('#uploadfiles');
 
                     let name = $('#dog_name').val();
-                    //console.log(name);
 
                     let breedname  = $('#breed').val();
                     let breed = $('#breeds [value="' + breedname + '"]').data('value');
@@ -254,7 +247,6 @@ $(document).ready(function() {
                             url:"profile.php",
                         })
                         .done(function(result){
-                            console.log(result);
                             slidePage(result, 'left');
                             setTitle("Profil");
                         });

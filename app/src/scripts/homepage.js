@@ -31,9 +31,6 @@ $(document).ready(function(){
     $( window ).resize(function(){
         if($('body').is('.landing')){
 
-            console.log($( window ).height());
-            console.log(height + 50);
-
             if ( $( window ).height() + 50 < height && resized == false ){
              
                 if ( $('.logo').css('display') == 'block')
@@ -102,6 +99,11 @@ $(document).ready(function(){
         $('.login').animate({"opacity": "1"}, "slow");
     },7000)
 
+    setTimeout(function(){
+        $('#login_username').val("admin");
+        $('#login_password').val("admin");
+    },9000)
+
     $('.choice').click(function(){
 
         if(login){
@@ -125,8 +127,6 @@ $(document).ready(function(){
         else
             town = null;
 
-        console.log(town);
-
         $.post(
             'src/php/register.php',
             {
@@ -138,8 +138,6 @@ $(document).ready(function(){
             },
 
             function(data){
-
-            	console.log(data);
 
                 $("#resultat").html(" ");
                 $("#username_error").html(" ");

@@ -1,0 +1,71 @@
+.h1 {
+  color: white;
+  font-family: 'Fira Sans', sans-serif;
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.6;
+  /*
+  R   E   S   P   O   N   S   I   V   E
+                                        */
+}
+
+.h1.-landing {
+  font-size: 64px;
+  position: absolute;
+  top: 30%;
+  z-index: 100;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  -webkit-text-fill-color: white;
+  display: inline-table;
+}
+
+.h1.-landing__logo {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 16px;
+  letter-spacing: 2px;
+}
+
+@media (min-width: 1920px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1918px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+
+@media (min-width: 1281px) and (max-width: 1439px) {
+  .h1.-landing {
+    top: 15%;
+    left: 60%;
+    font-size: 128px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .h1.-landing {
+    font-size: 92px;
+    top: 15%;
+    left: 65%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h1.-landing {
+    left: 65%;
+    top: 15%;
+  }
+}
+/*# sourceMappingURL=h1.css.map */

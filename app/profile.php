@@ -201,12 +201,13 @@
                             }
                             $note = $note / count($reviews);
                         }
-                        if (!$reviews){ ?>
-                            <p class="information_space">Aucune review pour le moment.</p>
-                        <?php
+                        if (!$reviews){ 
+                        	echo"<div class='information_group'><i class='icon information__icon icon-review'></i><span class='information_space'><span class='note'>Aucune review pour le moment</span></div>";
+                   
+                        
                         }else{
                             $note = number_format($note, 1);
-                            echo"<div class='information_group'><i class='icon information__icon icon-review'></i><span class='information_space'><span class='note'>".$note."</span> / 5 &mdash; ".count($reviews)." reviews</span></div>";
+                            echo"<div class='information_group'><i class='icon information__icon icon-review'></i><span class='information_space'><span class='note'>".$note."</span> / 5 &mdash; ".count($reviews)." évaluations</span></div>";
                         }
 
                             if ( $row['BIO'])

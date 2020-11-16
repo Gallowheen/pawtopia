@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
     height = $(window).height() - 120;
-    console.log(height);
     $('.walk__handler__container').css('height',height+'px');
     $('.walk__handler__container').css('top','60px');
 
@@ -62,8 +61,6 @@ $(document).ready(function(){
     yourPositionMarker.bindPopup("Vous êtes ici.");
 
     data = walks;
-
-    console.log(data);
 
     if (data.length >= 1){
         for( let i = 0; i < data.length; i++){
@@ -248,12 +245,7 @@ $(document).ready(function(){
             })
             .done(function(result){
 
-                console.log(result);
                 data = JSON.parse(result);
-                console.log(data);
-                //console.log(result);
-
-                //map.removeLayer();
 
                 //savoir le jour
                 var jour = new Array(7);
@@ -285,8 +277,6 @@ $(document).ready(function(){
 
                 if($('.tag_container'))
                     $('.tag_container').remove();
-
-                console.log(walks.length+'  lel  ');
             
                 if (walks.length == 0 || walks.length == 3 )
                     $('.content_container .container .row').eq(0).append('<div class="tag_container -walk"><div class="tags"><span>Tout les types de balades</span></div></div>');
@@ -409,7 +399,6 @@ function goToWalk(walk, name)
         setTimeout(function(){
             $('.walk__detail__background').each(function(){
                 let random = Math.floor(Math.random() * imgBank.length);
-                console.log(imgBank[random]);
                 $(this).css('background','url("'+imgBank[random]+'")');
                 $(this).css('background-position','center');
                 $(this).css('background-size','cover');
@@ -418,8 +407,6 @@ function goToWalk(walk, name)
             $(".view").click(function(e){
                 e.preventDefault();
                 e.stopPropagation();
-
-                console.log('lol');
 
                 var user = $(this).data("id");
 
@@ -439,25 +426,14 @@ function goToWalk(walk, name)
             $([document.documentElement, document.body]).animate({
                 scrollTop: $(".walk__dog").offset().top - 50
             }, 250);
-            $("#validate__sign").prop('disabled', true);
 
             let dog = [];
 
             $(".dog__card__id").click(function(e){
                 if (!$(this).children().eq(1).children().eq(0).hasClass('-active')){
                     dog.push($(this).data('id'));
-                    $(this).children().eq(1).children().eq(0).addClass('-active');
+                    $(this).children().eq(1).children().eq(0).hasClass('-active');
                     $(this).children().eq(1).children().eq(0).css('box-shadow',' 1px 1px 10px 0px #0067B0');
-                    //console.log(dog.length);
-                    $("#validate__sign").prop('disabled', false);
-                }
-                else{
-                    $(this).children().eq(1).children().eq(0).removeClass('-active');
-                    $(this).children().eq(1).children().eq(0).css('box-shadow','none');
-
-                    if (dog.length < 1){
-                        $("#validate__sign").prop('disabled', true);
-                    }
                 }
             });
 
@@ -466,7 +442,7 @@ function goToWalk(walk, name)
                 event = $(this).data('id');
                 console.log(event);
 
-                if (dog.length >= 1){
+                if (dog){
                     $.ajax({
                         method: "GET",
                         url:"src/php/joinwalk.php",

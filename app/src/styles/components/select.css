@@ -1,0 +1,96 @@
+.select {
+  border: 1px solid white;
+  border-radius: 2px;
+  outline: none;
+}
+
+@-webkit-keyframes bounce {
+  10%, 40% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+    border-bottom-color: red;
+  }
+  40%, 70% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+    border-bottom-color: red;
+  }
+  70%, 100% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+    border-bottom-color: red;
+  }
+}
+
+@keyframes bounce {
+  10%, 40% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+    border-bottom-color: red;
+  }
+  40%, 70% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+    border-bottom-color: red;
+  }
+  70%, 100% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+    border-bottom-color: red;
+  }
+}
+
+.select.-transparent {
+  border: none;
+  border-bottom: 1px solid white;
+  background: transparent;
+}
+
+.select.-transparent option {
+  background: #0287D0;
+  color: white;
+}
+
+.select.-walk {
+  border: 2px solid #003780;
+  padding: 8px;
+  width: 90%;
+  margin-left: 24px;
+  background: white;
+}
+
+.select.-walk option {
+  background: white;
+  color: black;
+}
+
+.select.-addDog {
+  border-bottom: 2px solid #003780;
+  padding: 8px 0px 8px 8px;
+  width: 100%;
+  background: white;
+  margin-top: 16px;
+}
+
+.select.-addDog:last-child {
+  margin-bottom: 16px;
+}
+
+.select.-error {
+  -webkit-animation: bounce 1s forwards;
+          animation: bounce 1s forwards;
+}
+
+.select.-nomargin {
+  margin-left: 0;
+  width: 100%;
+}
+
+.select.-small {
+  width: 80%;
+}
+
+.select.-nomargintop {
+  margin-top: 0;
+}
+/*# sourceMappingURL=select.css.map */

@@ -1,0 +1,130 @@
+.button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'Fira Sans', sans-serif;
+  outline: none !important;
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  /*
+  R   E   S   P   O   N   S   I   V   E
+                                        */
+}
+
+.button:disabled {
+  background: #ccc !important;
+}
+
+.button.-transparent {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  z-index: 100;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.button.-friend {
+  border: 2px solid #003780;
+  color: #003780;
+  padding: 5px 16px 5px 8px;
+  background: transparent;
+  font-size: 14px;
+}
+
+.button.-view {
+  border: 2px solid #003780;
+  color: #003780;
+  padding: 4px 16px;
+  background: transparent;
+  font-size: 14px;
+}
+
+.button.-color {
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #003780;
+  color: #003780;
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+}
+
+.button.-color.-blue {
+  background-color: #003780;
+  border: none;
+  color: white;
+}
+
+.button.-color.-blue.-inverted {
+  color: #003780;
+  background: white;
+}
+
+.button.-color.-add {
+  font-size: 14px;
+  padding: 8px;
+}
+
+.button.-color.-green {
+  color: #007C21;
+  border: 1px solid #007c21;
+  background: transparent;
+}
+
+.button.-color.-red {
+  background: #D73C2C;
+  color: white;
+}
+
+.button.-color.-noBorder {
+  border: none;
+}
+
+.button.-color.-walk {
+  padding: 8px 16px;
+}
+
+.button.-margintop {
+  margin-top: 32px;
+}
+
+.button.edit-profile {
+  float: right;
+  font-size: 16px;
+  padding: 4px 8px 4px 8px;
+}
+
+.button.-nomargin {
+  margin: 0;
+}
+
+.button.-lowpadding {
+  padding: 4px;
+}
+
+.button.-round {
+  border-radius: 25px;
+}
+
+.button.-right {
+  margin-right: 16px;
+}
+
+.button.-top {
+  margin-top: 16px;
+}
+
+.button.-full {
+  width: 100%;
+}
+
+.button.-more {
+  font-size: 12px;
+  margin-top: 18px;
+  padding: 4px 8px;
+  width: 100%;
+}
+/*# sourceMappingURL=button.css.map */

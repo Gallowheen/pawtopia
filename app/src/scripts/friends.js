@@ -6,8 +6,6 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
-        //console.log($(this).data('id'));
-
         var name = $(this).parent().children().eq(2).text();
 
         $.ajax({
@@ -15,9 +13,10 @@ $(document).ready(function() {
             url:"getMessage.php?ID=" + $(this).data('id'),
         })
         .done(function(result){
-            console.log(result);
-            container.html(result);
+            slidePage(result,'right');
+            setReturnButton("home", {}, name);
             setTitle(name);
+            $(window).scrollTop(0);
         });
 
     });
@@ -101,15 +100,17 @@ $(document).ready(function() {
             url:"src/php/accept_friend.php",
         })
         .done(function(result){
-            document.location.reload(true);
+            slidePage(result,'right');
+            var title = $(".header__title").html();
+            setReturnButton("home", {}, title);
+            setTitle('Home');
+            $(window).scrollTop(0);
         });
     });
 
     $(".view").click(function(e){
         e.preventDefault();
         e.stopPropagation();
-
-        console.log('lol');
 
         var user = $(this).data("id");
 

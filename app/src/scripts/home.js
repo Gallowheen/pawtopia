@@ -36,7 +36,6 @@ $(document).ready(function() {
             setTimeout(function(){
                 $('.walk__detail__background').each(function(){
                     let random = Math.floor(Math.random() * imgBank.length);
-                    console.log(imgBank[random]);
                     $(this).css('background','url("'+imgBank[random]+'")');
                     $(this).css('background-position','center');
                     $(this).css('background-size','cover');
@@ -46,10 +45,7 @@ $(document).ready(function() {
                     e.preventDefault();
                     e.stopPropagation();
 
-                    console.log('lol');
-
                     var user = $(this).data("id");
-                    var title = $(this).parent().children().eq(0).text();
 
                     $.ajax({
                         method: "GET",
@@ -58,8 +54,6 @@ $(document).ready(function() {
                     })
                     .done(function(result) {
                         slidePage(result, 'right');  
-                        setReturnButton("home", {}, title);
-                        setTitle('Profil de '+title);
                     });
                 });
             },500);
@@ -109,7 +103,6 @@ $(document).ready(function() {
 
     $('.walk__background').each(function(){
         let random = Math.floor(Math.random() * imgBank.length);
-        console.log(imgBank[random]);
         $(this).css('background','url("'+imgBank[random]+'")');
         $(this).css('background-size','100% 100%');
     });

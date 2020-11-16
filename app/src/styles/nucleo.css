@@ -1,0 +1,272 @@
+/* --------------------------------
+
+pawtopia Web Font
+Generated using nucleoapp.com
+
+-------------------------------- */
+@font-face {
+  font-family: 'pawtopia';
+  src: url("font/../../font/fonts/pawtopia.eot");
+  src: url("font/../../font/fonts/pawtopia.eot") format("embedded-opentype"), url("font/../../font/fonts/pawtopia.woff2") format("woff2"), url("font/../../font/fonts/pawtopia.woff") format("woff"), url("font/../../font/fonts/pawtopia.ttf") format("truetype"), url("font/../../font/fonts/pawtopia.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*------------------------
+	base class definition
+-------------------------*/
+.icon {
+  display: inline-block;
+  font: normal normal normal 1em/1 'pawtopia';
+  speak: none;
+  text-transform: none;
+  /* Better Font Rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*------------------------
+  change icon size
+-------------------------*/
+/* relative units */
+.icon-sm {
+  font-size: 0.8em;
+}
+
+.icon-lg {
+  font-size: 1.2em;
+}
+
+/* absolute units */
+.icon-16 {
+  font-size: 16px;
+}
+
+.icon-32 {
+  font-size: 32px;
+}
+
+/*----------------------------------
+  add a square/circle background
+-----------------------------------*/
+.icon-bg-square,
+.icon-bg-circle {
+  padding: 0.35em;
+  background-color: #eee;
+}
+
+.icon-bg-circle {
+  border-radius: 50%;
+}
+
+/*------------------------------------
+  use icons as list item markers
+-------------------------------------*/
+.icon-ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.icon-ul > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  line-height: 1.4;
+}
+
+.icon-ul > li > .icon {
+  margin-right: 0.4em;
+  line-height: inherit;
+}
+
+/*------------------------
+  spinning icons
+-------------------------*/
+.icon-is-spinning {
+  -webkit-animation: icon-spin 2s infinite linear;
+  animation: icon-spin 2s infinite linear;
+}
+
+@-webkit-keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/*------------------------
+  rotated/flipped icons
+-------------------------*/
+.icon-rotate-90 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.icon-rotate-180 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.icon-rotate-270 {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.icon-flip-y {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.icon-flip-x {
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  -webkit-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+/*------------------------
+	icons
+-------------------------*/
+.icon-home-52::before {
+  content: "\ea02";
+}
+
+.icon-ic_photo_camera_48px::before {
+  content: "\ea03";
+}
+
+.icon-ic_edit_48px::before {
+  content: "\ea04";
+}
+
+.icon-ic_person_add_48px::before {
+  content: "\ea05";
+}
+
+.icon-ic_people_48px::before {
+  content: "\ea06";
+}
+
+.icon-ic_visibility_48px::before {
+  content: "\ea07";
+}
+
+.icon-ic_visibility_off_48px::before {
+  content: "\ea08";
+}
+
+.icon-single-01::before {
+  content: "\ea09";
+}
+
+.icon-multiple-11::before {
+  content: "\ea0a";
+}
+
+.icon-calendar-60::before {
+  content: "\ea0b";
+}
+
+.icon-ic_home_48px::before {
+  content: "\ea0c";
+}
+
+.icon-ic_directions_run_48px::before {
+  content: "\ea0d";
+}
+
+.icon-ic_map_48px::before {
+  content: "\ea0e";
+}
+
+.icon-ic_pets_48px::before {
+  content: "\ea0f";
+}
+
+.icon-ic_check_48px::before {
+  content: "\ea10";
+}
+
+.icon-email-84::before {
+  content: "\ea11";
+}
+
+.icon-ic_sms_48px::before {
+  content: "\ea12";
+}
+
+.icon-add_dog::before {
+  content: "\ea14";
+}
+
+.icon-add_event::before {
+  content: "\ea15";
+}
+
+.icon-zoom-2::before {
+  content: "\ea16";
+}
+
+.icon-ic_location_searching_48px::before {
+  content: "\ea17";
+}
+
+.icon-ic_location_on_48px::before {
+  content: "\ea18";
+}
+
+.icon-ic_location_off_48px::before {
+  content: "\ea19";
+}
+
+.icon-ic_view_carousel_48px::before {
+  content: "\ea1a";
+}
+
+.icon-ic_view_list_48px::before {
+  content: "\ea1b";
+}
+
+.icon-ic_favorite_48px::before {
+  content: "\ea1d";
+}
+
+.icon-ic_import_contacts_48px::before {
+  content: "\ea1e";
+}
+
+.icon-ic_share_48px::before {
+  content: "\ea1f";
+}
+
+.icon-ic_notifications_48px::before {
+  content: "\ea20";
+}
+
+.icon-sent::before {
+  content: "\ea21";
+}
+
+.icon-review::before {
+  content: "\ea22";
+}
+/*# sourceMappingURL=nucleo.css.map */

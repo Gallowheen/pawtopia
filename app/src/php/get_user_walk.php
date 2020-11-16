@@ -26,10 +26,10 @@
     $html = "";
     if($result->num_rows === 0){
         if($pagename == "Accueil") {
-            $html .= "<img class='nowalk' src='/app/src/assets/img/ressources/no_walk.png'/><div class='center'><button id='walk' class='button -color -blue'>Découvrez les balades</button></div>";
+            $html .= "<img class='nowalk' src='src/assets/img/ressources/no_walk.png'/><div class='center'><button id='walk' class='button -color -blue'>Découvrez les balades</button></div>";
         }
         else {
-            $html .= "<img class='map__img' src='/app/src/assets/img/ressources/no_walk.png'/>";
+            $html .= "<img class='map__img' src='src/assets/img/ressources/no_walk.png'/>";
         }
     }else{
         $rows = resultToArray($result);
@@ -139,7 +139,7 @@
         }
         else
         {
-            $html .= "<img class='map__img' src='app/src/assets/img/ressources/no_walk.png'/>";
+            $html .= "<img class='map__img' src='src/assets/img/ressources/no_walk.png'/>";
         }
     }
     echo $html;

@@ -21,7 +21,6 @@ $(document).ready(function() {
     $('#filter').click(function(){
 
         height = $(window).height() - 120;
-        console.log(height);
         $('.member__content').css('height',height+'px');
 
         $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -74,8 +73,6 @@ $(document).ready(function() {
             }
         });
 
-        console.log(walks);
-
         $.ajax({
             method: "GET",
             data:{
@@ -86,8 +83,6 @@ $(document).ready(function() {
         })
         .done(function(result){
 
-            console.log(result);
-
             let data = JSON.parse(result);
             let member;
 
@@ -97,8 +92,6 @@ $(document).ready(function() {
 
             if($('.tag_container'))
                 $('.tag_container').remove();
-
-            console.log(walks);
 
             if (walks.length == 0 || walks.length == 3 )
                 $('.member__filtred .container .row .col').append('<div class="tag_container"><div class="tags"><span>Moins de '+$('#slider').val()+'km de vous</span></div><div class="tags"><span>Tout les types de balades</span></div></div>');

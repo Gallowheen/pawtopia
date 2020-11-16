@@ -40,9 +40,7 @@ $(document).ready(function() {
             .done(function(result) {
                 if (result == "failed"){
     
-                    let span = "<span class='error -review'>Vous avez déjà review cette personne</span>"
-    
-                    console.log($('.edit__profile').children().eq(0));
+                    let span = "<span class='error -review'>Vous avez déjà review cette personne</span>";
     
                     if($('.edit__profile').children().eq(0).hasClass('error')){
                         $('.edit__profile').children().eq(0).remove();
